@@ -1,4 +1,5 @@
 Название: **Event Booking**
+[![Build Status](https://travis-ci.com/IOINITID/event-booking.svg?branch=master)](https://travis-ci.com/IOINITID/event-booking)
 
 ---
 
