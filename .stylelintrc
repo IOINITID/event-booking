@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "stylelint-config-htmlacademy",
+    "stylelint-order-htmlacademy"
+  ],
+  "rules": {
+    "declaration-no-important": true,
+    "indentation": [
+      2,
+      {
+        "ignore": [
+          "inside-parens"
+        ]
+      }
+    ],
+    "string-quotes": "single"
+  }
+}

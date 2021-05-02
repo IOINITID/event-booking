@@ -1,0 +1,14 @@
+{
+  "*": [
+    "prettier --check --write .",
+    "git add ."
+  ],
+  "*.{js,jsx,ts,tsx}": [
+    "eslint --fix",
+    "git add ."
+  ],
+  "*.{css,scss}": [
+    "stylelint --fix",
+    "git add ."
+  ]
+}
