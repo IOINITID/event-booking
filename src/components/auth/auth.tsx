@@ -1,7 +1,10 @@
 import React, { FormEvent, useState } from 'react';
+import { login } from '../../features/user/userSlice';
+import { useDispatchTyped } from '../../hooks';
 import { styledButton, styledForm, styledFormField, styledInput, styledLabel } from './styled';
 
 const Auth = () => {
+  const dispatch = useDispatchTyped();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true);
@@ -53,7 +56,9 @@ const Auth = () => {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
+        if (resData.data.login.token) {
+          dispatch(login({ token: resData.data.login.token, userId: resData.data.login.userId }));
+        }
       })
       .catch((error) => {
         console.log(error);

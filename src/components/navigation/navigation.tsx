@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { selectToken } from '../../features/user/userSlice';
+import { useSelectorTyped } from '../../hooks';
 import {
   styledHeader,
   styledHeading,
@@ -10,6 +12,8 @@ import {
 } from './styled';
 
 const Navigation = () => {
+  const token = useSelectorTyped(selectToken);
+
   return (
     <header className={styledHeader}>
       <div className="logo">
@@ -17,21 +21,25 @@ const Navigation = () => {
       </div>
       <nav className={styledNavigation}>
         <ul className={styledNavigationList}>
-          <li className={styledNavigationItem}>
-            <NavLink className={styledNavigationLink} to="/auth">
-              Authenticate
-            </NavLink>
-          </li>
+          {!token && (
+            <li className={styledNavigationItem}>
+              <NavLink className={styledNavigationLink} to="/auth">
+                Authenticate
+              </NavLink>
+            </li>
+          )}
           <li className={styledNavigationItem}>
             <NavLink className={styledNavigationLink} to="/events">
               Events
             </NavLink>
           </li>
-          <li className={styledNavigationItem}>
-            <NavLink className={styledNavigationLink} to="/bookings">
-              Bookings
-            </NavLink>
-          </li>
+          {token && (
+            <li className={styledNavigationItem}>
+              <NavLink className={styledNavigationLink} to="/bookings">
+                Bookings
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

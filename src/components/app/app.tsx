@@ -9,9 +9,11 @@ import Auth from '../auth';
 import Events from '../events';
 import Bookings from '../bookings';
 import Navigation from '../navigation';
+import { selectToken } from '../../features/user/userSlice';
 
 const App = () => {
   const theme = useSelectorTyped(selectTheme);
+  const token = useSelectorTyped(selectToken);
 
   return (
     <ThemeProvider theme={{ mode: theme }}>
@@ -21,10 +23,12 @@ const App = () => {
         <Navigation />
         <main className={styledMain}>
           <Switch>
-            <Redirect from="/" to="/auth" exact />
-            <Route path="/auth" component={Auth} />
+            {!token && <Redirect from="/" to="/auth" exact />}
+            {token && <Redirect from="/" to="/events" exact />}
+            {token && <Redirect from="/auth" to="/events" exact />}
+            {!token && <Route path="/auth" component={Auth} />}
             <Route path="/events" component={Events} />
-            <Route path="/bookings" component={Bookings} />
+            {!token && <Route path="/bookings" component={Bookings} />}
           </Switch>
         </main>
       </HashRouter>
