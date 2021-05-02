@@ -40,6 +40,6 @@ export const styledNavigationLink = css`
   &:hover,
   &:active,
   &.active {
-    color: #f8e264;
+    color: #fdefa0;
   }
 `;
