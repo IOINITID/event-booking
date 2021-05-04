@@ -23,12 +23,12 @@ const App = () => {
         <Navigation />
         <main className={styledMain}>
           <Switch>
-            {!token && <Redirect from="/" to="/auth" exact />}
             {token && <Redirect from="/" to="/events" exact />}
             {token && <Redirect from="/auth" to="/events" exact />}
             {!token && <Route path="/auth" component={Auth} />}
             <Route path="/events" component={Events} />
-            {!token && <Route path="/bookings" component={Bookings} />}
+            {token && <Route path="/bookings" component={Bookings} />}
+            {!token && <Redirect to="/auth" exact />}
           </Switch>
         </main>
       </HashRouter>

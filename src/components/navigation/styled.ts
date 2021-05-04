@@ -43,3 +43,17 @@ export const styledNavigationLink = css`
     color: #fdefa0;
   }
 `;
+
+export const styledNavigationButton = css`
+  font: inherit;
+  color: #000000;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &.active {
+    color: #fdefa0;
+  }
+`;
