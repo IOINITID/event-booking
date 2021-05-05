@@ -22,10 +22,6 @@ const Events = () => {
     fetchEvents();
   }, []);
 
-  useEffect(() => {
-    console.log(events);
-  }, [events]);
-
   const fetchEvents = () => {
     const requestBody = {
       query: `
@@ -113,11 +109,13 @@ const Events = () => {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
+        fetchEvents();
       })
       .catch((error) => {
         console.log(error);
       });
+
+    setIsOpen(false);
   };
 
   const modalCancelHandler = () => {
