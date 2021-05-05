@@ -22,3 +22,9 @@ export const styledButton = css`
     color: #fdefa0;
   }
 `;
+
+export const styledTextarea = css`
+  display: block;
+  width: 100%;
+  resize: none;
+`;
