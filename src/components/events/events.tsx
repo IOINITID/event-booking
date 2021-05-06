@@ -1,7 +1,8 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { selectToken } from '../../features/user/userSlice';
+import React, { Fragment, useEffect, useState } from 'react';
+import { selectToken, selectUserId } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
 import Backdrop from '../backdrop';
+import EventList from '../event-list';
 import Modal from '../modal';
 import { styledButton, styledEvents, styledTextarea } from './styled';
 
@@ -13,6 +14,8 @@ const Events = () => {
   const [description, setDescription] = useState('');
   const token = useSelectorTyped(selectToken);
   const [events, setEvents] = useState([]);
+  const userId = useSelectorTyped(selectUserId);
+  const [isLoading, setIsLoading] = useState(false);
 
   const createEventHandler = () => {
     setIsOpen(true);
@@ -23,6 +26,8 @@ const Events = () => {
   }, []);
 
   const fetchEvents = () => {
+    setIsLoading(true);
+
     const requestBody = {
       query: `
           query {
@@ -57,9 +62,11 @@ const Events = () => {
       })
       .then((resData) => {
         setEvents(resData.data.events);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setIsLoading(false);
       });
   };
 
@@ -73,8 +80,6 @@ const Events = () => {
       return;
     }
 
-    const event = { title, description, price: Number(price), date };
-
     const requestBody = {
       query: `
           mutation {
@@ -84,10 +89,6 @@ const Events = () => {
               description
               price
               date
-              creator {
-                _id
-                email
-              }
             }
           }
         `,
@@ -109,7 +110,23 @@ const Events = () => {
         return res.json();
       })
       .then((resData) => {
-        fetchEvents();
+        setEvents([
+          ...events,
+          {
+            _id: resData.data.createEvent._id,
+            title: resData.data.createEvent.title,
+            description: resData.data.createEvent.description,
+            price: resData.data.createEvent.price,
+            date: resData.data.createEvent.date,
+            creator: {
+              _id: userId,
+              email: resData.data.createEvent.email,
+            },
+          },
+        ]);
+
+        console.log(events);
+        return events;
       })
       .catch((error) => {
         console.log(error);
@@ -182,11 +199,7 @@ const Events = () => {
           </button>
         </div>
       )}
-      <ul>
-        {events.map((event) => {
-          return <li key={event._id}>{event.title}</li>;
-        })}
-      </ul>
+      {isLoading ? <p>Loading...</p> : <EventList events={events} />}
     </Fragment>
   );
 };
