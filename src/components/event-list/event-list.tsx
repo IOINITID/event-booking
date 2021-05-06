@@ -5,7 +5,16 @@ const EventList = (props: any) => {
   return (
     <ul>
       {props.events.map((event) => {
-        return <EventItem key={event._id} eventId={event._id} title={event.title} creatorId={event.creator._id} />;
+        return (
+          <EventItem
+            key={event._id}
+            eventId={event._id}
+            title={event.title}
+            price={event.price}
+            date={event.date}
+            creatorId={event.creator._id}
+          />
+        );
       })}
     </ul>
   );

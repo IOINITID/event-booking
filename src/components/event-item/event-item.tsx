@@ -9,7 +9,9 @@ const EventItem = (props: any) => {
     <li key={props.eventId}>
       <div>
         <h1>{props.title}</h1>
-        <h2>$19.99</h2>
+        <h2>
+          ${props.price} - {new Date(props.date).toLocaleString()}
+        </h2>
       </div>
       <div>{props.creatorId === userId ? <p>Your the owner of this event.</p> : <button>View Details</button>}</div>
     </li>

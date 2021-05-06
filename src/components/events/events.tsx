@@ -3,6 +3,7 @@ import { selectToken, selectUserId } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
 import Backdrop from '../backdrop';
 import EventList from '../event-list';
+import Loader from '../loader';
 import Modal from '../modal';
 import { styledButton, styledEvents, styledTextarea } from './styled';
 
@@ -199,7 +200,7 @@ const Events = () => {
           </button>
         </div>
       )}
-      {isLoading ? <p>Loading...</p> : <EventList events={events} />}
+      {isLoading ? <Loader /> : <EventList events={events} />}
     </Fragment>
   );
 };
