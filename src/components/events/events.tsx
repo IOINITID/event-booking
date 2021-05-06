@@ -17,6 +17,7 @@ const Events = () => {
   const [events, setEvents] = useState([]);
   const userId = useSelectorTyped(selectUserId);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const createEventHandler = () => {
     setIsOpen(true);
@@ -138,7 +139,14 @@ const Events = () => {
 
   const modalCancelHandler = () => {
     setIsOpen(false);
+    setSelectedEvent(null);
   };
+
+  const showDetailHandler = (eventId) => {
+    setSelectedEvent(events.find((item) => item._id === eventId));
+  };
+
+  const bookEventHandler = () => null;
 
   return (
     <Fragment>
@@ -192,6 +200,25 @@ const Events = () => {
           </Modal>
         </Fragment>
       )}
+      {selectedEvent && (
+        <Fragment>
+          <Backdrop />
+          <Modal
+            title={selectedEvent.title}
+            cancel
+            confirm
+            confirmText="Book"
+            onCancel={modalCancelHandler}
+            onConfirm={bookEventHandler}
+          >
+            <h1>{selectedEvent.title}</h1>
+            <h2>
+              ${selectedEvent.price} - {new Date(selectedEvent.date).toLocaleString()}
+            </h2>
+            <p>{selectedEvent.description}</p>
+          </Modal>
+        </Fragment>
+      )}
       {token && (
         <div className={styledEvents}>
           <p>Share your own Events!</p>
@@ -200,7 +227,7 @@ const Events = () => {
           </button>
         </div>
       )}
-      {isLoading ? <Loader /> : <EventList events={events} />}
+      {isLoading ? <Loader /> : <EventList events={events} onViewDetail={showDetailHandler} />}
     </Fragment>
   );
 };

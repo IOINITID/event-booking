@@ -8,6 +8,7 @@ interface IModal {
   confirm: boolean;
   onCancel: () => void;
   onConfirm: () => void;
+  confirmText?: string;
 }
 
 const Modal = (props: IModal) => {
@@ -23,7 +24,7 @@ const Modal = (props: IModal) => {
         )}
         {props.confirm && (
           <button className={styledButton} onClick={props.onConfirm}>
-            Confirm
+            {props.confirmText || 'Confirm'}
           </button>
         )}
       </section>
