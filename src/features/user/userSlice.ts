@@ -7,8 +7,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  token: null,
-  userId: null,
+  token: localStorage.getItem('userToken') || null,
+  userId: localStorage.getItem('userId') || null,
 };
 
 export const userSlice = createSlice({
