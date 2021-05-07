@@ -146,7 +146,50 @@ const Events = () => {
     setSelectedEvent(events.find((item) => item._id === eventId));
   };
 
-  const bookEventHandler = () => null;
+  const bookEventHandler = () => {
+    if (!token) {
+      setSelectedEvent(null);
+      return;
+    }
+
+    setIsLoading(true);
+
+    const requestBody = {
+      query: `
+          mutation {
+            bookEvent(eventId: "${selectedEvent._id}") {
+              _id
+              createdAt
+              updatedAt
+            }
+          }
+        `,
+    };
+
+    fetch('http://localhost:8080/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error('Failed!');
+        }
+
+        return res.json();
+      })
+      .then((resData) => {
+        setIsLoading(false);
+        setSelectedEvent(null);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <Fragment>
@@ -207,7 +250,7 @@ const Events = () => {
             title={selectedEvent.title}
             cancel
             confirm
-            confirmText="Book"
+            confirmText={token && 'Book'}
             onCancel={modalCancelHandler}
             onConfirm={bookEventHandler}
           >
