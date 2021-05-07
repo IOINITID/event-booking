@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { selectToken } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
+import BookingList from '../booking-list';
 import Loader from '../loader';
 
 const Bookings = () => {
@@ -11,6 +12,46 @@ const Bookings = () => {
   useEffect(() => {
     fetchBookings();
   }, []);
+
+  const deleteBookingHandler = (bookingId: any) => {
+    setIsLoading(true);
+
+    const requestBody = {
+      query: `
+          mutation {
+            cancelBooking(bookingId: "${bookingId}") {
+              _id
+              title
+            }
+          }
+        `,
+    };
+
+    fetch('http://localhost:8080/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error('Failed!');
+        }
+
+        return res.json();
+      })
+      .then((resData) => {
+        const updatedBookings = bookings.filter((booking) => booking._id !== bookingId);
+        setBookings(updatedBookings);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
+  };
 
   const fetchBookings = () => {
     setIsLoading(true);
@@ -57,21 +98,7 @@ const Bookings = () => {
   };
 
   return (
-    <Fragment>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <ul>
-          {bookings.map((booking) => {
-            return (
-              <li key={booking._id}>
-                {booking.event.title} - {new Date(booking.createdAt).toLocaleDateString()}
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </Fragment>
+    <Fragment>{isLoading ? <Loader /> : <BookingList bookings={bookings} onDelete={deleteBookingHandler} />}</Fragment>
   );
 };
 
