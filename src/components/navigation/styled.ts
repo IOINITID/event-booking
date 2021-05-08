@@ -38,10 +38,12 @@ export const styledNavigation = css`
 
 export const styledNavigationList = css`
   display: grid;
+  align-items: center;
   grid-auto-flow: column;
   margin: 0;
   padding: 0;
   list-style: none;
+  column-gap: 16px;
 
   @media (max-width: 768px) {
     align-items: center;
@@ -51,11 +53,7 @@ export const styledNavigationList = css`
 `;
 
 export const styledNavigationItem = css`
-  margin: 0 1rem;
-
-  @media (max-width: 768px) {
-    margin: 0;
-  }
+  margin: 0;
 `;
 
 export const styledNavigationLink = css`

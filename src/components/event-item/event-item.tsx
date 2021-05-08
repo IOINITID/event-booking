@@ -1,6 +1,7 @@
 import React from 'react';
 import { selectUserId } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
+import { styledEventItemButton } from './styled';
 
 const EventItem = (props: any) => {
   const userId = useSelectorTyped(selectUserId);
@@ -17,7 +18,9 @@ const EventItem = (props: any) => {
         {props.creatorId === userId ? (
           <p>Your the owner of this event.</p>
         ) : (
-          <button onClick={props.onDetail.bind(this, props.eventId)}>View Details</button>
+          <button className={styledEventItemButton} onClick={props.onDetail.bind(this, props.eventId)}>
+            View Details
+          </button>
         )}
       </div>
     </li>

@@ -3,10 +3,10 @@ import theme from 'styled-theming';
 import { css } from '@emotion/css';
 
 export const styledMain = css`
-  margin: 4rem 2.5rem;
+  margin: 80px 0 0 0;
 
   @media (max-width: 768px) {
-    margin: 124px 0 0 0;
+    margin: 140px 0 0 0;
   }
 `;
 
