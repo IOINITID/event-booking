@@ -1,9 +1,10 @@
 import React from 'react';
 import EventItem from '../event-item';
+import { styledEventList } from './styled';
 
 const EventList = (props: any) => {
   return (
-    <ul>
+    <ul className={styledEventList}>
       {props.events.map((event) => {
         return (
           <EventItem

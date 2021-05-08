@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 import { login } from '../../features/user/userSlice';
 import { useDispatchTyped } from '../../hooks';
-import { styledButton, styledForm, styledFormField, styledInput, styledLabel } from './styled';
+import { styledButton, styledForm, styledFormActions, styledFormField, styledInput, styledLabel } from './styled';
 import { REQUEST_URL } from '../../utils/constants';
 
 const Auth = () => {
@@ -104,7 +104,7 @@ const Auth = () => {
           onChange={(event) => setPassword(event.target.value)}
         />
       </div>
-      <div className="form-actions">
+      <div className={styledFormActions}>
         <button className={styledButton} type="submit">
           Submit
         </button>

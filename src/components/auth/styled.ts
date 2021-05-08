@@ -21,6 +21,13 @@ export const styledFormField = css`
   margin-bottom: 1rem;
 `;
 
+export const styledFormActions = css`
+  @media (max-width: 768px) {
+    display: grid;
+    row-gap: 16px;
+  }
+`;
+
 export const styledButton = css`
   margin-right: 1rem;
   padding: 0.25rem 1rem;

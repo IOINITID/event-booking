@@ -7,8 +7,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  token: JSON.parse(localStorage.getItem('userToken')) || null,
-  userId: JSON.parse(localStorage.getItem('userId')) || null,
+  token: localStorage.getItem('userToken') || null,
+  userId: localStorage.getItem('userId') || null,
 };
 
 export const userSlice = createSlice({
@@ -18,10 +18,14 @@ export const userSlice = createSlice({
     login: (state, action: PayloadAction<{ token: string; userId: string }>) => {
       state.token = action.payload.token;
       state.userId = action.payload.userId;
+      localStorage.setItem('userToken', action.payload.token);
+      localStorage.setItem('userId', action.payload.userId);
     },
     logout: (state) => {
       state.token = null;
       state.userId = null;
+      localStorage.removeItem('userToken');
+      localStorage.removeItem('userId');
     },
   },
 });

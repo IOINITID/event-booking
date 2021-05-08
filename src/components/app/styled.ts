@@ -4,6 +4,10 @@ import { css } from '@emotion/css';
 
 export const styledMain = css`
   margin: 4rem 2.5rem;
+
+  @media (max-width: 768px) {
+    margin: 124px 0 0 0;
+  }
 `;
 
 export const GlobalStyles = createGlobalStyle`
