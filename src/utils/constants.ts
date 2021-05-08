@@ -8,3 +8,5 @@ export const retina = {
   dppx: 1.5,
   dpi: 144,
 };
+
+export const REQUEST_URL = 'https://ioinitid-event-booking.herokuapp.com/graphql';

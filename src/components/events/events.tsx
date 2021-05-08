@@ -6,6 +6,7 @@ import EventList from '../event-list';
 import Loader from '../loader';
 import Modal from '../modal';
 import { styledButton, styledEvents, styledTextarea } from './styled';
+import { REQUEST_URL } from '../../utils/constants';
 
 const Events = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +49,7 @@ const Events = () => {
         `,
     };
 
-    fetch('http://localhost:8080/graphql', {
+    fetch(REQUEST_URL, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -102,7 +103,7 @@ const Events = () => {
       },
     };
 
-    fetch('http://localhost:8080/graphql', {
+    fetch(REQUEST_URL, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -175,7 +176,7 @@ const Events = () => {
       },
     };
 
-    fetch('http://localhost:8080/graphql', {
+    fetch(REQUEST_URL, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {

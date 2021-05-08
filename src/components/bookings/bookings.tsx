@@ -3,6 +3,7 @@ import { selectToken } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
 import BookingList from '../booking-list';
 import Loader from '../loader';
+import { REQUEST_URL } from '../../utils/constants';
 
 const Bookings = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +31,7 @@ const Bookings = () => {
       },
     };
 
-    fetch('http://localhost:8080/graphql', {
+    fetch(REQUEST_URL, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
@@ -75,7 +76,7 @@ const Bookings = () => {
         `,
     };
 
-    fetch('http://localhost:8080/graphql', {
+    fetch(REQUEST_URL, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {

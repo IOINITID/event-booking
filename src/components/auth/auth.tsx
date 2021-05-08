@@ -2,6 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { login } from '../../features/user/userSlice';
 import { useDispatchTyped } from '../../hooks';
 import { styledButton, styledForm, styledFormField, styledInput, styledLabel } from './styled';
+import { REQUEST_URL } from '../../utils/constants';
 
 const Auth = () => {
   const dispatch = useDispatchTyped();
@@ -49,7 +50,7 @@ const Auth = () => {
       };
     }
 
-    fetch('http://localhost:8080/graphql', {
+    fetch(REQUEST_URL, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
