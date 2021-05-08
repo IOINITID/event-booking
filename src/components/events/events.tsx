@@ -259,7 +259,7 @@ const Events = () => {
           <Modal
             title={selectedEvent.title}
             cancel
-            confirm
+            confirm={Boolean(token)}
             confirmText={token && 'Book'}
             onCancel={modalCancelHandler}
             onConfirm={bookEventHandler}
