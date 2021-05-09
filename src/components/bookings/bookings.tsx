@@ -4,11 +4,14 @@ import { useSelectorTyped } from '../../hooks';
 import BookingList from '../booking-list';
 import Loader from '../loader';
 import { REQUEST_URL } from '../../utils/constants';
+import BookingsChart from '../bookings-chart';
+import BookingsControl from '../bookings-controls';
 
 const Bookings = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookings, setBookings] = useState([]);
   const token = useSelectorTyped(selectToken);
+  const [outputType, setOutputType] = useState('');
 
   useEffect(() => {
     fetchBookings();
@@ -70,6 +73,7 @@ const Bookings = () => {
                 _id
                 title
                 date
+                price
               }
             }
           }
@@ -101,8 +105,27 @@ const Bookings = () => {
       });
   };
 
+  const outputTypeChangeHandler = (type: any) => {
+    setOutputType(type);
+  };
+
   return (
-    <Fragment>{isLoading ? <Loader /> : <BookingList bookings={bookings} onDelete={deleteBookingHandler} />}</Fragment>
+    <Fragment>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <BookingsControl onOutputTypeChange={outputTypeChangeHandler} activeOutputType={outputType} />
+          <div>
+            {outputType !== 'chart' ? (
+              <BookingList bookings={bookings} onDelete={deleteBookingHandler} />
+            ) : (
+              <BookingsChart bookings={bookings} />
+            )}
+          </div>
+        </Fragment>
+      )}
+    </Fragment>
   );
 };
 
