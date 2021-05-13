@@ -134,7 +134,6 @@ const Events = () => {
           },
         ]);
 
-        console.log(events);
         return events;
       })
       .catch((error) => {
