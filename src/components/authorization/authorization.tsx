@@ -24,7 +24,6 @@ const Authorization = () => {
   const dispatch = useDispatchTyped();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = useState(true);
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -33,7 +32,7 @@ const Authorization = () => {
       return;
     }
 
-    let requestBody = {
+    const requestBody = {
       query: `
         query Login($email: String!, $password: String!) {
           login(email: $email, password: $password) {
@@ -48,23 +47,6 @@ const Authorization = () => {
         password: password,
       },
     };
-
-    if (!isLogin) {
-      requestBody = {
-        query: `
-          mutation CreateUser($email: String!, $password: String!) {
-            createUser(userInput: {email: $email, password: $password}) {
-              _id
-              email
-            }
-          }
-        `,
-        variables: {
-          email: email,
-          password: password,
-        },
-      };
-    }
 
     fetch(REQUEST_URL, {
       method: 'POST',
@@ -88,10 +70,6 @@ const Authorization = () => {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const switchModeHandler = () => {
-    setIsLogin(!isLogin);
   };
 
   return (
