@@ -1,28 +1,40 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import EventItem from '../event-item';
 import { styledEventList, styledEventListButton } from './styled';
 
 const EventList = (props: any) => {
+  const [eventsCount, setEventsCount] = useState(9);
+
   return (
     <Fragment>
       <ul className={styledEventList}>
-        {props.events.map((event) => {
-          return (
-            <EventItem
-              key={event._id}
-              eventId={event._id}
-              title={event.title}
-              price={event.price}
-              date={event.date}
-              creatorId={event.creator._id}
-              onDetail={props.onViewDetail}
-            />
-          );
+        {props.events.map((event, index) => {
+          if (index < eventsCount) {
+            return (
+              <EventItem
+                key={event._id}
+                eventId={event._id}
+                title={event.title}
+                price={event.price}
+                date={event.date}
+                creatorId={event.creator._id}
+                onDetail={props.onViewDetail}
+              />
+            );
+          }
         })}
       </ul>
-      <button className={styledEventListButton} type="button" onClick={() => null}>
-        Показать ещё
-      </button>
+      {props.events.length > eventsCount ? (
+        <button
+          className={styledEventListButton}
+          type="button"
+          onClick={() => {
+            setEventsCount(eventsCount + 9);
+          }}
+        >
+          Показать ещё
+        </button>
+      ) : null}
     </Fragment>
   );
 };
