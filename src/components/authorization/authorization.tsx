@@ -18,8 +18,9 @@ import {
 } from './styled';
 import { REQUEST_URL } from '../../utils/constants';
 import ticketsImage from '../../assets/images/tickets.png';
+import { NavLink } from 'react-router-dom';
 
-const Auth = () => {
+const Authorization = () => {
   const dispatch = useDispatchTyped();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -94,7 +95,7 @@ const Auth = () => {
   };
 
   return (
-    <form className={styledForm} onSubmit={submitHandler} autoComplete="off">
+    <form className={styledForm} onSubmit={submitHandler}>
       <div className={styledFormInfo}>
         <h2 className={styledFormInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
         <img src={ticketsImage} alt="Билеты на мероприятия." />
@@ -105,9 +106,9 @@ const Auth = () => {
           <h2 className={styledFormFieldsTitle}>Войти в свой профиль</h2>
           <p className={styledFormFieldsInfo}>
             У Вас ещё нет аккаунта?{' '}
-            <a className={styledFormFieldsInfoLink} href="#no_scroll">
+            <NavLink className={styledFormFieldsInfoLink} to="/registration">
               Создать учётную запись
-            </a>
+            </NavLink>
           </p>
         </header>
         <div className={styledFormFieldsFieldset}>
@@ -146,4 +147,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Authorization;

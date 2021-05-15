@@ -13,6 +13,8 @@ export const styledFormInfo = css`
   background: url(${backgroundImage});
   border-radius: 32px 0 0 32px;
   padding: 64px 104px 40px 104px;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export const styledFormInfoTitle = css`
@@ -29,7 +31,7 @@ export const styledFormFieldsTitle = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 28px;
-  line-height: 120%;
+  line-height: 1;
   color: #282828;
 `;
 
@@ -62,7 +64,7 @@ export const styledFormFields = css`
   display: grid;
   grid-template-rows: repeat(3, max-content);
   row-gap: 32px;
-  padding: 64px 104px;
+  padding: 64px 104px 56px 104px;
   border-radius: 0 32px 32px 0;
   background: #ffffff;
 `;
@@ -80,9 +82,9 @@ export const styledFormFieldsFieldset = css`
 export const styledLabel = css`
   display: grid;
   font-family: 'Grandis Extended', 'Arial', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 16px;
   letter-spacing: -0.002em;
   color: #282828;
 `;
@@ -90,10 +92,21 @@ export const styledLabel = css`
 export const styledInput = css`
   display: block;
   width: 100%;
+
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.002em;
+  color: #282828;
   border: 1px solid #282828;
   border-radius: 8px;
   padding: 16px 20px;
   outline: none;
+
+  &::placeholder {
+    color: #bfc4c7;
+  }
 `;
 
 export const styledFormField = css`
@@ -113,9 +126,18 @@ export const styledButton = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 16px;
   display: grid;
   letter-spacing: -0.002em;
   color: #ffffff;
   border: none;
+
+  &:hover,
+  &:focus {
+    background: #f06749;
+  }
+
+  &:active {
+    background: #e62f07;
+  }
 `;

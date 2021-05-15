@@ -56,7 +56,7 @@ export const styledNavigationLink = css`
   color: #1a1a1a;
   text-decoration: none;
 
-  &.auth {
+  &.button {
     display: grid;
     justify-content: center;
     align-items: center;
