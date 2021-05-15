@@ -7,6 +7,7 @@ import Loader from '../loader';
 import Modal from '../modal';
 import { styledButton, styledEvents, styledTextarea } from './styled';
 import { REQUEST_URL } from '../../utils/constants';
+import InfoBanner from '../info-banner';
 
 const Events = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -271,14 +272,8 @@ const Events = () => {
           </Modal>
         </Fragment>
       )}
-      {token && (
-        <div className={styledEvents}>
-          <p>Share your own Events!</p>
-          <button className={styledButton} onClick={createEventHandler}>
-            Create Event
-          </button>
-        </div>
-      )}
+      <InfoBanner onCreateEvent={createEventHandler} />
+
       {isLoading ? <Loader /> : <EventList events={events} onViewDetail={showDetailHandler} />}
     </Fragment>
   );

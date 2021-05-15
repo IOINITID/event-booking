@@ -40,7 +40,7 @@ const Navigation = () => {
             <Fragment>
               <li className={styledNavigationItem}>
                 <NavLink className={styledNavigationLink} to="/bookings">
-                  Bookings
+                  Забронированные
                 </NavLink>
               </li>
               <li>
