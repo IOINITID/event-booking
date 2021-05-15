@@ -111,6 +111,15 @@ module.exports = {
         },
       },
       {
+        test: /\.(jpg|jpeg|png|svg)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: 'images/[name].[ext]',
+          },
+        },
+      },
+      {
         test: /\.(woff2|woff|ttf)$/,
         use: {
           loader: 'file-loader',

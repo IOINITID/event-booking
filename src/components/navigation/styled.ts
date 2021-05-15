@@ -1,31 +1,22 @@
 import { css } from '@emotion/css';
 
 export const styledHeader = css`
-  position: fixed;
-  top: 0;
-  left: 0;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 40px 72px;
   display: grid;
-  justify-content: space-between;
   align-items: center;
-  grid-auto-flow: column;
-  grid-template-columns: repeat(2, auto);
-  width: 100%;
-  height: 3.5rem;
-  padding: 0 1rem;
-  background: #01d1d1;
-
-  @media (max-width: 768px) {
-    grid-auto-flow: row;
-    grid-template-columns: 1fr;
-    row-gap: 24px;
-    height: auto;
-    padding: 1rem;
-  }
+  grid-template-columns: auto max-content max-content;
 `;
 
 export const styledHeading = css`
   margin: 0;
-  font-size: 1.5rem;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 135.5%;
+  letter-spacing: 0.02em;
+  color: #1e1e1e;
 `;
 
 export const styledNavigation = css`
@@ -43,7 +34,7 @@ export const styledNavigationList = css`
   margin: 0;
   padding: 0;
   list-style: none;
-  column-gap: 16px;
+  column-gap: 40px;
 
   @media (max-width: 768px) {
     align-items: center;
@@ -57,33 +48,26 @@ export const styledNavigationItem = css`
 `;
 
 export const styledNavigationLink = css`
-  padding: 0.5rem 1rem;
-  color: #ffffff;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.002em;
+  color: #1a1a1a;
   text-decoration: none;
-  border: 1px solid #ffffff;
-  border-radius: 8px;
 
-  &:hover,
-  &:active,
-  &.active {
-    color: #000000;
-    background: #ffffff;
-  }
-`;
-
-export const styledNavigationButton = css`
-  padding: 0.5rem 1rem;
-  font: inherit;
-  color: #ffffff;
-  background: transparent;
-  border: 1px solid #ffffff;
-  border-radius: 8px;
-  cursor: pointer;
-
-  &:hover,
-  &:active,
-  &.active {
-    color: #000000;
-    background: #ffffff;
+  &.auth {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 24px;
+    border: 1px solid #252525;
+    border-radius: 8px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.002em;
+    color: #252525;
   }
 `;

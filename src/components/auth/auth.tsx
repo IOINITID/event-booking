@@ -1,8 +1,23 @@
 import React, { FormEvent, useState } from 'react';
 import { login } from '../../features/user/userSlice';
 import { useDispatchTyped } from '../../hooks';
-import { styledButton, styledForm, styledFormActions, styledFormField, styledInput, styledLabel } from './styled';
+import {
+  styledButton,
+  styledForm,
+  styledFormField,
+  styledFormFields,
+  styledFormFieldsHeader,
+  styledFormFieldsInfo,
+  styledFormFieldsInfoLink,
+  styledFormFieldsTitle,
+  styledFormInfo,
+  styledFormInfoTitle,
+  styledInput,
+  styledLabel,
+  styledFormFieldsFieldset,
+} from './styled';
 import { REQUEST_URL } from '../../utils/constants';
+import ticketsImage from '../../assets/images/tickets.png';
 
 const Auth = () => {
   const dispatch = useDispatchTyped();
@@ -79,37 +94,52 @@ const Auth = () => {
   };
 
   return (
-    <form className={styledForm} onSubmit={submitHandler}>
-      <div className={styledFormField}>
-        <label className={styledLabel} htmlFor="email">
-          Email
-        </label>
-        <input
-          className={styledInput}
-          type="email"
-          id="email"
-          name="email"
-          onChange={(event) => setEmail(event.target.value)}
-        />
+    <form className={styledForm} onSubmit={submitHandler} autoComplete="off">
+      <div className={styledFormInfo}>
+        <h2 className={styledFormInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
+        <img src={ticketsImage} alt="Билеты на мероприятия." />
       </div>
-      <div className={styledFormField}>
-        <label className={styledLabel} htmlFor="password">
-          Password
-        </label>
-        <input
-          className={styledInput}
-          type="password"
-          id="password"
-          name="password"
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
-      <div className={styledFormActions}>
+
+      <div className={styledFormFields}>
+        <header className={styledFormFieldsHeader}>
+          <h2 className={styledFormFieldsTitle}>Войти в свой профиль</h2>
+          <p className={styledFormFieldsInfo}>
+            У Вас ещё нет аккаунта?{' '}
+            <a className={styledFormFieldsInfoLink} href="#no_scroll">
+              Создать учётную запись
+            </a>
+          </p>
+        </header>
+        <div className={styledFormFieldsFieldset}>
+          <div className={styledFormField}>
+            <label className={styledLabel} htmlFor="email">
+              Адрес электронной почты
+            </label>
+            <input
+              className={styledInput}
+              type="email"
+              id="email"
+              name="email"
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="Электронная почта"
+            />
+          </div>
+          <div className={styledFormField}>
+            <label className={styledLabel} htmlFor="password">
+              Пароль
+            </label>
+            <input
+              className={styledInput}
+              type="password"
+              id="password"
+              name="password"
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="***************"
+            />
+          </div>
+        </div>
         <button className={styledButton} type="submit">
-          Submit
-        </button>
-        <button className={styledButton} type="button" onClick={switchModeHandler}>
-          Switch to {isLogin ? 'Signup' : 'Login'}
+          Войти ⟶
         </button>
       </div>
     </form>
