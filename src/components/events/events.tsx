@@ -5,7 +5,7 @@ import Backdrop from '../backdrop';
 import EventList from '../event-list';
 import Loader from '../loader';
 import Modal from '../modal';
-import { styledButton, styledEvents, styledTextarea } from './styled';
+import { styledTextarea } from './styled';
 import { REQUEST_URL } from '../../utils/constants';
 import InfoBanner from '../info-banner';
 

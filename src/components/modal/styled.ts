@@ -1,6 +1,7 @@
 import { css } from '@emotion/css';
 
 export const styledModal = css`
+  z-index: 10;
   position: fixed;
   top: 50%;
   left: 50%;

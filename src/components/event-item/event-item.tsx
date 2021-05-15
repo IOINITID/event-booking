@@ -1,27 +1,34 @@
 import React from 'react';
 import { selectUserId } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
-import { styledEventItemButton } from './styled';
+import {
+  styledEvent,
+  styledEventImage,
+  styledEventImageContainer,
+  styledEventInfo,
+  styledEventItemButton,
+  styledEventPrice,
+} from './styled';
+import eventImage from '../../assets/images/event-image.jpg';
 
 const EventItem = (props: any) => {
   const userId = useSelectorTyped(selectUserId);
 
   return (
-    <li key={props.eventId}>
-      <div>
-        <h1>{props.title}</h1>
-        <h2>
-          ${props.price} - {new Date(props.date).toLocaleString()}
-        </h2>
+    <li className={styledEvent} key={props.eventId}>
+      <div className={styledEventImageContainer}>
+        <img className={styledEventImage} src={eventImage} alt="Изображение мероприятия." />
+        <span className={styledEventPrice}>{props.price} ₽</span>
       </div>
-      <div>
-        {props.creatorId === userId ? (
-          <p>Your the owner of this event.</p>
-        ) : (
-          <button className={styledEventItemButton} onClick={props.onDetail.bind(this, props.eventId)}>
-            View Details
-          </button>
-        )}
+      <div className={styledEventInfo}>
+        <h3>{props.title}</h3>
+        <p>
+          {/* {new Date(props.date).getDate()} — {new Date(props.date).getTime()} */}
+          20 мая — 16:30
+        </p>
+        <button className={styledEventItemButton} type="button" onClick={props.onDetail.bind(this, props.eventId)}>
+          Подробнее
+        </button>
       </div>
     </li>
   );
