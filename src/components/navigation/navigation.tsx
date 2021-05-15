@@ -31,7 +31,7 @@ const Navigation = () => {
           </li>
           {!token && (
             <li className={styledNavigationItem}>
-              <NavLink className={cx('button', styledNavigationLink)} to="/authorization">
+              <NavLink className={styledNavigationLink} to="/authorization">
                 Войти
               </NavLink>
             </li>
@@ -46,7 +46,7 @@ const Navigation = () => {
               <li>
                 <a
                   href="#no_scroll"
-                  className={cx('auth', styledNavigationLink)}
+                  className={styledNavigationLink}
                   onClick={() => {
                     dispatch(logout());
                     history.push('/authorization');
