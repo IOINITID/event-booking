@@ -8,13 +8,14 @@ export const styledModal = css`
   width: 808px;
   transform: translate(-50%, -50%);
   background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
 `;
 
 export const styledModalHeader = css`
   position: relative;
   height: 304px;
   /* background: linear-gradient(99.19deg, #9ae048 15.01%, #79ff76 95.29%); */
-  border-radius: 16px 16px 0 0;
 `;
 
 export const styledModalImage = css`
@@ -23,7 +24,6 @@ export const styledModalImage = css`
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 16px 16px 0 0;
 `;
 
 export const styledModalPrice = css`
