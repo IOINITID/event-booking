@@ -1,5 +1,16 @@
 import React from 'react';
-import { styledButton, styledModal, styledModalActions, styledModalContent, styledModalHeader } from './styled';
+import { styledHeader } from '../navigation/styled';
+import {
+  styledButton,
+  styledModal,
+  styledModalActions,
+  styledModalContent,
+  styledModalHeader,
+  styledModalImage,
+  styledModalPrice,
+} from './styled';
+
+import modalImage from '../../assets/images/modal-image.jpg';
 
 interface IModal {
   title: string;
@@ -14,20 +25,29 @@ interface IModal {
 const Modal = (props: IModal) => {
   return (
     <div className={styledModal}>
-      <header className={styledModalHeader}>{props.title}</header>
-      <section className={styledModalContent}>{props.children}</section>
-      <section className={styledModalActions}>
-        {props.cancel && (
+      <header className={styledModalHeader}>
+        <img className={styledModalImage} src={modalImage} alt="Изображение мероприятия." />
+        <span className={styledModalPrice}>1 360 ₽</span>
+      </header>
+
+      <div className={styledModalContent}>
+        <h3>{props.title}</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          labore et dolore magna aliqua.{' '}
+        </p>
+        <time>20 мая - 16:30</time>
+        <p>Van Gogh Museum, Amsterdam</p>
+        <div className={styledModalActions}>
           <button className={styledButton} onClick={props.onCancel}>
-            Cancel
+            Отмена
           </button>
-        )}
-        {props.confirm && (
           <button className={styledButton} onClick={props.onConfirm}>
-            {props.confirmText || 'Confirm'}
+            Забронировать
           </button>
-        )}
-      </section>
+        </div>
+      </div>
     </div>
   );
 };

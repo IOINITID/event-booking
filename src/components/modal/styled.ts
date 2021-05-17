@@ -1,25 +1,44 @@
 import { css } from '@emotion/css';
 
 export const styledModal = css`
-  z-index: 10;
+  z-index: 100;
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 50rem;
-  max-width: 90%;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.25);
+  width: 808px;
   transform: translate(-50%, -50%);
-
-  @media (min-width: 768px) {
-    width: 30rem;
-  }
+  background: #ffffff;
 `;
 
 export const styledModalHeader = css`
-  padding: 1rem;
-  color: #ffffff;
-  background: #01d1d1;
+  position: relative;
+  height: 304px;
+  /* background: linear-gradient(99.19deg, #9ae048 15.01%, #79ff76 95.29%); */
+  border-radius: 16px 16px 0 0;
+`;
+
+export const styledModalImage = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px 16px 0 0;
+`;
+
+export const styledModalPrice = css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ffffff;
+  border-radius: 0px 16px;
+  padding: 16px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.02em;
+  color: #ef4723;
 `;
 
 export const styledModalHeading = css`
@@ -28,26 +47,39 @@ export const styledModalHeading = css`
 `;
 
 export const styledModalContent = css`
-  padding: 1rem;
+  padding: 32px 40px 48px 40px;
+  background: #ffffff;
 `;
 
 export const styledModalActions = css`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  column-gap: 16px;
+  justify-content: center;
 `;
 
 export const styledButton = css`
-  font: inherit;
-  color: #000000;
-  background: #01d1d1;
-  border: none;
+  width: max-content;
+  justify-self: center;
+  padding: 20px 59px;
   cursor: pointer;
+  background: #ef4723;
+  border-radius: 8px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  display: grid;
+  letter-spacing: -0.002em;
+  color: #ffffff;
+  border: none;
 
   &:hover,
-  &:active,
-  &.active {
-    color: #fdefa0;
+  &:focus {
+    background: #f06749;
+  }
+
+  &:active {
+    background: #e62f07;
   }
 `;
