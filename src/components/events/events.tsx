@@ -29,6 +29,14 @@ const Events = () => {
     fetchEvents();
   }, []);
 
+  useEffect(() => {
+    if (selectedEvent || isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isOpen, selectedEvent]);
+
   const fetchEvents = () => {
     setIsLoading(true);
 

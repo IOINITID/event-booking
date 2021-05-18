@@ -60,7 +60,7 @@ export const styledModalActions = css`
 
 export const styledButton = css`
   width: max-content;
-  justify-self: center;
+  align-items: center;
   padding: 20px 59px;
   cursor: pointer;
   background: #ef4723;
@@ -81,5 +81,32 @@ export const styledButton = css`
 
   &:active {
     background: #e62f07;
+  }
+`;
+
+export const styledButtonCancel = css`
+  width: max-content;
+  align-items: center;
+  padding: 20px 32px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.002em;
+  color: #ef4723;
+  border: 1px solid #ef4723;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: #f06749;
+    color: #ffffff;
+  }
+
+  &:active {
+    background: #e52f07;
+    color: #ffffff;
   }
 `;

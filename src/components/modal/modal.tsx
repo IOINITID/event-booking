@@ -2,6 +2,7 @@ import React from 'react';
 import { styledHeader } from '../navigation/styled';
 import {
   styledButton,
+  styledButtonCancel,
   styledModal,
   styledModalActions,
   styledModalContent,
@@ -40,7 +41,7 @@ const Modal = (props: IModal) => {
         <time>20 мая - 16:30</time>
         <p>Van Gogh Museum, Amsterdam</p>
         <div className={styledModalActions}>
-          <button className={styledButton} onClick={props.onCancel}>
+          <button className={styledButtonCancel} onClick={props.onCancel}>
             Отмена
           </button>
           <button className={styledButton} onClick={props.onConfirm}>
