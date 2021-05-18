@@ -1,20 +1,28 @@
 import { css } from '@emotion/css';
-import backgroundImage from '../../assets/images/form-info-background.jpg';
 
 export const styledForm = css`
   display: grid;
   grid-template-columns: 624px 592px;
   max-width: 1360px;
+  min-height: 580px;
 `;
 
 export const styledFormInfo = css`
+  position: relative;
   display: grid;
   row-gap: 40px;
-  background: url(${backgroundImage});
+  background: #282828;
   border-radius: 32px 0 0 32px;
   padding: 64px 104px 40px 104px;
   background-repeat: no-repeat;
   background-size: cover;
+`;
+
+export const styledFormImage = css`
+  position: absolute;
+  height: 324px;
+  right: 0;
+  bottom: 0;
 `;
 
 export const styledFormInfoTitle = css`
@@ -22,8 +30,9 @@ export const styledFormInfoTitle = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 28px;
-  line-height: 140.5%;
+  line-height: 39px;
   letter-spacing: 0.02em;
+  color: #ffffff;
 `;
 
 export const styledFormFieldsTitle = css`
@@ -31,7 +40,7 @@ export const styledFormFieldsTitle = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 28px;
-  line-height: 1;
+  line-height: 32px;
   color: #282828;
 `;
 
@@ -40,7 +49,7 @@ export const styledFormFieldsInfo = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 18px;
   letter-spacing: -0.002em;
   color: #282828;
 `;
@@ -63,7 +72,7 @@ export const styledFormFieldsInfoLink = css`
 export const styledFormFields = css`
   display: grid;
   grid-template-rows: repeat(3, max-content);
-  row-gap: 32px;
+  row-gap: 24px;
   padding: 64px 104px 56px 104px;
   border-radius: 0 32px 32px 0;
   background: #ffffff;
@@ -111,7 +120,7 @@ export const styledInput = css`
 
 export const styledFormField = css`
   display: grid;
-  row-gap: 12px;
+  row-gap: 16px;
 `;
 
 export const styledFormActions = css``;

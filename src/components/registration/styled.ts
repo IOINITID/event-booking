@@ -1,20 +1,28 @@
 import { css } from '@emotion/css';
-import backgroundImage from '../../assets/images/form-info-background.jpg';
 
 export const styledForm = css`
   display: grid;
   grid-template-columns: 624px 592px;
   max-width: 1360px;
+  min-height: 580px;
 `;
 
 export const styledFormInfo = css`
+  position: relative;
   display: grid;
   row-gap: 40px;
-  background: url(${backgroundImage});
+  background: #282828;
   border-radius: 32px 0 0 32px;
   padding: 64px 104px 40px 104px;
   background-repeat: no-repeat;
   background-size: cover;
+`;
+
+export const styledFormImage = css`
+  position: absolute;
+  height: 324px;
+  right: 0;
+  bottom: 0;
 `;
 
 export const styledFormInfoTitle = css`
@@ -22,8 +30,9 @@ export const styledFormInfoTitle = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 28px;
-  line-height: 140.5%;
+  line-height: 39px;
   letter-spacing: 0.02em;
+  color: #ffffff;
 `;
 
 export const styledFormFieldsTitle = css`
@@ -31,7 +40,7 @@ export const styledFormFieldsTitle = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 28px;
-  line-height: 1;
+  line-height: 32px;
   color: #282828;
 `;
 

@@ -15,6 +15,7 @@ import {
   styledInput,
   styledLabel,
   styledFormFieldsFieldset,
+  styledFormImage,
 } from './styled';
 import { REQUEST_URL } from '../../utils/constants';
 import ticketsImage from '../../assets/images/tickets.png';
@@ -76,7 +77,7 @@ const Authorization = () => {
     <form className={styledForm} onSubmit={submitHandler}>
       <div className={styledFormInfo}>
         <h2 className={styledFormInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
-        <img src={ticketsImage} alt="Билеты на мероприятия." />
+        <img className={styledFormImage} src={ticketsImage} alt="Билеты на мероприятия." />
       </div>
 
       <div className={styledFormFields}>

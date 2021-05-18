@@ -1,7 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import theme from 'styled-theming';
 import { css } from '@emotion/css';
-import backgroundImage from '../../assets/images/background.jpg';
 import fontBoldWoff2 from '../../assets/fonts/GrandisExtended-Bold.woff2';
 import fontBoldWoff from '../../assets/fonts/GrandisExtended-Bold.woff';
 import fontBoldTtf from '../../assets/fonts/GrandisExtended-Bold.ttf';
@@ -53,12 +52,5 @@ export const GlobalStyles = createGlobalStyle`
     background: linear-gradient(100.38deg, #FFFFFF -15.69%, rgba(255, 255, 255, 0) 17.45%), radial-gradient(132.55% 273% at 103.38% -8.2%, #EF4723 0%, rgba(252, 207, 149, 0.515625) 74.11%);
     background-repeat: no-repeat;
     background-attachment: fixed;
-  }
-
-  .root {
-    /* width: 100%;
-    height: 100vh;
-    background: url(${backgroundImage});
-    background-size: cover; */
   }
 `;

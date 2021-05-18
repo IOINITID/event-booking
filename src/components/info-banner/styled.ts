@@ -40,7 +40,7 @@ export const styledInfoBannerText = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 18px;
   letter-spacing: -0.002em;
   color: #252525;
 `;
@@ -50,7 +50,7 @@ export const styledInfoBannerLink = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 18px;
   letter-spacing: -0.002em;
   color: #557aff;
   text-decoration: none;
