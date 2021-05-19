@@ -20,7 +20,6 @@ export const styledFormInfo = css`
 
 export const styledFormImage = css`
   position: absolute;
-  height: 324px;
   right: 0;
   bottom: 0;
 `;
@@ -49,8 +48,7 @@ export const styledFormFieldsInfo = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.002em;
+  line-height: 20px;
   color: #282828;
 `;
 
@@ -58,8 +56,7 @@ export const styledFormFieldsInfoLink = css`
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.002em;
+  line-height: 20px;
   color: #557aff;
   text-decoration: none;
 
@@ -71,9 +68,9 @@ export const styledFormFieldsInfoLink = css`
 
 export const styledFormFields = css`
   display: grid;
-  grid-template-rows: repeat(3, max-content);
-  row-gap: 32px;
-  padding: 64px 104px 56px 104px;
+  grid-template-rows: repeat(2, max-content);
+  row-gap: 24px;
+  padding: 64px 104px;
   border-radius: 0 32px 32px 0;
   background: #ffffff;
 `;
@@ -94,23 +91,19 @@ export const styledLabel = css`
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
-  letter-spacing: -0.002em;
   color: #282828;
 `;
 
 export const styledInput = css`
-  display: block;
   width: 100%;
-
   font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  letter-spacing: -0.002em;
   color: #282828;
   border: 1px solid #282828;
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 19px 16px;
   outline: none;
 
   &::placeholder {
@@ -118,17 +111,45 @@ export const styledInput = css`
   }
 `;
 
+export const styledFormContainer = css`
+  display: grid;
+  row-gap: 40px;
+`;
+
 export const styledFormField = css`
   display: grid;
-  row-gap: 12px;
+  row-gap: 16px;
 `;
 
 export const styledFormActions = css``;
 
+export const styledFormFieldsPolicy = css`
+  margin: 0;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #282828;
+`;
+
+export const styledFormFieldsPolicyLink = css`
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #557aff;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+`;
+
 export const styledButton = css`
   width: max-content;
   justify-self: center;
-  padding: 20px 59px;
+  padding: 20px 32px;
   cursor: pointer;
   background: #ef4723;
   border-radius: 8px;
@@ -137,7 +158,6 @@ export const styledButton = css`
   font-size: 14px;
   line-height: 16px;
   display: grid;
-  letter-spacing: -0.002em;
   color: #ffffff;
   border: none;
 

@@ -16,6 +16,7 @@ import {
   styledLabel,
   styledFormFieldsFieldset,
   styledFormImage,
+  styledFormContainer,
 } from './styled';
 import { REQUEST_URL } from '../../utils/constants';
 import ticketsImage from '../../assets/images/tickets.png';
@@ -79,7 +80,6 @@ const Authorization = () => {
         <h2 className={styledFormInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
         <img className={styledFormImage} src={ticketsImage} alt="Билеты на мероприятия." />
       </div>
-
       <div className={styledFormFields}>
         <header className={styledFormFieldsHeader}>
           <h2 className={styledFormFieldsTitle}>Войти в свой профиль</h2>
@@ -90,37 +90,39 @@ const Authorization = () => {
             </NavLink>
           </p>
         </header>
-        <div className={styledFormFieldsFieldset}>
-          <div className={styledFormField}>
-            <label className={styledLabel} htmlFor="email">
-              Адрес электронной почты
-            </label>
-            <input
-              className={styledInput}
-              type="email"
-              id="email"
-              name="email"
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="Электронная почта"
-            />
+        <div className={styledFormContainer}>
+          <div className={styledFormFieldsFieldset}>
+            <div className={styledFormField}>
+              <label className={styledLabel} htmlFor="email">
+                Адрес электронной почты
+              </label>
+              <input
+                className={styledInput}
+                type="email"
+                id="email"
+                name="email"
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="Электронная почта"
+              />
+            </div>
+            <div className={styledFormField}>
+              <label className={styledLabel} htmlFor="password">
+                Пароль
+              </label>
+              <input
+                className={styledInput}
+                type="password"
+                id="password"
+                name="password"
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="***************"
+              />
+            </div>
           </div>
-          <div className={styledFormField}>
-            <label className={styledLabel} htmlFor="password">
-              Пароль
-            </label>
-            <input
-              className={styledInput}
-              type="password"
-              id="password"
-              name="password"
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="***************"
-            />
-          </div>
+          <button className={styledButton} type="submit">
+            Войти ⟶
+          </button>
         </div>
-        <button className={styledButton} type="submit">
-          Войти ⟶
-        </button>
       </div>
     </form>
   );
