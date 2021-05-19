@@ -10,12 +10,12 @@ export const styledForm = css`
 export const styledFormInfo = css`
   position: relative;
   display: grid;
-  row-gap: 40px;
-  background: #282828;
-  border-radius: 32px 0 0 32px;
   padding: 64px 104px 40px 104px;
+  background: #282828;
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 32px 0 0 32px;
+  row-gap: 40px;
 `;
 
 export const styledFormImage = css`
@@ -26,37 +26,37 @@ export const styledFormImage = css`
 
 export const styledFormInfoTitle = css`
   margin: 0;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 28px;
   line-height: 39px;
-  letter-spacing: 0.02em;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #ffffff;
+  letter-spacing: 0.02em;
 `;
 
 export const styledFormFieldsTitle = css`
   margin: 0;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 28px;
   line-height: 32px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #282828;
 `;
 
 export const styledFormFieldsInfo = css`
   margin: 0;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #282828;
 `;
 
 export const styledFormFieldsInfoLink = css`
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #557aff;
   text-decoration: none;
 
@@ -69,10 +69,10 @@ export const styledFormFieldsInfoLink = css`
 export const styledFormFields = css`
   display: grid;
   grid-template-rows: repeat(2, max-content);
-  row-gap: 24px;
   padding: 64px 104px 56px 104px;
-  border-radius: 0 32px 32px 0;
   background: #ffffff;
+  border-radius: 0 32px 32px 0;
+  row-gap: 24px;
 `;
 
 export const styledFormFieldsHeader = css`
@@ -92,23 +92,23 @@ export const styledFormFieldsFieldset = css`
 
 export const styledLabel = css`
   display: grid;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #282828;
 `;
 
 export const styledInput = css`
   width: 100%;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  padding: 19px 16px;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #282828;
   border: 1px solid #282828;
   border-radius: 8px;
-  padding: 19px 16px;
   outline: none;
 
   &::placeholder {
@@ -121,22 +121,20 @@ export const styledFormField = css`
   row-gap: 16px;
 `;
 
-export const styledFormActions = css``;
-
 export const styledButton = css`
-  width: max-content;
+  display: grid;
   justify-self: center;
+  width: max-content;
   padding: 20px 32px;
-  cursor: pointer;
-  background: #ef4723;
-  border-radius: 8px;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
-  display: grid;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #ffffff;
+  background: #ef4723;
   border: none;
+  border-radius: 8px;
+  cursor: pointer;
 
   &:hover,
   &:focus {
