@@ -121,8 +121,6 @@ export const styledFormField = css`
   row-gap: 16px;
 `;
 
-export const styledFormActions = css``;
-
 export const styledFormFieldsPolicy = css`
   margin: 0;
   font-family: 'Grandis Extended', 'Arial', sans-serif;

@@ -4,6 +4,9 @@ import { css } from '@emotion/css';
 import fontBoldWoff2 from '../../assets/fonts/GrandisExtended-Bold.woff2';
 import fontBoldWoff from '../../assets/fonts/GrandisExtended-Bold.woff';
 import fontBoldTtf from '../../assets/fonts/GrandisExtended-Bold.ttf';
+import fontMediumWoff2 from '../../assets/fonts/GrandisExtended-Medium.woff2';
+import fontMediumWoff from '../../assets/fonts/GrandisExtended-Medium.woff';
+import fontMediumTtf from '../../assets/fonts/GrandisExtended-Medium.ttf';
 import fontRegularWoff2 from '../../assets/fonts/GrandisExtended-Regular.woff2';
 import fontRegularWoff from '../../assets/fonts/GrandisExtended-Regular.woff';
 import fontRegularTtf from '../../assets/fonts/GrandisExtended-Regular.ttf';
@@ -24,6 +27,15 @@ export const GlobalStyles = createGlobalStyle`
     src: url(${fontRegularWoff2}) format('woff2'),
       url(${fontRegularWoff}) format('woff'),
       url(${fontRegularTtf}) format('truetype');
+  }
+
+  @font-face {
+    font-weight: 500;
+    font-family: 'Grandis Extended';
+    font-display: swap;
+    src: url(${fontMediumWoff2}) format('woff2'),
+      url(${fontMediumWoff}) format('woff'),
+      url(${fontMediumTtf}) format('truetype');
   }
 
   @font-face {
