@@ -8,6 +8,12 @@ export const styledEvents = css`
   border-radius: 8px;
 `;
 
+export const styledEventsLoader = css`
+  display: grid;
+  grid-template-columns: repeat(3, 384px);
+  gap: 32px;
+`;
+
 export const styledButton = css`
   padding: 0.5rem 1rem;
   font: inherit;

@@ -10,10 +10,10 @@ import {
   styledEventPrice,
 } from './styled';
 import eventImage from '../../assets/images/event-image.jpg';
+import dayjs from 'dayjs';
+import ru from 'dayjs/locale/ru';
 
 const EventItem = (props: any) => {
-  const userId = useSelectorTyped(selectUserId);
-
   return (
     <li className={styledEvent} key={props.eventId}>
       <div className={styledEventImageContainer}>
@@ -22,10 +22,7 @@ const EventItem = (props: any) => {
       </div>
       <div className={styledEventInfo}>
         <h3>{props.title}</h3>
-        <p>
-          {/* {new Date(props.date).getDate()} — {new Date(props.date).getTime()} */}
-          20 мая — 16:30
-        </p>
+        <p>{dayjs(props.date).locale(ru).format('DD MMMM — HH:mm')}</p>
         <button className={styledEventItemButton} type="button" onClick={props.onDetail.bind(this, props.eventId)}>
           Подробнее
         </button>

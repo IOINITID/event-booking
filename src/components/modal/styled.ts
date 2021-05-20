@@ -15,7 +15,6 @@ export const styledModal = css`
 export const styledModalHeader = css`
   position: relative;
   height: 304px;
-  /* background: linear-gradient(99.19deg, #9ae048 15.01%, #79ff76 95.29%); */
 `;
 
 export const styledModalImage = css`

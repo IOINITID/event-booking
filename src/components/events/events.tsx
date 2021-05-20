@@ -3,11 +3,24 @@ import { selectToken, selectUserId } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
 import Backdrop from '../backdrop';
 import EventList from '../event-list';
-import Loader from '../loader';
 import Modal from '../modal';
-import { styledTextarea } from './styled';
+import { styledEventsLoader, styledTextarea } from './styled';
 import { REQUEST_URL } from '../../utils/constants';
 import InfoBanner from '../info-banner';
+import ContentLoader from 'react-content-loader';
+
+const DoorDashFavorite = (props) => (
+  <ContentLoader
+    width={384}
+    height={176}
+    viewBox="0 0 384 176"
+    backgroundColor="#f0f0f0"
+    foregroundColor="#dedede"
+    {...props}
+  >
+    <rect x="0" y="0" rx="16" ry="16" width="384" height="176" />
+  </ContentLoader>
+);
 
 const Events = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -268,6 +281,7 @@ const Events = () => {
             title={selectedEvent.title}
             description={selectedEvent.description}
             date={selectedEvent.date}
+            price={selectedEvent.price}
             cancel
             confirm={Boolean(token)}
             confirmText={token && 'Book'}
@@ -284,7 +298,15 @@ const Events = () => {
       )}
       <InfoBanner onCreateEvent={createEventHandler} />
 
-      {isLoading ? <Loader /> : <EventList events={events} onViewDetail={showDetailHandler} />}
+      {isLoading ? (
+        <div className={styledEventsLoader}>
+          {Array.from(Array(9).keys()).map((item) => {
+            return <DoorDashFavorite key={item} />;
+          })}
+        </div>
+      ) : (
+        <EventList events={events} onViewDetail={showDetailHandler} isLoading={isLoading} />
+      )}
     </Fragment>
   );
 };

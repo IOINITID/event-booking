@@ -20,6 +20,7 @@ interface IModal {
   title: string;
   description?: string;
   date?: string;
+  price?: number;
   children: any;
   cancel: boolean;
   confirm: boolean;
@@ -36,13 +37,13 @@ const Modal = (props: IModal) => {
     <div className={styledModal}>
       <header className={styledModalHeader}>
         <img className={styledModalImage} src={modalImage} alt="Изображение мероприятия." />
-        <span className={styledModalPrice}>1 360 ₽</span>
+        <span className={styledModalPrice}>{props.price} ₽</span>
       </header>
 
       <div className={styledModalContent}>
         <h3>{props.title}</h3>
         <p>{props.description}</p>
-        <time>{dayjs(props.date).locale(ru).format('DD MMMM - HH:mm')}</time>
+        <time>{dayjs(props.date).locale(ru).format('DD MMMM — HH:mm')}</time>
         <p>Van Gogh Museum, Amsterdam</p>
         <div className={styledModalActions}>
           <button className={styledButtonCancel} onClick={props.onCancel}>
