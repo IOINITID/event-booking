@@ -1,15 +1,15 @@
 import { css } from '@emotion/css';
 
 export const styledModal = css`
-  z-index: 100;
   position: fixed;
   top: 50%;
   left: 50%;
+  z-index: 100;
   width: 808px;
-  transform: translate(-50%, -50%);
+  overflow: hidden;
   background: #ffffff;
   border-radius: 16px;
-  overflow: hidden;
+  transform: translate(-50%, -50%);
 `;
 
 export const styledModalHeader = css`
@@ -30,15 +30,15 @@ export const styledModalPrice = css`
   position: absolute;
   top: 0;
   right: 0;
-  background: #ffffff;
-  border-radius: 0px 16px;
   padding: 16px;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
-  letter-spacing: 0.02em;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #ef4723;
+  letter-spacing: 0.02em;
+  background: #ffffff;
+  border-radius: 0 16px;
 `;
 
 export const styledModalHeading = css`
@@ -53,26 +53,26 @@ export const styledModalContent = css`
 
 export const styledModalActions = css`
   display: grid;
+  justify-content: center;
+  align-items: start;
   grid-template-columns: repeat(2, max-content);
   column-gap: 16px;
-  justify-content: center;
 `;
 
 export const styledButton = css`
-  width: max-content;
+  display: grid;
   align-items: center;
+  width: max-content;
   padding: 20px 59px;
-  cursor: pointer;
-  background: #ef4723;
-  border-radius: 8px;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
-  display: grid;
-  letter-spacing: -0.002em;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #ffffff;
+  background: #ef4723;
   border: none;
+  border-radius: 8px;
+  cursor: pointer;
 
   &:hover,
   &:focus {
@@ -85,28 +85,27 @@ export const styledButton = css`
 `;
 
 export const styledButtonCancel = css`
-  width: max-content;
   align-items: center;
-  padding: 20px 32px;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
+  width: max-content;
+  padding: 19px 32px;
   font-weight: 700;
   font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.002em;
+  line-height: 16px;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #ef4723;
+  background: transparent;
   border: 1px solid #ef4723;
   border-radius: 8px;
-  background: transparent;
   cursor: pointer;
 
   &:hover,
   &:focus {
-    background: #f06749;
     color: #ffffff;
+    background: #f06749;
   }
 
   &:active {
-    background: #e52f07;
     color: #ffffff;
+    background: #e52f07;
   }
 `;

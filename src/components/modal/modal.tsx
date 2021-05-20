@@ -1,5 +1,4 @@
 import React from 'react';
-import { styledHeader } from '../navigation/styled';
 import {
   styledButton,
   styledButtonCancel,
@@ -10,11 +9,17 @@ import {
   styledModalImage,
   styledModalPrice,
 } from './styled';
-
 import modalImage from '../../assets/images/modal-image.jpg';
+import { useSelectorTyped } from '../../hooks';
+import { selectToken } from '../../features/user/userSlice';
+import { useHistory } from 'react-router';
+import dayjs from 'dayjs';
+import ru from 'dayjs/locale/ru';
 
 interface IModal {
   title: string;
+  description?: string;
+  date?: string;
   children: any;
   cancel: boolean;
   confirm: boolean;
@@ -24,6 +29,9 @@ interface IModal {
 }
 
 const Modal = (props: IModal) => {
+  const token = useSelectorTyped(selectToken);
+  const history = useHistory();
+
   return (
     <div className={styledModal}>
       <header className={styledModalHeader}>
@@ -33,18 +41,14 @@ const Modal = (props: IModal) => {
 
       <div className={styledModalContent}>
         <h3>{props.title}</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua.{' '}
-        </p>
-        <time>20 мая - 16:30</time>
+        <p>{props.description}</p>
+        <time>{dayjs(props.date).locale(ru).format('DD MMMM - HH:mm')}</time>
         <p>Van Gogh Museum, Amsterdam</p>
         <div className={styledModalActions}>
           <button className={styledButtonCancel} onClick={props.onCancel}>
             Отмена
           </button>
-          <button className={styledButton} onClick={props.onConfirm}>
+          <button className={styledButton} onClick={() => (token ? props.onConfirm() : history.push('/authorization'))}>
             Забронировать
           </button>
         </div>

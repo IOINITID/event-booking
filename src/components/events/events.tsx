@@ -266,6 +266,8 @@ const Events = () => {
           <Backdrop />
           <Modal
             title={selectedEvent.title}
+            description={selectedEvent.description}
+            date={selectedEvent.date}
             cancel
             confirm={Boolean(token)}
             confirmText={token && 'Book'}
