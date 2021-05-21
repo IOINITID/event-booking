@@ -14,8 +14,8 @@ const DoorDashFavorite = (props) => (
     width={384}
     height={176}
     viewBox="0 0 384 176"
-    backgroundColor="#f0f0f0"
-    foregroundColor="#dedede"
+    backgroundColor="#f26b4e"
+    foregroundColor="#ef4723"
     {...props}
   >
     <rect x="0" y="0" rx="16" ry="16" width="384" height="176" />
@@ -212,7 +212,7 @@ const Events = () => {
 
         return res.json();
       })
-      .then((resData) => {
+      .then(() => {
         setIsLoading(false);
         setSelectedEvent(null);
       })
