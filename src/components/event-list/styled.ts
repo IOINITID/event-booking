@@ -10,28 +10,28 @@ export const styledEventList = css`
 `;
 
 export const styledEventListButton = css`
-  width: max-content;
   justify-self: center;
+  width: max-content;
   padding: 20px 32px;
-  font-family: 'Grandis Extended', 'Arial', sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 24px;
-  letter-spacing: -0.002em;
+  font-family: 'Grandis Extended', 'Arial', sans-serif;
   color: #ef4723;
+  letter-spacing: -0.002em;
+  background: transparent;
   border: 1px solid #ef4723;
   border-radius: 8px;
-  background: transparent;
   cursor: pointer;
 
   &:hover,
   &:focus {
-    background: #f06749;
     color: #ffffff;
+    background: #f06749;
   }
 
   &:active {
-    background: #e52f07;
     color: #ffffff;
+    background: #e52f07;
   }
 `;

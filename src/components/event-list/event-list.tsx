@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, MouseEvent, useState } from 'react';
 import EventItem from '../event-item';
 import { styledEventList, styledEventListButton } from './styled';
 
@@ -28,7 +28,8 @@ const EventList = (props: any) => {
         <button
           className={styledEventListButton}
           type="button"
-          onClick={() => {
+          onClick={(event: MouseEvent<HTMLButtonElement>) => {
+            event.currentTarget.blur();
             setEventsCount(eventsCount + 9);
           }}
         >
