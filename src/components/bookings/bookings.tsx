@@ -6,6 +6,8 @@ import Loader from '../loader';
 import { REQUEST_URL } from '../../utils/constants';
 import BookingsChart from '../bookings-chart';
 import BookingsControl from '../bookings-controls';
+import { css } from '@emotion/css';
+import { styledBookingsContainer } from './styled';
 
 const Bookings = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -114,16 +116,16 @@ const Bookings = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Fragment>
+        <div className={styledBookingsContainer}>
           <BookingsControl onOutputTypeChange={outputTypeChangeHandler} activeOutputType={outputType} />
           <div>
-            {outputType !== 'chart' ? (
+            {outputType !== 'data' ? (
               <BookingList bookings={bookings} onDelete={deleteBookingHandler} />
             ) : (
               <BookingsChart bookings={bookings} />
             )}
           </div>
-        </Fragment>
+        </div>
       )}
     </Fragment>
   );

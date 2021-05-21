@@ -1,5 +1,5 @@
 import React from 'react';
-import { styledBookingActions, styledBookingData, styledBookingList, styledBookingListItem } from './styled';
+import { styledBookingButton, styledBookingList, styledBookingListItem } from './styled';
 
 const BookingList = (props: any) => {
   return (
@@ -7,11 +7,13 @@ const BookingList = (props: any) => {
       {props.bookings.map((booking: any) => {
         return (
           <li className={styledBookingListItem} key={booking._id}>
-            <div className={styledBookingData}>
+            <div>
               {booking.event.title} - {new Date(booking.createdAt).toLocaleDateString()}
             </div>
-            <div className={styledBookingActions}>
-              <button onClick={props.onDelete.bind(this, booking._id)}>Cancel</button>
+            <div>
+              <button className={styledBookingButton} onClick={props.onDelete.bind(this, booking._id)}>
+                Отменить
+              </button>
             </div>
           </li>
         );

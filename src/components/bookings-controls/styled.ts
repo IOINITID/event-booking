@@ -1,20 +1,28 @@
 import { css } from '@emotion/css';
 
 export const styledBookingsControl = css`
-  padding: 0.5rem;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  padding: 32px;
+  column-gap: 32px;
+  background: #ffffff;
+  border-radius: 16px;
 `;
 
 export const styledBookingsControlButton = css`
+  padding: 16px 24px;
   font: inherit;
-  border: none;
-  background: transparent;
-  color: #000000;
-  padding: 0.25rem 1rem;
-  border-bottom: 2px solid transparent;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #282828;
+  background-color: #ffffff;
+  border: 1px solid #ef4723;
+  border-radius: 32px;
+  cursor: pointer;
 
   &.active {
-    border-bottom-color: #01d1d1;
-    color: #01d1d1;
+    color: #ffffff;
+    background: #ef4723;
   }
 `;
