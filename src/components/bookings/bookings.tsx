@@ -8,6 +8,7 @@ import BookingsChart from '../bookings-chart';
 import BookingsControl from '../bookings-controls';
 import { css } from '@emotion/css';
 import { styledBookingsContainer } from './styled';
+import EventsBanner from '../events-banner';
 
 const Bookings = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -119,11 +120,11 @@ const Bookings = () => {
         <div className={styledBookingsContainer}>
           <BookingsControl onOutputTypeChange={outputTypeChangeHandler} activeOutputType={outputType} />
           <div>
-            {outputType !== 'data' ? (
+            {outputType !== 'my' && outputType !== 'data' && (
               <BookingList bookings={bookings} onDelete={deleteBookingHandler} />
-            ) : (
-              <BookingsChart bookings={bookings} />
             )}
+            {outputType === 'my' && <EventsBanner />}
+            {outputType === 'data' && <BookingsChart bookings={bookings} />}
           </div>
         </div>
       )}

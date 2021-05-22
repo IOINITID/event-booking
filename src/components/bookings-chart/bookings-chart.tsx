@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
+import { styles } from './styled';
 
 const BOOKING_BUCKETS = {
   Cheap: {
@@ -62,7 +63,11 @@ const BookingsChart = (props: any) => {
     },
   };
 
-  return <Bar data={chartData} options={options} type="bar" />;
+  return (
+    <div className={styles.container}>
+      <Bar data={chartData} options={options} type="bar" />
+    </div>
+  );
 };
 
 export default BookingsChart;
