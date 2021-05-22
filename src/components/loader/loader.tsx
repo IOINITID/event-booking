@@ -1,10 +1,10 @@
 import React from 'react';
-import { styledLoader, styledLoaderContainer } from './styled';
+import { styles } from './styled';
 
 const Loader = () => {
   return (
-    <div className={styledLoaderContainer}>
-      <div className={styledLoader}></div>
+    <div className={styles.container}>
+      <div className={styles.loader}></div>
     </div>
   );
 };
