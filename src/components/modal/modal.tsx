@@ -29,7 +29,7 @@ interface IModal {
   confirmText?: string;
 }
 
-const Modal = (props: IModal) => {
+const Modal = (props: any) => {
   const token = useSelectorTyped(selectToken);
   const history = useHistory();
 
@@ -44,7 +44,7 @@ const Modal = (props: IModal) => {
         <h3>{props.title}</h3>
         <p>{props.description}</p>
         <time>{dayjs(props.date).locale(ru).format('DD MMMM — HH:mm')}</time>
-        <p>Van Gogh Museum, Amsterdam</p>
+        <p>{props.location}</p>
         <div className={styledModalActions}>
           <button className={styledButtonCancel} onClick={props.onCancel}>
             Отмена

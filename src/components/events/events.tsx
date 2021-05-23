@@ -66,6 +66,7 @@ const Events = () => {
               description
               price
               date
+              location
               creator {
                 _id
                 email
@@ -104,20 +105,22 @@ const Events = () => {
       title.trim().length === 0 ||
       description.trim().length === 0 ||
       price.trim().length === 0 ||
-      date.trim().length === 0
+      date.trim().length === 0 ||
+      location.trim().length === 0
     ) {
       return;
     }
 
     const requestBody = {
       query: `
-          mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String!) {
-            createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date}) {
+          mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String!, $location: String!) {
+            createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date, location: $location}) {
               _id
               title
               description
               price
               date
+              location
             }
           }
         `,
@@ -126,6 +129,7 @@ const Events = () => {
         description: description,
         price: Number(price),
         date: date,
+        location: location,
       },
     };
 
@@ -153,6 +157,7 @@ const Events = () => {
             description: resData.data.createEvent.description,
             price: resData.data.createEvent.price,
             date: resData.data.createEvent.date,
+            location: resData.data.createEvent.location,
             creator: {
               _id: userId,
               email: resData.data.createEvent.email,
@@ -257,6 +262,7 @@ const Events = () => {
             description={selectedEvent.description}
             date={selectedEvent.date}
             price={selectedEvent.price}
+            location={selectedEvent.location}
             cancel
             confirm={Boolean(token)}
             confirmText={token && 'Book'}
