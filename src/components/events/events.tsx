@@ -157,7 +157,6 @@ const Events = () => {
       })
       .then((resData) => {
         setEvents([
-          ...events,
           {
             _id: resData.data.createEvent._id,
             title: resData.data.createEvent.title,
@@ -171,6 +170,7 @@ const Events = () => {
               email: resData.data.createEvent.email,
             },
           },
+          ...events,
         ]);
 
         return events;
