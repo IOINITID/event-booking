@@ -55,6 +55,7 @@ export const styledModalActions = css`
   justify-content: center;
   align-items: start;
   grid-template-columns: repeat(2, max-content);
+  padding: 0 40px 56px 40px;
   column-gap: 16px;
 `;
 

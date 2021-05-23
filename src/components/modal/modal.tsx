@@ -17,15 +17,15 @@ import dayjs from 'dayjs';
 import ru from 'dayjs/locale/ru';
 
 interface IModal {
-  title: string;
+  title?: string;
   description?: string;
   date?: string;
   price?: number;
-  children: any;
-  cancel: boolean;
-  confirm: boolean;
-  onCancel: () => void;
-  onConfirm: () => void;
+  children?: any;
+  cancel?: boolean;
+  confirm?: boolean;
+  onCancel?: () => void;
+  onConfirm?: () => void;
   confirmText?: string;
 }
 
@@ -50,7 +50,7 @@ const Modal = (props: IModal) => {
             Отмена
           </button>
           <button className={styledButton} onClick={() => (token ? props.onConfirm() : history.push('/authorization'))}>
-            Забронировать
+            Забронировать ⟶
           </button>
         </div>
       </div>

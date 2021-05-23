@@ -4,12 +4,13 @@ import { useSelectorTyped } from '../../hooks';
 import Backdrop from '../backdrop';
 import EventList from '../event-list';
 import Modal from '../modal';
-import { styledEventsLoader, styledTextarea } from './styled';
+import { styledEventsLoader } from './styled';
 import { REQUEST_URL } from '../../utils/constants';
 import InfoBanner from '../info-banner';
 import ContentLoader from 'react-content-loader';
+import ModalCreateEvent from '../modal/modal-create-event';
 
-const DoorDashFavorite = (props) => (
+const EventListLoader = (props) => (
   <ContentLoader
     width={384}
     height={176}
@@ -28,6 +29,7 @@ const Events = () => {
   const [price, setPrice] = useState('');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
   const token = useSelectorTyped(selectToken);
   const [events, setEvents] = useState([]);
   const userId = useSelectorTyped(selectUserId);
@@ -42,13 +44,15 @@ const Events = () => {
     fetchEvents();
   }, []);
 
-  useEffect(() => {
-    if (selectedEvent || isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isOpen, selectedEvent]);
+  /** Added scroll to body */
+
+  // useEffect(() => {
+  //   if (selectedEvent || isOpen) {
+  //     document.body.style.overflow = 'hidden';
+  //   } else {
+  //     document.body.style.overflow = 'auto';
+  //   }
+  // }, [isOpen, selectedEvent]);
 
   const fetchEvents = () => {
     setIsLoading(true);
@@ -227,51 +231,22 @@ const Events = () => {
       {isOpen && (
         <Fragment>
           <Backdrop />
-          <Modal title="Add Event" cancel confirm onCancel={modalCancelHandler} onConfirm={modalConfirmHandler}>
-            <form action="#">
-              <div>
-                <label htmlFor="title">Title</label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="price">Price</label>
-                <input
-                  type="number"
-                  id="price"
-                  name="price"
-                  value={price}
-                  onChange={(event) => setPrice(event.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="date">Date</label>
-                <input
-                  type="datetime-local"
-                  id="date"
-                  name="date"
-                  value={date}
-                  onChange={(event) => setDate(event.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="description">Description</label>
-                <textarea
-                  className={styledTextarea}
-                  id="description"
-                  name="description"
-                  value={description}
-                  onChange={(event) => setDescription(event.target.value)}
-                  rows={4}
-                />
-              </div>
-            </form>
-          </Modal>
+          <ModalCreateEvent
+            title={title}
+            setTitle={setTitle}
+            price={price}
+            setPrice={setPrice}
+            date={date}
+            setDate={setDate}
+            description={description}
+            setDescription={setDescription}
+            location={location}
+            setLocation={setLocation}
+            cancel
+            confirm
+            onCancel={modalCancelHandler}
+            onConfirm={modalConfirmHandler}
+          />
         </Fragment>
       )}
       {selectedEvent && (
@@ -287,13 +262,7 @@ const Events = () => {
             confirmText={token && 'Book'}
             onCancel={modalCancelHandler}
             onConfirm={bookEventHandler}
-          >
-            <h1>{selectedEvent.title}</h1>
-            <h2>
-              ${selectedEvent.price} - {new Date(selectedEvent.date).toLocaleString()}
-            </h2>
-            <p>{selectedEvent.description}</p>
-          </Modal>
+          />
         </Fragment>
       )}
       <InfoBanner onCreateEvent={createEventHandler} />
@@ -301,7 +270,7 @@ const Events = () => {
       {isLoading ? (
         <div className={styledEventsLoader}>
           {Array.from(Array(9).keys()).map((item) => {
-            return <DoorDashFavorite key={item} />;
+            return <EventListLoader key={item} />;
           })}
         </div>
       ) : (
