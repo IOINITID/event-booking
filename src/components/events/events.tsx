@@ -9,6 +9,7 @@ import { REQUEST_URL } from '../../utils/constants';
 import InfoBanner from '../info-banner';
 import ContentLoader from 'react-content-loader';
 import ModalCreateEvent from '../modal/modal-create-event';
+import ModalSuccess from '../modal/modal-success';
 
 const EventListLoader = (props) => (
   <ContentLoader
@@ -35,6 +36,7 @@ const Events = () => {
   const userId = useSelectorTyped(selectUserId);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const createEventHandler = () => {
     setIsOpen(true);
@@ -177,6 +179,7 @@ const Events = () => {
   const modalCancelHandler = () => {
     setIsOpen(false);
     setSelectedEvent(null);
+    setIsSuccess(false);
   };
 
   const showDetailHandler = (eventId) => {
@@ -224,6 +227,7 @@ const Events = () => {
       .then(() => {
         setIsLoading(false);
         setSelectedEvent(null);
+        setIsSuccess(true);
       })
       .catch((error) => {
         console.log(error);
@@ -269,6 +273,12 @@ const Events = () => {
             onCancel={modalCancelHandler}
             onConfirm={bookEventHandler}
           />
+        </Fragment>
+      )}
+      {isSuccess && (
+        <Fragment>
+          <Backdrop />
+          <ModalSuccess onCancel={modalCancelHandler} setIsSuccess={setIsSuccess} />
         </Fragment>
       )}
       <InfoBanner onCreateEvent={createEventHandler} />
