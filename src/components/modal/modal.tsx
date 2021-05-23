@@ -36,8 +36,8 @@ const Modal = (props: any) => {
   return (
     <div className={styledModal}>
       <header className={styledModalHeader}>
-        <img className={styledModalImage} src={modalImage} alt="Изображение мероприятия." />
-        <span className={styledModalPrice}>{props.price} ₽</span>
+        <img className={styledModalImage} src={props.image ? props.image : modalImage} alt="Изображение мероприятия." />
+        <span className={styledModalPrice}>{Number(props.price).toLocaleString()} ₽</span>
       </header>
 
       <div className={styledModalContent}>

@@ -17,6 +17,8 @@ const EventList = (props: any) => {
                 title={event.title}
                 price={event.price}
                 date={event.date}
+                location={event.location}
+                image={event.image}
                 creatorId={event.creator._id}
                 onDetail={props.onViewDetail}
               />

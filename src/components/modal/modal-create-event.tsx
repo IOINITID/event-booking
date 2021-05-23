@@ -25,11 +25,9 @@ const ModalCreateEvent = (props: any) => {
   const token = useSelectorTyped(selectToken);
   const history = useHistory();
 
-  const [image, setImage] = useState(null);
-
   useEffect(() => {
-    console.log(image);
-  }, [image]);
+    console.log(props.image);
+  }, [props.image]);
 
   return (
     <div
@@ -166,21 +164,24 @@ const ModalCreateEvent = (props: any) => {
                 id="image"
                 name="image"
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  setImage(URL.createObjectURL(event.target.files[0]));
                   const image = event.target.files[0];
                   const fileReader = new FileReader();
 
                   fileReader.readAsDataURL(image);
                   fileReader.onload = () => {
-                    const imageInfo = {
-                      name: image.name,
-                      type: image.type,
-                      size: Math.round(image.size / 1000) + ' kB',
-                      base64: fileReader.result,
-                      file: image,
-                    };
-
-                    setImage(imageInfo);
+                    // const imageInfo = {
+                    //   name: image.name,
+                    //   type: image.type,
+                    //   size: Math.round(image.size / 1000) + ' kB',
+                    //   base64: fileReader.result,
+                    //   file: image,
+                    // };
+                    // if (image.size > 3000000) {
+                    //   throw new Error('Size is more than 3MB');
+                    // } else {
+                    //   setImage(fileReader.result);
+                    // }
+                    props.setImage(fileReader.result);
                   };
                 }}
               />
@@ -189,7 +190,7 @@ const ModalCreateEvent = (props: any) => {
                   cursor: pointer;
                 `}
               >
-                Выбрать фаил
+                Выбрать файл
               </span>
             </div>
           </div>
@@ -211,10 +212,12 @@ const ModalCreateEvent = (props: any) => {
                 left: 0;
                 width: 100%;
                 height: 100%;
+                padding: 4px;
+                border-radius: 16px;
                 object-position: 50% 50%;
-                object-fit: ${image ? 'cover' : 'none'};
+                object-fit: ${props.image ? 'cover' : 'none'};
               `}
-              src={image ? image.base64 : imageIcon}
+              src={props.image ? props.image : imageIcon}
               alt=""
             />
           </div>

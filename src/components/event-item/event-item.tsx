@@ -17,8 +17,8 @@ const EventItem = (props: any) => {
   return (
     <li className={styledEvent} key={props.eventId}>
       <div className={styledEventImageContainer}>
-        <img className={styledEventImage} src={eventImage} alt="Изображение мероприятия." />
-        <span className={styledEventPrice}>{props.price} ₽</span>
+        <img className={styledEventImage} src={props.image ? props.image : eventImage} alt="Изображение мероприятия." />
+        <span className={styledEventPrice}>{Number(props.price).toLocaleString()} ₽</span>
       </div>
       <div className={styledEventInfo}>
         <h3>{props.title}</h3>

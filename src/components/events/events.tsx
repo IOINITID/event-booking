@@ -31,6 +31,7 @@ const Events = () => {
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
+  const [image, setImage] = useState(null);
   const token = useSelectorTyped(selectToken);
   const [events, setEvents] = useState([]);
   const userId = useSelectorTyped(selectUserId);
@@ -69,6 +70,7 @@ const Events = () => {
               price
               date
               location
+              image
               creator {
                 _id
                 email
@@ -108,21 +110,23 @@ const Events = () => {
       description.trim().length === 0 ||
       price.trim().length === 0 ||
       date.trim().length === 0 ||
-      location.trim().length === 0
+      location.trim().length === 0 ||
+      image.trim().length === 0
     ) {
       return;
     }
 
     const requestBody = {
       query: `
-          mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String!, $location: String!) {
-            createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date, location: $location}) {
+          mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String!, $location: String!, $image: String!) {
+            createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date, location: $location, image: $image}) {
               _id
               title
               description
               price
               date
               location
+              image
             }
           }
         `,
@@ -132,6 +136,7 @@ const Events = () => {
         price: Number(price),
         date: date,
         location: location,
+        image: image,
       },
     };
 
@@ -160,6 +165,7 @@ const Events = () => {
             price: resData.data.createEvent.price,
             date: resData.data.createEvent.date,
             location: resData.data.createEvent.location,
+            image: resData.data.createEvent.image,
             creator: {
               _id: userId,
               email: resData.data.createEvent.email,
@@ -251,6 +257,8 @@ const Events = () => {
             setDescription={setDescription}
             location={location}
             setLocation={setLocation}
+            image={image}
+            setImage={setImage}
             cancel
             confirm
             onCancel={modalCancelHandler}
@@ -267,6 +275,7 @@ const Events = () => {
             date={selectedEvent.date}
             price={selectedEvent.price}
             location={selectedEvent.location}
+            image={selectedEvent.image}
             cancel
             confirm={Boolean(token)}
             confirmText={token && 'Book'}
