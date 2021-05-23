@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { css } from '@emotion/css';
 import React from 'react';
 import { useHistory } from 'react-router';
@@ -5,6 +7,7 @@ import { selectToken } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
 import { styledButton, styledButtonCancel, styledModalActions } from './styled';
 import imageIcon from '../../assets/images/image-icon.svg';
+import closeIcon from '../../assets/images/close-icon.svg';
 
 interface IModal {
   title: string;
@@ -30,8 +33,7 @@ const ModalCreateEvent = (props: any) => {
         margin: 0 auto;
         background-color: #ffffff;
         border-radius: 16px;
-        /* padding: 24px 40px 56px 40px; */
-      `}
+`}
     >
       <header
         className={css`
@@ -41,16 +43,23 @@ const ModalCreateEvent = (props: any) => {
           grid-auto-flow: column;
           padding: 24px 40px;
           border-bottom: 1px solid #282828;
-        `}
+`}
       >
         <h2
           className={css`
             margin: 0;
-          `}
+`}
         >
           Создать мероприятие
         </h2>
-        <div>X</div>
+        <div
+          className={css`
+            cursor: pointer;
+`}
+          onClick={props.onCancel}
+        >
+          <img src={closeIcon} alt="" />
+        </div>
       </header>
 
       <form
@@ -58,7 +67,7 @@ const ModalCreateEvent = (props: any) => {
           display: grid;
           padding: 24px 40px 40px 40px;
           row-gap: 24px;
-        `}
+`}
         action="#"
       >
         <div
@@ -66,31 +75,31 @@ const ModalCreateEvent = (props: any) => {
             display: grid;
             grid-auto-flow: column;
             column-gap: 48px;
-          `}
+`}
         >
           <div
             className={css`
               display: grid;
               row-gap: 24px;
-            `}
+`}
           >
             <div
               className={css`
                 display: grid;
                 row-gap: 16px;
-              `}
+`}
             >
               <p
                 className={css`
                   margin: 0;
-                `}
+`}
               >
                 Обложка мероприятия
               </p>
               <p
                 className={css`
                   margin: 0;
-                `}
+`}
               >
                 Рекомендуемый размер изображения не менее 800x300 пикселей
               </p>
@@ -121,7 +130,7 @@ const ModalCreateEvent = (props: any) => {
                   color: #ffffff;
                   background: #e52f07;
                 }
-              `}
+`}
             >
               <label
                 className={css`
@@ -132,7 +141,7 @@ const ModalCreateEvent = (props: any) => {
                   height: 100%;
                   cursor: pointer;
                   opacity: 0;
-                `}
+`}
                 htmlFor="image"
               >
                 Обложка мероприятия
@@ -146,7 +155,7 @@ const ModalCreateEvent = (props: any) => {
                   height: 100%;
                   opacity: 0;
                   pointer-events: none;
-                `}
+`}
                 type="file"
                 id="image"
                 name="image"
@@ -154,7 +163,7 @@ const ModalCreateEvent = (props: any) => {
               <span
                 className={css`
                   cursor: pointer;
-                `}
+`}
               >
                 Выбрать фаил
               </span>
@@ -169,7 +178,7 @@ const ModalCreateEvent = (props: any) => {
               height: 188px;
               border: 2px dashed #282828;
               border-radius: 16px;
-            `}
+`}
           >
             <img
               className={css`
@@ -180,7 +189,7 @@ const ModalCreateEvent = (props: any) => {
                 height: 100%;
                 object-position: 50% 50%;
                 object-fit: none;
-              `}
+`}
               src={imageIcon}
               alt=""
             />
@@ -192,13 +201,13 @@ const ModalCreateEvent = (props: any) => {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             column-gap: 24px;
-          `}
+`}
         >
           <div
             className={css`
               display: grid;
               row-gap: 16px;
-            `}
+`}
           >
             <label htmlFor="title">Название мероприятия</label>
             <input
@@ -211,7 +220,7 @@ const ModalCreateEvent = (props: any) => {
                 color: #282828;
                 border: 1px solid #282828;
                 border-radius: 8px;
-              `}
+`}
               type="text"
               id="title"
               name="title"
@@ -223,7 +232,7 @@ const ModalCreateEvent = (props: any) => {
             className={css`
               display: grid;
               row-gap: 16px;
-            `}
+`}
           >
             <label htmlFor="price">Стоимость</label>
             <input
@@ -236,7 +245,7 @@ const ModalCreateEvent = (props: any) => {
                 color: #282828;
                 border: 1px solid #282828;
                 border-radius: 8px;
-              `}
+`}
               type="number"
               id="price"
               name="price"
@@ -251,13 +260,13 @@ const ModalCreateEvent = (props: any) => {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             column-gap: 24px;
-          `}
+`}
         >
           <div
             className={css`
               display: grid;
               row-gap: 16px;
-            `}
+`}
           >
             <label htmlFor="date">Дата и время проведения</label>
             <input
@@ -270,7 +279,7 @@ const ModalCreateEvent = (props: any) => {
                 color: #282828;
                 border: 1px solid #282828;
                 border-radius: 8px;
-              `}
+`}
               type="datetime-local"
               id="date"
               name="date"
@@ -283,7 +292,7 @@ const ModalCreateEvent = (props: any) => {
             className={css`
               display: grid;
               row-gap: 16px;
-            `}
+`}
           >
             <label htmlFor="location">Место проведения</label>
             <input
@@ -296,7 +305,7 @@ const ModalCreateEvent = (props: any) => {
                 color: #282828;
                 border: 1px solid #282828;
                 border-radius: 8px;
-              `}
+`}
               type="text"
               id="location"
               name="location"
@@ -310,7 +319,7 @@ const ModalCreateEvent = (props: any) => {
           className={css`
             display: grid;
             row-gap: 16px;
-          `}
+`}
         >
           <label htmlFor="description">Описание</label>
           <textarea
@@ -324,7 +333,7 @@ const ModalCreateEvent = (props: any) => {
               color: #282828;
               border: 1px solid #282828;
               border-radius: 8px;
-            `}
+`}
             id="description"
             name="description"
             value={props.description}
