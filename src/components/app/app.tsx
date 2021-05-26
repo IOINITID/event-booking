@@ -15,7 +15,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { REQUEST_URL } from '../../utils/constants';
 
-const defaultOptions: DefaultOptions = {
+const defaultOptions = {
   watchQuery: {
     fetchPolicy: 'no-cache',
     errorPolicy: 'ignore',
