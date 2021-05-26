@@ -11,6 +11,38 @@ import ContentLoader from 'react-content-loader';
 import ModalCreateEvent from '../modal/modal-create-event';
 import ModalSuccess from '../modal/modal-success';
 
+import { gql, useMutation } from '@apollo/client';
+
+const CREATE_EVENT = gql`
+  mutation CreateEvent(
+    $title: String!
+    $description: String!
+    $price: Float!
+    $date: String!
+    $location: String!
+    $image: Upload!
+  ) {
+    createEvent(
+      eventInput: {
+        title: $title
+        description: $description
+        price: $price
+        date: $date
+        location: $location
+        image: $image
+      }
+    ) {
+      _id
+      title
+      description
+      price
+      date
+      location
+      image
+    }
+  }
+`;
+
 const EventListLoader = (props) => (
   <ContentLoader
     width={384}
@@ -38,6 +70,8 @@ const Events = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const [createEvent] = useMutation(CREATE_EVENT);
 
   const createEventHandler = () => {
     setIsOpen(true);
@@ -110,26 +144,13 @@ const Events = () => {
       description.trim().length === 0 ||
       price.trim().length === 0 ||
       date.trim().length === 0 ||
-      location.trim().length === 0 ||
-      image.trim().length === 0
+      location.trim().length === 0
+      // image.trim().length === 0
     ) {
       return;
     }
 
-    const requestBody = {
-      query: `
-          mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String!, $location: String!, $image: String!) {
-            createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date, location: $location, image: $image}) {
-              _id
-              title
-              description
-              price
-              date
-              location
-              image
-            }
-          }
-        `,
+    createEvent({
       variables: {
         title: title,
         description: description,
@@ -138,46 +159,70 @@ const Events = () => {
         location: location,
         image: image,
       },
-    };
+    });
 
-    fetch(REQUEST_URL, {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
+    // const requestBody = {
+    //   query: `
+    //       mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String!, $location: String!, $image: String!) {
+    //         createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date, location: $location, image: $image}) {
+    //           _id
+    //           title
+    //           description
+    //           price
+    //           date
+    //           location
+    //           image
+    //         }
+    //       }
+    //     `,
+    //   variables: {
+    //     title: title,
+    //     description: description,
+    //     price: Number(price),
+    //     date: date,
+    //     location: location,
+    //     image: image,
+    //   },
+    // };
 
-        return res.json();
-      })
-      .then((resData) => {
-        setEvents([
-          {
-            _id: resData.data.createEvent._id,
-            title: resData.data.createEvent.title,
-            description: resData.data.createEvent.description,
-            price: resData.data.createEvent.price,
-            date: resData.data.createEvent.date,
-            location: resData.data.createEvent.location,
-            image: resData.data.createEvent.image,
-            creator: {
-              _id: userId,
-              email: resData.data.createEvent.email,
-            },
-          },
-          ...events,
-        ]);
+    // fetch(REQUEST_URL, {
+    //   method: 'POST',
+    //   body: JSON.stringify(requestBody),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    //   .then((res) => {
+    //     if (res.status !== 200 && res.status !== 201) {
+    //       throw new Error('Failed!');
+    //     }
 
-        return events;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //     return res.json();
+    //   })
+    //   .then((resData) => {
+    //     setEvents([
+    //       {
+    //         _id: resData.data.createEvent._id,
+    //         title: resData.data.createEvent.title,
+    //         description: resData.data.createEvent.description,
+    //         price: resData.data.createEvent.price,
+    //         date: resData.data.createEvent.date,
+    //         location: resData.data.createEvent.location,
+    //         image: resData.data.createEvent.image,
+    //         creator: {
+    //           _id: userId,
+    //           email: resData.data.createEvent.email,
+    //         },
+    //       },
+    //       ...events,
+    //     ]);
+
+    //     return events;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
     setIsOpen(false);
   };

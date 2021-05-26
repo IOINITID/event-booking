@@ -11,30 +11,57 @@ import Bookings from '../bookings';
 import Navigation from '../navigation';
 import { selectToken } from '../../features/user/userSlice';
 import Registration from '../registration';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { createUploadLink } from 'apollo-upload-client';
+import { REQUEST_URL } from '../../utils/constants';
+
+const defaultOptions: DefaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+};
+
+const client = new ApolloClient({
+  link: createUploadLink({
+    uri: REQUEST_URL,
+    headers: {
+      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
+    },
+  }),
+  cache: new InMemoryCache(),
+  defaultOptions: defaultOptions,
+});
 
 const App = () => {
   const theme = useSelectorTyped(selectTheme);
   const token = useSelectorTyped(selectToken);
 
   return (
-    <ThemeProvider theme={{ mode: theme }}>
-      <Normalize />
-      <GlobalStyles />
-      <HashRouter>
-        <Navigation />
-        <main className={styledMain}>
-          <Switch>
-            {token && <Redirect from="/" to="/events" exact />}
-            {token && <Redirect from="/authorization" to="/events" exact />}
-            {!token && <Route path="/authorization" component={Authorization} />}
-            {!token && <Route path="/registration" component={Registration} />}
-            <Route path="/events" component={Events} />
-            {token && <Route path="/bookings" component={Bookings} />}
-            {!token && <Redirect to="/authorization" exact />}
-          </Switch>
-        </main>
-      </HashRouter>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={{ mode: theme }}>
+        <Normalize />
+        <GlobalStyles />
+        <HashRouter>
+          <Navigation />
+          <main className={styledMain}>
+            <Switch>
+              {token && <Redirect from="/" to="/events" exact />}
+              {token && <Redirect from="/authorization" to="/events" exact />}
+              {!token && <Route path="/authorization" component={Authorization} />}
+              {!token && <Route path="/registration" component={Registration} />}
+              <Route path="/events" component={Events} />
+              {token && <Route path="/bookings" component={Bookings} />}
+              {!token && <Redirect to="/authorization" exact />}
+            </Switch>
+          </main>
+        </HashRouter>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 };
 
