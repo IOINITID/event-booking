@@ -11,11 +11,11 @@ import Bookings from '../bookings';
 import Navigation from '../navigation';
 import { selectToken } from '../../features/user/userSlice';
 import Registration from '../registration';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, DefaultOptions } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { REQUEST_URL } from '../../utils/constants';
 
-const defaultOptions = {
+const defaultOptions: DefaultOptions = {
   watchQuery: {
     fetchPolicy: 'no-cache',
     errorPolicy: 'ignore',
