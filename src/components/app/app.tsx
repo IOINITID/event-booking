@@ -11,20 +11,9 @@ import Bookings from '../bookings';
 import Navigation from '../navigation';
 import { selectToken } from '../../features/user/userSlice';
 import Registration from '../registration';
-import { ApolloClient, InMemoryCache, ApolloProvider, DefaultOptions } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { REQUEST_URL } from '../../utils/constants';
-
-const defaultOptions: DefaultOptions = {
-  watchQuery: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'ignore',
-  },
-  query: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
-  },
-};
 
 const client = new ApolloClient({
   link: createUploadLink({
@@ -32,9 +21,9 @@ const client = new ApolloClient({
     headers: {
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
     },
+    credentials: 'include',
   }),
   cache: new InMemoryCache(),
-  defaultOptions: defaultOptions,
 });
 
 const App = () => {
