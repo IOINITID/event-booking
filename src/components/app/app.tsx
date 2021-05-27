@@ -21,7 +21,6 @@ const client = new ApolloClient({
     headers: {
       Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
     },
-    credentials: 'include',
   }),
   cache: new InMemoryCache(),
 });
