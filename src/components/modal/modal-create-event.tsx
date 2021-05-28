@@ -24,10 +24,7 @@ interface IModal {
 const ModalCreateEvent = (props: any) => {
   const token = useSelectorTyped(selectToken);
   const history = useHistory();
-
-  useEffect(() => {
-    console.log(props.image);
-  }, [props.image]);
+  const [previewImage, setPreviewImage] = useState(null);
 
   return (
     <div
@@ -169,19 +166,16 @@ const ModalCreateEvent = (props: any) => {
 
                   fileReader.readAsDataURL(image);
                   fileReader.onload = () => {
-                    // const imageInfo = {
-                    //   name: image.name,
-                    //   type: image.type,
-                    //   size: Math.round(image.size / 1000) + ' kB',
-                    //   base64: fileReader.result,
-                    //   file: image,
-                    // };
-                    // if (image.size > 3000000) {
-                    //   throw new Error('Size is more than 3MB');
-                    // } else {
-                    //   setImage(fileReader.result);
-                    // }
-                    props.setImage(image);
+                    const MAX_IMAGE_SIZE = 3145728;
+
+                    if (image.size > MAX_IMAGE_SIZE) {
+                      console.log('Image size is more than 3MB.');
+                      setPreviewImage(fileReader.result);
+                      props.setImage(image);
+                    } else {
+                      setPreviewImage(fileReader.result);
+                      props.setImage(image);
+                    }
                   };
                 }}
               />
@@ -215,9 +209,9 @@ const ModalCreateEvent = (props: any) => {
                 padding: 4px;
                 border-radius: 16px;
                 object-position: 50% 50%;
-                object-fit: ${props.image ? 'cover' : 'none'};
+                object-fit: ${previewImage ? 'cover' : 'none'};
               `}
-              src={props.image ? props.image : imageIcon}
+              src={previewImage ? previewImage : imageIcon}
               alt=""
             />
           </div>

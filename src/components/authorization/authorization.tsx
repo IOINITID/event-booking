@@ -66,7 +66,12 @@ const Authorization = () => {
       })
       .then((resData) => {
         if (resData.data.login.token) {
-          dispatch(login({ token: resData.data.login.token, userId: resData.data.login.userId }));
+          dispatch(
+            login({
+              token: resData.data.login.token,
+              userId: resData.data.login.userId,
+            })
+          );
         }
       })
       .catch((error) => {

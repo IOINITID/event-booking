@@ -71,7 +71,26 @@ const Events = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const [createEvent] = useMutation(CREATE_EVENT);
+  const [createEvent] = useMutation(CREATE_EVENT, {
+    onCompleted: (data) => {
+      setEvents([
+        {
+          _id: data.createEvent._id,
+          title: data.createEvent.title,
+          description: data.createEvent.description,
+          price: data.createEvent.price,
+          date: data.createEvent.date,
+          location: data.createEvent.location,
+          image: data.createEvent.image,
+          creator: {
+            _id: userId,
+            email: data.createEvent.email,
+          },
+        },
+        ...events,
+      ]);
+    },
+  });
 
   const createEventHandler = () => {
     setIsOpen(true);
@@ -144,9 +163,10 @@ const Events = () => {
       description.trim().length === 0 ||
       price.trim().length === 0 ||
       date.trim().length === 0 ||
-      location.trim().length === 0
-      // image.trim().length === 0
+      location.trim().length === 0 ||
+      !image
     ) {
+      console.log('All fields required.');
       return;
     }
 
