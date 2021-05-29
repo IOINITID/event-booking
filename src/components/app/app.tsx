@@ -14,6 +14,8 @@ import Registration from '../registration';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { REQUEST_URL } from '../../utils/constants';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const client = new ApolloClient({
   link: createUploadLink({
@@ -48,6 +50,7 @@ const App = () => {
             </Switch>
           </main>
         </HashRouter>
+        <ToastContainer />
       </ThemeProvider>
     </ApolloProvider>
   );

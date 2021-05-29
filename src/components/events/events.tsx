@@ -12,6 +12,8 @@ import ModalCreateEvent from '../modal/modal-create-event';
 import ModalSuccess from '../modal/modal-success';
 
 import { gql, useMutation } from '@apollo/client';
+import { ToastContainer, toast } from 'react-toastify';
+import { POSITION } from 'react-toastify/dist/utils';
 
 const CREATE_EVENT = gql`
   mutation CreateEvent(
@@ -89,6 +91,7 @@ const Events = () => {
         },
         ...events,
       ]);
+      toast('Мероприятие успешно создано.');
     },
   });
 
