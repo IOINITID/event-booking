@@ -20,7 +20,7 @@ const CREATE_EVENT = gql`
     $price: Float!
     $date: String!
     $location: String!
-    $image: Upload!
+    $image: String!
   ) {
     createEvent(
       eventInput: {
