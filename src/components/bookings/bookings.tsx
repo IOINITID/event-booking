@@ -9,16 +9,61 @@ import BookingsControl from '../bookings-controls';
 import { css } from '@emotion/css';
 import { styledBookingsContainer } from './styled';
 import EventsBanner from '../events-banner';
+import { styledBookingButton, styledBookingList, styledBookingListItem } from '../booking-list/styled';
+import { gql, useMutation, useQuery } from '@apollo/client';
+
+const EVENTS = gql`
+  query Events {
+    events {
+      _id
+      title
+      description
+      price
+      date
+      location
+      image
+      creator {
+        _id
+        email
+      }
+    }
+  }
+`;
+
+const DELETE_EVENT = gql`
+  mutation DeleteEvent($id: ID!) {
+    deleteEvent(eventId: $id) {
+      _id
+    }
+  }
+`;
 
 const Bookings = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookings, setBookings] = useState([]);
   const token = useSelectorTyped(selectToken);
   const [outputType, setOutputType] = useState('');
+  const [events, setEvents] = useState([]);
+
+  const { data, loading, error } = useQuery(EVENTS, {
+    fetchPolicy: 'network-only',
+  });
+
+  const [deleteEvent, { loading: deleteEventLoading }] = useMutation(DELETE_EVENT, {
+    onCompleted: (data) => {
+      setEvents(events.filter((event) => event._id !== data.deleteEvent._id));
+    },
+  });
 
   useEffect(() => {
     fetchBookings();
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      setEvents(data.events);
+    }
+  }, [data]);
 
   const deleteBookingHandler = (bookingId: any) => {
     setIsLoading(true);
@@ -112,6 +157,10 @@ const Bookings = () => {
     setOutputType(type);
   };
 
+  if (loading || deleteEventLoading) {
+    <Loader />;
+  }
+
   return (
     <Fragment>
       {isLoading ? (
@@ -126,6 +175,29 @@ const Bookings = () => {
             {outputType === 'my' && (
               <Fragment>
                 <EventsBanner />
+                <ul className={styledBookingList}>
+                  {events.map((event: any) => {
+                    return (
+                      <li className={styledBookingListItem} key={event._id}>
+                        <div>{event.title}</div>
+                        <div>
+                          <button
+                            className={styledBookingButton}
+                            onClick={() => {
+                              deleteEvent({
+                                variables: {
+                                  id: event._id,
+                                },
+                              });
+                            }}
+                          >
+                            Отменить
+                          </button>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
               </Fragment>
             )}
             {outputType === 'data' && <BookingsChart bookings={bookings} />}
