@@ -15,7 +15,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<{ token: string; userId: string }>) => {
+    getLogin: (state, action: PayloadAction<{ token: string; userId: string }>) => {
       state.token = action.payload.token;
       state.userId = action.payload.userId;
       localStorage.setItem('userToken', action.payload.token);
@@ -30,7 +30,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { getLogin, logout } = userSlice.actions;
 
 export const selectToken = (state: RootState) => state.user.token;
 

@@ -1,5 +1,5 @@
-import React, { FormEvent, useState } from 'react';
-import { login } from '../../features/user/userSlice';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { getLogin } from '../../features/user/userSlice';
 import { useDispatchTyped } from '../../hooks';
 import {
   styledButton,
@@ -18,14 +18,49 @@ import {
   styledFormImage,
   styledFormContainer,
 } from './styled';
-import { REQUEST_URL } from '../../utils/constants';
 import ticketsImage from '../../assets/images/tickets.png';
 import { NavLink } from 'react-router-dom';
+
+import { gql, useLazyQuery } from '@apollo/client';
+import { toast } from 'react-toastify';
+import Loader from '../loader';
+
+const LOGIN = gql`
+  query Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      userId
+      token
+      tokenExpiration
+      message
+    }
+  }
+`;
 
 const Authorization = () => {
   const dispatch = useDispatchTyped();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [login, { data, loading, error }] = useLazyQuery(LOGIN, {
+    fetchPolicy: 'network-only',
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        getLogin({
+          token: data.login.token,
+          userId: data.login.userId,
+        })
+      );
+      toast(data.login.message);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      toast(error.message);
+    }
+  }, [error]);
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -34,50 +69,63 @@ const Authorization = () => {
       return;
     }
 
-    const requestBody = {
-      query: `
-        query Login($email: String!, $password: String!) {
-          login(email: $email, password: $password) {
-            userId
-            token
-            tokenExpiration
-          }
-        }
-      `,
+    login({
       variables: {
-        email: email,
-        password: password,
+        email,
+        password,
       },
-    };
+    });
 
-    fetch(REQUEST_URL, {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
+    //   const requestBody = {
+    //     query: `
+    //       query Login($email: String!, $password: String!) {
+    //         login(email: $email, password: $password) {
+    //           userId
+    //           token
+    //           tokenExpiration
+    //         }
+    //       }
+    //     `,
+    //     variables: {
+    //       email: email,
+    //       password: password,
+    //     },
+    //   };
 
-        return res.json();
-      })
-      .then((resData) => {
-        if (resData.data.login.token) {
-          dispatch(
-            login({
-              token: resData.data.login.token,
-              userId: resData.data.login.userId,
-            })
-          );
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    //   fetch(REQUEST_URL, {
+    //     method: 'POST',
+    //     body: JSON.stringify(requestBody),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //     .then((res) => {
+    //       if (res.status !== 200 && res.status !== 201) {
+    //         throw new Error('Failed!');
+    //       }
+
+    //       return res.json();
+    //     })
+    //     .then((resData) => {
+    //       if (resData.data.login.token) {
+    //         dispatch(
+    //           login({
+    //             token: resData.data.login.token,
+    //             userId: resData.data.login.userId,
+    //           })
+    //         );
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
   };
+
+  console.log(loading);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <form className={styledForm} onSubmit={submitHandler}>

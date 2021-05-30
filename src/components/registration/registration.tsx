@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { login } from '../../features/user/userSlice';
+import { getLogin } from '../../features/user/userSlice';
 import { useDispatchTyped } from '../../hooks';
 import {
   styledButton,
@@ -67,7 +67,7 @@ const Registration = () => {
       })
       .then((resData) => {
         if (resData.data.login.token) {
-          dispatch(login({ token: resData.data.login.token, userId: resData.data.login.userId }));
+          dispatch(getLogin({ token: resData.data.login.token, userId: resData.data.login.userId }));
         }
       })
       .catch((error) => {

@@ -11,9 +11,27 @@ import ContentLoader from 'react-content-loader';
 import ModalCreateEvent from '../modal/modal-create-event';
 import ModalSuccess from '../modal/modal-success';
 
-import { gql, useMutation } from '@apollo/client';
-import { ToastContainer, toast } from 'react-toastify';
-import { POSITION } from 'react-toastify/dist/utils';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { toast } from 'react-toastify';
+import Loader from '../loader';
+
+const EVENTS = gql`
+  query Events {
+    events {
+      _id
+      title
+      description
+      price
+      date
+      location
+      image
+      creator {
+        _id
+        email
+      }
+    }
+  }
+`;
 
 const CREATE_EVENT = gql`
   mutation CreateEvent(
@@ -65,15 +83,15 @@ const Events = () => {
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
   const token = useSelectorTyped(selectToken);
   const [events, setEvents] = useState([]);
   const userId = useSelectorTyped(selectUserId);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const [createEvent] = useMutation(CREATE_EVENT, {
+  const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
     onCompleted: (data) => {
       setEvents([
         {
@@ -91,8 +109,13 @@ const Events = () => {
         },
         ...events,
       ]);
+
       toast('Мероприятие успешно создано.');
     },
+  });
+
+  const { data, loading, error } = useQuery(EVENTS, {
+    fetchPolicy: 'network-only',
   });
 
   const createEventHandler = () => {
@@ -102,6 +125,18 @@ const Events = () => {
   useEffect(() => {
     fetchEvents();
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      setEvents(data.events);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      toast(error.message);
+    }
+  }, [error]);
 
   /** Added scroll to body */
 
@@ -114,50 +149,48 @@ const Events = () => {
   // }, [isOpen, selectedEvent]);
 
   const fetchEvents = () => {
-    setIsLoading(true);
-
-    const requestBody = {
-      query: `
-          query {
-            events {
-              _id
-              title
-              description
-              price
-              date
-              location
-              image
-              creator {
-                _id
-                email
-              }
-            }
-          }
-        `,
-    };
-
-    fetch(REQUEST_URL, {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
-
-        return res.json();
-      })
-      .then((resData) => {
-        setEvents(resData.data.events);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
+    // setIsLoading(true);
+    // const requestBody = {
+    //   query: `
+    //       query {
+    //         events {
+    //           _id
+    //           title
+    //           description
+    //           price
+    //           date
+    //           location
+    //           image
+    //           creator {
+    //             _id
+    //             email
+    //           }
+    //         }
+    //       }
+    //     `,
+    // };
+    //
+    //   fetch(REQUEST_URL, {
+    //     method: 'POST',
+    //     body: JSON.stringify(requestBody),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //     .then((res) => {
+    //       if (res.status !== 200 && res.status !== 201) {
+    //         throw new Error('Failed!');
+    //       }
+    //       return res.json();
+    //     })
+    //     .then((resData) => {
+    //       setEvents(resData.data.events);
+    //       setIsLoading(false);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //       setIsLoading(false);
+    //     });
   };
 
   const modalConfirmHandler = () => {
@@ -169,7 +202,7 @@ const Events = () => {
       location.trim().length === 0 ||
       !image
     ) {
-      console.log('All fields required.');
+      toast('Все поля должны быть заполнены.');
       return;
     }
 
@@ -184,70 +217,13 @@ const Events = () => {
       },
     });
 
-    // const requestBody = {
-    //   query: `
-    //       mutation CreateEvent($title: String!, $description: String!, $price: Float!, $date: String!, $location: String!, $image: String!) {
-    //         createEvent(eventInput: {title: $title, description: $description, price: $price, date: $date, location: $location, image: $image}) {
-    //           _id
-    //           title
-    //           description
-    //           price
-    //           date
-    //           location
-    //           image
-    //         }
-    //       }
-    //     `,
-    //   variables: {
-    //     title: title,
-    //     description: description,
-    //     price: Number(price),
-    //     date: date,
-    //     location: location,
-    //     image: image,
-    //   },
-    // };
-
-    // fetch(REQUEST_URL, {
-    //   method: 'POST',
-    //   body: JSON.stringify(requestBody),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    //   .then((res) => {
-    //     if (res.status !== 200 && res.status !== 201) {
-    //       throw new Error('Failed!');
-    //     }
-
-    //     return res.json();
-    //   })
-    //   .then((resData) => {
-    //     setEvents([
-    //       {
-    //         _id: resData.data.createEvent._id,
-    //         title: resData.data.createEvent.title,
-    //         description: resData.data.createEvent.description,
-    //         price: resData.data.createEvent.price,
-    //         date: resData.data.createEvent.date,
-    //         location: resData.data.createEvent.location,
-    //         image: resData.data.createEvent.image,
-    //         creator: {
-    //           _id: userId,
-    //           email: resData.data.createEvent.email,
-    //         },
-    //       },
-    //       ...events,
-    //     ]);
-
-    //     return events;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
     setIsOpen(false);
+    setTitle('');
+    setDescription('');
+    setPrice('');
+    setDate('');
+    setLocation('');
+    setImage('');
   };
 
   const modalCancelHandler = () => {
@@ -266,7 +242,7 @@ const Events = () => {
       return;
     }
 
-    setIsLoading(true);
+    // setIsLoading(true);
 
     const requestBody = {
       query: `
@@ -299,15 +275,19 @@ const Events = () => {
         return res.json();
       })
       .then(() => {
-        setIsLoading(false);
+        // setIsLoading(false);
         setSelectedEvent(null);
         setIsSuccess(true);
       })
       .catch((error) => {
         console.log(error);
-        setIsLoading(false);
+        // setIsLoading(false);
       });
   };
+
+  if (createEventLoading) {
+    return <Loader />;
+  }
 
   return (
     <Fragment>
@@ -360,14 +340,14 @@ const Events = () => {
       )}
       <InfoBanner onCreateEvent={createEventHandler} />
 
-      {isLoading ? (
+      {loading ? (
         <div className={styledEventsLoader}>
           {Array.from(Array(9).keys()).map((item) => {
             return <EventListLoader key={item} />;
           })}
         </div>
       ) : (
-        <EventList events={events} onViewDetail={showDetailHandler} isLoading={isLoading} />
+        <EventList events={events} onViewDetail={showDetailHandler} isLoading={loading} />
       )}
     </Fragment>
   );

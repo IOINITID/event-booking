@@ -8,6 +8,7 @@ import { useSelectorTyped } from '../../hooks';
 import { styledButton, styledButtonCancel, styledModalActions } from './styled';
 import imageIcon from '../../assets/images/image-icon.svg';
 import closeIcon from '../../assets/images/close-icon.svg';
+import { toast } from 'react-toastify';
 
 interface IModal {
   title: string;
@@ -165,10 +166,10 @@ const ModalCreateEvent = (props: any) => {
 
                   fileReader.readAsDataURL(image);
                   fileReader.onload = () => {
-                    const MAX_IMAGE_SIZE = 3145728;
+                    const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
                     if (image.size > MAX_IMAGE_SIZE) {
-                      console.log('Image size is more than 3MB.');
+                      toast('Изображение должно быть меньше 5MB.');
                       props.setImage(fileReader.result);
                     } else {
                       props.setImage(fileReader.result);
