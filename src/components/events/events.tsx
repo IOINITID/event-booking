@@ -272,7 +272,7 @@ const Events = () => {
 
       {loading ? (
         <div className={styledEventsLoader}>
-          {Array.from(Array(9).keys()).map((item) => {
+          {Array.from(Array(6).keys()).map((item) => {
             return <EventListLoader key={item} />;
           })}
         </div>

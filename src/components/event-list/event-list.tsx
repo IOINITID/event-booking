@@ -3,7 +3,7 @@ import EventItem from '../event-item';
 import { styledEventList, styledEventListButton } from './styled';
 
 const EventList = (props: any) => {
-  const [eventsCount, setEventsCount] = useState(9);
+  const [eventsCount, setEventsCount] = useState(6);
 
   return (
     <Fragment>
@@ -32,7 +32,7 @@ const EventList = (props: any) => {
           type="button"
           onClick={(event: MouseEvent<HTMLButtonElement>) => {
             event.currentTarget.blur();
-            setEventsCount(eventsCount + 9);
+            setEventsCount(eventsCount + 6);
           }}
         >
           Показать ещё
