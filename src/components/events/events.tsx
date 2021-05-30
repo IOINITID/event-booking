@@ -63,6 +63,16 @@ const CREATE_EVENT = gql`
   }
 `;
 
+const BOOK_EVENT = gql`
+  mutation BookEvent($id: ID!) {
+    bookEvent(eventId: $id) {
+      _id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 const EventListLoader = (props) => (
   <ContentLoader
     width={384}
@@ -87,7 +97,6 @@ const Events = () => {
   const token = useSelectorTyped(selectToken);
   const [events, setEvents] = useState([]);
   const userId = useSelectorTyped(selectUserId);
-  // const [isLoading, setIsLoading] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -109,7 +118,6 @@ const Events = () => {
         },
         ...events,
       ]);
-
       toast('Мероприятие успешно создано.');
     },
   });
@@ -118,13 +126,16 @@ const Events = () => {
     fetchPolicy: 'network-only',
   });
 
+  const [bookEvent, { loading: bookEventLoading }] = useMutation(BOOK_EVENT, {
+    onCompleted: () => {
+      setSelectedEvent(null);
+      setIsSuccess(true);
+    },
+  });
+
   const createEventHandler = () => {
     setIsOpen(true);
   };
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
 
   useEffect(() => {
     if (data) {
@@ -147,51 +158,6 @@ const Events = () => {
   //     document.body.style.overflow = 'auto';
   //   }
   // }, [isOpen, selectedEvent]);
-
-  const fetchEvents = () => {
-    // setIsLoading(true);
-    // const requestBody = {
-    //   query: `
-    //       query {
-    //         events {
-    //           _id
-    //           title
-    //           description
-    //           price
-    //           date
-    //           location
-    //           image
-    //           creator {
-    //             _id
-    //             email
-    //           }
-    //         }
-    //       }
-    //     `,
-    // };
-    //
-    //   fetch(REQUEST_URL, {
-    //     method: 'POST',
-    //     body: JSON.stringify(requestBody),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    //     .then((res) => {
-    //       if (res.status !== 200 && res.status !== 201) {
-    //         throw new Error('Failed!');
-    //       }
-    //       return res.json();
-    //     })
-    //     .then((resData) => {
-    //       setEvents(resData.data.events);
-    //       setIsLoading(false);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //       setIsLoading(false);
-    //     });
-  };
 
   const modalConfirmHandler = () => {
     if (
@@ -242,50 +208,14 @@ const Events = () => {
       return;
     }
 
-    // setIsLoading(true);
-
-    const requestBody = {
-      query: `
-          mutation BookEvent($id: ID!) {
-            bookEvent(eventId: $id) {
-              _id
-              createdAt
-              updatedAt
-            }
-          }
-        `,
+    bookEvent({
       variables: {
         id: selectedEvent._id,
       },
-    };
-
-    fetch(REQUEST_URL, {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
-
-        return res.json();
-      })
-      .then(() => {
-        // setIsLoading(false);
-        setSelectedEvent(null);
-        setIsSuccess(true);
-      })
-      .catch((error) => {
-        console.log(error);
-        // setIsLoading(false);
-      });
+    });
   };
 
-  if (createEventLoading) {
+  if (createEventLoading || bookEventLoading) {
     return <Loader />;
   }
 

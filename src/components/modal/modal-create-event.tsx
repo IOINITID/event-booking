@@ -102,7 +102,7 @@ const ModalCreateEvent = (props: any) => {
                   margin: 0;
                 `}
               >
-                Рекомендуемый размер изображения не менее 800x300 пикселей
+                Рекомендуемый размер изображения не менее 800x300 пикселей и весом не более 5MB.
               </p>
             </div>
             <div
@@ -170,7 +170,7 @@ const ModalCreateEvent = (props: any) => {
 
                     if (image.size > MAX_IMAGE_SIZE) {
                       toast('Изображение должно быть меньше 5MB.');
-                      props.setImage(fileReader.result);
+                      return;
                     } else {
                       props.setImage(fileReader.result);
                     }

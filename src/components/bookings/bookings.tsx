@@ -123,7 +123,11 @@ const Bookings = () => {
             {outputType !== 'my' && outputType !== 'data' && (
               <BookingList bookings={bookings} onDelete={deleteBookingHandler} />
             )}
-            {outputType === 'my' && <EventsBanner />}
+            {outputType === 'my' && (
+              <Fragment>
+                <EventsBanner />
+              </Fragment>
+            )}
             {outputType === 'data' && <BookingsChart bookings={bookings} />}
           </div>
         </div>
