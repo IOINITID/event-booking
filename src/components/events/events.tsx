@@ -5,7 +5,6 @@ import Backdrop from '../backdrop';
 import EventList from '../event-list';
 import Modal from '../modal';
 import { styledEventsLoader } from './styled';
-import { REQUEST_URL } from '../../utils/constants';
 import InfoBanner from '../info-banner';
 import ContentLoader from 'react-content-loader';
 import ModalCreateEvent from '../modal/modal-create-event';
@@ -100,7 +99,7 @@ const Events = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
+  const [createEvent, { loading: createEventLoading, error: createEventError }] = useMutation(CREATE_EVENT, {
     onCompleted: (data) => {
       setEvents([
         {
@@ -120,10 +119,11 @@ const Events = () => {
       ]);
       toast('Мероприятие успешно создано.');
     },
+    fetchPolicy: 'no-cache',
   });
 
   const { data, loading, error } = useQuery(EVENTS, {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'no-cache',
   });
 
   const [bookEvent, { loading: bookEventLoading }] = useMutation(BOOK_EVENT, {
@@ -131,6 +131,7 @@ const Events = () => {
       setSelectedEvent(null);
       setIsSuccess(true);
     },
+    fetchPolicy: 'no-cache',
   });
 
   const createEventHandler = () => {
@@ -147,7 +148,11 @@ const Events = () => {
     if (error) {
       toast(error.message);
     }
-  }, [error]);
+
+    if (createEventError) {
+      toast(createEventError.message);
+    }
+  }, [error, createEventError]);
 
   /** Added scroll to body */
 

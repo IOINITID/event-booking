@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { css } from '@emotion/css';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import { useHistory } from 'react-router';
 import { selectToken } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';

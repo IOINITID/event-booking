@@ -11,6 +11,7 @@ import { styledBookingsContainer } from './styled';
 import EventsBanner from '../events-banner';
 import { styledBookingButton, styledBookingList, styledBookingListItem } from '../booking-list/styled';
 import { gql, useMutation, useQuery } from '@apollo/client';
+import { toast } from 'react-toastify';
 
 const EVENTS = gql`
   query Events {
@@ -46,13 +47,14 @@ const Bookings = () => {
   const [events, setEvents] = useState([]);
 
   const { data, loading, error } = useQuery(EVENTS, {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'no-cache',
   });
 
-  const [deleteEvent, { loading: deleteEventLoading }] = useMutation(DELETE_EVENT, {
+  const [deleteEvent, { loading: deleteEventLoading, error: deleteEventError }] = useMutation(DELETE_EVENT, {
     onCompleted: (data) => {
       setEvents(events.filter((event) => event._id !== data.deleteEvent._id));
     },
+    fetchPolicy: 'no-cache',
   });
 
   useEffect(() => {
@@ -64,6 +66,16 @@ const Bookings = () => {
       setEvents(data.events);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      toast(error.message);
+    }
+
+    if (deleteEventError) {
+      toast(deleteEventError.message);
+    }
+  }, [error, deleteEventError]);
 
   const deleteBookingHandler = (bookingId: any) => {
     setIsLoading(true);
@@ -158,7 +170,7 @@ const Bookings = () => {
   };
 
   if (loading || deleteEventLoading) {
-    <Loader />;
+    return <Loader />;
   }
 
   return (

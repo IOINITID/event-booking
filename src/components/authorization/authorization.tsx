@@ -41,7 +41,7 @@ const Authorization = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, { data, loading, error }] = useLazyQuery(LOGIN, {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'no-cache',
   });
 
   useEffect(() => {
@@ -120,8 +120,6 @@ const Authorization = () => {
     //       console.log(error);
     //     });
   };
-
-  console.log(loading);
 
   if (loading) {
     return <Loader />;

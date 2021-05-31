@@ -17,19 +17,19 @@ import { REQUEST_URL } from '../../utils/constants';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-const client = new ApolloClient({
-  link: createUploadLink({
-    uri: REQUEST_URL,
-    headers: {
-      Authorization: `Bearer ${window.localStorage.getItem('userToken')}`,
-    },
-  }),
-  cache: new InMemoryCache(),
-});
-
 const App = () => {
   const theme = useSelectorTyped(selectTheme);
   const token = useSelectorTyped(selectToken);
+
+  const client = new ApolloClient({
+    link: createUploadLink({
+      uri: REQUEST_URL,
+      headers: {
+        Authorization: token ? `Bearer ${token}` : '',
+      },
+    }),
+    cache: new InMemoryCache(),
+  });
 
   return (
     <ApolloProvider client={client}>
