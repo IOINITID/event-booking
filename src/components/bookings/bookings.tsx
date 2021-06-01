@@ -12,6 +12,7 @@ import EventsBanner from '../events-banner';
 import { styledBookingButton, styledBookingList, styledBookingListItem } from '../booking-list/styled';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
 
 const EVENTS = gql`
   query Events {
@@ -132,8 +133,11 @@ const Bookings = () => {
               event {
                 _id
                 title
-                date
+                description
                 price
+                date
+                location
+                image
               }
             }
           }
@@ -182,34 +186,72 @@ const Bookings = () => {
           <BookingsControl onOutputTypeChange={outputTypeChangeHandler} activeOutputType={outputType} />
           <div>
             {outputType !== 'my' && outputType !== 'data' && (
-              <BookingList bookings={bookings} onDelete={deleteBookingHandler} />
+              <Fragment>
+                {bookings.length ? (
+                  <BookingList bookings={bookings} onDelete={deleteBookingHandler} />
+                ) : (
+                  <EventsBanner />
+                )}
+              </Fragment>
             )}
             {outputType === 'my' && (
               <Fragment>
-                <EventsBanner />
-                <ul className={styledBookingList}>
-                  {events.map((event: any) => {
-                    return (
-                      <li className={styledBookingListItem} key={event._id}>
-                        <div>{event.title}</div>
-                        <div>
-                          <button
-                            className={styledBookingButton}
-                            onClick={() => {
-                              deleteEvent({
-                                variables: {
-                                  id: event._id,
-                                },
-                              });
-                            }}
+                {events.length ? (
+                  <ul className={styledBookingList}>
+                    {events.map((event: any, index: number) => {
+                      return (
+                        <li className={styledBookingListItem} key={event._id}>
+                          <span>{index}</span>
+                          <img
+                            className={css`
+                              width: 96px;
+                              height: 96px;
+                              border-radius: 8px;
+                              object-fit: cover;
+                            `}
+                            src={event.image}
+                            alt="Изображение мероприятия."
+                          />
+                          <div
+                            className={css`
+                              max-width: 111px;
+                            `}
                           >
-                            Отменить
-                          </button>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
+                            {event.title}
+                          </div>
+                          <div>
+                            <div>{dayjs(event.date).locale('ru').format('DD MMMM')}</div>
+                            <div>{dayjs(event.date).locale('ru').format('HH:MM')}</div>
+                          </div>
+                          <div>{event.price} ₽</div>
+                          <div
+                            className={css`
+                              max-width: 153px;
+                            `}
+                          >
+                            {event.location}
+                          </div>
+                          <div>
+                            <button
+                              className={styledBookingButton}
+                              onClick={() => {
+                                deleteEvent({
+                                  variables: {
+                                    id: event._id,
+                                  },
+                                });
+                              }}
+                            >
+                              Отменить
+                            </button>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <EventsBanner />
+                )}
               </Fragment>
             )}
             {outputType === 'data' && <BookingsChart bookings={bookings} />}
