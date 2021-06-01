@@ -31,6 +31,13 @@ const Navigation = () => {
           </li>
           {!token && (
             <li className={styledNavigationItem}>
+              <NavLink className={styledNavigationLink} to="/registration">
+                Регистрация
+              </NavLink>
+            </li>
+          )}
+          {!token && (
+            <li className={styledNavigationItem}>
               <NavLink className={styledNavigationLink} to="/authorization">
                 Войти
               </NavLink>

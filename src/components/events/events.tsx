@@ -13,6 +13,7 @@ import ModalSuccess from '../modal/modal-success';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Loader from '../loader';
+import { css } from '@emotion/css';
 
 const EVENTS = gql`
   query Events {
@@ -82,6 +83,19 @@ const EventListLoader = (props) => (
     {...props}
   >
     <rect x="0" y="0" rx="16" ry="16" width="384" height="176" />
+  </ContentLoader>
+);
+
+const EventListButtonLoader = (props) => (
+  <ContentLoader
+    width={181}
+    height={56}
+    viewBox="0 0 181 56"
+    backgroundColor="#f26b4e"
+    foregroundColor="#ef4723"
+    {...props}
+  >
+    <rect x="0" y="0" rx="8" ry="8" width="181" height="56" />
   </ContentLoader>
 );
 
@@ -280,6 +294,12 @@ const Events = () => {
           {Array.from(Array(6).keys()).map((item) => {
             return <EventListLoader key={item} />;
           })}
+          <EventListButtonLoader
+            className={css`
+              justify-self: center;
+              grid-column: 2/3;
+            `}
+          />
         </div>
       ) : (
         <EventList events={events} onViewDetail={showDetailHandler} isLoading={loading} />

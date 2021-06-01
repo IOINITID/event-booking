@@ -25,8 +25,8 @@ export const styledEventPrice = css`
 `;
 
 export const styledEventImage = css`
-  width: 100%;
-  height: 100%;
+  width: 176px;
+  height: 176px;
   border-radius: 16px 0 0 16px;
   object-fit: cover;
 `;

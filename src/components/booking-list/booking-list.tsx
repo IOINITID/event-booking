@@ -16,14 +16,14 @@ const BookingList = (props: any) => {
                 height: 96px;
                 border-radius: 8px;
                 object-fit: cover;
-`}
+              `}
               src={booking.event.image}
               alt="Изображение мероприятия."
             />
             <div
               className={css`
                 max-width: 111px;
-`}
+              `}
             >
               {booking.event.title}
             </div>
@@ -35,7 +35,7 @@ const BookingList = (props: any) => {
             <div
               className={css`
                 max-width: 153px;
-`}
+              `}
             >
               {booking.event.location}
             </div>

@@ -13,6 +13,7 @@ import { styledBookingButton, styledBookingList, styledBookingListItem } from '.
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
+import { useHistory } from 'react-router';
 
 const EVENTS = gql`
   query Events {
@@ -46,6 +47,7 @@ const Bookings = () => {
   const token = useSelectorTyped(selectToken);
   const [outputType, setOutputType] = useState('');
   const [events, setEvents] = useState([]);
+  const history = useHistory();
 
   const { data, loading, error } = useQuery(EVENTS, {
     fetchPolicy: 'no-cache',
@@ -190,7 +192,11 @@ const Bookings = () => {
                 {bookings.length ? (
                   <BookingList bookings={bookings} onDelete={deleteBookingHandler} />
                 ) : (
-                  <EventsBanner />
+                  <EventsBanner
+                    description="Забронируй любое мероприятие, и оно появится в этом списке!"
+                    buttonTitle="Забронировать мероприятие"
+                    onClick={() => history.push('/events')}
+                  />
                 )}
               </Fragment>
             )}
@@ -208,14 +214,14 @@ const Bookings = () => {
                               height: 96px;
                               border-radius: 8px;
                               object-fit: cover;
-                            `}
+`}
                             src={event.image}
                             alt="Изображение мероприятия."
                           />
                           <div
                             className={css`
                               max-width: 111px;
-                            `}
+`}
                           >
                             {event.title}
                           </div>
@@ -227,7 +233,7 @@ const Bookings = () => {
                           <div
                             className={css`
                               max-width: 153px;
-                            `}
+`}
                           >
                             {event.location}
                           </div>
@@ -250,7 +256,11 @@ const Bookings = () => {
                     })}
                   </ul>
                 ) : (
-                  <EventsBanner />
+                  <EventsBanner
+                    description=" Создай любое мероприятие, и оно появится в этом списке!"
+                    buttonTitle="Создать мероприятие"
+                    onClick={() => history.push('/events')}
+                  />
                 )}
               </Fragment>
             )}

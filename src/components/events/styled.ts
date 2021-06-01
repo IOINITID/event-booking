@@ -12,6 +12,7 @@ export const styledEventsLoader = css`
   display: grid;
   grid-template-columns: repeat(3, 384px);
   gap: 32px;
+  row-gap: 40px;
 `;
 
 export const styledButton = css`
