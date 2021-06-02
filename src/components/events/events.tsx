@@ -9,69 +9,12 @@ import EventsBanner from '../events-banner';
 import ContentLoader from 'react-content-loader';
 import ModalCreateEvent from '../modal/modal-create-event';
 import ModalSuccess from '../modal/modal-success';
-
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Loader from '../loader';
 import { css } from '@emotion/css';
-
-const EVENTS = gql`
-  query Events {
-    events {
-      _id
-      title
-      description
-      price
-      date
-      location
-      image
-      creator {
-        _id
-        email
-      }
-    }
-  }
-`;
-
-const CREATE_EVENT = gql`
-  mutation CreateEvent(
-    $title: String!
-    $description: String!
-    $price: Float!
-    $date: String!
-    $location: String!
-    $image: String!
-  ) {
-    createEvent(
-      eventInput: {
-        title: $title
-        description: $description
-        price: $price
-        date: $date
-        location: $location
-        image: $image
-      }
-    ) {
-      _id
-      title
-      description
-      price
-      date
-      location
-      image
-    }
-  }
-`;
-
-const BOOK_EVENT = gql`
-  mutation BookEvent($id: ID!) {
-    bookEvent(eventId: $id) {
-      _id
-      createdAt
-      updatedAt
-    }
-  }
-`;
+import { EVENTS } from '../../graphql/queries';
+import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
 
 const EventListLoader = (props) => (
   <ContentLoader

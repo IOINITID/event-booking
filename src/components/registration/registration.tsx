@@ -1,104 +1,66 @@
 import React, { FormEvent, useState } from 'react';
-import { getLogin } from '../../features/user/userSlice';
-import { useDispatchTyped } from '../../hooks';
-import {
-  styledButton,
-  styledForm,
-  styledFormField,
-  styledFormFields,
-  styledFormFieldsHeader,
-  styledFormFieldsInfo,
-  styledFormFieldsInfoLink,
-  styledFormFieldsTitle,
-  styledFormInfo,
-  styledFormInfoTitle,
-  styledInput,
-  styledLabel,
-  styledFormFieldsFieldset,
-  styledFormImage,
-  styledFormFieldsPolicy,
-  styledFormFieldsPolicyLink,
-  styledFormContainer,
-} from './styled';
-import { REQUEST_URL } from '../../utils/constants';
+import { styles } from './styled';
 import ticketsImage from '../../assets/images/tickets.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import { CREATE_USER } from '../../graphql/mutations';
+import { useMutation } from '@apollo/client';
+import { toast } from 'react-toastify';
+import Loader from '../loader';
 
 const Registration = () => {
-  const dispatch = useDispatchTyped();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
+  const [createUser, { loading }] = useMutation(CREATE_USER, {
+    onCompleted: () => {
+      toast('Регистрация выполнена успешно.');
+      history.push('/authorization');
+    },
+  });
 
-  const submitHandler = (event: FormEvent) => {
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (email.trim().length === 0 || password.trim().length === 0) {
       return;
     }
 
-    const requestBody = {
-      query: `
-        mutation CreateUser($email: String!, $password: String!) {
-          createUser(userInput: {email: $email, password: $password}) {
-            _id
-            email
-          }
-        }
-      `,
+    createUser({
       variables: {
         email: email,
         password: password,
       },
-    };
-
-    fetch(REQUEST_URL, {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
-
-        return res.json();
-      })
-      .then((resData) => {
-        if (resData.data.login.token) {
-          dispatch(getLogin({ token: resData.data.login.token, userId: resData.data.login.userId }));
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    });
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <form className={styledForm} onSubmit={submitHandler}>
-      <div className={styledFormInfo}>
-        <h2 className={styledFormInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
-        <img className={styledFormImage} src={ticketsImage} alt="Билеты на мероприятия." />
+    <form className={styles.form} onSubmit={submitHandler}>
+      <div className={styles.formInfo}>
+        <h2 className={styles.formInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
+        <img className={styles.formImage} src={ticketsImage} alt="Билеты на мероприятия." />
       </div>
-      <div className={styledFormFields}>
-        <header className={styledFormFieldsHeader}>
-          <h2 className={styledFormFieldsTitle}>Регистрация</h2>
-          <p className={styledFormFieldsInfo}>
+      <div className={styles.formFields}>
+        <header className={styles.formFieldsHeader}>
+          <h2 className={styles.formFieldsTitle}>Регистрация</h2>
+          <p className={styles.formFieldsInfo}>
             У Вас уже есть аккаунт?{' '}
-            <NavLink className={styledFormFieldsInfoLink} to="/authorization">
+            <NavLink className={styles.formFieldsInfoLink} to="/authorization">
               Войти в свой профиль
             </NavLink>
           </p>
         </header>
-        <div className={styledFormContainer}>
-          <div className={styledFormFieldsFieldset}>
-            <div className={styledFormField}>
-              <label className={styledLabel} htmlFor="email">
+        <div className={styles.formContainer}>
+          <div className={styles.formFieldsFieldset}>
+            <div className={styles.formField}>
+              <label className={styles.label} htmlFor="email">
                 Адрес электронной почты
               </label>
               <input
-                className={styledInput}
+                className={styles.input}
                 type="email"
                 id="email"
                 name="email"
@@ -106,12 +68,12 @@ const Registration = () => {
                 placeholder="Электронная почта"
               />
             </div>
-            <div className={styledFormField}>
-              <label className={styledLabel} htmlFor="password">
+            <div className={styles.formField}>
+              <label className={styles.label} htmlFor="password">
                 Пароль
               </label>
               <input
-                className={styledInput}
+                className={styles.input}
                 type="password"
                 id="password"
                 name="password"
@@ -119,15 +81,14 @@ const Registration = () => {
                 placeholder="***************"
               />
             </div>
-            <p className={styledFormFieldsPolicy}>
+            <p className={styles.formFieldsPolicy}>
               Нажимая на кнопку, Вы соглашаетесь с{' '}
-              <a className={styledFormFieldsPolicyLink} href="#no_scrooll">
+              <a className={styles.formFieldsPolicyLink} href="#no_scrooll">
                 политикой обработки персональных данных
               </a>
             </p>
           </div>
-
-          <button className={styledButton} type="submit">
+          <button className={styles.button} type="submit">
             Зарегистрироваться ⟶
           </button>
         </div>

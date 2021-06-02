@@ -10,36 +10,12 @@ import { css } from '@emotion/css';
 import { styledBookingsContainer } from './styled';
 import InfoBanner from '../info-banner';
 import { styledBookingButton, styledBookingList, styledBookingListItem } from '../booking-list/styled';
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import { useHistory } from 'react-router';
-
-const EVENTS = gql`
-  query Events {
-    events {
-      _id
-      title
-      description
-      price
-      date
-      location
-      image
-      creator {
-        _id
-        email
-      }
-    }
-  }
-`;
-
-const DELETE_EVENT = gql`
-  mutation DeleteEvent($id: ID!) {
-    deleteEvent(eventId: $id) {
-      _id
-    }
-  }
-`;
+import { EVENTS } from '../../graphql/queries';
+import { DELETE_EVENT } from '../../graphql/mutations';
 
 const Bookings = () => {
   const [isLoading, setIsLoading] = useState(false);

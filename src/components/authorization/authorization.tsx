@@ -20,21 +20,10 @@ import {
 } from './styled';
 import ticketsImage from '../../assets/images/tickets.png';
 import { NavLink } from 'react-router-dom';
-
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Loader from '../loader';
-
-const LOGIN = gql`
-  query Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      userId
-      token
-      tokenExpiration
-      message
-    }
-  }
-`;
+import { LOGIN } from '../../graphql/queries';
 
 const Authorization = () => {
   const dispatch = useDispatchTyped();

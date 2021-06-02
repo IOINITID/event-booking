@@ -1,6 +1,4 @@
 import React from 'react';
-import { selectUserId } from '../../features/user/userSlice';
-import { useSelectorTyped } from '../../hooks';
 import {
   styledEvent,
   styledEventImage,
