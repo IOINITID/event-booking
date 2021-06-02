@@ -14,18 +14,24 @@ import { useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import { useHistory } from 'react-router';
-import { EVENTS } from '../../graphql/queries';
+import { EVENTS, GET_BOOKINGS } from '../../graphql/queries';
 import { DELETE_EVENT } from '../../graphql/mutations';
+import { CANCEL_BOOKING } from '../../graphql/mutations';
 
 const Bookings = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookings, setBookings] = useState([]);
-  const token = useSelectorTyped(selectToken);
   const [outputType, setOutputType] = useState('');
   const [events, setEvents] = useState([]);
   const history = useHistory();
 
-  const { data, loading, error } = useQuery(EVENTS, {
+  const { loading, error } = useQuery(EVENTS, {
+    onCompleted: (data) => {
+      setEvents(data.events);
+    },
+    onError: (error) => {
+      toast(error.message);
+    },
     fetchPolicy: 'no-cache',
   });
 
@@ -33,125 +39,43 @@ const Bookings = () => {
     onCompleted: (data) => {
       setEvents(events.filter((event) => event._id !== data.deleteEvent._id));
     },
+    onError: (error) => {
+      toast(error.message);
+    },
     fetchPolicy: 'no-cache',
   });
 
-  useEffect(() => {
-    fetchBookings();
-  }, []);
+  const [cancelBooking, { loading: cancelBookingLoading }] = useMutation(CANCEL_BOOKING, {
+    onCompleted: (data) => {
+      const updatedBookings = bookings.filter((booking) => booking.event._id !== data.cancelBooking._id);
+      setBookings(updatedBookings);
+      setIsLoading(false);
+    },
+    fetchPolicy: 'no-cache',
+  });
 
-  useEffect(() => {
-    if (data) {
-      setEvents(data.events);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (error) {
-      toast(error.message);
-    }
-
-    if (deleteEventError) {
-      toast(deleteEventError.message);
-    }
-  }, [error, deleteEventError]);
+  const { loading: bookingsLoading } = useQuery(GET_BOOKINGS, {
+    onCompleted: (data) => {
+      setBookings(data.bookings);
+    },
+    fetchPolicy: 'no-cache',
+  });
 
   const deleteBookingHandler = (bookingId: any) => {
     setIsLoading(true);
 
-    const requestBody = {
-      query: `
-          mutation CancelBooking($id: ID!) {
-            cancelBooking(bookingId: $id) {
-              _id
-              title
-            }
-          }
-        `,
+    cancelBooking({
       variables: {
         id: bookingId,
       },
-    };
-
-    fetch(REQUEST_URL, {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
-
-        return res.json();
-      })
-      .then((resData) => {
-        const updatedBookings = bookings.filter((booking) => booking._id !== bookingId);
-        setBookings(updatedBookings);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
-  };
-
-  const fetchBookings = () => {
-    setIsLoading(true);
-
-    const requestBody = {
-      query: `
-          query {
-            bookings {
-              _id
-              createdAt
-              event {
-                _id
-                title
-                description
-                price
-                date
-                location
-                image
-              }
-            }
-          }
-        `,
-    };
-
-    fetch(REQUEST_URL, {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
-
-        return res.json();
-      })
-      .then((resData) => {
-        setBookings(resData.data.bookings);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
+    });
   };
 
   const outputTypeChangeHandler = (type: any) => {
     setOutputType(type);
   };
 
-  if (loading || deleteEventLoading) {
+  if (loading || deleteEventLoading || cancelBookingLoading || bookingsLoading) {
     return <Loader />;
   }
 

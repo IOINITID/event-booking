@@ -64,50 +64,6 @@ const Authorization = () => {
         password,
       },
     });
-
-    //   const requestBody = {
-    //     query: `
-    //       query Login($email: String!, $password: String!) {
-    //         login(email: $email, password: $password) {
-    //           userId
-    //           token
-    //           tokenExpiration
-    //         }
-    //       }
-    //     `,
-    //     variables: {
-    //       email: email,
-    //       password: password,
-    //     },
-    //   };
-
-    //   fetch(REQUEST_URL, {
-    //     method: 'POST',
-    //     body: JSON.stringify(requestBody),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    //     .then((res) => {
-    //       if (res.status !== 200 && res.status !== 201) {
-    //         throw new Error('Failed!');
-    //       }
-
-    //       return res.json();
-    //     })
-    //     .then((resData) => {
-    //       if (resData.data.login.token) {
-    //         dispatch(
-    //           login({
-    //             token: resData.data.login.token,
-    //             userId: resData.data.login.userId,
-    //           })
-    //         );
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
   };
 
   if (loading) {

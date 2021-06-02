@@ -28,3 +28,21 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const GET_BOOKINGS = gql`
+  query {
+    bookings {
+      _id
+      createdAt
+      event {
+        _id
+        title
+        description
+        price
+        date
+        location
+        image
+      }
+    }
+  }
+`;

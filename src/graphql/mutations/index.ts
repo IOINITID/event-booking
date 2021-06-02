@@ -56,3 +56,12 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const CANCEL_BOOKING = gql`
+  mutation CancelBooking($id: ID!) {
+    cancelBooking(bookingId: $id) {
+      _id
+      title
+    }
+  }
+`;
