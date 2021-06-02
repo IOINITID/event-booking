@@ -2,14 +2,7 @@ import React, { Fragment } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { logout, selectToken } from '../../features/user/userSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
-import {
-  styledHeader,
-  styledHeading,
-  styledNavigation,
-  styledNavigationItem,
-  styledNavigationLink,
-  styledNavigationList,
-} from './styled';
+import { styles } from './styled';
 
 const Navigation = () => {
   const dispatch = useDispatchTyped();
@@ -17,42 +10,42 @@ const Navigation = () => {
   const history = useHistory();
 
   return (
-    <header className={styledHeader}>
+    <header className={styles.header}>
       <div>
-        <h1 className={styledHeading}>Event booking</h1>
+        <h1 className={styles.heading}>Event booking</h1>
       </div>
-      <nav className={styledNavigation}>
-        <ul className={styledNavigationList}>
-          <li className={styledNavigationItem}>
-            <NavLink className={styledNavigationLink} to="/events">
+      <nav>
+        <ul className={styles.navigationList}>
+          <li className={styles.navigationItem}>
+            <NavLink className={styles.navigationLink} to="/events">
               Мероприятия
             </NavLink>
           </li>
           {!token && (
-            <li className={styledNavigationItem}>
-              <NavLink className={styledNavigationLink} to="/registration">
+            <li className={styles.navigationItem}>
+              <NavLink className={styles.navigationLink} to="/registration">
                 Регистрация
               </NavLink>
             </li>
           )}
           {!token && (
-            <li className={styledNavigationItem}>
-              <NavLink className={styledNavigationLink} to="/authorization">
+            <li className={styles.navigationItem}>
+              <NavLink className={styles.navigationLink} to="/authorization">
                 Войти
               </NavLink>
             </li>
           )}
           {token && (
             <Fragment>
-              <li className={styledNavigationItem}>
-                <NavLink className={styledNavigationLink} to="/bookings">
+              <li className={styles.navigationItem}>
+                <NavLink className={styles.navigationLink} to="/bookings">
                   Забронированные
                 </NavLink>
               </li>
-              <li>
+              <li className={styles.navigationItem}>
                 <a
                   href="#no_scroll"
-                  className={styledNavigationLink}
+                  className={styles.navigationLink}
                   onClick={() => {
                     dispatch(logout());
                     history.push('/authorization');
