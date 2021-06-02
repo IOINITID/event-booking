@@ -13,6 +13,8 @@
         ]
       }
     ],
-    "string-quotes": "single"
+    "string-quotes": "single",
+    "no-eol-whitespace": null,
+    "no-missing-end-of-source-newline": null
   }
 }

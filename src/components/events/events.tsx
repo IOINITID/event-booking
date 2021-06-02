@@ -5,7 +5,7 @@ import Backdrop from '../backdrop';
 import EventList from '../event-list';
 import Modal from '../modal';
 import { styledEventsLoader } from './styled';
-import InfoBanner from '../info-banner';
+import EventsBanner from '../events-banner';
 import ContentLoader from 'react-content-loader';
 import ModalCreateEvent from '../modal/modal-create-event';
 import ModalSuccess from '../modal/modal-success';
@@ -287,7 +287,7 @@ const Events = () => {
           <ModalSuccess onCancel={modalCancelHandler} setIsSuccess={setIsSuccess} />
         </Fragment>
       )}
-      <InfoBanner onCreateEvent={createEventHandler} />
+      <EventsBanner onCreateEvent={createEventHandler} />
 
       {loading ? (
         <div className={styledEventsLoader}>

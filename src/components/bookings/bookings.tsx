@@ -8,7 +8,7 @@ import BookingsChart from '../bookings-chart';
 import BookingsControl from '../bookings-controls';
 import { css } from '@emotion/css';
 import { styledBookingsContainer } from './styled';
-import EventsBanner from '../events-banner';
+import InfoBanner from '../info-banner';
 import { styledBookingButton, styledBookingList, styledBookingListItem } from '../booking-list/styled';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
@@ -192,7 +192,7 @@ const Bookings = () => {
                 {bookings.length ? (
                   <BookingList bookings={bookings} onDelete={deleteBookingHandler} />
                 ) : (
-                  <EventsBanner
+                  <InfoBanner
                     description="Забронируй любое мероприятие, и оно появится в этом списке!"
                     buttonTitle="Забронировать мероприятие"
                     onClick={() => history.push('/events')}
@@ -214,14 +214,14 @@ const Bookings = () => {
                               height: 96px;
                               border-radius: 8px;
                               object-fit: cover;
-`}
+                            `}
                             src={event.image}
                             alt="Изображение мероприятия."
                           />
                           <div
                             className={css`
                               max-width: 111px;
-`}
+                            `}
                           >
                             {event.title}
                           </div>
@@ -233,7 +233,7 @@ const Bookings = () => {
                           <div
                             className={css`
                               max-width: 153px;
-`}
+                            `}
                           >
                             {event.location}
                           </div>
@@ -256,7 +256,7 @@ const Bookings = () => {
                     })}
                   </ul>
                 ) : (
-                  <EventsBanner
+                  <InfoBanner
                     description=" Создай любое мероприятие, и оно появится в этом списке!"
                     buttonTitle="Создать мероприятие"
                     onClick={() => history.push('/events')}
