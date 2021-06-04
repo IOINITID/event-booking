@@ -31,12 +31,15 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
       <Backdrop />
       <div
         className={css`
-          position: relative;
+          position: fixed;
+          top: 50%;
+          left: 50%;
           z-index: 10;
           width: 808px;
           margin: 0 auto;
           background-color: rgb(255, 255, 255);
           border-radius: 16px;
+          transform: translate(-50%, -50%);
         `}
       >
         <header

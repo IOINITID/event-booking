@@ -3,44 +3,16 @@ import { selectToken, selectUserId } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
 import EventList from '../event-list';
 import Modal from '../modal';
-import { styledEventsLoader } from './styled';
 import EventsBanner from '../events-banner';
-import ContentLoader from 'react-content-loader';
 import ModalCreateEvent from '../modal/modal-create-event';
 import ModalSuccess from '../modal/modal-success';
 import { useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Loader from '../loader';
-import { css } from '@emotion/css';
 import { EVENTS } from '../../graphql/queries';
 import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
 import { useHistory } from 'react-router';
-
-const EventListLoader = (props) => (
-  <ContentLoader
-    width={384}
-    height={176}
-    viewBox="0 0 384 176"
-    backgroundColor="#f26b4e"
-    foregroundColor="#ef4723"
-    {...props}
-  >
-    <rect x="0" y="0" rx="16" ry="16" width="384" height="176" />
-  </ContentLoader>
-);
-
-const EventListButtonLoader = (props) => (
-  <ContentLoader
-    width={181}
-    height={56}
-    viewBox="0 0 181 56"
-    backgroundColor="#f26b4e"
-    foregroundColor="#ef4723"
-    {...props}
-  >
-    <rect x="0" y="0" rx="8" ry="8" width="181" height="56" />
-  </ContentLoader>
-);
+import EventListLoader from '../loader/event-list-loader';
 
 const Events = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -114,13 +86,13 @@ const Events = () => {
 
   /** Added scroll to body */
 
-  // useEffect(() => {
-  //   if (selectedEvent || isOpen) {
-  //     document.body.style.overflow = 'hidden';
-  //   } else {
-  //     document.body.style.overflow = 'auto';
-  //   }
-  // }, [isOpen, selectedEvent]);
+  useEffect(() => {
+    if (selectedEvent || isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isOpen, selectedEvent]);
 
   const modalConfirmHandler = () => {
     if (
@@ -184,6 +156,14 @@ const Events = () => {
 
   return (
     <Fragment>
+      <EventsBanner onCreateEvent={createEventHandler} />
+
+      {loading ? (
+        <EventListLoader itemsCount={6} />
+      ) : (
+        <EventList events={events} onViewDetail={showDetailHandler} isLoading={loading} />
+      )}
+
       {isOpen && (
         <ModalCreateEvent
           title={title}
@@ -202,6 +182,7 @@ const Events = () => {
           onConfirm={modalConfirmHandler}
         />
       )}
+
       {selectedEvent && (
         <Modal
           title={selectedEvent.title}
@@ -223,23 +204,6 @@ const Events = () => {
             history.push('/bookings');
           }}
         />
-      )}
-      <EventsBanner onCreateEvent={createEventHandler} />
-
-      {loading ? (
-        <div className={styledEventsLoader}>
-          {Array.from(Array(6).keys()).map((item) => {
-            return <EventListLoader key={item} />;
-          })}
-          <EventListButtonLoader
-            className={css`
-              justify-self: center;
-              grid-column: 2/3;
-            `}
-          />
-        </div>
-      ) : (
-        <EventList events={events} onViewDetail={showDetailHandler} isLoading={loading} />
       )}
     </Fragment>
   );
