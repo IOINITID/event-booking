@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { selectToken } from '../../features/user/userSlice';
+import { selectToken, selectUserId } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
 import BookingList from '../booking-list';
 import Loader from '../loader';
@@ -24,6 +24,7 @@ const Bookings = () => {
   const [outputType, setOutputType] = useState('');
   const [events, setEvents] = useState([]);
   const history = useHistory();
+  const userId = useSelectorTyped(selectUserId);
 
   const { loading, error } = useQuery(EVENTS, {
     onCompleted: (data) => {
@@ -104,56 +105,58 @@ const Bookings = () => {
               <Fragment>
                 {events.length ? (
                   <ul className={styledBookingList}>
-                    {events.map((event: any, index: number) => {
-                      return (
-                        <li className={styledBookingListItem} key={event._id}>
-                          <span>{index}</span>
-                          <img
-                            className={css`
-                              width: 96px;
-                              height: 96px;
-                              border-radius: 8px;
-                              object-fit: cover;
-                            `}
-                            src={event.image}
-                            alt="Изображение мероприятия."
-                          />
-                          <div
-                            className={css`
-                              max-width: 111px;
-                            `}
-                          >
-                            {event.title}
-                          </div>
-                          <div>
-                            <div>{dayjs(event.date).locale('ru').format('DD MMMM')}</div>
-                            <div>{dayjs(event.date).locale('ru').format('HH:MM')}</div>
-                          </div>
-                          <div>{event.price} ₽</div>
-                          <div
-                            className={css`
-                              max-width: 153px;
-                            `}
-                          >
-                            {event.location}
-                          </div>
-                          <div>
-                            <button
-                              className={styledBookingButton}
-                              onClick={() => {
-                                deleteEvent({
-                                  variables: {
-                                    id: event._id,
-                                  },
-                                });
-                              }}
+                    {events
+                      .filter((event) => event.creator._id === userId)
+                      .map((event: any, index: number) => {
+                        return (
+                          <li className={styledBookingListItem} key={event._id}>
+                            <span>{index}</span>
+                            <img
+                              className={css`
+                                width: 96px;
+                                height: 96px;
+                                border-radius: 8px;
+                                object-fit: cover;
+                              `}
+                              src={event.image}
+                              alt="Изображение мероприятия."
+                            />
+                            <div
+                              className={css`
+                                max-width: 111px;
+                              `}
                             >
-                              Отменить
-                            </button>
-                          </div>
-                        </li>
-                      );
-                    })}
+                              {event.title}
+                            </div>
+                            <div>
+                              <div>{dayjs(event.date).locale('ru').format('DD MMMM')}</div>
+                              <div>{dayjs(event.date).locale('ru').format('HH:MM')}</div>
+                            </div>
+                            <div>{event.price} ₽</div>
+                            <div
+                              className={css`
+                                max-width: 153px;
+                              `}
+                            >
+                              {event.location}
+                            </div>
+                            <div>
+                              <button
+                                className={styledBookingButton}
+                                onClick={() => {
+                                  deleteEvent({
+                                    variables: {
+                                      id: event._id,
+                                    },
+                                  });
+                                }}
+                              >
+                                Отменить
+                              </button>
+                            </div>
+                          </li>
+                        );
+                      })}
                   </ul>
                 ) : (
                   <InfoBanner

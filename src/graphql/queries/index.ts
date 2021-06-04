@@ -42,6 +42,9 @@ export const GET_BOOKINGS = gql`
         date
         location
         image
+        creator {
+          _id
+        }
       }
     }
   }

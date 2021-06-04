@@ -84,8 +84,6 @@ const Events = () => {
     }
   }, [error, createEventError]);
 
-  /** Added scroll to body */
-
   useEffect(() => {
     if (selectedEvent || isOpen) {
       document.body.style.overflow = 'hidden';
