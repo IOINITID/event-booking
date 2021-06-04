@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { selectToken, selectUserId } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
-import Backdrop from '../backdrop';
 import EventList from '../event-list';
 import Modal from '../modal';
 import { styledEventsLoader } from './styled';
@@ -15,6 +14,7 @@ import Loader from '../loader';
 import { css } from '@emotion/css';
 import { EVENTS } from '../../graphql/queries';
 import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
+import { useHistory } from 'react-router';
 
 const EventListLoader = (props) => (
   <ContentLoader
@@ -55,6 +55,7 @@ const Events = () => {
   const userId = useSelectorTyped(selectUserId);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const history = useHistory();
 
   const [createEvent, { loading: createEventLoading, error: createEventError }] = useMutation(CREATE_EVENT, {
     onCompleted: (data) => {
@@ -184,51 +185,44 @@ const Events = () => {
   return (
     <Fragment>
       {isOpen && (
-        <Fragment>
-          <Backdrop />
-          <ModalCreateEvent
-            title={title}
-            setTitle={setTitle}
-            price={price}
-            setPrice={setPrice}
-            date={date}
-            setDate={setDate}
-            description={description}
-            setDescription={setDescription}
-            location={location}
-            setLocation={setLocation}
-            image={image}
-            setImage={setImage}
-            cancel
-            confirm
-            onCancel={modalCancelHandler}
-            onConfirm={modalConfirmHandler}
-          />
-        </Fragment>
+        <ModalCreateEvent
+          title={title}
+          setTitle={setTitle}
+          price={price}
+          setPrice={setPrice}
+          date={date}
+          setDate={setDate}
+          description={description}
+          setDescription={setDescription}
+          location={location}
+          setLocation={setLocation}
+          image={image}
+          setImage={setImage}
+          onCancel={modalCancelHandler}
+          onConfirm={modalConfirmHandler}
+        />
       )}
       {selectedEvent && (
-        <Fragment>
-          <Backdrop />
-          <Modal
-            title={selectedEvent.title}
-            description={selectedEvent.description}
-            date={selectedEvent.date}
-            price={selectedEvent.price}
-            location={selectedEvent.location}
-            image={selectedEvent.image}
-            cancel
-            confirm={Boolean(token)}
-            confirmText={token && 'Book'}
-            onCancel={modalCancelHandler}
-            onConfirm={bookEventHandler}
-          />
-        </Fragment>
+        <Modal
+          title={selectedEvent.title}
+          description={selectedEvent.description}
+          date={selectedEvent.date}
+          price={selectedEvent.price}
+          location={selectedEvent.location}
+          image={selectedEvent.image}
+          onCancel={modalCancelHandler}
+          onConfirm={bookEventHandler}
+        />
       )}
+
       {isSuccess && (
-        <Fragment>
-          <Backdrop />
-          <ModalSuccess onCancel={modalCancelHandler} setIsSuccess={setIsSuccess} />
-        </Fragment>
+        <ModalSuccess
+          onCancel={modalCancelHandler}
+          onConfirm={() => {
+            setIsSuccess(false);
+            history.push('/bookings');
+          }}
+        />
       )}
       <EventsBanner onCreateEvent={createEventHandler} />
 
