@@ -101,6 +101,7 @@ const Bookings = () => {
                 )}
               </Fragment>
             )}
+
             {outputType === 'my' && (
               <Fragment>
                 {events.length ? (
@@ -167,6 +168,7 @@ const Bookings = () => {
                 )}
               </Fragment>
             )}
+
             {outputType === 'data' && <BookingsChart bookings={bookings} />}
           </div>
         </div>
