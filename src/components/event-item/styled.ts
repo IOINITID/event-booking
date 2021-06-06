@@ -5,8 +5,12 @@ export const styles = {
     display: grid;
     grid-template-columns: 176px 208px;
   `,
-  imageContainer: css`
+  container: css`
     position: relative;
+    height: 176px;
+    background: linear-gradient(100.38deg, #ffffff -15.69%, rgba(255, 255, 255, 0) 17.45%),
+      radial-gradient(132.55% 273% at 103.38% -8.2%, #ef4723 0%, rgba(252, 207, 149, 0.515625) 74.11%);
+    border-radius: 16px 0 0 16px;
   `,
   price: css`
     position: absolute;
@@ -30,9 +34,26 @@ export const styles = {
   `,
   info: css`
     position: relative;
+    height: 176px;
     padding: 24px 16px;
     background-color: #ffffff;
     border-radius: 0 16px 16px 0;
+  `,
+  title: css`
+    margin: 0 0 16px 0;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
+  `,
+  date: css`
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
   `,
   button: css`
     position: absolute;

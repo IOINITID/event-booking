@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { selectToken, selectUserId } from '../../features/user/userSlice';
-import { useSelectorTyped } from '../../hooks';
+import { logout, selectToken, selectUserId } from '../../features/user/userSlice';
+import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import EventList from '../event-list';
 import Modal from '../modal';
 import EventsBanner from '../events-banner';
@@ -28,6 +28,7 @@ const Events = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatchTyped();
 
   const [createEvent, { loading: createEventLoading, error: createEventError }] = useMutation(CREATE_EVENT, {
     onCompleted: (data) => {
@@ -60,6 +61,12 @@ const Events = () => {
     onCompleted: () => {
       setSelectedEvent(null);
       setIsSuccess(true);
+    },
+    onError: (error) => {
+      if (error.message === 'Необходима авторизация.') {
+        setSelectedEvent(null);
+        dispatch(logout());
+      }
     },
     fetchPolicy: 'no-cache',
   });
