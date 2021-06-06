@@ -1,14 +1,34 @@
 import React, { Fragment, MouseEvent, useState } from 'react';
 import EventItem from '../event-item';
-import { styledEventList, styledEventListButton } from './styled';
+import { styles } from './styled';
 
-const EventList = (props: any) => {
-  const [eventsCount, setEventsCount] = useState(6);
+interface IEventItem {
+  _id: string;
+  eventId: string;
+  image: string;
+  price: string;
+  title: string;
+  date: string;
+  onDetail: (eventId: string) => void;
+}
+
+interface IEventList {
+  events: IEventItem[];
+  onViewDetail: (eventId: string) => void;
+}
+
+const EventList = (props: IEventList) => {
+  const [eventsCount, setEventsCount] = useState<number>(6);
+
+  const loadEventsHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.currentTarget.blur();
+    setEventsCount(eventsCount + 6);
+  };
 
   return (
     <Fragment>
-      <ul className={styledEventList}>
-        {props.events.map((event, index) => {
+      <ul className={styles.list}>
+        {props.events.map((event: IEventItem, index: number) => {
           if (index < eventsCount) {
             return (
               <EventItem
@@ -17,9 +37,7 @@ const EventList = (props: any) => {
                 title={event.title}
                 price={event.price}
                 date={event.date}
-                location={event.location}
                 image={event.image}
-                creatorId={event.creator._id}
                 onDetail={props.onViewDetail}
               />
             );
@@ -27,14 +45,7 @@ const EventList = (props: any) => {
         })}
       </ul>
       {props.events.length > eventsCount ? (
-        <button
-          className={styledEventListButton}
-          type="button"
-          onClick={(event: MouseEvent<HTMLButtonElement>) => {
-            event.currentTarget.blur();
-            setEventsCount(eventsCount + 6);
-          }}
-        >
+        <button className={styles.button} type="button" onClick={loadEventsHandler}>
           Показать ещё
         </button>
       ) : null}

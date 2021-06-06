@@ -131,7 +131,7 @@ const Events = () => {
     setIsSuccess(false);
   };
 
-  const showDetailHandler = (eventId) => {
+  const showDetailHandler = (eventId: string) => {
     setSelectedEvent(events.find((item) => item._id === eventId));
   };
 
@@ -156,11 +156,7 @@ const Events = () => {
     <Fragment>
       <EventsBanner onCreateEvent={createEventHandler} />
 
-      {loading ? (
-        <EventListLoader itemsCount={6} />
-      ) : (
-        <EventList events={events} onViewDetail={showDetailHandler} isLoading={loading} />
-      )}
+      {loading ? <EventListLoader itemsCount={6} /> : <EventList events={events} onViewDetail={showDetailHandler} />}
 
       {isOpen && (
         <ModalCreateEvent
