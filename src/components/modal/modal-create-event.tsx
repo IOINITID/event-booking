@@ -6,6 +6,7 @@ import { styles } from './styled';
 import imageIcon from '../../assets/images/image-icon.svg';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { toast } from 'react-toastify';
+import Button from '../button';
 
 interface IModalCreateEvent {
   title: string;
@@ -373,12 +374,12 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
             </span>
           </div>
           <div className={styles.actions}>
-            <button className={styles.buttonCancel} onClick={props.onCancel}>
+            <Button buttonType="outline" onClick={props.onCancel}>
               Отмена
-            </button>
-            <button className={styles.buttonConfirm} onClick={props.onConfirm}>
+            </Button>
+            <Button buttonType="default" onClick={props.onConfirm}>
               Создать мероприятие ⟶
-            </button>
+            </Button>
           </div>
         </form>
       </div>

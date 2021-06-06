@@ -145,6 +145,8 @@ const Events = () => {
   const bookEventHandler = () => {
     if (!token) {
       setSelectedEvent(null);
+      setIsOpen(false);
+      history.push('/authorization');
       return;
     }
 

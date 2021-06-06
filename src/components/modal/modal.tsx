@@ -3,6 +3,7 @@ import { styles } from './styled';
 import modalImage from '../../assets/images/modal-image.jpg';
 import dayjs from 'dayjs';
 import ru from 'dayjs/locale/ru';
+import Button from '../button';
 
 interface IModal {
   title: string;
@@ -37,12 +38,12 @@ const Modal = (props: IModal) => {
             <p className={styles.location}>{props.location}</p>
           </div>
           <div className={styles.actions}>
-            <button className={styles.buttonCancel} onClick={props.onCancel}>
+            <Button buttonType="outline" onClick={props.onCancel}>
               Отмена
-            </button>
-            <button className={styles.buttonConfirm} onClick={props.onConfirm}>
+            </Button>
+            <Button buttonType="default" onClick={props.onConfirm}>
               Забронировать ⟶
-            </button>
+            </Button>
           </div>
         </div>
       </div>

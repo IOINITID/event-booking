@@ -2,6 +2,7 @@ import React from 'react';
 import { styles } from './styled';
 import eventSuccessImage from '../../assets/images/event-success.jpg';
 import { css, cx } from '@emotion/css';
+import Button from '../button';
 
 interface IModalSuccess {
   onCancel?: () => void;
@@ -35,12 +36,12 @@ const ModalSuccess = (props: IModalSuccess) => {
             Мероприятие появится у Вас в списке забронированных.
           </p>
           <div className={styles.actions}>
-            <button className={styles.buttonCancel} onClick={props.onCancel}>
+            <Button buttonType="outline" onClick={props.onCancel}>
               Отмена
-            </button>
-            <button className={styles.buttonConfirm} onClick={props.onConfirm}>
+            </Button>
+            <Button buttonType="default" onClick={props.onConfirm}>
               К забронированным ⟶
-            </button>
+            </Button>
           </div>
         </div>
       </div>
