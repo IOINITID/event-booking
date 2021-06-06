@@ -374,10 +374,10 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
             </span>
           </div>
           <div className={styles.actions}>
-            <Button buttonType="outline" onClick={props.onCancel}>
+            <Button type="outline" onClick={props.onCancel}>
               Отмена
             </Button>
-            <Button buttonType="default" onClick={props.onConfirm}>
+            <Button type="default" onClick={props.onConfirm}>
               Создать мероприятие ⟶
             </Button>
           </div>
