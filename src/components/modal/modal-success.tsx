@@ -2,7 +2,6 @@ import React from 'react';
 import { styles } from './styled';
 import eventSuccessImage from '../../assets/images/event-success.jpg';
 import { css, cx } from '@emotion/css';
-import Backdrop from '../backdrop';
 
 interface IModalSuccess {
   onCancel?: () => void;
@@ -11,8 +10,7 @@ interface IModalSuccess {
 
 const ModalSuccess = (props: IModalSuccess) => {
   return (
-    <div>
-      <Backdrop />
+    <div className={styles.backdrop}>
       <div
         className={cx(
           styles.container,

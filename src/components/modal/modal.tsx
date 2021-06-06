@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { styles } from './styled';
 import modalImage from '../../assets/images/modal-image.jpg';
 import dayjs from 'dayjs';
 import ru from 'dayjs/locale/ru';
-import Backdrop from '../backdrop';
 
 interface IModal {
   title: string;
@@ -18,8 +17,7 @@ interface IModal {
 
 const Modal = (props: IModal) => {
   return (
-    <div>
-      <Backdrop />
+    <div className={styles.backdrop}>
       <div className={styles.container}>
         <header className={styles.header}>
           <img

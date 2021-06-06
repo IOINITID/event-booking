@@ -85,12 +85,12 @@ const Events = () => {
   }, [error, createEventError]);
 
   useEffect(() => {
-    if (selectedEvent || isOpen) {
+    if (selectedEvent || isOpen || isSuccess) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-  }, [isOpen, selectedEvent]);
+  }, [isOpen, selectedEvent, isSuccess]);
 
   const modalConfirmHandler = () => {
     if (

@@ -6,7 +6,6 @@ import { styles } from './styled';
 import imageIcon from '../../assets/images/image-icon.svg';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { toast } from 'react-toastify';
-import Backdrop from '../backdrop';
 
 interface IModalCreateEvent {
   title: string;
@@ -27,8 +26,7 @@ interface IModalCreateEvent {
 
 const ModalCreateEvent = (props: IModalCreateEvent) => {
   return (
-    <div>
-      <Backdrop />
+    <div className={styles.backdrop}>
       <div
         className={css`
           position: fixed;
