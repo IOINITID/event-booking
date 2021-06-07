@@ -20,7 +20,7 @@ export const styles = {
     }
   `,
   primary: css`
-    padding: 20px 59px;
+    padding: 19px 32px;
     color: #ffffff;
     background: #ef4723;
     border: none;

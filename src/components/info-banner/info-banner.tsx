@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../button';
 import { styles } from './styled';
 
 interface IEventsBanner {
@@ -15,9 +16,9 @@ const EventsBanner = (props: IEventsBanner) => {
         <br />
         {props.description}
       </h2>
-      <button className={styles.button} onClick={props.onClick}>
+      <Button type="primary" onClick={props.onClick}>
         {props.buttonTitle} ⟶
-      </button>
+      </Button>
     </div>
   );
 };

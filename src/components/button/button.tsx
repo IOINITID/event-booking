@@ -1,12 +1,12 @@
 import { cx } from '@emotion/css';
-import React, { ReactElement } from 'react';
+import React, { MouseEvent, ReactNode } from 'react';
 import { styles } from './styled';
 
 interface IButton {
   type: 'primary' | 'outline';
-  onClick: () => void;
+  onClick: (() => void) | ((event: MouseEvent<HTMLButtonElement>) => void);
   className?: string;
-  children: ReactElement | string;
+  children: ReactNode;
 }
 
 const Button = (props: IButton) => {

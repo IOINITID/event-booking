@@ -1,4 +1,5 @@
 import React, { Fragment, MouseEvent, useState } from 'react';
+import Button from '../button';
 import EventItem from '../event-item';
 import { styles } from './styled';
 
@@ -45,9 +46,9 @@ const EventList = (props: IEventList) => {
         })}
       </ul>
       {props.events.length > eventsCount ? (
-        <button className={styles.button} type="button" onClick={loadEventsHandler}>
+        <Button type="outline" className={styles.button} onClick={loadEventsHandler}>
           Показать ещё
-        </button>
+        </Button>
       ) : null}
     </Fragment>
   );
