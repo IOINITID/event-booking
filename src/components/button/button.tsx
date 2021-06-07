@@ -1,15 +1,21 @@
+import { cx } from '@emotion/css';
 import React, { ReactElement } from 'react';
 import { styles } from './styled';
 
 interface IButton {
   type: 'default' | 'outline';
   onClick: () => void;
+  className?: string;
   children: ReactElement | string;
 }
 
 const Button = (props: IButton) => {
   return (
-    <button className={props.type === 'default' ? styles.default : styles.outline} onClick={props.onClick}>
+    <button
+      className={cx(props.type === 'default' ? styles.default : styles.outline, props.className)}
+      type="button"
+      onClick={props.onClick}
+    >
       {props.children}
     </button>
   );

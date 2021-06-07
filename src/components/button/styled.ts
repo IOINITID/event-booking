@@ -2,8 +2,6 @@ import { css } from '@emotion/css';
 
 export const styles = {
   default: css`
-    display: grid;
-    align-items: center;
     width: max-content;
     padding: 20px 59px;
     font-weight: 700;
@@ -26,7 +24,6 @@ export const styles = {
     }
   `,
   outline: css`
-    align-items: center;
     width: max-content;
     padding: 19px 32px;
     font-weight: 700;

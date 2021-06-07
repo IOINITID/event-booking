@@ -19,7 +19,7 @@ export const styles = {
     padding: 16px;
     font-weight: 700;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 16px;
     font-family: 'Grandis Extended', 'Arial', sans-serif;
     color: #ef4723;
     letter-spacing: 0.02em;
@@ -59,28 +59,7 @@ export const styles = {
     position: absolute;
     right: 0;
     bottom: 0;
-    display: grid;
-    justify-self: center;
-    width: max-content;
     padding: 16px 24px;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
-    font-family: 'Grandis Extended', 'Arial', sans-serif;
-    color: #ffffff;
-    letter-spacing: -0.002em;
-    background: #ef4723;
-    border: none;
     border-radius: 16px 0;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      background: #f06749;
-    }
-
-    &:active {
-      background: #e62f07;
-    }
   `,
 };

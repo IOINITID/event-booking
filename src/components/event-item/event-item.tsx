@@ -1,6 +1,7 @@
 import React from 'react';
 import { styles } from './styled';
 import dayjs from 'dayjs';
+import Button from '../button';
 
 interface IEventItem {
   eventId: string;
@@ -21,9 +22,9 @@ const EventItem = (props: IEventItem) => {
       <div className={styles.info}>
         <h3 className={styles.title}>{props.title}</h3>
         <p className={styles.date}>{dayjs(props.date).locale('ru').format('DD MMMM — HH:mm')}</p>
-        <button className={styles.button} type="button" onClick={() => props.onDetail(props.eventId)}>
+        <Button type="default" className={styles.button} onClick={() => props.onDetail(props.eventId)}>
           Подробнее
-        </button>
+        </Button>
       </div>
     </li>
   );
