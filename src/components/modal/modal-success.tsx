@@ -39,7 +39,7 @@ const ModalSuccess = (props: IModalSuccess) => {
             <Button type="outline" onClick={props.onCancel}>
               Отмена
             </Button>
-            <Button type="default" onClick={props.onConfirm}>
+            <Button type="primary" onClick={props.onConfirm}>
               К забронированным ⟶
             </Button>
           </div>

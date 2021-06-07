@@ -22,7 +22,7 @@ const EventItem = (props: IEventItem) => {
       <div className={styles.info}>
         <h3 className={styles.title}>{props.title}</h3>
         <p className={styles.date}>{dayjs(props.date).locale('ru').format('DD MMMM — HH:mm')}</p>
-        <Button type="default" className={styles.button} onClick={() => props.onDetail(props.eventId)}>
+        <Button type="primary" className={styles.button} onClick={() => props.onDetail(props.eventId)}>
           Подробнее
         </Button>
       </div>

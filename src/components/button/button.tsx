@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { styles } from './styled';
 
 interface IButton {
-  type: 'default' | 'outline';
+  type: 'primary' | 'outline';
   onClick: () => void;
   className?: string;
   children: ReactElement | string;
@@ -12,7 +12,7 @@ interface IButton {
 const Button = (props: IButton) => {
   return (
     <button
-      className={cx(props.type === 'default' ? styles.default : styles.outline, props.className)}
+      className={cx(styles.default, props.type === 'primary' ? styles.primary : styles.outline, props.className)}
       type="button"
       onClick={props.onClick}
     >

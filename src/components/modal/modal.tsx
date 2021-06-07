@@ -41,7 +41,7 @@ const Modal = (props: IModal) => {
             <Button type="outline" onClick={props.onCancel}>
               Отмена
             </Button>
-            <Button type="default" onClick={props.onConfirm}>
+            <Button type="primary" onClick={props.onConfirm}>
               Забронировать ⟶
             </Button>
           </div>
