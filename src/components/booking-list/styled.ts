@@ -1,6 +1,18 @@
 import { css } from '@emotion/css';
 
 export const styles = {
+  image: css`
+    width: 96px;
+    height: 96px;
+    border-radius: 8px;
+    object-fit: cover;
+  `,
+  title: css`
+    max-width: 111px;
+  `,
+  location: css`
+    max-width: 153px;
+  `,
   list: css`
     display: grid;
     margin: 0;
