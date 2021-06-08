@@ -30,7 +30,7 @@ const Events = () => {
   const history = useHistory();
   const dispatch = useDispatchTyped();
 
-  const [createEvent, { loading: createEventLoading, error: createEventError }] = useMutation(CREATE_EVENT, {
+  const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
     onCompleted: (data) => {
       setEvents([
         {
@@ -50,10 +50,19 @@ const Events = () => {
       ]);
       toast('Мероприятие успешно создано.');
     },
+    onError: (error) => {
+      toast(error.message);
+    },
     fetchPolicy: 'no-cache',
   });
 
-  const { data, loading, error } = useQuery(EVENTS, {
+  const { loading } = useQuery(EVENTS, {
+    onCompleted: (data) => {
+      setEvents(data.events);
+    },
+    onError: (error) => {
+      toast(error.message);
+    },
     fetchPolicy: 'no-cache',
   });
 
@@ -67,6 +76,7 @@ const Events = () => {
         setSelectedEvent(null);
         dispatch(logout());
       }
+      toast(error.message);
     },
     fetchPolicy: 'no-cache',
   });
@@ -75,21 +85,15 @@ const Events = () => {
     setIsOpen(true);
   };
 
-  useEffect(() => {
-    if (data) {
-      setEvents(data.events);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (error) {
-      toast(error.message);
-    }
-
-    if (createEventError) {
-      toast(createEventError.message);
-    }
-  }, [error, createEventError]);
+  const clearValues = () => {
+    setIsOpen(false);
+    setTitle('');
+    setDescription('');
+    setPrice('');
+    setDate('');
+    setLocation('');
+    setImage('');
+  };
 
   useEffect(() => {
     if (selectedEvent || isOpen || isSuccess) {
@@ -123,13 +127,7 @@ const Events = () => {
       },
     });
 
-    setIsOpen(false);
-    setTitle('');
-    setDescription('');
-    setPrice('');
-    setDate('');
-    setLocation('');
-    setImage('');
+    clearValues();
   };
 
   const modalCancelHandler = () => {

@@ -3,6 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { logout, selectToken } from '../../features/user/userSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { styles } from './styled';
+import logoIcon from '../../assets/images/logo-icon.svg';
 
 const Navigation = () => {
   const dispatch = useDispatchTyped();
@@ -11,9 +12,9 @@ const Navigation = () => {
 
   return (
     <header className={styles.header}>
-      <div>
-        <h1 className={styles.heading}>Event booking</h1>
-      </div>
+      <NavLink to="/">
+        <img src={logoIcon} width="210" alt="Логотип Event booking." />
+      </NavLink>
       <nav>
         <ul className={styles.navigationList}>
           <li className={styles.navigationItem}>

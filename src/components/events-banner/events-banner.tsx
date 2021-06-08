@@ -6,7 +6,11 @@ import { useSelectorTyped } from '../../hooks';
 import Button from '../button';
 import { styles } from './styled';
 
-const InfoBanner = (props: any) => {
+interface IInfoBanner {
+  onCreateEvent: () => void;
+}
+
+const InfoBanner = (props: IInfoBanner) => {
   const token = useSelectorTyped(selectToken);
   const history = useHistory();
 

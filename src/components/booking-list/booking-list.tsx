@@ -1,14 +1,15 @@
 import { css } from '@emotion/css';
 import dayjs from 'dayjs';
 import React from 'react';
-import { styledBookingButton, styledBookingList, styledBookingListItem } from './styled';
+import Button from '../button';
+import { styles } from './styled';
 
 const BookingList = (props: any) => {
   return (
-    <ul className={styledBookingList}>
+    <ul className={styles.list}>
       {props.bookings.map((booking: any, index: number) => {
         return (
-          <li className={styledBookingListItem} key={booking._id}>
+          <li className={styles.listItem} key={booking._id}>
             <span>{index}</span>
             <img
               className={css`
@@ -40,9 +41,9 @@ const BookingList = (props: any) => {
               {booking.event.location}
             </div>
             <div>
-              <button className={styledBookingButton} onClick={props.onDelete.bind(this, booking._id)}>
+              <Button type="outline" onClick={() => props.onDelete(booking._id)}>
                 Отменить
-              </button>
+              </Button>
             </div>
           </li>
         );
