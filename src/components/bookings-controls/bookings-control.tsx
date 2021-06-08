@@ -1,27 +1,29 @@
 import React from 'react';
-import { styledBookingsControl, styledBookingsControlButton } from './styled';
+import { styles } from './styled';
 import { cx } from '@emotion/css';
 
-const BookingsControl = (props: any) => {
+interface IBookingsControl {
+  activeOutputType: 'booking' | 'my' | 'data';
+  onOutputTypeChange: (type: 'booking' | 'my' | 'data') => void;
+}
+
+const BookingsControl = (props: IBookingsControl) => {
   return (
-    <div className={styledBookingsControl}>
+    <div className={styles.control}>
       <button
-        className={cx(
-          styledBookingsControlButton,
-          props.activeOutputType !== 'my' && props.activeOutputType !== 'data' && 'active'
-        )}
+        className={cx(styles.button, props.activeOutputType !== 'my' && props.activeOutputType !== 'data' && 'active')}
         onClick={() => props.onOutputTypeChange('booking')}
       >
         Забронированные
       </button>
       <button
-        className={cx(styledBookingsControlButton, props.activeOutputType === 'my' && 'active')}
+        className={cx(styles.button, props.activeOutputType === 'my' && 'active')}
         onClick={() => props.onOutputTypeChange('my')}
       >
         Созданные мной
       </button>
       <button
-        className={cx(styledBookingsControlButton, props.activeOutputType === 'data' && 'active')}
+        className={cx(styles.button, props.activeOutputType === 'data' && 'active')}
         onClick={() => props.onOutputTypeChange('data')}
       >
         Статистика

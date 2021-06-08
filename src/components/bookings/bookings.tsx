@@ -20,7 +20,7 @@ import Button from '../button';
 const Bookings = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookings, setBookings] = useState([]);
-  const [outputType, setOutputType] = useState('');
+  const [outputType, setOutputType] = useState<'booking' | 'my' | 'data'>(null);
   const [events, setEvents] = useState([]);
   const history = useHistory();
   const userId = useSelectorTyped(selectUserId);
@@ -71,7 +71,7 @@ const Bookings = () => {
     });
   };
 
-  const outputTypeChangeHandler = (type: string) => {
+  const outputTypeChangeHandler = (type: 'booking' | 'my' | 'data') => {
     setOutputType(type);
   };
 

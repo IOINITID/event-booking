@@ -7,9 +7,13 @@ export const styles = {
     align-items: center;
   `,
   loader: css`
+    position: fixed;
+    top: 50%;
+    left: 50%;
     display: inline-block;
     width: 80px;
     height: 80px;
+    transform: translate(-50%, -50%);
 
     &::after {
       content: ' ';

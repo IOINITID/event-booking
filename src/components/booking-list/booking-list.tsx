@@ -1,3 +1,4 @@
+import { css } from '@emotion/css';
 import dayjs from 'dayjs';
 import React from 'react';
 import Button from '../button';
@@ -29,17 +30,17 @@ const BookingList = (props: IBookingList) => {
 
         return (
           <li className={styles.listItem} key={booking._id}>
-            <span>{index}</span>
+            <span className={styles.number}>{index + 1}</span>
             <img className={styles.image} src={image} alt="Изображение мероприятия." />
             <div className={styles.title}>{title}</div>
-            <div>
+            <div className={styles.date}>
               <div>{dayjs(date).locale('ru').format('DD MMMM')}</div>
               <div>{dayjs(date).locale('ru').format('HH:MM')}</div>
             </div>
-            <div>{price} ₽</div>
+            <div className={styles.price}>{price} ₽</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button type="outline" onClick={() => props.onDelete(booking._id)}>
+              <Button type="outline" className={styles.button} onClick={() => props.onDelete(booking._id)}>
                 Отменить
               </Button>
             </div>

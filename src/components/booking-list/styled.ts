@@ -7,11 +7,20 @@ export const styles = {
     border-radius: 8px;
     object-fit: cover;
   `,
+  number: css`
+    width: 27px;
+  `,
   title: css`
-    max-width: 111px;
+    width: 111px;
   `,
   location: css`
-    max-width: 153px;
+    width: 177px;
+  `,
+  date: css`
+    width: 64px;
+  `,
+  price: css`
+    width: 57px;
   `,
   list: css`
     display: grid;
@@ -28,5 +37,8 @@ export const styles = {
     padding: 32px;
     background-color: #ffffff;
     border-radius: 16px;
+  `,
+  button: css`
+    padding: 16px 24px;
   `,
 };
