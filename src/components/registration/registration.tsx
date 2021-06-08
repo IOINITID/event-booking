@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import { styles } from './styled';
 import ticketsImage from '../../assets/images/tickets.png';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { CREATE_USER } from '../../graphql/mutations';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Loader from '../loader';
+import Button from '../button';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ const Registration = () => {
     },
   });
 
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+  const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     if (email.trim().length === 0 || password.trim().length === 0) {
@@ -38,7 +39,7 @@ const Registration = () => {
   }
 
   return (
-    <form className={styles.form} onSubmit={submitHandler}>
+    <form className={styles.form}>
       <div className={styles.formInfo}>
         <h2 className={styles.formInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
         <img className={styles.formImage} src={ticketsImage} alt="Билеты на мероприятия." />
@@ -88,9 +89,9 @@ const Registration = () => {
               </a>
             </p>
           </div>
-          <button className={styles.button} type="submit">
+          <Button className={styles.button} type="primary" onClick={submitHandler}>
             Зарегистрироваться ⟶
-          </button>
+          </Button>
         </div>
       </div>
     </form>

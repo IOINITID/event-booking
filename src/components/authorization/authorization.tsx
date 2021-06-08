@@ -1,29 +1,14 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { getLogin } from '../../features/user/userSlice';
 import { useDispatchTyped } from '../../hooks';
-import {
-  styledButton,
-  styledForm,
-  styledFormField,
-  styledFormFields,
-  styledFormFieldsHeader,
-  styledFormFieldsInfo,
-  styledFormFieldsInfoLink,
-  styledFormFieldsTitle,
-  styledFormInfo,
-  styledFormInfoTitle,
-  styledInput,
-  styledLabel,
-  styledFormFieldsFieldset,
-  styledFormImage,
-  styledFormContainer,
-} from './styled';
+import { styles } from './styled';
 import ticketsImage from '../../assets/images/tickets.png';
 import { NavLink } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Loader from '../loader';
 import { LOGIN } from '../../graphql/queries';
+import Button from '../button';
 
 const Authorization = () => {
   const dispatch = useDispatchTyped();
@@ -51,7 +36,7 @@ const Authorization = () => {
     }
   }, [error]);
 
-  const submitHandler = (event: FormEvent) => {
+  const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     if (email.trim().length === 0 || password.trim().length === 0) {
@@ -71,29 +56,29 @@ const Authorization = () => {
   }
 
   return (
-    <form className={styledForm} onSubmit={submitHandler}>
-      <div className={styledFormInfo}>
-        <h2 className={styledFormInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
-        <img className={styledFormImage} src={ticketsImage} alt="Билеты на мероприятия." />
+    <form className={styles.form}>
+      <div className={styles.formInfo}>
+        <h2 className={styles.formInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
+        <img className={styles.formImage} src={ticketsImage} alt="Билеты на мероприятия." />
       </div>
-      <div className={styledFormFields}>
-        <header className={styledFormFieldsHeader}>
-          <h2 className={styledFormFieldsTitle}>Войти в свой профиль</h2>
-          <p className={styledFormFieldsInfo}>
+      <div className={styles.formFields}>
+        <header className={styles.formFieldsHeader}>
+          <h2 className={styles.formFieldsTitle}>Войти в свой профиль</h2>
+          <p className={styles.formFieldsInfo}>
             У Вас ещё нет аккаунта?{' '}
-            <NavLink className={styledFormFieldsInfoLink} to="/registration">
+            <NavLink className={styles.formFieldsInfoLink} to="/registration">
               Создать учётную запись
             </NavLink>
           </p>
         </header>
-        <div className={styledFormContainer}>
-          <div className={styledFormFieldsFieldset}>
-            <div className={styledFormField}>
-              <label className={styledLabel} htmlFor="email">
+        <div className={styles.formContainer}>
+          <div className={styles.formFieldsFieldset}>
+            <div className={styles.formField}>
+              <label className={styles.label} htmlFor="email">
                 Адрес электронной почты
               </label>
               <input
-                className={styledInput}
+                className={styles.input}
                 type="email"
                 id="email"
                 name="email"
@@ -101,12 +86,12 @@ const Authorization = () => {
                 placeholder="Электронная почта"
               />
             </div>
-            <div className={styledFormField}>
-              <label className={styledLabel} htmlFor="password">
+            <div className={styles.formField}>
+              <label className={styles.label} htmlFor="password">
                 Пароль
               </label>
               <input
-                className={styledInput}
+                className={styles.input}
                 type="password"
                 id="password"
                 name="password"
@@ -115,9 +100,9 @@ const Authorization = () => {
               />
             </div>
           </div>
-          <button className={styledButton} type="submit">
+          <Button className={styles.button} type="primary" onClick={submitHandler}>
             Войти ⟶
-          </button>
+          </Button>
         </div>
       </div>
     </form>

@@ -1,46 +1,40 @@
 import { cx } from '@emotion/css';
 import React, { Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { selectToken } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
-import {
-  styledInfoBanner,
-  styledInfoBannerText,
-  styledInfoBannerLink,
-  styledInfoBannerButton,
-  styledInfoBannerAuthenticated,
-  styledInfoBannerHeadingAuthenticated,
-  styledInfoBannerHeading,
-} from './styled';
+import Button from '../button';
+import { styles } from './styled';
 
 const InfoBanner = (props: any) => {
   const token = useSelectorTyped(selectToken);
+  const history = useHistory();
 
   return (
     <Fragment>
       {!token ? (
-        <div className={styledInfoBanner}>
-          <h2 className={styledInfoBannerHeading}>
+        <div className={styles.infoBanner}>
+          <h2 className={styles.infoBannerHeading}>
             Регистрируй учётную запись, чтобы бронировать мероприятия и создавать свои
           </h2>
-          <p className={styledInfoBannerText}>
+          <p className={styles.infoBannerText}>
             У Вас уже есть аккаунт?{' '}
-            <NavLink className={styledInfoBannerLink} to="/authorization">
+            <NavLink className={styles.infoBannerLink} to="/authorization">
               Войдите в свой профиль
             </NavLink>
           </p>
-          <NavLink className={styledInfoBannerButton} to="/registration">
+          <Button type="primary" onClick={() => history.push('/registration')}>
             Создать аккаунт ⟶
-          </NavLink>
+          </Button>
         </div>
       ) : (
-        <div className={cx(styledInfoBanner, styledInfoBannerAuthenticated)}>
-          <h2 className={cx(styledInfoBannerHeading, styledInfoBannerHeadingAuthenticated)}>
+        <div className={cx(styles.infoBanner, styles.infoBannerAuthenticated)}>
+          <h2 className={cx(styles.infoBannerHeading, styles.infoBannerHeadingAuthenticated)}>
             Создайте своё мероприятие, и другие пользователи получат возможность забронировать его
           </h2>
-          <button className={styledInfoBannerButton} type="button" onClick={props.onCreateEvent}>
+          <Button type="primary" onClick={props.onCreateEvent}>
             Создать мероприятие ⟶
-          </button>
+          </Button>
         </div>
       )}
     </Fragment>

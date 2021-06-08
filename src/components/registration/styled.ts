@@ -130,27 +130,6 @@ export const styles = {
     }
   `,
   button: css`
-    display: grid;
     justify-self: center;
-    width: max-content;
-    padding: 20px 32px;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
-    font-family: 'Grandis Extended', 'Arial', sans-serif;
-    color: #ffffff;
-    background: #ef4723;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      background: #f06749;
-    }
-
-    &:active {
-      background: #e62f07;
-    }
   `,
 };
