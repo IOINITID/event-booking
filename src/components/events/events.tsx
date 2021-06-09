@@ -14,21 +14,50 @@ import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
 import { useHistory } from 'react-router';
 import EventListLoader from '../loader/event-list-loader';
 
+interface IEvent {
+  _id: string;
+  title: string;
+  description: string;
+  date: string;
+  price: string;
+  location: string;
+  image: string;
+  creator: {
+    _id: string;
+    email: string;
+  };
+}
+
 const Events = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState<IEvent | null>(null);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [date, setDate] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [image, setImage] = useState('');
-  const token = useSelectorTyped(selectToken);
-  const [events, setEvents] = useState([]);
-  const userId = useSelectorTyped(selectUserId);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const history = useHistory();
+
   const dispatch = useDispatchTyped();
+
+  const token = useSelectorTyped(selectToken);
+  const userId = useSelectorTyped(selectUserId);
+
+  const history = useHistory();
+
+  const [events, setEvents] = useState<IEvent[] | []>([]);
+
+  const { loading: eventsLoading } = useQuery(EVENTS, {
+    onCompleted: (data) => {
+      setEvents(data.events);
+    },
+    onError: (error) => {
+      toast(error.message);
+    },
+    fetchPolicy: 'no-cache',
+  });
 
   const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
     onCompleted: (data) => {
@@ -56,24 +85,14 @@ const Events = () => {
     fetchPolicy: 'no-cache',
   });
 
-  const { loading } = useQuery(EVENTS, {
-    onCompleted: (data) => {
-      setEvents(data.events);
-    },
-    onError: (error) => {
-      toast(error.message);
-    },
-    fetchPolicy: 'no-cache',
-  });
-
   const [bookEvent, { loading: bookEventLoading }] = useMutation(BOOK_EVENT, {
     onCompleted: () => {
-      setSelectedEvent(null);
-      setIsSuccess(true);
+      setIsPreviewOpen(null);
+      setIsSuccessOpen(true);
     },
     onError: (error) => {
       if (error.message === 'Необходима авторизация.') {
-        setSelectedEvent(null);
+        setIsPreviewOpen(null);
         dispatch(logout());
         history.push('/authorization');
       }
@@ -82,12 +101,16 @@ const Events = () => {
     fetchPolicy: 'no-cache',
   });
 
-  const createEventHandler = () => {
-    setIsOpen(true);
-  };
+  useEffect(() => {
+    if (isPreviewOpen || isCreateOpen || isSuccessOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isCreateOpen, isPreviewOpen, isSuccessOpen]);
 
   const clearValues = () => {
-    setIsOpen(false);
+    setIsCreateOpen(false);
     setTitle('');
     setDescription('');
     setPrice('');
@@ -95,14 +118,6 @@ const Events = () => {
     setLocation('');
     setImage('');
   };
-
-  useEffect(() => {
-    if (selectedEvent || isOpen || isSuccess) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isOpen, selectedEvent, isSuccess]);
 
   const modalConfirmHandler = () => {
     if (
@@ -132,26 +147,31 @@ const Events = () => {
   };
 
   const modalCancelHandler = () => {
-    setIsOpen(false);
-    setSelectedEvent(null);
-    setIsSuccess(false);
+    setIsCreateOpen(false);
+    setIsPreviewOpen(null);
+    setIsSuccessOpen(false);
+    clearValues();
+  };
+
+  const createEventHandler = () => {
+    setIsCreateOpen(true);
   };
 
   const showDetailHandler = (eventId: string) => {
-    setSelectedEvent(events.find((item) => item._id === eventId));
+    setIsPreviewOpen(events.find((event: IEvent) => event._id === eventId));
   };
 
   const bookEventHandler = () => {
     if (!token) {
-      setSelectedEvent(null);
-      setIsOpen(false);
+      setIsPreviewOpen(null);
+      setIsCreateOpen(false);
       history.push('/authorization');
       return;
     }
 
     bookEvent({
       variables: {
-        id: selectedEvent._id,
+        id: isPreviewOpen._id,
       },
     });
   };
@@ -162,11 +182,18 @@ const Events = () => {
 
   return (
     <Fragment>
+      {/* Events banner */}
       <EventsBanner onCreateEvent={createEventHandler} />
 
-      {loading ? <EventListLoader itemsCount={6} /> : <EventList events={events} onViewDetail={showDetailHandler} />}
+      {/* Events list */}
+      {eventsLoading ? (
+        <EventListLoader itemsCount={6} />
+      ) : (
+        <EventList events={events} onViewDetail={showDetailHandler} />
+      )}
 
-      {isOpen && (
+      {/* Modal create event */}
+      {isCreateOpen && (
         <ModalCreateEvent
           title={title}
           setTitle={setTitle}
@@ -185,24 +212,26 @@ const Events = () => {
         />
       )}
 
-      {selectedEvent && (
+      {/* Modal preview event */}
+      {isPreviewOpen && (
         <Modal
-          title={selectedEvent.title}
-          description={selectedEvent.description}
-          date={selectedEvent.date}
-          price={selectedEvent.price}
-          location={selectedEvent.location}
-          image={selectedEvent.image}
+          title={isPreviewOpen.title}
+          description={isPreviewOpen.description}
+          date={isPreviewOpen.date}
+          price={isPreviewOpen.price}
+          location={isPreviewOpen.location}
+          image={isPreviewOpen.image}
           onCancel={modalCancelHandler}
           onConfirm={bookEventHandler}
         />
       )}
 
-      {isSuccess && (
+      {/* Modal success event */}
+      {isSuccessOpen && (
         <ModalSuccess
           onCancel={modalCancelHandler}
           onConfirm={() => {
-            setIsSuccess(false);
+            setIsSuccessOpen(false);
             history.push('/bookings');
           }}
         />

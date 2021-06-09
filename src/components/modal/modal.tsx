@@ -9,7 +9,7 @@ interface IModal {
   title: string;
   description: string;
   date: string;
-  price: number;
+  price: string;
   location: string;
   image: string;
   onCancel?: () => void;

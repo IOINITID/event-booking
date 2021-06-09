@@ -3,18 +3,22 @@ import Button from '../button';
 import EventItem from '../event-item';
 import { styles } from './styled';
 
-interface IEventItem {
+interface IEvent {
   _id: string;
-  eventId: string;
-  image: string;
-  price: string;
   title: string;
+  description: string;
   date: string;
-  onDetail: (eventId: string) => void;
+  price: string;
+  location: string;
+  image: string;
+  creator: {
+    _id: string;
+    email: string;
+  };
 }
 
 interface IEventList {
-  events: IEventItem[];
+  events: IEvent[];
   onViewDetail: (eventId: string) => void;
 }
 
@@ -29,19 +33,9 @@ const EventList = (props: IEventList) => {
   return (
     <Fragment>
       <ul className={styles.list}>
-        {props.events.map((event: IEventItem, index: number) => {
+        {props.events.map((event: IEvent, index: number) => {
           if (index < eventsCount) {
-            return (
-              <EventItem
-                key={event._id}
-                eventId={event._id}
-                title={event.title}
-                price={event.price}
-                date={event.date}
-                image={event.image}
-                onDetail={props.onViewDetail}
-              />
-            );
+            return <EventItem key={event._id} event={event} onDetail={props.onViewDetail} />;
           }
         })}
       </ul>

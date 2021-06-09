@@ -36,7 +36,7 @@ const BookingList = (props: IBookingList) => {
               <div>{dayjs(date).locale('ru').format('DD MMMM')}</div>
               <div>{dayjs(date).locale('ru').format('HH:MM')}</div>
             </div>
-            <div className={styles.price}>{price} ₽</div>
+            <div className={styles.price}>{Number(price).toLocaleString()} ₽</div>
             <div className={styles.location}>{location}</div>
             <div>
               <Button type="outline" className={styles.button} onClick={() => props.onDelete(booking._id)}>
