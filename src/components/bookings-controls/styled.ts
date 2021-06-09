@@ -21,6 +21,11 @@ export const styles = {
     border-radius: 32px;
     cursor: pointer;
 
+    &:hover,
+    &:focus {
+      color: #ffffff;
+    }
+
     &.active {
       color: #ffffff;
       background: #ef4723;

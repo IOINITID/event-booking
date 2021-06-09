@@ -75,6 +75,7 @@ const Events = () => {
       if (error.message === 'Необходима авторизация.') {
         setSelectedEvent(null);
         dispatch(logout());
+        history.push('/authorization');
       }
       toast(error.message);
     },

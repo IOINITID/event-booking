@@ -1,6 +1,7 @@
 import React from 'react';
 import { styles } from './styled';
 import { cx } from '@emotion/css';
+import Button from '../button';
 
 interface IBookingsControl {
   activeOutputType: 'booking' | 'my' | 'data';
@@ -10,24 +11,27 @@ interface IBookingsControl {
 const BookingsControl = (props: IBookingsControl) => {
   return (
     <div className={styles.control}>
-      <button
+      <Button
+        type="primary"
         className={cx(styles.button, props.activeOutputType !== 'my' && props.activeOutputType !== 'data' && 'active')}
         onClick={() => props.onOutputTypeChange('booking')}
       >
         Забронированные
-      </button>
-      <button
+      </Button>
+      <Button
+        type="primary"
         className={cx(styles.button, props.activeOutputType === 'my' && 'active')}
         onClick={() => props.onOutputTypeChange('my')}
       >
         Созданные мной
-      </button>
-      <button
+      </Button>
+      <Button
+        type="primary"
         className={cx(styles.button, props.activeOutputType === 'data' && 'active')}
         onClick={() => props.onOutputTypeChange('data')}
       >
         Статистика
-      </button>
+      </Button>
     </div>
   );
 };
