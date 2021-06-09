@@ -8,19 +8,44 @@ export const styles = {
     object-fit: cover;
   `,
   number: css`
-    width: 27px;
+    width: 25px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
   `,
   title: css`
-    width: 111px;
+    width: 110px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
   `,
   location: css`
-    width: 177px;
+    width: 180px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
   `,
   date: css`
-    width: 64px;
+    width: 100px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
   `,
   price: css`
-    width: 57px;
+    width: 100px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
   `,
   list: css`
     display: grid;
