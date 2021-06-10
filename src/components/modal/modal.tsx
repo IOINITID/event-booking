@@ -1,20 +1,18 @@
-import React from 'react';
-import { styles } from './styled';
-import modalImage from '../../assets/images/modal-image.jpg';
-import dayjs from 'dayjs';
-import ru from 'dayjs/locale/ru';
+import React, { ReactNode } from 'react';
 import Button from '../button';
+import { styles } from './styled';
 
-interface IModal {
+export interface IModal {
   isOpen: boolean;
-  title: string;
-  description: string;
-  date: string;
-  price: string;
-  location: string;
-  image: string;
-  onCancel?: () => void;
-  onConfirm?: () => void;
+  cancelButton: {
+    title: string;
+    onClick: () => void;
+  };
+  confirmButton: {
+    title: string;
+    onClick: () => void;
+  };
+  children: ReactNode;
 }
 
 const Modal = (props: IModal) => {
@@ -22,31 +20,14 @@ const Modal = (props: IModal) => {
     props.isOpen && (
       <div className={styles.backdrop}>
         <div className={styles.container}>
-          <header className={styles.header}>
-            <img
-              className={styles.image}
-              width="176"
-              height="176"
-              src={props.image || modalImage}
-              alt="Изображение мероприятия."
-            />
-            <span className={styles.price}>{Number(props.price).toLocaleString()} ₽</span>
-          </header>
-          <div className={styles.content}>
-            <h3 className={styles.title}>{props.title}</h3>
-            <p className={styles.description}>{props.description}</p>
-            <div className={styles.infoContainer}>
-              <time className={styles.time}>{dayjs(props.date).locale(ru).format('DD MMMM — HH:mm')}</time>
-              <p className={styles.location}>{props.location}</p>
-            </div>
-            <div className={styles.actions}>
-              <Button type="outline" onClick={props.onCancel}>
-                Отмена
-              </Button>
-              <Button type="primary" onClick={props.onConfirm}>
-                Забронировать ⟶
-              </Button>
-            </div>
+          <div>{props.children}</div>
+          <div className={styles.actions}>
+            <Button type="outline" onClick={props.cancelButton.onClick}>
+              {props.cancelButton.title}
+            </Button>
+            <Button type="primary" onClick={props.confirmButton.onClick}>
+              {props.confirmButton.title}
+            </Button>
           </div>
         </div>
       </div>

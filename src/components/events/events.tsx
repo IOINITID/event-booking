@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { logout, selectToken, selectUserId } from '../../features/user/userSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import EventList from '../event-list';
-import Modal from '../modal';
+import ModalPreview from '../modal/modal-preview';
 import EventsBanner from '../events-banner';
 import ModalCreateEvent from '../modal/modal-create-event';
 import ModalSuccess from '../modal/modal-success';
@@ -12,7 +12,6 @@ import Loader from '../loader';
 import { EVENTS } from '../../graphql/queries';
 import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
 import { useHistory } from 'react-router';
-import EventListLoader from '../loader/event-list-loader';
 
 interface IEvent {
   _id: string;
@@ -176,6 +175,11 @@ const Events = () => {
     });
   };
 
+  const successClickHandler = () => {
+    setIsSuccessOpen(false);
+    history.push('/bookings');
+  };
+
   if (createEventLoading || bookEventLoading) {
     return <Loader />;
   }
@@ -208,7 +212,7 @@ const Events = () => {
       />
 
       {/* Modal preview event */}
-      <Modal
+      <ModalPreview
         isOpen={Boolean(isPreviewOpen)}
         title={isPreviewOpen?.title}
         description={isPreviewOpen?.description}
@@ -221,14 +225,7 @@ const Events = () => {
       />
 
       {/* Modal success event */}
-      <ModalSuccess
-        isOpen={isSuccessOpen}
-        onCancel={modalCancelHandler}
-        onConfirm={() => {
-          setIsSuccessOpen(false);
-          history.push('/bookings');
-        }}
-      />
+      <ModalSuccess isOpen={isSuccessOpen} onCancel={modalCancelHandler} onConfirm={successClickHandler} />
     </Fragment>
   );
 };

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { styles } from './styled';
 import eventSuccessImage from '../../assets/images/event-success.jpg';
 import { css, cx } from '@emotion/css';
-import Button from '../button';
+import Modal from './modal';
 
 interface IModalSuccess {
   isOpen: boolean;
@@ -11,44 +11,35 @@ interface IModalSuccess {
 }
 
 const ModalSuccess = (props: IModalSuccess) => {
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
-    props.isOpen && (
-      <div className={styles.backdrop}>
-        <div
+    <Modal
+      isOpen={props.isOpen}
+      cancelButton={{ title: 'Отмена', onClick: props.onCancel }}
+      confirmButton={{ title: 'К забронированным ⟶', onClick: props.onConfirm }}
+    >
+      <header className={styles.header}>
+        <img className={styles.image} src={eventSuccessImage} alt="" />
+      </header>
+      <div className={styles.content}>
+        <h2 className={styles.title}>Бронирование прошло успешно!</h2>
+        <p
           className={cx(
-            styles.container,
+            styles.description,
             css`
-              width: 592px;
+              margin-bottom: 32px;
             `
           )}
         >
-          <header className={styles.header}>
-            <img className={styles.image} src={eventSuccessImage} alt="" />
-          </header>
-          <div className={styles.content}>
-            <h2 className={styles.title}>Бронирование прошло успешно!</h2>
-            <p
-              className={cx(
-                styles.description,
-                css`
-                  margin-bottom: 32px;
-                `
-              )}
-            >
-              Мероприятие появится у Вас в списке забронированных.
-            </p>
-            <div className={styles.actions}>
-              <Button type="outline" onClick={props.onCancel}>
-                Отмена
-              </Button>
-              <Button type="primary" onClick={props.onConfirm}>
-                К забронированным ⟶
-              </Button>
-            </div>
-          </div>
-        </div>
+          Мероприятие появится у Вас в списке забронированных.
+        </p>
       </div>
-    )
+    </Modal>
   );
 };
 

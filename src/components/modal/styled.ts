@@ -16,7 +16,6 @@ export const styles = {
     top: 50%;
     left: 50%;
     z-index: 100;
-    width: 808px;
     overflow: hidden;
     background: #ffffff;
     border-radius: 16px;
@@ -49,7 +48,7 @@ export const styles = {
     border-radius: 0 16px;
   `,
   content: css`
-    padding: 32px;
+    padding: 32px 32px 0 32px;
     background: #ffffff;
   `,
   title: css`
@@ -95,7 +94,8 @@ export const styles = {
   actions: css`
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(2, max-content);
+    grid-auto-flow: column;
+    padding: 0 32px 32px 32px;
     column-gap: 24px;
   `,
 };
