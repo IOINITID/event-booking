@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { logout, selectToken, selectUserId } from '../../features/user/userSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import EventList from '../event-list';
@@ -99,14 +99,6 @@ const Events = () => {
     },
     fetchPolicy: 'no-cache',
   });
-
-  useEffect(() => {
-    if (isPreviewOpen || isCreateOpen || isSuccessOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isCreateOpen, isPreviewOpen, isSuccessOpen]);
 
   const clearValues = () => {
     setIsCreateOpen(false);

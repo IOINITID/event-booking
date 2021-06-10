@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import Button from '../button';
 import { styles } from './styled';
 
@@ -16,6 +16,14 @@ export interface IModal {
 }
 
 const Modal = (props: IModal) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     props.isOpen && (
       <div className={styles.backdrop}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { styles } from './styled';
 import eventSuccessImage from '../../assets/images/event-success.jpg';
 import { css, cx } from '@emotion/css';
@@ -11,12 +11,6 @@ interface IModalSuccess {
 }
 
 const ModalSuccess = (props: IModalSuccess) => {
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
-
   return (
     <Modal
       isOpen={props.isOpen}
