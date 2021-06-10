@@ -186,56 +186,49 @@ const Events = () => {
       <EventsBanner onCreateEvent={createEventHandler} />
 
       {/* Events list */}
-      {eventsLoading ? (
-        <EventListLoader itemsCount={6} />
-      ) : (
-        <EventList events={events} onViewDetail={showDetailHandler} />
-      )}
+      <EventList events={events} isLoading={eventsLoading} onViewDetail={showDetailHandler} />
 
       {/* Modal create event */}
-      {isCreateOpen && (
-        <ModalCreateEvent
-          title={title}
-          setTitle={setTitle}
-          price={price}
-          setPrice={setPrice}
-          date={date}
-          setDate={setDate}
-          description={description}
-          setDescription={setDescription}
-          location={location}
-          setLocation={setLocation}
-          image={image}
-          setImage={setImage}
-          onCancel={modalCancelHandler}
-          onConfirm={modalConfirmHandler}
-        />
-      )}
+      <ModalCreateEvent
+        isOpen={isCreateOpen}
+        title={title}
+        setTitle={setTitle}
+        price={price}
+        setPrice={setPrice}
+        date={date}
+        setDate={setDate}
+        description={description}
+        setDescription={setDescription}
+        location={location}
+        setLocation={setLocation}
+        image={image}
+        setImage={setImage}
+        onCancel={modalCancelHandler}
+        onConfirm={modalConfirmHandler}
+      />
 
       {/* Modal preview event */}
-      {isPreviewOpen && (
-        <Modal
-          title={isPreviewOpen.title}
-          description={isPreviewOpen.description}
-          date={isPreviewOpen.date}
-          price={isPreviewOpen.price}
-          location={isPreviewOpen.location}
-          image={isPreviewOpen.image}
-          onCancel={modalCancelHandler}
-          onConfirm={bookEventHandler}
-        />
-      )}
+      <Modal
+        isOpen={Boolean(isPreviewOpen)}
+        title={isPreviewOpen?.title}
+        description={isPreviewOpen?.description}
+        date={isPreviewOpen?.date}
+        price={isPreviewOpen?.price}
+        location={isPreviewOpen?.location}
+        image={isPreviewOpen?.image}
+        onCancel={modalCancelHandler}
+        onConfirm={bookEventHandler}
+      />
 
       {/* Modal success event */}
-      {isSuccessOpen && (
-        <ModalSuccess
-          onCancel={modalCancelHandler}
-          onConfirm={() => {
-            setIsSuccessOpen(false);
-            history.push('/bookings');
-          }}
-        />
-      )}
+      <ModalSuccess
+        isOpen={isSuccessOpen}
+        onCancel={modalCancelHandler}
+        onConfirm={() => {
+          setIsSuccessOpen(false);
+          history.push('/bookings');
+        }}
+      />
     </Fragment>
   );
 };

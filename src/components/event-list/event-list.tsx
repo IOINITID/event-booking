@@ -1,6 +1,7 @@
 import React, { Fragment, MouseEvent, useState } from 'react';
 import Button from '../button';
 import EventItem from '../event-item';
+import EventListLoader from '../loader/event-list-loader';
 import { styles } from './styled';
 
 interface IEvent {
@@ -19,6 +20,7 @@ interface IEvent {
 
 interface IEventList {
   events: IEvent[];
+  isLoading: boolean;
   onViewDetail: (eventId: string) => void;
 }
 
@@ -29,6 +31,10 @@ const EventList = (props: IEventList) => {
     event.currentTarget.blur();
     setEventsCount(eventsCount + 6);
   };
+
+  if (props.isLoading) {
+    return <EventListLoader itemsCount={6} />;
+  }
 
   return (
     <Fragment>
