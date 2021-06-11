@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 
-// Store imports
-import { selectUserId } from '../../features/user/userSlice';
-import { useSelectorTyped } from '../../hooks';
-
 // Components imports
 import BookingList from '../booking-list';
 import Loader from '../loader';
@@ -16,9 +12,6 @@ import { useMutation, useQuery } from '@apollo/client';
 import { EVENTS, GET_BOOKINGS } from '../../graphql/queries';
 import { DELETE_EVENT } from '../../graphql/mutations';
 import { CANCEL_BOOKING } from '../../graphql/mutations';
-
-// Router imports
-import { useHistory } from 'react-router';
 
 // Styles imports
 import { styles } from './styled';

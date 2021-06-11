@@ -1,15 +1,74 @@
-import React, { Fragment } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import React from 'react';
+
+// Components imports
+import logoIcon from '../../assets/images/logo-icon.svg';
+
+// Store imports
 import { logout, selectToken } from '../../features/user/userSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
-import { styles } from './styled';
-import logoIcon from '../../assets/images/logo-icon.svg';
+
+// Router imports
+import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 
+// Styles imports
+import { styles } from './styled';
+
+// Additional imports
+import { nanoid } from 'nanoid';
+
+// Interfaces and types
+interface ILink {
+  id: string;
+  enable: boolean;
+  title: string;
+  path: ROUTES;
+  onClick: () => void | null;
+}
+
 const Navigation = () => {
+  // Store values
   const dispatch = useDispatchTyped();
   const token = useSelectorTyped(selectToken);
-  const history = useHistory();
+
+  // Components data
+  const links: ILink[] = [
+    {
+      id: nanoid(),
+      enable: true,
+      title: 'Мероприятия',
+      path: ROUTES.EVENTS,
+      onClick: null,
+    },
+    {
+      id: nanoid(),
+      enable: Boolean(!token),
+      title: 'Регистрация',
+      path: ROUTES.REGISTRATION,
+      onClick: null,
+    },
+    {
+      id: nanoid(),
+      enable: Boolean(!token),
+      title: 'Войти',
+      path: ROUTES.AUTHORIZATION,
+      onClick: null,
+    },
+    {
+      id: nanoid(),
+      enable: Boolean(token),
+      title: 'Забронированные',
+      path: ROUTES.BOOKINGS,
+      onClick: null,
+    },
+    {
+      id: nanoid(),
+      enable: Boolean(token),
+      title: 'Выйти',
+      path: ROUTES.AUTHORIZATION,
+      onClick: () => dispatch(logout()),
+    },
+  ];
 
   return (
     <header className={styles.header}>
@@ -18,46 +77,17 @@ const Navigation = () => {
       </NavLink>
       <nav>
         <ul className={styles.navigationList}>
-          <li className={styles.navigationItem}>
-            <NavLink className={styles.navigationLink} to={ROUTES.EVENTS}>
-              Мероприятия
-            </NavLink>
-          </li>
-          {!token && (
-            <li className={styles.navigationItem}>
-              <NavLink className={styles.navigationLink} to={ROUTES.REGISTRATION}>
-                Регистрация
-              </NavLink>
-            </li>
-          )}
-          {!token && (
-            <li className={styles.navigationItem}>
-              <NavLink className={styles.navigationLink} to={ROUTES.AUTHORIZATION}>
-                Войти
-              </NavLink>
-            </li>
-          )}
-          {token && (
-            <Fragment>
-              <li className={styles.navigationItem}>
-                <NavLink className={styles.navigationLink} to={ROUTES.BOOKINGS}>
-                  Забронированные
-                </NavLink>
-              </li>
-              <li className={styles.navigationItem}>
-                <a
-                  href="#no_scroll"
-                  className={styles.navigationLink}
-                  onClick={() => {
-                    dispatch(logout());
-                    history.push(ROUTES.AUTHORIZATION);
-                  }}
-                >
-                  Выйти
-                </a>
-              </li>
-            </Fragment>
-          )}
+          {links.map((link: ILink) => {
+            return (
+              link.enable && (
+                <li key={link.id} className={styles.navigationItem}>
+                  <NavLink className={styles.navigationLink} to={link.path} onClick={link.onClick}>
+                    {link.title}
+                  </NavLink>
+                </li>
+              )
+            );
+          })}
         </ul>
       </nav>
     </header>
