@@ -1,3 +1,4 @@
+import { css, cx } from '@emotion/css';
 import React, { ReactNode, useEffect } from 'react';
 import Button from '../button';
 import { styles } from './styled';
@@ -13,21 +14,31 @@ export interface IModal {
     onClick: () => void;
   };
   children: ReactNode;
+  width: number;
 }
 
 const Modal = (props: IModal) => {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    if (props.isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
 
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [props.isOpen]);
 
   return (
     props.isOpen && (
       <div className={styles.backdrop}>
-        <div className={styles.container}>
+        <div
+          className={cx(
+            styles.container,
+            css`
+              width: ${props.width}px;
+            `
+          )}
+        >
           <div>{props.children}</div>
           <div className={styles.actions}>
             <Button type="outline" onClick={props.cancelButton.onClick}>

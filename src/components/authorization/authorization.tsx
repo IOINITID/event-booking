@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import Loader from '../loader';
 import { LOGIN } from '../../graphql/queries';
 import Button from '../button';
+import { ROUTES } from '../../utils/constants';
 
 const Authorization = () => {
   const dispatch = useDispatchTyped();
@@ -66,7 +67,7 @@ const Authorization = () => {
           <h2 className={styles.formFieldsTitle}>Войти в свой профиль</h2>
           <p className={styles.formFieldsInfo}>
             У Вас ещё нет аккаунта?{' '}
-            <NavLink className={styles.formFieldsInfoLink} to="/registration">
+            <NavLink className={styles.formFieldsInfoLink} to={ROUTES.AUTHORIZATION}>
               Создать учётную запись
             </NavLink>
           </p>

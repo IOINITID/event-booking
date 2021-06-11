@@ -1,36 +1,44 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { css } from '@emotion/css';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import imageIcon from '../../assets/images/image-icon.svg';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { toast } from 'react-toastify';
 import Modal from './modal';
 
+interface IEventData {
+  title: string;
+  description: string;
+  date: string;
+  price: string;
+  location: string;
+  image: string;
+}
+
 interface IModalCreateEvent {
   isOpen: boolean;
-  title: string;
-  setTitle: (title: string) => void;
-  price: string;
-  setPrice: (price: string) => void;
-  date: string;
-  setDate: (date: string) => void;
-  description: string;
-  setDescription: (description: string) => void;
-  location: string;
-  setLocation: (location: string) => void;
-  image: string;
-  setImage: (image: string) => void;
   onCancel: () => void;
-  onConfirm: () => void;
+  onConfirm: (eventData: IEventData) => void;
 }
 
 const ModalCreateEvent = (props: IModalCreateEvent) => {
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [date, setDate] = useState('');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [image, setImage] = useState('');
+
   return (
     <Modal
       isOpen={props.isOpen}
       cancelButton={{ title: 'Отменить', onClick: props.onCancel }}
-      confirmButton={{ title: ' Создать мероприятие ⟶', onClick: props.onConfirm }}
+      confirmButton={{
+        title: ' Создать мероприятие ⟶',
+        onClick: () => props.onConfirm({ title, price, date, description, location, image }),
+      }}
+      width={808}
     >
       <header
         className={css`
@@ -168,7 +176,7 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
                       toast('Изображение должно быть меньше 5MB.');
                       return;
                     } else {
-                      props.setImage(String(fileReader.result));
+                      setImage(String(fileReader.result));
                     }
                   };
                 }}
@@ -203,9 +211,9 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
                 padding: 4px;
                 border-radius: 16px;
                 object-position: 50% 50%;
-                object-fit: ${props.image ? 'cover' : 'none'};
+                object-fit: ${image ? 'cover' : 'none'};
               `}
-              src={props.image ? props.image : imageIcon}
+              src={image ? image : imageIcon}
               alt=""
             />
           </div>
@@ -239,8 +247,8 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
               type="text"
               id="title"
               name="title"
-              value={props.title}
-              onChange={(event) => props.setTitle(event.target.value)}
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
             />
           </div>
           <div
@@ -264,8 +272,8 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
               type="number"
               id="price"
               name="price"
-              value={props.price}
-              onChange={(event) => props.setPrice(event.target.value)}
+              value={price}
+              onChange={(event) => setPrice(event.target.value)}
             />
           </div>
         </div>
@@ -298,8 +306,8 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
               type="datetime-local"
               id="date"
               name="date"
-              value={props.date}
-              onChange={(event) => props.setDate(event.target.value)}
+              value={date}
+              onChange={(event) => setDate(event.target.value)}
             />
           </div>
 
@@ -324,8 +332,8 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
               type="text"
               id="location"
               name="location"
-              value={props.location}
-              onChange={(event) => props.setLocation(event.target.value)}
+              value={location}
+              onChange={(event) => setLocation(event.target.value)}
             />
           </div>
         </div>
@@ -351,9 +359,9 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
             `}
             id="description"
             name="description"
-            value={props.description}
+            value={description}
             maxLength={500}
-            onChange={(event) => props.setDescription(event.target.value)}
+            onChange={(event) => setDescription(event.target.value)}
             rows={4}
           />
           <span
@@ -361,7 +369,7 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
               justify-self: end;
             `}
           >
-            {`${props.description.length}/500`}
+            {`${description.length}/500`}
           </span>
         </div>
       </form>

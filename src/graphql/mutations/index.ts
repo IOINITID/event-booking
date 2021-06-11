@@ -26,6 +26,10 @@ export const CREATE_EVENT = gql`
       date
       location
       image
+      creator {
+        _id
+        email
+      }
     }
   }
 `;

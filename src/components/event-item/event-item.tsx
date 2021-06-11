@@ -29,7 +29,7 @@ const EventItem = (props: IEventItem) => {
     <li className={styles.event}>
       <div className={styles.container}>
         <img className={styles.image} src={image} alt="Изображение мероприятия." />
-        <span className={styles.price}>{Number(price).toLocaleString()} ₽</span>
+        <span className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</span>
       </div>
       <div className={styles.info}>
         <h3 className={styles.title}>{title}</h3>

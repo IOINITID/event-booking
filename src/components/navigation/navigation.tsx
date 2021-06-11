@@ -4,6 +4,7 @@ import { logout, selectToken } from '../../features/user/userSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { styles } from './styled';
 import logoIcon from '../../assets/images/logo-icon.svg';
+import { ROUTES } from '../../utils/constants';
 
 const Navigation = () => {
   const dispatch = useDispatchTyped();
@@ -12,26 +13,26 @@ const Navigation = () => {
 
   return (
     <header className={styles.header}>
-      <NavLink to="/">
+      <NavLink to={ROUTES.MAIN}>
         <img src={logoIcon} width="210" alt="Логотип Event booking." />
       </NavLink>
       <nav>
         <ul className={styles.navigationList}>
           <li className={styles.navigationItem}>
-            <NavLink className={styles.navigationLink} to="/events">
+            <NavLink className={styles.navigationLink} to={ROUTES.EVENTS}>
               Мероприятия
             </NavLink>
           </li>
           {!token && (
             <li className={styles.navigationItem}>
-              <NavLink className={styles.navigationLink} to="/registration">
+              <NavLink className={styles.navigationLink} to={ROUTES.REGISTRATION}>
                 Регистрация
               </NavLink>
             </li>
           )}
           {!token && (
             <li className={styles.navigationItem}>
-              <NavLink className={styles.navigationLink} to="/authorization">
+              <NavLink className={styles.navigationLink} to={ROUTES.AUTHORIZATION}>
                 Войти
               </NavLink>
             </li>
@@ -39,7 +40,7 @@ const Navigation = () => {
           {token && (
             <Fragment>
               <li className={styles.navigationItem}>
-                <NavLink className={styles.navigationLink} to="/bookings">
+                <NavLink className={styles.navigationLink} to={ROUTES.BOOKINGS}>
                   Забронированные
                 </NavLink>
               </li>
@@ -49,7 +50,7 @@ const Navigation = () => {
                   className={styles.navigationLink}
                   onClick={() => {
                     dispatch(logout());
-                    history.push('/authorization');
+                    history.push(ROUTES.AUTHORIZATION);
                   }}
                 >
                   Выйти

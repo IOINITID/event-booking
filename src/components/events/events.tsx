@@ -1,18 +1,30 @@
 import React, { Fragment, useState } from 'react';
-import { logout, selectToken, selectUserId } from '../../features/user/userSlice';
+
+// Store imports
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { logout, selectToken } from '../../features/user/userSlice';
+
+// Components imports
+import Loader from '../loader';
+import EventsBanner from '../events-banner';
 import EventList from '../event-list';
 import ModalPreview from '../modal/modal-preview';
-import EventsBanner from '../events-banner';
 import ModalCreateEvent from '../modal/modal-create-event';
 import ModalSuccess from '../modal/modal-success';
+
+// GraphQL imports
 import { useMutation, useQuery } from '@apollo/client';
-import { toast } from 'react-toastify';
-import Loader from '../loader';
 import { EVENTS } from '../../graphql/queries';
 import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
-import { useHistory } from 'react-router';
 
+// Router imports
+import { useHistory } from 'react-router';
+import { ROUTES } from '../../utils/constants';
+
+// Additional imports
+import { toast } from 'react-toastify';
+
+// Interfaces and types
 interface IEvent {
   _id: string;
   title: string;
@@ -27,27 +39,31 @@ interface IEvent {
   };
 }
 
+interface IEventData {
+  title: string;
+  description: string;
+  date: string;
+  price: string;
+  location: string;
+  image: string;
+}
+
 const Events = () => {
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [isPreviewOpen, setIsPreviewOpen] = useState<IEvent | null>(null);
-  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
-
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [date, setDate] = useState('');
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState('');
-  const [image, setImage] = useState('');
-
-  const dispatch = useDispatchTyped();
-
-  const token = useSelectorTyped(selectToken);
-  const userId = useSelectorTyped(selectUserId);
-
-  const history = useHistory();
-
+  // State values
+  const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
+  const [previewEvent, setPreviewEvent] = useState<IEvent | null>(null);
   const [events, setEvents] = useState<IEvent[] | []>([]);
 
+  // Store values
+  const dispatch = useDispatchTyped();
+  const token = useSelectorTyped(selectToken);
+
+  // Router values
+  const history = useHistory();
+
+  // GraphQL query hooks
   const { loading: eventsLoading } = useQuery(EVENTS, {
     onCompleted: (data) => {
       setEvents(data.events);
@@ -58,6 +74,7 @@ const Events = () => {
     fetchPolicy: 'no-cache',
   });
 
+  // GraphQL mutation hooks
   const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
     onCompleted: (data) => {
       setEvents([
@@ -70,8 +87,8 @@ const Events = () => {
           location: data.createEvent.location,
           image: data.createEvent.image,
           creator: {
-            _id: userId,
-            email: data.createEvent.email,
+            _id: data.createEvent.creator._id,
+            email: data.createEvent.creator.email,
           },
         },
         ...events,
@@ -86,38 +103,31 @@ const Events = () => {
 
   const [bookEvent, { loading: bookEventLoading }] = useMutation(BOOK_EVENT, {
     onCompleted: () => {
-      setIsPreviewOpen(null);
+      setIsPreviewOpen(false);
+      setPreviewEvent(null);
       setIsSuccessOpen(true);
     },
     onError: (error) => {
       if (error.message === 'Необходима авторизация.') {
-        setIsPreviewOpen(null);
+        setIsPreviewOpen(false);
+        setPreviewEvent(null);
         dispatch(logout());
-        history.push('/authorization');
+        history.push(ROUTES.AUTHORIZATION);
       }
       toast(error.message);
     },
     fetchPolicy: 'no-cache',
   });
 
-  const clearValues = () => {
-    setIsCreateOpen(false);
-    setTitle('');
-    setDescription('');
-    setPrice('');
-    setDate('');
-    setLocation('');
-    setImage('');
-  };
-
-  const modalConfirmHandler = () => {
+  // Components handlers
+  const modalConfirmHandler = (eventData: IEventData) => {
     if (
-      title.trim().length === 0 ||
-      description.trim().length === 0 ||
-      price.trim().length === 0 ||
-      date.trim().length === 0 ||
-      location.trim().length === 0 ||
-      !image
+      eventData.title.trim().length === 0 ||
+      eventData.description.trim().length === 0 ||
+      eventData.price.trim().length === 0 ||
+      eventData.date.trim().length === 0 ||
+      eventData.location.trim().length === 0 ||
+      !eventData.image
     ) {
       toast('Все поля должны быть заполнены.');
       return;
@@ -125,23 +135,23 @@ const Events = () => {
 
     createEvent({
       variables: {
-        title: title,
-        description: description,
-        price: Number(price),
-        date: date,
-        location: location,
-        image: image,
+        title: eventData.title,
+        description: eventData.description,
+        price: Number(eventData.price),
+        date: eventData.date,
+        location: eventData.location,
+        image: eventData.image,
       },
     });
 
-    clearValues();
+    setIsCreateOpen(false);
   };
 
   const modalCancelHandler = () => {
     setIsCreateOpen(false);
-    setIsPreviewOpen(null);
+    setIsPreviewOpen(false);
     setIsSuccessOpen(false);
-    clearValues();
+    setPreviewEvent(null);
   };
 
   const createEventHandler = () => {
@@ -149,29 +159,32 @@ const Events = () => {
   };
 
   const showDetailHandler = (eventId: string) => {
-    setIsPreviewOpen(events.find((event: IEvent) => event._id === eventId));
+    setIsPreviewOpen(true);
+    setPreviewEvent(events.find((event: IEvent) => event._id === eventId));
   };
 
   const bookEventHandler = () => {
     if (!token) {
-      setIsPreviewOpen(null);
+      setIsPreviewOpen(false);
+      setPreviewEvent(null);
       setIsCreateOpen(false);
-      history.push('/authorization');
+      history.push(ROUTES.AUTHORIZATION);
       return;
     }
 
     bookEvent({
       variables: {
-        id: isPreviewOpen._id,
+        id: previewEvent._id,
       },
     });
   };
 
   const successClickHandler = () => {
     setIsSuccessOpen(false);
-    history.push('/bookings');
+    history.push(ROUTES.BOOKINGS);
   };
 
+  // Loader conditions
   if (createEventLoading || bookEventLoading) {
     return <Loader />;
   }
@@ -185,33 +198,12 @@ const Events = () => {
       <EventList events={events} isLoading={eventsLoading} onViewDetail={showDetailHandler} />
 
       {/* Modal create event */}
-      <ModalCreateEvent
-        isOpen={isCreateOpen}
-        title={title}
-        setTitle={setTitle}
-        price={price}
-        setPrice={setPrice}
-        date={date}
-        setDate={setDate}
-        description={description}
-        setDescription={setDescription}
-        location={location}
-        setLocation={setLocation}
-        image={image}
-        setImage={setImage}
-        onCancel={modalCancelHandler}
-        onConfirm={modalConfirmHandler}
-      />
+      <ModalCreateEvent isOpen={isCreateOpen} onCancel={modalCancelHandler} onConfirm={modalConfirmHandler} />
 
       {/* Modal preview event */}
       <ModalPreview
-        isOpen={Boolean(isPreviewOpen)}
-        title={isPreviewOpen?.title}
-        description={isPreviewOpen?.description}
-        date={isPreviewOpen?.date}
-        price={isPreviewOpen?.price}
-        location={isPreviewOpen?.location}
-        image={isPreviewOpen?.image}
+        isOpen={isPreviewOpen}
+        event={previewEvent}
         onCancel={modalCancelHandler}
         onConfirm={bookEventHandler}
       />

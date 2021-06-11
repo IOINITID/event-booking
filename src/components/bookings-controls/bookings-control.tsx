@@ -1,11 +1,20 @@
 import React from 'react';
-import { styles } from './styled';
-import { cx } from '@emotion/css';
+
+// Components imports
 import Button from '../button';
 
+// Styles imports
+import { styles } from './styled';
+
+// Additional imports
+import { cx } from '@emotion/css';
+
+// Interfaces and types
 interface IBookingsControl {
+  bookings: any;
+  events: any;
   activeOutputType: 'booking' | 'my' | 'data';
-  onOutputTypeChange: (type: 'booking' | 'my' | 'data') => void;
+  onTypeChange: (type: 'booking' | 'my' | 'data') => void;
 }
 
 const BookingsControl = (props: IBookingsControl) => {
@@ -14,21 +23,21 @@ const BookingsControl = (props: IBookingsControl) => {
       <Button
         type="primary"
         className={cx(styles.button, props.activeOutputType !== 'my' && props.activeOutputType !== 'data' && 'active')}
-        onClick={() => props.onOutputTypeChange('booking')}
+        onClick={() => props.onTypeChange('booking')}
       >
-        Забронированные
+        Забронированные ({props.bookings.length || 0})
       </Button>
       <Button
         type="primary"
         className={cx(styles.button, props.activeOutputType === 'my' && 'active')}
-        onClick={() => props.onOutputTypeChange('my')}
+        onClick={() => props.onTypeChange('my')}
       >
-        Созданные мной
+        Созданные мной ({props.events.length || 0})
       </Button>
       <Button
         type="primary"
         className={cx(styles.button, props.activeOutputType === 'data' && 'active')}
-        onClick={() => props.onOutputTypeChange('data')}
+        onClick={() => props.onTypeChange('data')}
       >
         Статистика
       </Button>

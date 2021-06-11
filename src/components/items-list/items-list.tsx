@@ -1,37 +1,38 @@
-import React from 'react';
-import Button from '../button';
-import { styles } from './styled';
 import dayjs from 'dayjs';
-import InfoBanner from '../info-banner';
-import { ROUTES } from '../../utils/constants';
+import React from 'react';
 import { useHistory } from 'react-router';
-
-interface IBooking {
-  _id: string;
-  event: IEvent;
-}
+import { ROUTES } from '../../utils/constants';
+import Button from '../button';
+import InfoBanner from '../info-banner';
+import { styles } from './styles';
 
 interface IEvent {
+  _id: string;
   title: string;
-  price: string;
+  description: string;
   date: string;
+  price: string;
   location: string;
   image: string;
+  creator: {
+    _id: string;
+    email: string;
+  };
 }
 
-interface IBookingList {
-  bookings: IBooking[];
-  onDelete: (bookingId: string) => void;
+interface ItemsList {
+  events: IEvent[];
+  onDelete: (eventId: string) => void;
 }
 
-const BookingList = (props: IBookingList) => {
+const ItemsList = (props: ItemsList) => {
   const history = useHistory();
 
-  if (!props.bookings.length) {
+  if (!props.events.length) {
     return (
       <InfoBanner
-        description="Забронируй любое мероприятие, и оно появится в этом списке!"
-        buttonTitle="Забронировать мероприятие"
+        description=" Создай любое мероприятие, и оно появится в этом списке!"
+        buttonTitle="Создать мероприятие"
         onClick={() => history.push(ROUTES.EVENTS)}
       />
     );
@@ -39,11 +40,11 @@ const BookingList = (props: IBookingList) => {
 
   return (
     <ul className={styles.list}>
-      {props.bookings.map((booking: IBooking, index: number) => {
-        const { title, image, date, price, location } = booking.event;
+      {props.events.map((event: IEvent, index: number) => {
+        const { _id, title, image, date, price, location } = event;
 
         return (
-          <li className={styles.listItem} key={booking._id}>
+          <li className={styles.listItem} key={_id}>
             <span className={styles.number}>{index + 1}</span>
             <img className={styles.image} src={image} alt="Изображение мероприятия." />
             <div className={styles.title}>{title}</div>
@@ -54,7 +55,7 @@ const BookingList = (props: IBookingList) => {
             <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button type="outline" className={styles.button} onClick={() => props.onDelete(booking._id)}>
+              <Button type="outline" className={styles.button} onClick={() => props.onDelete(_id)}>
                 Отменить
               </Button>
             </div>
@@ -65,4 +66,4 @@ const BookingList = (props: IBookingList) => {
   );
 };
 
-export default BookingList;
+export default ItemsList;

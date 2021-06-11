@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { selectToken } from '../../features/user/userSlice';
 import { useSelectorTyped } from '../../hooks';
+import { ROUTES } from '../../utils/constants';
 import Button from '../button';
 import { styles } from './styled';
 
@@ -23,11 +24,11 @@ const InfoBanner = (props: IInfoBanner) => {
           </h2>
           <p className={styles.infoBannerText}>
             У Вас уже есть аккаунт?{' '}
-            <NavLink className={styles.infoBannerLink} to="/authorization">
+            <NavLink className={styles.infoBannerLink} to={ROUTES.AUTHORIZATION}>
               Войдите в свой профиль
             </NavLink>
           </p>
-          <Button type="primary" onClick={() => history.push('/registration')}>
+          <Button type="primary" onClick={() => history.push(ROUTES.REGISTRATION)}>
             Создать аккаунт ⟶
           </Button>
         </div>

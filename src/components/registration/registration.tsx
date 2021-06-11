@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import Loader from '../loader';
 import Button from '../button';
+import { ROUTES } from '../../utils/constants';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ const Registration = () => {
   const [createUser, { loading }] = useMutation(CREATE_USER, {
     onCompleted: () => {
       toast('Регистрация выполнена успешно.');
-      history.push('/authorization');
+      history.push(ROUTES.AUTHORIZATION);
     },
   });
 
@@ -49,7 +50,7 @@ const Registration = () => {
           <h2 className={styles.formFieldsTitle}>Регистрация</h2>
           <p className={styles.formFieldsInfo}>
             У Вас уже есть аккаунт?{' '}
-            <NavLink className={styles.formFieldsInfoLink} to="/authorization">
+            <NavLink className={styles.formFieldsInfoLink} to={ROUTES.AUTHORIZATION}>
               Войти в свой профиль
             </NavLink>
           </p>
@@ -84,7 +85,7 @@ const Registration = () => {
             </div>
             <p className={styles.formFieldsPolicy}>
               Нажимая на кнопку, Вы соглашаетесь с{' '}
-              <a className={styles.formFieldsPolicyLink} href="#no_scrooll">
+              <a className={styles.formFieldsPolicyLink} href="#no_scroll">
                 политикой обработки персональных данных
               </a>
             </p>

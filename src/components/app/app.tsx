@@ -13,7 +13,7 @@ import { selectToken } from '../../features/user/userSlice';
 import Registration from '../registration';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
-import { REQUEST_URL } from '../../utils/constants';
+import { REQUEST_URL, ROUTES } from '../../utils/constants';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -40,13 +40,13 @@ const App = () => {
           <Navigation />
           <main className={styledMain}>
             <Switch>
-              {token && <Redirect from="/" to="/events" exact />}
-              {token && <Redirect from="/authorization" to="/events" exact />}
-              {!token && <Route path="/authorization" component={Authorization} />}
-              {!token && <Route path="/registration" component={Registration} />}
-              <Route path="/events" component={Events} />
-              {token && <Route path="/bookings" component={Bookings} />}
-              {!token && <Redirect to="/authorization" exact />}
+              {token && <Redirect from={ROUTES.MAIN} to={ROUTES.EVENTS} exact />}
+              {token && <Redirect from={ROUTES.AUTHORIZATION} to={ROUTES.EVENTS} exact />}
+              {!token && <Route path={ROUTES.AUTHORIZATION} component={Authorization} />}
+              {!token && <Route path={ROUTES.REGISTRATION} component={Registration} />}
+              <Route path={ROUTES.EVENTS} component={Events} />
+              {token && <Route path={ROUTES.BOOKINGS} component={Bookings} />}
+              {!token && <Redirect to={ROUTES.AUTHORIZATION} exact />}
             </Switch>
           </main>
         </HashRouter>
