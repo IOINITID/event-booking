@@ -1,6 +1,9 @@
 import { css } from '@emotion/css';
-import ticketsImageLight from '../../assets/images/tickets-background-light.png';
-import ticketsImageDark from '../../assets/images/tickets-background-dark.png';
+import ticketsImageLight from '../../assets/images/tickets-background-light@1x.png';
+import ticketsImageLightRetina from '../../assets/images/tickets-background-light@2x.png';
+import ticketsImageDark from '../../assets/images/tickets-background-dark@1x.png';
+import ticketsImageDarkRetina from '../../assets/images/tickets-background-dark@2x.png';
+import { retina } from '../../utils/constants';
 
 export const styles = {
   infoBanner: css`
@@ -11,13 +14,22 @@ export const styles = {
     background-image: url(${ticketsImageDark});
     background-repeat: no-repeat;
     background-position: 100% 100%;
+    background-size: 500px;
     border-radius: 24px;
     row-gap: 16px;
+
+    @media (min-resolution: ${retina.dppx}dppx), (min-resolution: ${retina.dpi}dpi) {
+      background-image: url(${ticketsImageDarkRetina});
+    }
   `,
   infoBannerAuthenticated: css`
     background-color: #282828;
     row-gap: 32px;
     background-image: url(${ticketsImageLight});
+
+    @media (min-resolution: ${retina.dppx}dppx), (min-resolution: ${retina.dpi}dpi) {
+      background-image: url(${ticketsImageLightRetina});
+    }
   `,
   infoBannerHeading: css`
     max-width: 696px;

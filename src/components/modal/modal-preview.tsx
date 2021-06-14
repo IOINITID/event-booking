@@ -1,10 +1,17 @@
 import React from 'react';
-import { styles } from './styled';
-import modalImage from '../../assets/images/modal-image.jpg';
-import dayjs from 'dayjs';
-import ru from 'dayjs/locale/ru';
+
+// Components imports
 import Modal from './index';
 
+// Styles imports
+import { styles } from './styled';
+
+// Additional imports
+import dayjs from 'dayjs';
+import ru from 'dayjs/locale/ru';
+import { cx } from '@emotion/css';
+
+// Interfaces and types
 interface IEvent {
   _id: string;
   title: string;
@@ -34,12 +41,12 @@ const ModalPreview = (props: IModalPreview) => {
       confirmButton={{ title: 'Забронировать ⟶', onClick: props.onConfirm }}
       width={808}
     >
-      <header className={styles.header}>
+      <header className={cx(styles.header, styles.preview)}>
         <img
           className={styles.image}
           width="176"
           height="176"
-          src={props.event?.image || modalImage}
+          src={props.event?.image}
           alt="Изображение мероприятия."
         />
         <span className={styles.price}>

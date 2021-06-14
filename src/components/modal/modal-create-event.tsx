@@ -1,12 +1,17 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { css } from '@emotion/css';
 import React, { ChangeEvent, useState } from 'react';
+
+// Components imports
+import Modal from './modal';
 import imageIcon from '../../assets/images/image-icon.svg';
 import closeIcon from '../../assets/images/close-icon.svg';
-import { toast } from 'react-toastify';
-import Modal from './modal';
 
+// Additional imports
+import { toast } from 'react-toastify';
+import { css } from '@emotion/css';
+
+// Interfaces and types
 interface IEventData {
   title: string;
   description: string;
@@ -23,6 +28,7 @@ interface IModalCreateEvent {
 }
 
 const ModalCreateEvent = (props: IModalCreateEvent) => {
+  // State values
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [date, setDate] = useState('');

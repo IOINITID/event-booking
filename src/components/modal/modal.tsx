@@ -1,8 +1,15 @@
-import { css, cx } from '@emotion/css';
 import React, { ReactNode, useEffect } from 'react';
+
+// Components imports
 import Button from '../button';
+
+// Styles imports
 import { styles } from './styled';
 
+// Additional imports
+import { css, cx } from '@emotion/css';
+
+// Interfaces and types
 export interface IModal {
   isOpen: boolean;
   cancelButton: {
@@ -18,11 +25,11 @@ export interface IModal {
 }
 
 const Modal = (props: IModal) => {
+  // Body overflow updating
   useEffect(() => {
     if (props.isOpen) {
       document.body.style.overflow = 'hidden';
     }
-
     return () => {
       document.body.style.overflow = 'auto';
     };
