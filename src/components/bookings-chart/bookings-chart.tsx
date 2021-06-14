@@ -1,105 +1,115 @@
 import React from 'react';
-// import { Bar } from 'react-chartjs-2';
 import { styles } from './styled';
 import { PieChart, Pie, Cell } from 'recharts';
-
-// const BOOKING_BUCKETS = {
-//   Cheap: {
-//     min: 0,
-//     max: 100,
-//     color: 'rgba(255, 99, 132, 0.2)',
-//   },
-//   Normal: {
-//     min: 100,
-//     max: 200,
-//     color: 'rgba(54, 162, 235, 0.2)',
-//   },
-//   Expensive: {
-//     min: 200,
-//     max: 1000,
-//     color: 'rgba(255, 206, 86, 0.2)',
-//   },
-// };
-
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
-
-const COLORS = ['#557AFF', '#33EF23', '#6423EF', '#EF4723'];
-// const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
-const RADIAN = Math.PI / 180;
-
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
+import { css, cx } from '@emotion/css';
 
 const BookingsChart = (props: any) => {
-  // const chartData = { labels: [], datasets: [] };
-  // let values = [];
+  // const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-  // for (const bucket in BOOKING_BUCKETS) {
-  //   const filteredBookingsCount = props.bookings.reduce((prevValue, currentValue) => {
-  //     if (
-  //       currentValue.event.price > BOOKING_BUCKETS[bucket].min &&
-  //       currentValue.event.price < BOOKING_BUCKETS[bucket].max
-  //     ) {
-  //       return prevValue + 1;
-  //     } else {
-  //       return prevValue;
-  //     }
-  //   }, 0);
+  const RADIAN = Math.PI / 180;
 
-  //   values.push(filteredBookingsCount);
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-  //   chartData.labels.push(bucket);
-  //   chartData.datasets.push({
-  //     label: [bucket],
-  //     backgroundColor: [BOOKING_BUCKETS[bucket].color],
-  //     borderColor: [BOOKING_BUCKETS[bucket].color],
-  //     borderWidth: 1,
-  //     data: values,
-  //   });
+    return (
+      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
-  //   values = [...values];
-  //   values[values.length - 1] = 0;
-  // }
+  const one = props.bookings.reduce((previousValue: number, currentValue: any) => {
+    if (currentValue.event.price >= 0 && currentValue.event.price <= 3000) {
+      return previousValue + currentValue.event.price;
+    } else {
+      return previousValue;
+    }
+  }, 0);
 
-  // const options = {
-  //   scales: {
-  //     yAxes: [
-  //       {
-  //         ticks: {
-  //           beginAtZero: true,
-  //         },
-  //       },
-  //     ],
-  //   },
-  // };
+  const two = props.bookings.reduce((previousValue: number, currentValue: any) => {
+    if (currentValue.event.price >= 3000 && currentValue.event.price <= 8000) {
+      return previousValue + currentValue.event.price;
+    } else {
+      return previousValue;
+    }
+  }, 0);
+
+  const three = props.bookings.reduce((previousValue: number, currentValue: any) => {
+    if (currentValue.event.price >= 8000 && currentValue.event.price <= 10000) {
+      return previousValue + currentValue.event.price;
+    } else {
+      return previousValue;
+    }
+  }, 0);
+
+  const four = props.bookings.reduce((previousValue: number, currentValue: any) => {
+    if (currentValue.event.price >= 10000) {
+      return previousValue + currentValue.event.price;
+    } else {
+      return previousValue;
+    }
+  }, 0);
+
+  const dataValues = [
+    { name: 'one', value: one, color: '#557AFF' },
+    { name: 'two', value: two, color: '#33EF23' },
+    { name: 'three', value: three, color: '#6423EF' },
+    { name: 'four', value: four, color: '#EF4723' },
+  ];
+
+  const data = dataValues.filter((item: any) => item.value);
 
   return (
-    // <div className={styles.container}>
-    //   <Bar data={chartData} options={options} type="bar" />
-    // </div>
     <div className={styles.container}>
       <div className={styles.info}>
         <h2 className={styles.heading}>Статистика расходов на мероприятия</h2>
         <ul className={styles.list}>
-          <li className={styles.item}>От 0₽ до 3 000₽</li>
-          <li className={styles.item}>От 3 000₽ до 8 000₽ </li>
-          <li className={styles.item}>От 8 000₽ до 10 000₽ </li>
-          <li className={styles.item}>От 10 000₽ и более</li>
+          <li className={styles.item}>
+            <div
+              className={cx(
+                styles.itemIndicator,
+                css`
+                  background-color: #557aff;
+                `
+              )}
+            ></div>
+            <p className={styles.itemDescription}>От 0₽ до 3 000₽</p>
+          </li>
+          <li className={styles.item}>
+            <div
+              className={cx(
+                styles.itemIndicator,
+                css`
+                  background-color: #33ef23;
+                `
+              )}
+            ></div>
+            <p className={styles.itemDescription}>От 3 000₽ до 8 000₽</p>
+          </li>
+          <li className={styles.item}>
+            <div
+              className={cx(
+                styles.itemIndicator,
+                css`
+                  background-color: #6423ef;
+                `
+              )}
+            ></div>
+            <p className={styles.itemDescription}>От 8 000₽ до 10 000₽</p>
+          </li>
+          <li className={styles.item}>
+            <div
+              className={cx(
+                styles.itemIndicator,
+                css`
+                  background-color: #ef4723;
+                `
+              )}
+            ></div>
+            <p className={styles.itemDescription}>От 10 000₽ и более</p>
+          </li>
         </ul>
       </div>
 
@@ -115,7 +125,7 @@ const BookingsChart = (props: any) => {
           dataKey="value"
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
         </Pie>
       </PieChart>

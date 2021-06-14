@@ -30,6 +30,18 @@ export const styles = {
     row-gap: 16px;
   `,
   item: css`
+    display: grid;
+    align-items: center;
+    grid-template-columns: 8px max-content;
+    column-gap: 8px;
+  `,
+  itemIndicator: css`
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  `,
+  itemDescription: css`
+    margin: 0;
     font-weight: 500;
     font-size: 18px;
     line-height: 18px;
