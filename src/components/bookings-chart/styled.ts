@@ -2,8 +2,38 @@ import { css } from '@emotion/css';
 
 export const styles = {
   container: css`
+    display: grid;
+    grid-template-columns: 469px 1fr;
     padding: 32px 56px;
+    column-gap: 183px;
     background-color: #ffffff;
     border-radius: 16px;
+  `,
+  info: css`
+    display: grid;
+    grid-template-rows: repeat(2, max-content);
+    row-gap: 32px;
+  `,
+  heading: css`
+    margin: 0;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 48px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
+  `,
+  list: css`
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    row-gap: 16px;
+  `,
+  item: css`
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    font-family: 'Grandis Extended', 'Arial', sans-serif;
+    color: #282828;
   `,
 };
