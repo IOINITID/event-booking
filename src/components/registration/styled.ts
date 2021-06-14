@@ -1,4 +1,7 @@
 import { css } from '@emotion/css';
+import ticketsImage from '../../assets/images/tickets@1x.png';
+import ticketsImageRetina from '../../assets/images/tickets@2x.png';
+import { retina } from '../../utils/constants';
 
 export const styles = {
   form: css`
@@ -11,11 +14,17 @@ export const styles = {
     position: relative;
     display: grid;
     padding: 64px 104px 40px 104px;
-    background: #282828;
+    background-color: #282828;
+    background-image: url(${ticketsImage});
     background-repeat: no-repeat;
-    background-size: cover;
+    background-position: 100% 100%;
+    background-size: 499px;
     border-radius: 32px 0 0 32px;
     row-gap: 40px;
+
+    @media (min-resolution: ${retina.dppx}dppx), (min-resolution: ${retina.dpi}dpi) {
+      background-image: url(${ticketsImageRetina});
+    }
   `,
   formImage: css`
     position: absolute;

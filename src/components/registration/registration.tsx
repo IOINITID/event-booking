@@ -1,25 +1,40 @@
 import React, { MouseEvent, useState } from 'react';
-import { styles } from './styled';
-import ticketsImage from '../../assets/images/tickets.png';
-import { NavLink, useHistory } from 'react-router-dom';
-import { CREATE_USER } from '../../graphql/mutations';
-import { useMutation } from '@apollo/client';
-import { toast } from 'react-toastify';
+
+// Components imports
 import Loader from '../loader';
 import Button from '../button';
+
+// GraphQL imports
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from '../../graphql/mutations';
+
+// Router imports
+import { NavLink, useHistory } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 
+// Styles imports
+import { styles } from './styled';
+
+// Additional imports
+import { toast } from 'react-toastify';
+
 const Registration = () => {
+  // State values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // Router values
   const history = useHistory();
-  const [createUser, { loading }] = useMutation(CREATE_USER, {
+
+  // GraphQL mutation hooks
+  const [createUser, { loading: createUserLoading }] = useMutation(CREATE_USER, {
     onCompleted: () => {
       toast('Регистрация выполнена успешно.');
       history.push(ROUTES.AUTHORIZATION);
     },
   });
 
+  // Components handlers
   const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -35,7 +50,8 @@ const Registration = () => {
     });
   };
 
-  if (loading) {
+  // Loader conditions
+  if (createUserLoading) {
     return <Loader />;
   }
 
@@ -43,7 +59,6 @@ const Registration = () => {
     <form className={styles.form}>
       <div className={styles.formInfo}>
         <h2 className={styles.formInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
-        <img className={styles.formImage} src={ticketsImage} alt="Билеты на мероприятия." />
       </div>
       <div className={styles.formFields}>
         <header className={styles.formFieldsHeader}>

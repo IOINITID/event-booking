@@ -1,26 +1,38 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
-import { getLogin } from '../../features/user/userSlice';
+import React, { MouseEvent, useState } from 'react';
+
+// Store imports
 import { useDispatchTyped } from '../../hooks';
-import { styles } from './styled';
-import ticketsImage from '../../assets/images/tickets.png';
-import { NavLink } from 'react-router-dom';
-import { useLazyQuery } from '@apollo/client';
-import { toast } from 'react-toastify';
+import { getLogin } from '../../features/user/userSlice';
+
+// Components imports
 import Loader from '../loader';
-import { LOGIN } from '../../graphql/queries';
 import Button from '../button';
+
+// GraphQL imports
+import { useLazyQuery } from '@apollo/client';
+import { LOGIN } from '../../graphql/queries';
+
+// Router imports
+import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../utils/constants';
 
+// Styles imports
+import { styles } from './styled';
+
+// Additional imports
+import { toast } from 'react-toastify';
+
 const Authorization = () => {
-  const dispatch = useDispatchTyped();
+  // State values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [login, { data, loading, error }] = useLazyQuery(LOGIN, {
-    fetchPolicy: 'no-cache',
-  });
 
-  useEffect(() => {
-    if (data) {
+  // Store values
+  const dispatch = useDispatchTyped();
+
+  // GraphQL query hooks
+  const [login, { loading: loginLoading }] = useLazyQuery(LOGIN, {
+    onCompleted: (data) => {
       dispatch(
         getLogin({
           token: data.login.token,
@@ -28,15 +40,14 @@ const Authorization = () => {
         })
       );
       toast(data.login.message);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (error) {
+    },
+    onError: (error) => {
       toast(error.message);
-    }
-  }, [error]);
+    },
+    fetchPolicy: 'no-cache',
+  });
 
+  // Components handlers
   const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -52,7 +63,8 @@ const Authorization = () => {
     });
   };
 
-  if (loading) {
+  // Loader conditions
+  if (loginLoading) {
     return <Loader />;
   }
 
@@ -60,7 +72,6 @@ const Authorization = () => {
     <form className={styles.form}>
       <div className={styles.formInfo}>
         <h2 className={styles.formInfoTitle}>Будь в курсе последних событий и бронируй мероприятия в один клик</h2>
-        <img className={styles.formImage} src={ticketsImage} alt="Билеты на мероприятия." />
       </div>
       <div className={styles.formFields}>
         <header className={styles.formFieldsHeader}>
