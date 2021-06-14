@@ -1,11 +1,20 @@
 import React from 'react';
-import Button from '../button';
-import { styles } from './styled';
-import dayjs from 'dayjs';
-import InfoBanner from '../info-banner';
-import { ROUTES } from '../../utils/constants';
-import { useHistory } from 'react-router';
 
+// Components imports
+import Button from '../button';
+import InfoBanner from '../info-banner';
+
+// Router imports
+import { useHistory } from 'react-router';
+import { ROUTES } from '../../utils/constants';
+
+// Styles imports
+import { styles } from './styled';
+
+// Additional imports
+import dayjs from 'dayjs';
+
+// Interfaces and types
 interface IBooking {
   _id: string;
   event: IEvent;
@@ -25,6 +34,7 @@ interface IBookingList {
 }
 
 const BookingList = (props: IBookingList) => {
+  // Store values
   const history = useHistory();
 
   if (!props.bookings.length) {

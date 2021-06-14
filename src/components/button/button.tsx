@@ -1,7 +1,12 @@
-import { cx } from '@emotion/css';
 import React, { MouseEvent, ReactNode } from 'react';
+
+// Styles imports
 import { styles } from './styled';
 
+// Additional imports
+import { cx } from '@emotion/css';
+
+// Interfaces and types
 interface IButton {
   type: 'primary' | 'outline';
   onClick: (() => void) | ((event: MouseEvent<HTMLButtonElement>) => void);

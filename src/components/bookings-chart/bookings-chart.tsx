@@ -1,5 +1,9 @@
 import React from 'react';
+
+// Styles imports
 import { styles } from './styled';
+
+// Additional imports
 import { PieChart, Pie, Cell } from 'recharts';
 import { css, cx } from '@emotion/css';
 
