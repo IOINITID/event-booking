@@ -112,6 +112,7 @@ const Events = () => {
         setIsPreviewOpen(false);
         setPreviewEvent(null);
         dispatch(logout());
+
         history.push(ROUTES.AUTHORIZATION);
       }
       toast(error.message);
