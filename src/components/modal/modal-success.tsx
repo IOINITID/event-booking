@@ -22,11 +22,11 @@ const ModalSuccess = (props: IModalSuccess) => {
       isOpen={props.isOpen}
       cancelButton={{ title: 'Отмена', onClick: props.onCancel }}
       confirmButton={{ title: 'К забронированным ⟶', onClick: props.onConfirm }}
-      width={808}
+      width={592}
     >
-      <header className={styles.header}>{/* <img className={styles.image} src={eventSuccessImage} alt="" /> */}</header>
+      <header className={styles.header} />
       <div className={styles.content}>
-        <h2 className={styles.title}>Бронирование прошло успешно!</h2>
+        <h2 className={cx(styles.title, styles.titleSuccess)}>Бронирование прошло успешно!</h2>
         <p
           className={cx(
             styles.description,
