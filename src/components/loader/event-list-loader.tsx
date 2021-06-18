@@ -1,5 +1,7 @@
-import { css } from '@emotion/css';
 import React from 'react';
+
+// Additional imports
+import { css } from '@emotion/css';
 import ContentLoader, { IContentLoaderProps } from 'react-content-loader';
 
 const EventItemLoader = (props: IContentLoaderProps) => (
@@ -28,6 +30,7 @@ const EventListButtonLoader = (props: IContentLoaderProps) => (
   </ContentLoader>
 );
 
+// Interfaces and types
 interface IEventListLoader {
   itemsCount: number;
 }

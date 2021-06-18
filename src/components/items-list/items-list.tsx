@@ -1,11 +1,20 @@
-import dayjs from 'dayjs';
 import React from 'react';
-import { useHistory } from 'react-router';
-import { ROUTES } from '../../utils/constants';
+
+// Components imports
 import Button from '../button';
 import InfoBanner from '../info-banner';
+
+// Router imports
+import { useHistory } from 'react-router';
+import { ROUTES } from '../../utils/constants';
+
+// Styles imports
 import { styles } from './styles';
 
+// Additional imports
+import dayjs from 'dayjs';
+
+// Interfaces and types
 interface IEvent {
   _id: string;
   title: string;
@@ -26,6 +35,7 @@ interface ItemsList {
 }
 
 const ItemsList = (props: ItemsList) => {
+  // Router values
   const history = useHistory();
 
   if (!props.events.length) {

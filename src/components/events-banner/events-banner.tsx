@@ -1,18 +1,32 @@
-import { cx } from '@emotion/css';
 import React, { Fragment } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import { selectToken } from '../../features/user/userSlice';
-import { useSelectorTyped } from '../../hooks';
-import { ROUTES } from '../../utils/constants';
+
+// Components imports
 import Button from '../button';
+
+// Store imports
+import { NavLink, useHistory } from 'react-router-dom';
+import { ROUTES } from '../../utils/constants';
+
+// Router imports
+import { useSelectorTyped } from '../../hooks';
+import { selectToken } from '../../features/user/userSlice';
+
+// Styles imports
 import { styles } from './styled';
 
+// Additional imports
+import { cx } from '@emotion/css';
+
+// Interfaces and types
 interface IInfoBanner {
   onCreateEvent: () => void;
 }
 
 const InfoBanner = (props: IInfoBanner) => {
+  // Store values
   const token = useSelectorTyped(selectToken);
+
+  // Router values
   const history = useHistory();
 
   return (

@@ -1,8 +1,15 @@
 import React from 'react';
-import { styles } from './styled';
-import dayjs from 'dayjs';
+
+// Components imports
 import Button from '../button';
 
+// Styles imports
+import { styles } from './styled';
+
+// Additional imports
+import dayjs from 'dayjs';
+
+// Interfaces and types
 interface IEvent {
   _id: string;
   title: string;

@@ -1,9 +1,14 @@
 import React, { Fragment, MouseEvent, useState } from 'react';
+
+// Components imports
 import Button from '../button';
 import EventItem from '../event-item';
 import EventListLoader from '../loader/event-list-loader';
+
+// Styles imports
 import { styles } from './styled';
 
+// Interfaces and types
 interface IEvent {
   _id: string;
   title: string;
@@ -25,13 +30,16 @@ interface IEventList {
 }
 
 const EventList = (props: IEventList) => {
+  // State values
   const [eventsCount, setEventsCount] = useState<number>(6);
 
+  // Components handlers
   const loadEventsHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.currentTarget.blur();
     setEventsCount(eventsCount + 6);
   };
 
+  // Loader conditions
   if (props.isLoading) {
     return <EventListLoader itemsCount={6} />;
   }

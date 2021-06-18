@@ -1,23 +1,36 @@
 import React, { memo } from 'react';
-import { selectTheme } from '../../features/theme/themeSlice';
-import { useSelectorTyped } from '../../hooks';
-import { ThemeProvider } from 'styled-components';
-import { Normalize } from 'styled-normalize';
-import { GlobalStyles, styledMain } from './styled';
-import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
+
+// Components imports
 import Authorization from '../authorization';
+import Registration from '../registration';
 import Events from '../events';
 import Bookings from '../bookings';
 import Navigation from '../navigation';
-import { selectToken } from '../../features/user/userSlice';
-import Registration from '../registration';
+
+// GraphQL imports
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
+
+// Store imports
+import { useSelectorTyped } from '../../hooks';
+import { selectToken } from '../../features/user/userSlice';
+import { selectTheme } from '../../features/theme/themeSlice';
+
+// Router imports
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { REQUEST_URL, ROUTES } from '../../utils/constants';
+
+// Styles imports
+import { GlobalStyles, styledMain } from './styled';
+
+// Additional imports
+import { ThemeProvider } from 'styled-components';
+import { Normalize } from 'styled-normalize';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = () => {
+  // Store values
   const theme = useSelectorTyped(selectTheme);
   const token = useSelectorTyped(selectToken);
 
