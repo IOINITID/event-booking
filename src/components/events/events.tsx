@@ -168,6 +168,7 @@ const Events = () => {
       setIsPreviewOpen(false);
       setPreviewEvent(null);
       setIsCreateOpen(false);
+
       history.push(ROUTES.AUTHORIZATION);
       return;
     }
