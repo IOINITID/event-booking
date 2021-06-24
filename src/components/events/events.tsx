@@ -110,7 +110,6 @@ const Events = () => {
     onError: (error) => {
       if (error.message === 'Необходима авторизация.') {
         setIsPreviewOpen(false);
-
         setPreviewEvent(null);
         dispatch(logout());
         history.push(ROUTES.AUTHORIZATION);
