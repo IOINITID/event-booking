@@ -105,6 +105,7 @@ const Events = () => {
     onCompleted: () => {
       setIsPreviewOpen(false);
       setPreviewEvent(null);
+
       setIsSuccessOpen(true);
     },
     onError: (error) => {
