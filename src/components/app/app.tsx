@@ -8,8 +8,7 @@ import Bookings from '../bookings';
 import Navigation from '../navigation';
 
 // GraphQL imports
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import { createUploadLink } from 'apollo-upload-client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 
 // Store imports
 import { useSelectorTyped } from '../../hooks';
@@ -32,7 +31,7 @@ const App = () => {
   const token = useSelectorTyped(selectToken);
 
   const client = new ApolloClient({
-    link: createUploadLink({
+    link: createHttpLink({
       uri: REQUEST_URL,
       headers: {
         Authorization: token ? `Bearer ${token}` : '',
