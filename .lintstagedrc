@@ -1,14 +1,7 @@
 {
-  "*": [
-    "prettier --check --write .",
-    "git add ."
-  ],
-  "*.{js,jsx,ts,tsx}": [
+  "src/**/*.{ts,tsx}": [
+    "prettier --write",
     "eslint --fix",
-    "git add ."
-  ],
-  "*.{css,scss,ts,tsx}": [
     "stylelint --fix",
-    "git add ."
   ]
 }
