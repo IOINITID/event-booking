@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
 
 interface UserState {
-  token: string;
-  userId: string;
+  token: string | null;
+  userId: string | null;
 }
 
 const initialState: UserState = {
