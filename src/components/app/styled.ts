@@ -1,5 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
-import { css } from '@emotion/css';
+import { css, injectGlobal } from '@emotion/css';
 import fontBoldWoff2 from '../../assets/fonts/GrandisExtended-Bold.woff2';
 import fontBoldWoff from '../../assets/fonts/GrandisExtended-Bold.woff';
 import fontBoldTtf from '../../assets/fonts/GrandisExtended-Bold.ttf';
@@ -10,15 +9,17 @@ import fontRegularWoff2 from '../../assets/fonts/GrandisExtended-Regular.woff2';
 import fontRegularWoff from '../../assets/fonts/GrandisExtended-Regular.woff';
 import fontRegularTtf from '../../assets/fonts/GrandisExtended-Regular.ttf';
 
-export const styledMain = css`
-  display: grid;
-  row-gap: 40px;
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 72px 64px 72px;
-`;
+export const styles = {
+  container: css`
+    display: grid;
+    row-gap: 40px;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 72px 64px 72px;
+  `,
+};
 
-export const GlobalStyles = createGlobalStyle`
+injectGlobal`
   @font-face {
     font-weight: 400;
     font-family: 'Grandis Extended';
@@ -60,7 +61,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     font-family: 'Grandis Extended', 'Arial', sans-serif;
     scroll-behavior: smooth;
-    background: linear-gradient(100.38deg, #ffffff -15.69%, rgba(255, 255, 255, 0) 17.45%), radial-gradient(132.55% 273% at 103.38% -8.2%, #ef4723 0%, rgba(252, 207, 149, 0.515625) 74.11%);
+    background: linear-gradient(100.38deg, #ffffff -15.69%, rgba(255, 255, 255, 0) 17.45%), radial-gradient(132.55% 273% at 103.38% -8.2%, #ef4723 0%, rgba(252, 207, 149, 0.52) 74.11%);
     background-repeat: no-repeat;
     background-attachment: fixed;
   }

@@ -19,10 +19,9 @@ import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { REQUEST_URL, ROUTES } from '../../utils/constants';
 
 // Styles imports
-import { GlobalStyles, styledMain } from './styled';
+import { styles } from './styled';
 
 // Additional imports
-import { Normalize } from 'styled-normalize';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -42,11 +41,9 @@ const App = () => {
 
   return (
     <ApolloProvider client={client}>
-      <Normalize />
-      <GlobalStyles />
       <HashRouter>
         <Navigation />
-        <main className={styledMain}>
+        <main className={styles.container}>
           <Switch>
             {token && <Redirect from={ROUTES.MAIN} to={ROUTES.EVENTS} exact />}
             {token && <Redirect from={ROUTES.AUTHORIZATION} to={ROUTES.EVENTS} exact />}
