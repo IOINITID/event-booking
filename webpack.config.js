@@ -22,75 +22,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-      {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         loader: 'ts-loader',
       },
       {
-        test: /\.module\.(css|scss)$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[folder]__[local]--[hash:base64:5]',
-              },
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [['autoprefixer']],
-              },
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                outputStyle: 'compressed',
-              },
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(css|scss)$/,
-        exclude: /\.module\.(css|scss)$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [['autoprefixer']],
-              },
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                outputStyle: 'compressed',
-              },
-            },
-          },
-        ],
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.svg$/,
@@ -98,15 +35,6 @@ module.exports = {
           loader: '@svgr/webpack',
           options: {
             svgo: false,
-          },
-        },
-      },
-      {
-        test: /favicon.svg$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'images/[name].[ext]',
           },
         },
       },
