@@ -10,7 +10,6 @@ Thumbs.db
 # Вспомогательные файлы
 *.log*
 node_modules/
-package-lock.json
 
 # Файлы готовой сборки
 public/

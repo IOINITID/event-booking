@@ -1,10 +1,10 @@
 language: node_js
 
 node_js:
-  - 'stable'
+  - stable
 
 install:
-  - 'npm install --force'
+  - yarn install
 
 notifications:
   email: false
@@ -14,7 +14,7 @@ cache:
     - node_modules
 
 script:
-  - npm run build
+  - yarn build
 
 deploy:
   provider: pages
