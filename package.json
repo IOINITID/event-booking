@@ -55,9 +55,6 @@
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^3.11.2"
   },
-  "engines": {
-    "node": "14"
-  },
   "dependencies": {
     "@apollo/client": "^3.3.19",
     "@emotion/css": "^11.1.3",
