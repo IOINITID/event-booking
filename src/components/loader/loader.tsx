@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Styles imports
 import { styles } from './styled';
 
@@ -11,4 +9,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export { Loader };

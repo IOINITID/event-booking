@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // Components imports
 import BookingList from '../booking-list';
-import Loader from '../loader';
+import { Loader } from '../loader';
 import BookingsChart from '../bookings-chart';
 import BookingsControl from '../bookings-controls';
 import ItemsList from '../items-list';

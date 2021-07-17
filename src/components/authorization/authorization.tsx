@@ -1,11 +1,11 @@
-import React, { MouseEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
 // Store imports
 import { useDispatchTyped } from '../../hooks';
 import { getLogin } from '../../features/user/userSlice';
 
 // Components imports
-import Loader from '../loader';
+import { Loader } from '../loader';
 import Button from '../button';
 
 // GraphQL imports

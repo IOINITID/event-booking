@@ -1,9 +1,9 @@
-import React, { Fragment, MouseEvent, useState } from 'react';
+import { Fragment, MouseEvent, useState } from 'react';
 
 // Components imports
 import Button from '../button';
 import EventItem from '../event-item';
-import EventListLoader from '../loader/event-list-loader';
+import { EventListLoader } from '../event-list-loader';
 
 // Styles imports
 import { styles } from './styled';

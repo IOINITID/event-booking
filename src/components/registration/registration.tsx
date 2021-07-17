@@ -1,7 +1,7 @@
-import React, { MouseEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
 // Components imports
-import Loader from '../loader';
+import { Loader } from '../loader';
 import Button from '../button';
 
 // GraphQL imports

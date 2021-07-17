@@ -1,11 +1,11 @@
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react';
 
 // Store imports
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { logout, selectToken } from '../../features/user/userSlice';
 
 // Components imports
-import Loader from '../loader';
+import { Loader } from '../loader';
 import EventsBanner from '../events-banner';
 import EventList from '../event-list';
 import ModalPreview from '../modal/modal-preview';
