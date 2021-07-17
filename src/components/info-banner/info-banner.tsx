@@ -1,7 +1,5 @@
-import React from 'react';
-
 // Components imports
-import Button from '../button';
+import { Button } from '../button';
 
 // Styles imports
 import { styles } from './styled';

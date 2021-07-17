@@ -1,7 +1,5 @@
-import React from 'react';
-
 // Components imports
-import Button from '../button';
+import { Button } from '../button';
 import InfoBanner from '../info-banner';
 
 // Router imports
@@ -65,7 +63,7 @@ const ItemsList = (props: ItemsList) => {
             <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button type="outline" className={styles.button} onClick={() => props.onDelete(_id)}>
+              <Button type="primary" className={styles.button} onClick={() => props.onDelete(_id)}>
                 Отменить
               </Button>
             </div>

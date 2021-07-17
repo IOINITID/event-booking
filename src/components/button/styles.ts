@@ -1,7 +1,8 @@
+// Additional imports
 import { css } from '@emotion/css';
 
 export const styles = {
-  default: css`
+  root: css`
     width: max-content;
     font-weight: 700;
     font-size: 14px;
@@ -19,13 +20,13 @@ export const styles = {
       background: #e62f07;
     }
   `,
-  primary: css`
+  default: css`
     padding: 19px 32px;
     color: #ffffff;
     background: #ef4723;
     border: none;
   `,
-  outline: css`
+  primary: css`
     padding: 19px 32px;
     color: #ef4723;
     background: transparent;

@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
-
 // Components imports
-import Button from '../button';
+import { Button } from '../button';
 
 // Store imports
 import { NavLink, useHistory } from 'react-router-dom';
@@ -30,7 +28,7 @@ const InfoBanner = (props: IInfoBanner) => {
   const history = useHistory();
 
   return (
-    <Fragment>
+    <>
       {!token ? (
         <div className={styles.infoBanner}>
           <h2 className={styles.infoBannerHeading}>
@@ -56,7 +54,7 @@ const InfoBanner = (props: IInfoBanner) => {
           </Button>
         </div>
       )}
-    </Fragment>
+    </>
   );
 };
 

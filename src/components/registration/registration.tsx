@@ -2,7 +2,7 @@ import { MouseEvent, useState } from 'react';
 
 // Components imports
 import { Loader } from '../loader';
-import Button from '../button';
+import { Button } from '../button';
 
 // GraphQL imports
 import { useMutation } from '@apollo/client';

@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 // Components imports
-import Button from '../button';
+import { Button } from '../button';
 
 // Styles imports
 import { styles } from './styled';
@@ -48,7 +48,7 @@ const Modal = (props: IModal) => {
         >
           <div>{props.children}</div>
           <div className={styles.actions}>
-            <Button type="outline" onClick={props.cancelButton.onClick}>
+            <Button type="default" onClick={props.cancelButton.onClick}>
               {props.cancelButton.title}
             </Button>
             <Button type="primary" onClick={props.confirmButton.onClick}>

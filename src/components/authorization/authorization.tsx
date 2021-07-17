@@ -6,7 +6,7 @@ import { getLogin } from '../../features/user/userSlice';
 
 // Components imports
 import { Loader } from '../loader';
-import Button from '../button';
+import { Button } from '../button';
 
 // GraphQL imports
 import { useLazyQuery } from '@apollo/client';

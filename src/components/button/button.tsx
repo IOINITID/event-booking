@@ -1,29 +1,23 @@
-import React, { MouseEvent, ReactNode } from 'react';
-
 // Styles imports
-import { styles } from './styled';
+import { styles } from './styles';
+
+// Types imports
+import { ButtonType } from './types';
 
 // Additional imports
 import { cx } from '@emotion/css';
 
-// Interfaces and types
-interface IButton {
-  type: 'primary' | 'outline';
-  onClick: (() => void) | ((event: MouseEvent<HTMLButtonElement>) => void);
-  className?: string;
-  children: ReactNode;
-}
-
-const Button = (props: IButton) => {
+const Button = ({ type, className, onClick, children, ...props }: ButtonType) => {
   return (
     <button
-      className={cx(styles.default, props.type === 'primary' ? styles.primary : styles.outline, props.className)}
+      className={cx(styles.root, type === 'default' && styles.default, type === 'primary' && styles.primary, className)}
       type="button"
-      onClick={props.onClick}
+      onClick={onClick}
+      {...props}
     >
-      {props.children}
+      {children}
     </button>
   );
 };
 
-export default Button;
+export { Button };
