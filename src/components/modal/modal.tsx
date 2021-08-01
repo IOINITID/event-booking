@@ -48,10 +48,10 @@ const Modal = (props: IModal) => {
         >
           <div>{props.children}</div>
           <div className={styles.actions}>
-            <Button type="default" onClick={props.cancelButton.onClick}>
+            <Button variant="outlined" onClick={props.cancelButton.onClick}>
               {props.cancelButton.title}
             </Button>
-            <Button type="primary" onClick={props.confirmButton.onClick}>
+            <Button variant="contained" onClick={props.confirmButton.onClick}>
               {props.confirmButton.title}
             </Button>
           </div>

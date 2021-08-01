@@ -39,7 +39,7 @@ const EventItem = (props: IEventItem) => {
       <div className={styles.info}>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.date}>{dayjs(date).locale('ru').format('DD MMMM — HH:mm')}</p>
-        <Button type="primary" className={styles.button} onClick={() => props.onDetail(_id)}>
+        <Button className={styles.button} variant="contained" onClick={() => props.onDetail(_id)}>
           Подробнее
         </Button>
       </div>

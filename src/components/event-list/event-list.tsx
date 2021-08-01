@@ -54,7 +54,7 @@ const EventList = (props: IEventList) => {
         })}
       </ul>
       {props.events.length > eventsCount ? (
-        <Button type="primary" className={styles.button} onClick={loadEventsHandler}>
+        <Button className={styles.button} variant="outlined" onClick={loadEventsHandler}>
           Показать ещё
         </Button>
       ) : null}

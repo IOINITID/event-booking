@@ -63,7 +63,7 @@ const ItemsList = (props: ItemsList) => {
             <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button type="primary" className={styles.button} onClick={() => props.onDelete(_id)}>
+              <Button className={styles.button} variant="outlined" onClick={() => props.onDelete(_id)}>
                 Отменить
               </Button>
             </div>

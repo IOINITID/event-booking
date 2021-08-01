@@ -40,7 +40,7 @@ const InfoBanner = (props: IInfoBanner) => {
               Войдите в свой профиль
             </NavLink>
           </p>
-          <Button type="primary" onClick={() => history.push(ROUTES.REGISTRATION)}>
+          <Button variant="contained" onClick={() => history.push(ROUTES.REGISTRATION)}>
             Создать аккаунт ⟶
           </Button>
         </div>
@@ -49,7 +49,7 @@ const InfoBanner = (props: IInfoBanner) => {
           <h2 className={cx(styles.infoBannerHeading, styles.infoBannerHeadingAuthenticated)}>
             Создайте своё мероприятие, и другие пользователи получат возможность забронировать его
           </h2>
-          <Button type="primary" onClick={props.onCreateEvent}>
+          <Button variant="contained" onClick={props.onCreateEvent}>
             Создать мероприятие ⟶
           </Button>
         </div>

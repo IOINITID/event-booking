@@ -62,7 +62,7 @@ const BookingList = (props: IBookingList) => {
             <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button type="primary" className={styles.button} onClick={() => props.onDelete(booking._id)}>
+              <Button variant="outlined" className={styles.button} onClick={() => props.onDelete(booking._id)}>
                 Отменить
               </Button>
             </div>

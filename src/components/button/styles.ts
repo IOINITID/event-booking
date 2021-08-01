@@ -20,13 +20,22 @@ export const styles = {
       background: #e62f07;
     }
   `,
-  default: css`
+  text: css`
     padding: 19px 32px;
-    color: #ffffff;
-    background: #ef4723;
+    color: #000000;
+    background: #ffffff;
     border: none;
+
+    &:hover,
+    &:focus {
+      background: #ffffff;
+    }
+
+    &:active {
+      background: #ffffff;
+    }
   `,
-  primary: css`
+  outlined: css`
     padding: 19px 32px;
     color: #ef4723;
     background: transparent;
@@ -40,5 +49,11 @@ export const styles = {
     &:active {
       color: #ffffff;
     }
+  `,
+  contained: css`
+    padding: 19px 32px;
+    color: #ffffff;
+    background: #ef4723;
+    border: none;
   `,
 };

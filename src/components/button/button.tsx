@@ -6,13 +6,21 @@ import { ButtonType } from './types';
 
 // Additional imports
 import { cx } from '@emotion/css';
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
-const Button = ({ type, className, onClick, children, ...props }: ButtonType) => {
+type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & ButtonType;
+
+const Button = ({ className, variant = 'text', children, ...props }: ButtonProps) => {
   return (
     <button
-      className={cx(styles.root, type === 'default' && styles.default, type === 'primary' && styles.primary, className)}
+      className={cx(
+        styles.root,
+        variant === 'text' && styles.text,
+        variant === 'outlined' && styles.outlined,
+        variant === 'contained' && styles.contained,
+        className
+      )}
       type="button"
-      onClick={onClick}
       {...props}
     >
       {children}

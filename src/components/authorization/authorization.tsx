@@ -112,7 +112,7 @@ const Authorization = () => {
               />
             </div>
           </div>
-          <Button className={styles.button} type="primary" onClick={submitHandler}>
+          <Button className={styles.button} variant="contained" onClick={submitHandler}>
             Войти ⟶
           </Button>
         </div>

@@ -19,22 +19,22 @@ const BookingsControl = (props: IBookingsControl) => {
   return (
     <div className={styles.control}>
       <Button
-        type="primary"
         className={cx(styles.button, props.activeOutputType !== 'my' && props.activeOutputType !== 'data' && 'active')}
+        variant="contained"
         onClick={() => props.onTypeChange('booking')}
       >
         Забронированные ({props.bookings.length || 0})
       </Button>
       <Button
-        type="primary"
         className={cx(styles.button, props.activeOutputType === 'my' && 'active')}
+        variant="contained"
         onClick={() => props.onTypeChange('my')}
       >
         Созданные мной ({props.events.length || 0})
       </Button>
       <Button
-        type="primary"
         className={cx(styles.button, props.activeOutputType === 'data' && 'active')}
+        variant="contained"
         onClick={() => props.onTypeChange('data')}
       >
         Статистика

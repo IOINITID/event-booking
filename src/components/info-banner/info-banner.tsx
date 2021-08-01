@@ -19,7 +19,7 @@ const EventsBanner = (props: IEventsBanner) => {
         <br />
         {props.description}
       </h2>
-      <Button type="primary" onClick={props.onClick}>
+      <Button variant="contained" onClick={props.onClick}>
         {props.buttonTitle} ⟶
       </Button>
     </div>
