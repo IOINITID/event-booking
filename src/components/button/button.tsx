@@ -1,11 +1,11 @@
-// Styles imports
-import { styles } from './styles';
-
-// Types imports
+// Types
 import { ButtonProps } from './types';
 
-// Additional imports
+// Additional
 import { cx } from '@emotion/css';
+
+// Styles
+import { styles } from './styles';
 
 const Button = ({ className, variant = 'text', children, ...props }: ButtonProps) => {
   const buttonStyles = cx(
