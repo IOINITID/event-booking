@@ -1,15 +1,16 @@
-# Файлы и папки операционной системы
+# Files and folders of OS
 .DS_Store
 Thumbs.db
 
-# Файлы редактора
+# Files of editor or IDE
 .idea
 *.sublime*
 .vscode
 
-# Вспомогательные файлы
+# Additional files
 *.log*
 node_modules/
+src/stories
 
-# Файлы готовой сборки
+# Build files
 public/
