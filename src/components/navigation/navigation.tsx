@@ -4,7 +4,7 @@ import React from 'react';
 import logoIcon from '../../assets/images/logo-icon.svg';
 
 // Store imports
-import { logout, selectToken } from '../../features/user/userSlice';
+import { logout, selectToken } from '../../store/user/userSlice';
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 
 // Router imports

@@ -12,7 +12,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 
 // Store imports
 import { useSelectorTyped } from '../../hooks';
-import { selectToken } from '../../features/user/userSlice';
+import { selectToken } from '../../store/user/userSlice';
 
 // Router imports
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';

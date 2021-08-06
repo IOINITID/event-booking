@@ -7,7 +7,7 @@ import { ROUTES } from '../../utils/constants';
 
 // Router imports
 import { useSelectorTyped } from '../../hooks';
-import { selectToken } from '../../features/user/userSlice';
+import { selectToken } from '../../store/user/userSlice';
 
 // Styles imports
 import { styles } from './styled';

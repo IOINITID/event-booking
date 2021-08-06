@@ -2,7 +2,7 @@ import { MouseEvent, useState } from 'react';
 
 // Store imports
 import { useDispatchTyped } from '../../hooks';
-import { getLogin } from '../../features/user/userSlice';
+import { getLogin } from '../../store/user/userSlice';
 
 // Components imports
 import { Loader } from '../../components/loader';

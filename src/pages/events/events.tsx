@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 
 // Store imports
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
-import { logout, selectToken } from '../../features/user/userSlice';
+import { logout, selectToken } from '../../store/user/userSlice';
 
 // Components imports
 import { Loader } from '../../components/loader';
