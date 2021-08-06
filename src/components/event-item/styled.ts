@@ -9,7 +9,7 @@ export const styles = {
     position: relative;
     height: 176px;
     background: linear-gradient(100.38deg, #ffffff -15.69%, rgba(255, 255, 255, 0) 17.45%),
-      radial-gradient(132.55% 273% at 103.38% -8.2%, #ef4723 0%, rgba(252, 207, 149, 0.515625) 74.11%);
+      radial-gradient(132.55% 273% at 103.38% -8.2%, #ef4723 0%, rgba(252, 207, 149, 0.52) 74.11%);
     border-radius: 16px 0 0 16px;
   `,
   price: css`
@@ -59,7 +59,6 @@ export const styles = {
     position: absolute;
     right: 0;
     bottom: 0;
-    padding: 16px 24px;
-    border-radius: 16px 0;
+    padding: 16px 24px; /* Size type for button */
   `,
 };
