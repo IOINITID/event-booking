@@ -5,12 +5,12 @@ import { useDispatchTyped, useSelectorTyped } from '../../hooks';
 import { logout, selectToken } from '../../features/user/userSlice';
 
 // Components imports
-import { Loader } from '../loader';
-import EventsBanner from '../events-banner';
-import EventList from '../event-list';
-import ModalPreview from '../modal/modal-preview';
-import ModalCreateEvent from '../modal/modal-create-event';
-import ModalSuccess from '../modal/modal-success';
+import { Loader } from '../../components/loader';
+import EventsBanner from '../../components/events-banner';
+import EventList from '../../components/event-list';
+import ModalPreview from '../../components/modal/modal-preview';
+import ModalCreateEvent from '../../components/modal/modal-create-event';
+import ModalSuccess from '../../components/modal/modal-success';
 
 // GraphQL imports
 import { useMutation, useQuery } from '@apollo/client';

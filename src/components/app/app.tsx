@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 // Components imports
-import Authorization from '../authorization';
-import Registration from '../registration';
-import Events from '../events';
-import Bookings from '../bookings';
+import Authorization from '../../pages/authorization';
+import Registration from '../../pages/registration';
+import Events from '../../pages/events';
+import Bookings from '../../pages/bookings';
 import Navigation from '../navigation';
 
 // GraphQL imports

@@ -5,8 +5,8 @@ import { useDispatchTyped } from '../../hooks';
 import { getLogin } from '../../features/user/userSlice';
 
 // Components imports
-import { Loader } from '../loader';
-import { Button } from '../button';
+import { Loader } from '../../components/loader';
+import { Button } from '../../components/button';
 
 // GraphQL imports
 import { useLazyQuery } from '@apollo/client';

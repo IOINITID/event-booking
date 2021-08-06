@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 // Components imports
-import BookingList from '../booking-list';
-import { Loader } from '../loader';
-import BookingsChart from '../bookings-chart';
-import BookingsControl from '../bookings-controls';
-import ItemsList from '../items-list';
+import BookingList from '../../components/booking-list';
+import { Loader } from '../../components/loader';
+import BookingsChart from '../../components/bookings-chart';
+import BookingsControl from '../../components/bookings-controls';
+import ItemsList from '../../components/items-list';
 
 // GraphQL imports
 import { useMutation, useQuery } from '@apollo/client';
