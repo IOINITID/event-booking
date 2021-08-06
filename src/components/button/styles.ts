@@ -56,4 +56,11 @@ export const styles = {
     background: #ef4723;
     border: none;
   `,
+  leaf: css`
+    padding: 19px 32px;
+    color: #ffffff;
+    background: #ef4723;
+    border: none;
+    border-radius: 16px 0;
+  `,
 };

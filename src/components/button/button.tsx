@@ -13,6 +13,7 @@ const Button = ({ className, variant = 'text', children, ...props }: ButtonProps
     variant === 'text' && styles.text,
     variant === 'outlined' && styles.outlined,
     variant === 'contained' && styles.contained,
+    variant === 'leaf' && styles.leaf,
     className
   );
 

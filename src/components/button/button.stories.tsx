@@ -35,3 +35,9 @@ const ContainedButtonArgs: ButtonProps = {
   variant: 'contained',
 };
 Contained.args = ContainedButtonArgs;
+
+export const Leaf = Template.bind({});
+const LeafButtonArgs: ButtonProps = {
+  variant: 'leaf',
+};
+Leaf.args = LeafButtonArgs;
