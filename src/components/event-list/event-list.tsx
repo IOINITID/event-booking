@@ -2,7 +2,7 @@ import { MouseEvent, useState } from 'react';
 
 // Components imports
 import { Button } from '../button';
-import { EventItem } from '../event-item';
+import { Event } from '../event';
 import { EventListLoader } from '../event-list-loader';
 
 // Styles imports
@@ -50,7 +50,13 @@ const EventList = ({ events, isLoading, onDetailClick }: EventListProps) => {
 
             return (
               <li key={event._id}>
-                <EventItem event={event} onDetailClick={handleDetailClick} />
+                <Event
+                  title={event.title}
+                  date={event.date}
+                  price={event.price}
+                  image={event.image}
+                  onDetailClick={handleDetailClick}
+                />
               </li>
             );
           }
