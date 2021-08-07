@@ -1,35 +1,16 @@
 // Components
 import { Button } from '../button';
 
+// Types
+import { EventItemProps } from './types';
+
 // Additional
 import dayjs from 'dayjs';
 
 // Styles
 import { styles } from './styles';
 
-// Interfaces or types
-type EventType = {
-  _id: string;
-  title: string;
-  description: string;
-  date: string;
-  price: string;
-  location: string;
-  image: string;
-  creator: {
-    _id: string;
-    email: string;
-  };
-};
-
-type EventItemProps = {
-  event: EventType;
-  onDetailClick: (eventId: string) => void;
-};
-
 const EventItem = ({ event, onDetailClick }: EventItemProps) => {
-  const handleDetailClick = () => onDetailClick(event._id);
-
   return (
     <div className={styles.container}>
       <div className={styles.preview}>
@@ -38,8 +19,8 @@ const EventItem = ({ event, onDetailClick }: EventItemProps) => {
       </div>
       <div className={styles.info}>
         <h3 className={styles.title}>{event.title}</h3>
-        <p className={styles.date}>{dayjs(event.date).locale('ru').format('DD MMMM — HH:mm')}</p>
-        <Button className={styles.button} variant="leaf" onClick={handleDetailClick}>
+        <p className={styles.date}>{dayjs(event.date).locale(dayjs.locale('ru')).format('DD MMMM — HH:mm')}</p>
+        <Button className={styles.button} variant="leaf" onClick={onDetailClick}>
           Подробнее
         </Button>
       </div>

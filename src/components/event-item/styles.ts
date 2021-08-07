@@ -4,10 +4,10 @@ export const styles = {
   container: css`
     display: grid;
     grid-template-columns: 176px 208px;
+    height: 176px;
   `,
   preview: css`
     position: relative;
-    height: 176px;
     background: linear-gradient(100.38deg, #ffffff -15.69%, rgba(255, 255, 255, 0) 17.45%),
       radial-gradient(132.55% 273% at 103.38% -8.2%, #ef4723 0%, rgba(252, 207, 149, 0.52) 74.11%);
     border-radius: 16px 0 0 16px;
@@ -28,13 +28,12 @@ export const styles = {
   `,
   image: css`
     width: 176px;
-    height: 176px;
+    height: 100%;
     border-radius: 16px 0 0 16px;
     object-fit: cover;
   `,
   info: css`
     position: relative;
-    height: 176px;
     padding: 24px 16px;
     background-color: #ffffff;
     border-radius: 0 16px 16px 0;

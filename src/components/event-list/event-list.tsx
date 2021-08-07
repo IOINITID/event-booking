@@ -1,4 +1,4 @@
-import { Fragment, MouseEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
 // Components imports
 import { Button } from '../button';
@@ -6,7 +6,7 @@ import { EventItem } from '../event-item';
 import { EventListLoader } from '../event-list-loader';
 
 // Styles imports
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Interfaces and types
 interface IEvent {
@@ -30,28 +30,27 @@ type EventListProps = {
 };
 
 const EventList = ({ events, isLoading, onDetailClick }: EventListProps) => {
-  // State values
   const [eventsCount, setEventsCount] = useState<number>(6);
 
-  // Components handlers
   const handleShowMoreEventsClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.currentTarget.blur();
     setEventsCount(eventsCount + 6);
   };
 
-  // Loader conditions
   if (isLoading) {
     return <EventListLoader itemsCount={6} />;
   }
 
   return (
-    <Fragment>
+    <>
       <ul className={styles.list}>
         {events.map((event: IEvent, index: number) => {
           if (index < eventsCount) {
+            const handleDetailClick = () => onDetailClick(event._id);
+
             return (
               <li key={event._id}>
-                <EventItem event={event} onDetailClick={onDetailClick} />;
+                <EventItem event={event} onDetailClick={handleDetailClick} />
               </li>
             );
           }
@@ -62,7 +61,7 @@ const EventList = ({ events, isLoading, onDetailClick }: EventListProps) => {
           Показать ещё
         </Button>
       )}
-    </Fragment>
+    </>
   );
 };
 

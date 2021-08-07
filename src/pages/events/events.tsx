@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
 // Store imports
 import { useDispatchTyped, useSelectorTyped } from '../../hooks';
@@ -49,21 +49,17 @@ interface IEventData {
 }
 
 const Events = () => {
-  // State values
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
   const [previewEvent, setPreviewEvent] = useState<IEvent | null>(null);
   const [events, setEvents] = useState<IEvent[] | []>([]);
 
-  // Store values
   const dispatch = useDispatchTyped();
   const token = useSelectorTyped(selectToken);
 
-  // Router values
   const history = useHistory();
 
-  // GraphQL query hooks
   const { loading: eventsLoading } = useQuery(EVENTS, {
     onCompleted: (data) => {
       setEvents(data.events);
@@ -74,7 +70,6 @@ const Events = () => {
     fetchPolicy: 'no-cache',
   });
 
-  // GraphQL mutation hooks
   const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
     onCompleted: (data) => {
       setEvents([
@@ -119,7 +114,6 @@ const Events = () => {
     fetchPolicy: 'no-cache',
   });
 
-  // Components handlers
   const modalConfirmHandler = (eventData: IEventData) => {
     if (
       eventData.title.trim().length === 0 ||
@@ -158,7 +152,7 @@ const Events = () => {
     setIsCreateOpen(true);
   };
 
-  const showDetailHandler = (eventId: string) => {
+  const handleDetailClick = (eventId: string) => {
     setIsPreviewOpen(true);
     setPreviewEvent(events.find((event: IEvent) => event._id === eventId));
   };
@@ -184,33 +178,23 @@ const Events = () => {
     history.push(ROUTES.BOOKINGS);
   };
 
-  // Loader conditions
   if (createEventLoading || bookEventLoading) {
     return <Loader />;
   }
 
   return (
-    <Fragment>
-      {/* Events banner */}
+    <>
       <EventsBanner onCreateEvent={createEventHandler} />
-
-      {/* Events list */}
-      <EventList events={events} isLoading={eventsLoading} onDetailClick={showDetailHandler} />
-
-      {/* Modal create event */}
+      <EventList events={events} isLoading={eventsLoading} onDetailClick={handleDetailClick} />
       <ModalCreateEvent isOpen={isCreateOpen} onCancel={modalCancelHandler} onConfirm={modalConfirmHandler} />
-
-      {/* Modal preview event */}
       <ModalPreview
         isOpen={isPreviewOpen}
         event={previewEvent}
         onCancel={modalCancelHandler}
         onConfirm={bookEventHandler}
       />
-
-      {/* Modal success event */}
       <ModalSuccess isOpen={isSuccessOpen} onCancel={modalCancelHandler} onConfirm={successClickHandler} />
-    </Fragment>
+    </>
   );
 };
 
