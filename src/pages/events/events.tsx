@@ -195,7 +195,7 @@ const Events = () => {
       <EventsBanner onCreateEvent={createEventHandler} />
 
       {/* Events list */}
-      <EventList events={events} isLoading={eventsLoading} onViewDetail={showDetailHandler} />
+      <EventList events={events} isLoading={eventsLoading} onDetailClick={showDetailHandler} />
 
       {/* Modal create event */}
       <ModalCreateEvent isOpen={isCreateOpen} onCancel={modalCancelHandler} onConfirm={modalConfirmHandler} />

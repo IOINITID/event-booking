@@ -2,7 +2,7 @@ import { Fragment, MouseEvent, useState } from 'react';
 
 // Components imports
 import { Button } from '../button';
-import EventItem from '../event-item';
+import { EventItem } from '../event-item';
 import { EventListLoader } from '../event-list-loader';
 
 // Styles imports
@@ -23,41 +23,45 @@ interface IEvent {
   };
 }
 
-interface IEventList {
+type EventListProps = {
   events: IEvent[];
   isLoading: boolean;
-  onViewDetail: (eventId: string) => void;
-}
+  onDetailClick: (eventId: string) => void;
+};
 
-const EventList = (props: IEventList) => {
+const EventList = ({ events, isLoading, onDetailClick }: EventListProps) => {
   // State values
   const [eventsCount, setEventsCount] = useState<number>(6);
 
   // Components handlers
-  const loadEventsHandler = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleShowMoreEventsClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.currentTarget.blur();
     setEventsCount(eventsCount + 6);
   };
 
   // Loader conditions
-  if (props.isLoading) {
+  if (isLoading) {
     return <EventListLoader itemsCount={6} />;
   }
 
   return (
     <Fragment>
       <ul className={styles.list}>
-        {props.events.map((event: IEvent, index: number) => {
+        {events.map((event: IEvent, index: number) => {
           if (index < eventsCount) {
-            return <EventItem key={event._id} event={event} onDetail={props.onViewDetail} />;
+            return (
+              <li key={event._id}>
+                <EventItem event={event} onDetailClick={onDetailClick} />;
+              </li>
+            );
           }
         })}
       </ul>
-      {props.events.length > eventsCount ? (
-        <Button className={styles.button} variant="outlined" onClick={loadEventsHandler}>
+      {events.length > eventsCount && (
+        <Button className={styles.button} variant="outlined" onClick={handleShowMoreEventsClick}>
           Показать ещё
         </Button>
-      ) : null}
+      )}
     </Fragment>
   );
 };

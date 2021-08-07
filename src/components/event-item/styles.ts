@@ -1,11 +1,11 @@
 import { css } from '@emotion/css';
 
 export const styles = {
-  event: css`
+  container: css`
     display: grid;
     grid-template-columns: 176px 208px;
   `,
-  container: css`
+  preview: css`
     position: relative;
     height: 176px;
     background: linear-gradient(100.38deg, #ffffff -15.69%, rgba(255, 255, 255, 0) 17.45%),

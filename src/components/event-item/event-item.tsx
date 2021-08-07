@@ -5,10 +5,10 @@ import { Button } from '../button';
 import dayjs from 'dayjs';
 
 // Styles
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Interfaces or types
-interface IEvent {
+type EventType = {
   _id: string;
   title: string;
   description: string;
@@ -20,29 +20,31 @@ interface IEvent {
     _id: string;
     email: string;
   };
-}
-
-type EventItemProps = {
-  event: IEvent;
-  onDetail: (eventId: string) => void;
 };
 
-const EventItem = ({ event, onDetail }: EventItemProps) => {
+type EventItemProps = {
+  event: EventType;
+  onDetailClick: (eventId: string) => void;
+};
+
+const EventItem = ({ event, onDetailClick }: EventItemProps) => {
+  const handleDetailClick = () => onDetailClick(event._id);
+
   return (
-    <li className={styles.event}>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div className={styles.preview}>
         <img className={styles.image} src={event.image} alt="Изображение мероприятия." />
         <span className={styles.price}>{event.price ? `${Number(event.price).toLocaleString()} ₽` : 'Бесплатно'}</span>
       </div>
       <div className={styles.info}>
         <h3 className={styles.title}>{event.title}</h3>
         <p className={styles.date}>{dayjs(event.date).locale('ru').format('DD MMMM — HH:mm')}</p>
-        <Button className={styles.button} variant="leaf" onClick={() => onDetail(event._id)}>
+        <Button className={styles.button} variant="leaf" onClick={handleDetailClick}>
           Подробнее
         </Button>
       </div>
-    </li>
+    </div>
   );
 };
 
-export default EventItem;
+export { EventItem };

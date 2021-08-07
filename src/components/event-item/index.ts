@@ -1,3 +1,1 @@
-import EventItem from './event-item';
-
-export default EventItem;
+export { EventItem } from './event-item';
