@@ -10,30 +10,12 @@ export const styles = {
     font-family: 'Grandis Extended', 'Arial', sans-serif;
     border-radius: 8px;
     cursor: pointer;
-
-    &:hover,
-    &:focus {
-      background: #f06749;
-    }
-
-    &:active {
-      background: #e62f07;
-    }
   `,
   text: css`
     padding: 19px 32px;
     color: #000000;
-    background: #ffffff;
+    background: transparent;
     border: none;
-
-    &:hover,
-    &:focus {
-      background: #ffffff;
-    }
-
-    &:active {
-      background: #ffffff;
-    }
   `,
   outlined: css`
     padding: 19px 32px;
@@ -44,10 +26,12 @@ export const styles = {
     &:hover,
     &:focus {
       color: #ffffff;
+      background: #f06749;
     }
 
     &:active {
       color: #ffffff;
+      background: #e62f07;
     }
   `,
   contained: css`
@@ -55,6 +39,17 @@ export const styles = {
     color: #ffffff;
     background: #ef4723;
     border: none;
+
+    &:hover,
+    &:focus {
+      color: #ffffff;
+      background: #f06749;
+    }
+
+    &:active {
+      color: #ffffff;
+      background: #e62f07;
+    }
   `,
   leaf: css`
     padding: 19px 32px;
@@ -62,5 +57,16 @@ export const styles = {
     background: #ef4723;
     border: none;
     border-radius: 16px 0;
+
+    &:hover,
+    &:focus {
+      color: #ffffff;
+      background: #f06749;
+    }
+
+    &:active {
+      color: #ffffff;
+      background: #e62f07;
+    }
   `,
 };

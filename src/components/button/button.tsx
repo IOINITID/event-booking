@@ -7,7 +7,7 @@ import { cx } from '@emotion/css';
 // Styles
 import { styles } from './styles';
 
-const Button = ({ className, variant = 'text', children, ...props }: ButtonProps) => {
+const Button = ({ className, variant = 'text', children, onClick }: ButtonProps) => {
   const buttonStyles = cx(
     styles.root,
     variant === 'text' && styles.text,
@@ -18,7 +18,7 @@ const Button = ({ className, variant = 'text', children, ...props }: ButtonProps
   );
 
   return (
-    <button className={buttonStyles} type="button" {...props}>
+    <button className={buttonStyles} type="button" onClick={onClick}>
       {children}
     </button>
   );
