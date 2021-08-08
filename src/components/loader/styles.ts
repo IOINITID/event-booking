@@ -8,6 +8,9 @@ export const styles = {
     align-items: center;
   `,
   loader: css`
+    --loader-color: #ef4723;
+    --loader-animation-duration: 1.2s;
+
     position: fixed;
     top: 50%;
     left: 50%;
@@ -22,10 +25,10 @@ export const styles = {
       width: 64px;
       height: 64px;
       margin: 8px;
-      border: 6px solid #ef4723;
-      border-color: #ef4723 transparent #ef4723 transparent;
+      border: 6px solid var(--loader-color);
+      border-color: var(--loader-color) transparent var(--loader-color) transparent;
       border-radius: 50%;
-      animation: rotate 1.2s linear infinite;
+      animation: rotate var(--loader-animation-duration) linear infinite;
     }
 
     @keyframes rotate {
