@@ -1,3 +1,1 @@
-import InfoBanner from './info-banner';
-
-export default InfoBanner;
+export { InfoBanner } from './info-banner';

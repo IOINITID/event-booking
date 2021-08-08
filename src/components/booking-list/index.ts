@@ -1,3 +1,1 @@
-import BookingList from './booking-list';
-
-export default BookingList;
+export { BookingList } from './booking-list';

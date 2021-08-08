@@ -43,4 +43,4 @@ const BookingsControl = (props: IBookingsControl) => {
   );
 };
 
-export default BookingsControl;
+export { BookingsControl };

@@ -1,6 +1,6 @@
 // Components imports
 import { Button } from '../button';
-import InfoBanner from '../info-banner';
+import { InfoBanner } from '../info-banner';
 
 // Router imports
 import { useHistory } from 'react-router';
@@ -73,4 +73,4 @@ const BookingList = (props: IBookingList) => {
   );
 };
 
-export default BookingList;
+export { BookingList };

@@ -1,12 +1,10 @@
-import React from 'react';
+// Components
+import { Modal } from './index';
 
-// Components imports
-import Modal from './index';
-
-// Styles imports
+// Styles
 import { styles } from './styled';
 
-// Additional imports
+// Additional
 import dayjs from 'dayjs';
 import ru from 'dayjs/locale/ru';
 import { cx } from '@emotion/css';
@@ -65,4 +63,4 @@ const ModalPreview = (props: IModalPreview) => {
   );
 };
 
-export default ModalPreview;
+export { ModalPreview };

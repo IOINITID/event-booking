@@ -61,4 +61,4 @@ const Modal = (props: IModal) => {
   );
 };
 
-export default Modal;
+export { Modal };

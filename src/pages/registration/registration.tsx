@@ -114,4 +114,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export { Registration };

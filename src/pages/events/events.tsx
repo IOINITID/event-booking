@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 // Components imports
 import { Loader } from '../../components/loader';
-import EventsBanner from '../../components/events-banner';
-import EventList from '../../components/event-list';
-import ModalPreview from '../../components/modal/modal-preview';
-import ModalCreateEvent from '../../components/modal/modal-create-event';
-import ModalSuccess from '../../components/modal/modal-success';
+import { EventsBanner } from '../../components/events-banner';
+import { EventList } from '../../components/event-list';
+import { ModalPreview } from '../../components/modal/modal-preview';
+import { ModalCreateEvent } from '../../components/modal/modal-create-event';
+import { ModalSuccess } from '../../components/modal/modal-success';
 
 // GraphQL imports
 import { useMutation, useQuery } from '@apollo/client';
@@ -198,4 +198,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export { Events };

@@ -56,4 +56,4 @@ const EventList = ({ events, isLoading, onDetailClick }: EventListProps) => {
   );
 };
 
-export default EventList;
+export { EventList };

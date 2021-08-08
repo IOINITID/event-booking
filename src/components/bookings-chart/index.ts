@@ -1,3 +1,1 @@
-import BookingsChart from './bookings-chart';
-
-export default BookingsChart;
+export { BookingsChart } from './bookings-chart';

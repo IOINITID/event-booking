@@ -1,7 +1,5 @@
-import React from 'react';
-
 // Components imports
-import Modal from './modal';
+import { Modal } from './modal';
 
 // Styles imports
 import { styles } from './styled';
@@ -42,4 +40,4 @@ const ModalSuccess = (props: IModalSuccess) => {
   );
 };
 
-export default ModalSuccess;
+export { ModalSuccess };

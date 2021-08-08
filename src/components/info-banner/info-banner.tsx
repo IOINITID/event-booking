@@ -11,7 +11,7 @@ interface IEventsBanner {
   onClick: () => void;
 }
 
-const EventsBanner = (props: IEventsBanner) => {
+const InfoBanner = (props: IEventsBanner) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
@@ -26,4 +26,4 @@ const EventsBanner = (props: IEventsBanner) => {
   );
 };
 
-export default EventsBanner;
+export { InfoBanner };

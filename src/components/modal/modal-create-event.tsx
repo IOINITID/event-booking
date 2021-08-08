@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 // Components imports
-import Modal from './modal';
+import { Modal } from './modal';
 import imageIcon from '../../assets/images/image-icon.svg';
 import closeIcon from '../../assets/images/close-icon.svg';
 
@@ -383,4 +383,4 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
   );
 };
 
-export default ModalCreateEvent;
+export { ModalCreateEvent };

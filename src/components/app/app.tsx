@@ -1,29 +1,29 @@
 import { memo } from 'react';
 
-// Components imports
-import Authorization from '../../pages/authorization';
-import Registration from '../../pages/registration';
-import Events from '../../pages/events';
-import Bookings from '../../pages/bookings';
-import Navigation from '../navigation';
+// Components
+import { Authorization } from '../../pages/authorization';
+import { Registration } from '../../pages/registration';
+import { Events } from '../../pages/events';
+import { Bookings } from '../../pages/bookings';
+import { Navigation } from '../navigation';
 
-// GraphQL imports
+// GraphQL
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 
-// Store imports
+// Store
 import { useSelector } from 'react-redux';
 import { userTokenSelector } from '../../store/userSlice/selectors';
 
-// Router imports
+// Router
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { REQUEST_URL, ROUTES } from '../../utils/constants';
 
-// Styles imports
-import { styles } from './styled';
-
-// Additional imports
+// Additional
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+
+// Styles
+import { styles } from './styles';
 
 const App = () => {
   const token = useSelector(userTokenSelector);

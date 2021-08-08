@@ -20,7 +20,7 @@ interface IInfoBanner {
   onCreateEvent: () => void;
 }
 
-const InfoBanner = (props: IInfoBanner) => {
+const EventsBanner = (props: IInfoBanner) => {
   const history = useHistory();
   const token = useSelector(userTokenSelector);
 
@@ -55,4 +55,4 @@ const InfoBanner = (props: IInfoBanner) => {
   );
 };
 
-export default InfoBanner;
+export { EventsBanner };

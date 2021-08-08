@@ -1,3 +1,1 @@
-import EventsBanner from './events-banner';
-
-export default EventsBanner;
+export { EventsBanner } from './events-banner';

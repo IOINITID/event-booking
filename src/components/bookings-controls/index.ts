@@ -1,3 +1,1 @@
-import BookingsControl from './bookings-control';
-
-export default BookingsControl;
+export { BookingsControl } from './bookings-control';

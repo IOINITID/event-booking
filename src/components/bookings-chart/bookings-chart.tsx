@@ -137,4 +137,4 @@ const BookingsChart = (props: any) => {
   );
 };
 
-export default BookingsChart;
+export { BookingsChart };
