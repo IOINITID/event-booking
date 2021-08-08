@@ -3,7 +3,6 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "src",
     "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,

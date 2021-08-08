@@ -51,7 +51,6 @@ export const styles = {
     line-height: 18px;
     font-family: 'Grandis Extended', 'Arial', sans-serif;
     color: #252525;
-    letter-spacing: -0.002em;
   `,
   infoBannerLink: css`
     margin: 0;
@@ -61,7 +60,6 @@ export const styles = {
     font-family: 'Grandis Extended', 'Arial', sans-serif;
     color: #557aff;
     text-decoration: none;
-    letter-spacing: -0.002em;
 
     &:hover,
     &:focus {

@@ -1,9 +1,5 @@
 import { useState } from 'react';
 
-// Store imports
-import { useDispatchTyped, useSelectorTyped } from '../../hooks';
-import { logout, selectToken } from '../../store/user/userSlice';
-
 // Components imports
 import { Loader } from '../../components/loader';
 import EventsBanner from '../../components/events-banner';
@@ -17,12 +13,17 @@ import { useMutation, useQuery } from '@apollo/client';
 import { EVENTS } from '../../graphql/queries';
 import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
 
+// Store imports
+import { logout } from '../../store/userSlice';
+import { userTokenSelector } from '../../store/userSlice/selectors';
+
 // Router imports
 import { useHistory } from 'react-router';
 import { ROUTES } from '../../utils/constants';
 
 // Additional imports
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Interfaces and types
 interface IEvent {
@@ -49,16 +50,15 @@ interface IEventData {
 }
 
 const Events = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const token = useSelector(userTokenSelector);
+
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
   const [previewEvent, setPreviewEvent] = useState<IEvent | null>(null);
   const [events, setEvents] = useState<IEvent[] | []>([]);
-
-  const dispatch = useDispatchTyped();
-  const token = useSelectorTyped(selectToken);
-
-  const history = useHistory();
 
   const { loading: eventsLoading } = useQuery(EVENTS, {
     onCompleted: (data) => {

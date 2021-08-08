@@ -2,12 +2,12 @@
 import { Button } from '../button';
 
 // Store imports
-import { NavLink, useHistory } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
+import { useSelector } from 'react-redux';
+import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Router imports
-import { useSelectorTyped } from '../../hooks';
-import { selectToken } from '../../store/user/userSlice';
+import { NavLink, useHistory } from 'react-router-dom';
+import { ROUTES } from '../../utils/constants';
 
 // Styles imports
 import { styles } from './styled';
@@ -21,11 +21,8 @@ interface IInfoBanner {
 }
 
 const InfoBanner = (props: IInfoBanner) => {
-  // Store values
-  const token = useSelectorTyped(selectToken);
-
-  // Router values
   const history = useHistory();
+  const token = useSelector(userTokenSelector);
 
   return (
     <>

@@ -1,27 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '..';
 
 interface UserState {
-  token: string | null;
-  userId: string | null;
+  token: string;
+  userId: string;
 }
 
 const initialState: UserState = {
-  token: localStorage.getItem('userToken') || null,
-  userId: localStorage.getItem('userId') || null,
+  token: localStorage.getItem('userToken'),
+  userId: localStorage.getItem('userId'),
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    getLogin: (state, action: PayloadAction<{ token: string; userId: string }>) => {
+    getLogin: (state: UserState, action: PayloadAction<UserState>) => {
       state.token = action.payload.token;
       state.userId = action.payload.userId;
       localStorage.setItem('userToken', action.payload.token);
       localStorage.setItem('userId', action.payload.userId);
     },
-    logout: (state) => {
+    logout: (state: UserState) => {
       state.token = null;
       state.userId = null;
       localStorage.removeItem('userToken');
@@ -31,9 +30,5 @@ export const userSlice = createSlice({
 });
 
 export const { getLogin, logout } = userSlice.actions;
-
-export const selectToken = (state: RootState) => state.user.token;
-
-export const selectUserId = (state: RootState) => state.user.userId;
 
 export default userSlice.reducer;

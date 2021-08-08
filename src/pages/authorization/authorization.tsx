@@ -1,8 +1,7 @@
 import { MouseEvent, useState } from 'react';
 
 // Store imports
-import { useDispatchTyped } from '../../hooks';
-import { getLogin } from '../../store/user/userSlice';
+import { getLogin } from '../../store/userSlice';
 
 // Components imports
 import { Loader } from '../../components/loader';
@@ -21,14 +20,12 @@ import { styles } from './styled';
 
 // Additional imports
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 const Authorization = () => {
-  // State values
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // Store values
-  const dispatch = useDispatchTyped();
 
   // GraphQL query hooks
   const [login, { loading: loginLoading }] = useLazyQuery(LOGIN, {

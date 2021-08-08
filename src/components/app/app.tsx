@@ -11,8 +11,8 @@ import Navigation from '../navigation';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 
 // Store imports
-import { useSelectorTyped } from '../../hooks';
-import { selectToken } from '../../store/user/userSlice';
+import { useSelector } from 'react-redux';
+import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Router imports
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
@@ -26,8 +26,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = () => {
-  // Store values
-  const token = useSelectorTyped(selectToken);
+  const token = useSelector(userTokenSelector);
 
   const client = new ApolloClient({
     link: createHttpLink({

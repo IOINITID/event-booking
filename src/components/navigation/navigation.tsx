@@ -4,8 +4,7 @@ import React from 'react';
 import logoIcon from '../../assets/images/logo-icon.svg';
 
 // Store imports
-import { logout, selectToken } from '../../store/user/userSlice';
-import { useDispatchTyped, useSelectorTyped } from '../../hooks';
+import { logout } from '../../store/userSlice';
 
 // Router imports
 import { NavLink } from 'react-router-dom';
@@ -16,6 +15,8 @@ import { styles } from './styled';
 
 // Additional imports
 import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Interfaces and types
 interface ILink {
@@ -28,8 +29,8 @@ interface ILink {
 
 const Navigation = () => {
   // Store values
-  const dispatch = useDispatchTyped();
-  const token = useSelectorTyped(selectToken);
+  const dispatch = useDispatch();
+  const token = useSelector(userTokenSelector);
 
   // Components data
   const links: ILink[] = [
