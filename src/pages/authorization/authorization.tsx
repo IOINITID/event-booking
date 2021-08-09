@@ -13,7 +13,7 @@ import { LOGIN } from '../../graphql/queries';
 
 // Router imports
 import { NavLink } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
+import { Routes } from '../../routes';
 
 // Styles imports
 import { styles } from './styled';
@@ -75,7 +75,7 @@ const Authorization = () => {
           <h2 className={styles.formFieldsTitle}>Войти в свой профиль</h2>
           <p className={styles.formFieldsInfo}>
             У Вас ещё нет аккаунта?{' '}
-            <NavLink className={styles.formFieldsInfoLink} to={ROUTES.AUTHORIZATION}>
+            <NavLink className={styles.formFieldsInfoLink} to={Routes.Authorization}>
               Создать учётную запись
             </NavLink>
           </p>

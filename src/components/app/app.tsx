@@ -16,7 +16,10 @@ import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Router
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { REQUEST_URL, ROUTES } from '../../utils/constants';
+import { Routes } from '../../routes';
+
+// Constants
+import { REQUEST_URL } from '../../utils/constants';
 
 // Additional
 import { ToastContainer } from 'react-toastify';
@@ -44,13 +47,13 @@ const App = () => {
         <Navigation />
         <main className={styles.container}>
           <Switch>
-            {token && <Redirect from={ROUTES.MAIN} to={ROUTES.EVENTS} exact />}
-            {token && <Redirect from={ROUTES.AUTHORIZATION} to={ROUTES.EVENTS} exact />}
-            {!token && <Route path={ROUTES.AUTHORIZATION} component={Authorization} />}
-            {!token && <Route path={ROUTES.REGISTRATION} component={Registration} />}
-            <Route path={ROUTES.EVENTS} component={Events} />
-            {token && <Route path={ROUTES.BOOKINGS} component={Bookings} />}
-            {!token && <Redirect to={ROUTES.AUTHORIZATION} exact />}
+            {token && <Redirect from={Routes.Main} to={Routes.Events} exact />}
+            {token && <Redirect from={Routes.Authorization} to={Routes.Events} exact />}
+            {!token && <Route path={Routes.Authorization} component={Authorization} />}
+            {!token && <Route path={Routes.Registration} component={Registration} />}
+            <Route path={Routes.Events} component={Events} />
+            {token && <Route path={Routes.Bookings} component={Bookings} />}
+            {!token && <Redirect to={Routes.Authorization} exact />}
           </Switch>
         </main>
       </HashRouter>

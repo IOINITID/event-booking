@@ -14,13 +14,13 @@ import { LinkDataType } from './types';
 
 // Router
 import { useLocation } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
-
-// Styles
-import { styles } from './styled';
+import { Routes } from '../../routes';
 
 // Additional
 import { nanoid } from 'nanoid';
+
+// Styles
+import { styles } from './styles';
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -32,35 +32,35 @@ const Navigation = () => {
       id: nanoid(),
       enable: true,
       title: 'Мероприятия',
-      path: ROUTES.EVENTS,
+      path: Routes.Events,
       onClick: null,
     },
     {
       id: nanoid(),
       enable: Boolean(!token),
       title: 'Регистрация',
-      path: ROUTES.REGISTRATION,
+      path: Routes.Registration,
       onClick: null,
     },
     {
       id: nanoid(),
       enable: Boolean(!token),
       title: 'Войти',
-      path: ROUTES.AUTHORIZATION,
+      path: Routes.Authorization,
       onClick: null,
     },
     {
       id: nanoid(),
       enable: Boolean(token),
       title: 'Забронированные',
-      path: ROUTES.BOOKINGS,
+      path: Routes.Bookings,
       onClick: null,
     },
     {
       id: nanoid(),
       enable: Boolean(token),
       title: 'Выйти',
-      path: ROUTES.AUTHORIZATION,
+      path: Routes.Authorization,
       onClick: (event: MouseEvent<HTMLAnchorElement>) => {
         event.currentTarget.blur();
         dispatch(logout());
@@ -70,7 +70,7 @@ const Navigation = () => {
 
   return (
     <header className={styles.header}>
-      <Link to={ROUTES.MAIN}>
+      <Link to={Routes.Main}>
         <img src={logoIcon} width="210" alt="Логотип Event booking." />
       </Link>
       <nav>

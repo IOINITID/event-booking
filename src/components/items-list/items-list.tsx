@@ -4,7 +4,7 @@ import { InfoBanner } from '../info-banner';
 
 // Router imports
 import { useHistory } from 'react-router';
-import { ROUTES } from '../../utils/constants';
+import { Routes } from '../../routes';
 
 // Styles imports
 import { styles } from './styles';
@@ -41,7 +41,7 @@ const ItemsList = (props: ItemsList) => {
       <InfoBanner
         description=" Создай любое мероприятие, и оно появится в этом списке!"
         buttonTitle="Создать мероприятие"
-        onClick={() => history.push(ROUTES.EVENTS)}
+        onClick={() => history.push(Routes.Events)}
       />
     );
   }

@@ -19,7 +19,7 @@ import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Router imports
 import { useHistory } from 'react-router';
-import { ROUTES } from '../../utils/constants';
+import { Routes } from '../../routes';
 
 // Additional imports
 import { toast } from 'react-toastify';
@@ -107,7 +107,7 @@ const Events = () => {
         setIsPreviewOpen(false);
         setPreviewEvent(null);
         dispatch(logout());
-        history.push(ROUTES.AUTHORIZATION);
+        history.push(Routes.Authorization);
       }
       toast(error.message);
     },
@@ -162,7 +162,7 @@ const Events = () => {
       setIsPreviewOpen(false);
       setPreviewEvent(null);
       setIsCreateOpen(false);
-      history.push(ROUTES.AUTHORIZATION);
+      history.push(Routes.Authorization);
       return;
     }
 
@@ -175,7 +175,7 @@ const Events = () => {
 
   const successClickHandler = () => {
     setIsSuccessOpen(false);
-    history.push(ROUTES.BOOKINGS);
+    history.push(Routes.Bookings);
   };
 
   if (createEventLoading || bookEventLoading) {

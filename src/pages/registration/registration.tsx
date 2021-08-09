@@ -10,7 +10,7 @@ import { CREATE_USER } from '../../graphql/mutations';
 
 // Router imports
 import { NavLink, useHistory } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
+import { Routes } from '../../routes';
 
 // Styles imports
 import { styles } from './styled';
@@ -30,7 +30,7 @@ const Registration = () => {
   const [createUser, { loading: createUserLoading }] = useMutation(CREATE_USER, {
     onCompleted: () => {
       toast('Регистрация выполнена успешно.');
-      history.push(ROUTES.AUTHORIZATION);
+      history.push(Routes.Authorization);
     },
   });
 
@@ -65,7 +65,7 @@ const Registration = () => {
           <h2 className={styles.formFieldsTitle}>Регистрация</h2>
           <p className={styles.formFieldsInfo}>
             У Вас уже есть аккаунт?{' '}
-            <NavLink className={styles.formFieldsInfoLink} to={ROUTES.AUTHORIZATION}>
+            <NavLink className={styles.formFieldsInfoLink} to={Routes.Authorization}>
               Войти в свой профиль
             </NavLink>
           </p>

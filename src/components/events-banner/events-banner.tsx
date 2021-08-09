@@ -7,7 +7,7 @@ import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Router imports
 import { NavLink, useHistory } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
+import { Routes } from '../../routes';
 
 // Styles imports
 import { styles } from './styled';
@@ -33,11 +33,11 @@ const EventsBanner = (props: IInfoBanner) => {
           </h2>
           <p className={styles.infoBannerText}>
             У Вас уже есть аккаунт?{' '}
-            <NavLink className={styles.infoBannerLink} to={ROUTES.AUTHORIZATION}>
+            <NavLink className={styles.infoBannerLink} to={Routes.Authorization}>
               Войдите в свой профиль
             </NavLink>
           </p>
-          <Button variant="contained" onClick={() => history.push(ROUTES.REGISTRATION)}>
+          <Button variant="contained" onClick={() => history.push(Routes.Registration)}>
             Создать аккаунт ⟶
           </Button>
         </div>
