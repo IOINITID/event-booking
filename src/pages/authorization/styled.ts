@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import ticketsImage from '../../assets/images/tickets@1x.png';
 import ticketsImageRetina from '../../assets/images/tickets@2x.png';
-import { Retina } from '../../utils/constants';
+import { Retina } from '../../theme';
 
 export const styles = {
   form: css`

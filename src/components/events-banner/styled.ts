@@ -3,7 +3,7 @@ import ticketsImageLight from '../../assets/images/tickets-background-light@1x.p
 import ticketsImageLightRetina from '../../assets/images/tickets-background-light@2x.png';
 import ticketsImageDark from '../../assets/images/tickets-background-dark@1x.png';
 import ticketsImageDarkRetina from '../../assets/images/tickets-background-dark@2x.png';
-import { Retina } from '../../utils/constants';
+import { Retina } from '../../theme';
 
 export const styles = {
   infoBanner: css`

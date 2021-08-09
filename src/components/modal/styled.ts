@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import ticketsImageDark from '../../assets/images/tickets-background-dark@1x.png';
 import ticketsImageDarkRetina from '../../assets/images/tickets-background-dark@2x.png';
-import { Retina } from '../../utils/constants';
+import { Retina } from '../../theme';
 
 export const styles = {
   backdrop: css`
