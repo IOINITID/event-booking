@@ -1,39 +1,33 @@
-import React from 'react';
+import { MouseEvent } from 'react';
 
-// Components imports
+// Components
+import { Link } from '../link';
 import logoIcon from '../../assets/images/logo-icon.svg';
 
-// Store imports
-import { logout } from '../../store/userSlice';
-
-// Router imports
-import { NavLink } from 'react-router-dom';
-import { ROUTES } from '../../utils/constants';
-
-// Styles imports
-import { styles } from './styled';
-
-// Additional imports
-import { nanoid } from 'nanoid';
+// Store
 import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/userSlice';
 import { userTokenSelector } from '../../store/userSlice/selectors';
 
-// Interfaces and types
-interface ILink {
-  id: string;
-  enable: boolean;
-  title: string;
-  path: ROUTES;
-  onClick: () => void | null;
-}
+// Types
+import { LinkDataType } from './types';
+
+// Router
+import { useLocation } from 'react-router-dom';
+import { ROUTES } from '../../utils/constants';
+
+// Styles
+import { styles } from './styled';
+
+// Additional
+import { nanoid } from 'nanoid';
 
 const Navigation = () => {
-  // Store values
   const dispatch = useDispatch();
   const token = useSelector(userTokenSelector);
+  const { pathname } = useLocation();
 
-  // Components data
-  const links: ILink[] = [
+  const links: LinkDataType[] = [
     {
       id: nanoid(),
       enable: true,
@@ -67,24 +61,31 @@ const Navigation = () => {
       enable: Boolean(token),
       title: 'Выйти',
       path: ROUTES.AUTHORIZATION,
-      onClick: () => dispatch(logout()),
+      onClick: (event: MouseEvent<HTMLAnchorElement>) => {
+        event.currentTarget.blur();
+        dispatch(logout());
+      },
     },
   ];
 
   return (
     <header className={styles.header}>
-      <NavLink to={ROUTES.MAIN}>
+      <Link to={ROUTES.MAIN}>
         <img src={logoIcon} width="210" alt="Логотип Event booking." />
-      </NavLink>
+      </Link>
       <nav>
         <ul className={styles.navigationList}>
-          {links.map((link: ILink) => {
+          {links.map((link: LinkDataType) => {
             return (
               link.enable && (
                 <li key={link.id} className={styles.navigationItem}>
-                  <NavLink className={styles.navigationLink} to={link.path} onClick={link.onClick}>
+                  <Link
+                    variant={pathname === link.path ? 'contained' : 'outlined'}
+                    to={link.path}
+                    onClick={link.onClick}
+                  >
                     {link.title}
-                  </NavLink>
+                  </Link>
                 </li>
               )
             );

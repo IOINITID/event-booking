@@ -8,7 +8,7 @@ import { cx } from '@emotion/css';
 // Styles
 import { styles } from './styles';
 
-const Link = ({ className, variant, to, children }: LinkProps) => {
+const Link = ({ className, variant, to, children, onClick }: LinkProps) => {
   const linkStyles = cx(
     styles.root,
     variant === 'text' && styles.text,
@@ -18,7 +18,7 @@ const Link = ({ className, variant, to, children }: LinkProps) => {
   );
 
   return (
-    <ReactRouterLink to={to} className={linkStyles}>
+    <ReactRouterLink to={to} className={linkStyles} onClick={onClick}>
       {children}
     </ReactRouterLink>
   );
