@@ -3,7 +3,7 @@ import ticketsImageLight from '../../assets/images/tickets-background-light@1x.p
 import ticketsImageLightRetina from '../../assets/images/tickets-background-light@2x.png';
 import ticketsImageDark from '../../assets/images/tickets-background-dark@1x.png';
 import ticketsImageDarkRetina from '../../assets/images/tickets-background-dark@2x.png';
-import { retina } from '../../utils/constants';
+import { Retina } from '../../utils/constants';
 
 export const styles = {
   infoBanner: css`
@@ -18,7 +18,7 @@ export const styles = {
     border-radius: 24px;
     row-gap: 16px;
 
-    @media (min-resolution: ${retina.dppx}dppx), (min-resolution: ${retina.dpi}dpi) {
+    @media (min-resolution: ${Retina.dppx}dppx), (min-resolution: ${Retina.dpi}dpi) {
       background-image: url(${ticketsImageDarkRetina});
     }
   `,
@@ -27,7 +27,7 @@ export const styles = {
     row-gap: 32px;
     background-image: url(${ticketsImageLight});
 
-    @media (min-resolution: ${retina.dppx}dppx), (min-resolution: ${retina.dpi}dpi) {
+    @media (min-resolution: ${Retina.dppx}dppx), (min-resolution: ${Retina.dpi}dpi) {
       background-image: url(${ticketsImageLightRetina});
     }
   `,

@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import ticketsImage from '../../assets/images/tickets@1x.png';
 import ticketsImageRetina from '../../assets/images/tickets@2x.png';
-import { retina } from '../../utils/constants';
+import { Retina } from '../../utils/constants';
 
 export const styles = {
   form: css`
@@ -22,7 +22,7 @@ export const styles = {
     border-radius: 32px 0 0 32px;
     row-gap: 40px;
 
-    @media (min-resolution: ${retina.dppx}dppx), (min-resolution: ${retina.dpi}dpi) {
+    @media (min-resolution: ${Retina.dppx}dppx), (min-resolution: ${Retina.dpi}dpi) {
       background-image: url(${ticketsImageRetina});
     }
   `,
