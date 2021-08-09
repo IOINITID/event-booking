@@ -47,7 +47,6 @@ export const styles = {
     font-family: 'Grandis Extended', 'Arial', sans-serif;
     color: #282828;
     text-decoration: none;
-    letter-spacing: -0.002em;
     background: transparent;
     border: 1px solid transparent;
     border-radius: 8px;
@@ -63,7 +62,6 @@ export const styles = {
       line-height: 24px;
       font-family: 'Grandis Extended', 'Arial', sans-serif;
       color: #282828;
-      letter-spacing: -0.002em;
       border: 1px solid #282828;
       border-radius: 8px;
     }
@@ -78,7 +76,6 @@ export const styles = {
       line-height: 24px;
       font-family: 'Grandis Extended', 'Arial', sans-serif;
       color: #ffffff;
-      letter-spacing: -0.002em;
       background: #282828;
       border: 1px solid #282828;
       border-radius: 8px;
