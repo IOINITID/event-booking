@@ -75,7 +75,7 @@ const Authorization = () => {
           <h2 className={styles.formFieldsTitle}>Войти в свой профиль</h2>
           <p className={styles.formFieldsInfo}>
             У Вас ещё нет аккаунта?{' '}
-            <NavLink className={styles.formFieldsInfoLink} to={Routes.Authorization}>
+            <NavLink className={styles.formFieldsInfoLink} to={Routes.Registration}>
               Создать учётную запись
             </NavLink>
           </p>
