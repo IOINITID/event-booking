@@ -1,58 +1,46 @@
-import { ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 
-// Components imports
+// Components
 import { Button } from '../button';
 
-// Styles imports
-import { styles } from './styles';
+// Types
+import { ModalProps } from './types';
 
-// Additional imports
+// Additional
 import { css, cx } from '@emotion/css';
 
-// Interfaces and types
-export interface IModal {
-  isOpen: boolean;
-  cancelButton: {
-    title: string;
-    onClick: () => void;
-  };
-  confirmButton: {
-    title: string;
-    onClick: () => void;
-  };
-  children: ReactNode;
-  width: number;
-}
+// Styles
+import { styles } from './styles';
 
-const Modal = (props: IModal) => {
-  // Body overflow updating
+const Modal = ({ width, isOpen, children, cancelButton, confirmButton }: ModalProps) => {
   useEffect(() => {
-    if (props.isOpen) {
+    if (isOpen) {
       document.body.style.overflow = 'hidden';
     }
+
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [props.isOpen]);
+  }, [isOpen]);
 
   return (
-    props.isOpen && (
+    isOpen && (
       <div className={styles.backdrop}>
         <div
           className={cx(
             styles.container,
             css`
-              width: ${props.width}px;
+              width: ${width}px;
             `
           )}
         >
-          <div>{props.children}</div>
+          <div>{children}</div>
           <div className={styles.actions}>
-            <Button variant="outlined" onClick={props.cancelButton.onClick}>
-              {props.cancelButton.title}
+            <Button variant="outlined" onClick={cancelButton.onClick}>
+              {cancelButton.title}
             </Button>
-            <Button variant="contained" onClick={props.confirmButton.onClick}>
-              {props.confirmButton.title}
+            <Button variant="contained" onClick={confirmButton.onClick}>
+              {confirmButton.title}
             </Button>
           </div>
         </div>
