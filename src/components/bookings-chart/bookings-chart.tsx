@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Styles imports
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Additional imports
 import { PieChart, Pie, Cell } from 'recharts';

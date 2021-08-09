@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from 'react';
 import { Button } from '../button';
 
 // Styles imports
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Additional imports
 import { css, cx } from '@emotion/css';

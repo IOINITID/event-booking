@@ -2,7 +2,7 @@
 import { Button } from '../button';
 
 // Styles imports
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Additional imports
 import { cx } from '@emotion/css';

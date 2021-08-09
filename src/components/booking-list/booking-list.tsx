@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 import { Routes } from '../../routes';
 
 // Styles imports
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Additional imports
 import dayjs from 'dayjs';

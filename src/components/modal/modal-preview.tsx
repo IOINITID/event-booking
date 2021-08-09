@@ -2,7 +2,7 @@
 import { Modal } from './index';
 
 // Styles
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Additional
 import dayjs from 'dayjs';

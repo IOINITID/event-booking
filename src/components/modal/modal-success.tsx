@@ -2,7 +2,7 @@
 import { Modal } from './modal';
 
 // Styles imports
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Additional imports
 import { css, cx } from '@emotion/css';

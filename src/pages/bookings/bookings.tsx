@@ -14,7 +14,7 @@ import { DELETE_EVENT } from '../../graphql/mutations';
 import { CANCEL_BOOKING } from '../../graphql/mutations';
 
 // Styles imports
-import { styles } from './styled';
+import { styles } from './styles';
 
 // Additional imports
 import { toast } from 'react-toastify';
