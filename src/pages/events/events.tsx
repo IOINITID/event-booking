@@ -10,8 +10,8 @@ import { ModalSuccess } from '../../components/modal/modal-success';
 
 // GraphQL imports
 import { useMutation, useQuery } from '@apollo/client';
-import { EVENTS } from '../../graphql/queries';
-import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
+import { EVENTS } from '../../services/graphql/queries';
+import { CREATE_EVENT, BOOK_EVENT } from '../../services/graphql/mutations';
 
 // Store imports
 import { setLogout } from '../../store/userSlice';

@@ -6,7 +6,7 @@ import { Button } from '../../components/button';
 
 // GraphQL imports
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../../graphql/mutations';
+import { CREATE_USER } from '../../services/graphql/mutations';
 
 // Router imports
 import { NavLink, useHistory } from 'react-router-dom';

@@ -9,7 +9,7 @@ import { Button } from '../../components/button';
 
 // GraphQL imports
 import { useLazyQuery } from '@apollo/client';
-import { LOGIN } from '../../graphql/queries';
+import { LOGIN } from '../../services/graphql/queries';
 
 // Router imports
 import { NavLink } from 'react-router-dom';
