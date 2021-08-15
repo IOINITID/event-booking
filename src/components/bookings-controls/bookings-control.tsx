@@ -1,44 +1,49 @@
-// Components imports
+// Components
 import { Button } from '../button';
 
-// Styles imports
-import { styles } from './styles';
+// Types
+import { BookingsControlProps, ControlsDataType } from './types';
 
 // Additional imports
 import { cx } from '@emotion/css';
 
-// Interfaces and types
-interface IBookingsControl {
-  bookings: any;
-  events: any;
-  activeOutputType: 'booking' | 'my' | 'data';
-  onTypeChange: (type: 'booking' | 'my' | 'data') => void;
-}
+// Styles
+import { styles } from './styles';
 
-const BookingsControl = (props: IBookingsControl) => {
+const BookingsControl = ({ bookings, events, activeOutputType, onTypeChange }: BookingsControlProps) => {
+  const ControlsData: ControlsDataType[] = [
+    {
+      title: 'Забронированные',
+      type: 'booking',
+      length: bookings.length,
+    },
+    {
+      title: 'Созданные мной',
+      type: 'my',
+      length: events.length,
+    },
+    {
+      title: 'Статистика',
+      type: 'data',
+    },
+  ];
+
   return (
     <div className={styles.control}>
-      <Button
-        className={cx(styles.button, props.activeOutputType !== 'my' && props.activeOutputType !== 'data' && 'active')}
-        variant="contained"
-        onClick={() => props.onTypeChange('booking')}
-      >
-        Забронированные ({props.bookings.length || 0})
-      </Button>
-      <Button
-        className={cx(styles.button, props.activeOutputType === 'my' && 'active')}
-        variant="contained"
-        onClick={() => props.onTypeChange('my')}
-      >
-        Созданные мной ({props.events.length || 0})
-      </Button>
-      <Button
-        className={cx(styles.button, props.activeOutputType === 'data' && 'active')}
-        variant="contained"
-        onClick={() => props.onTypeChange('data')}
-      >
-        Статистика
-      </Button>
+      {ControlsData.map(({ title, type, length }, index) => {
+        const handleControlButtonClick = () => onTypeChange(type);
+
+        return (
+          <Button
+            key={`${type}-${index}`}
+            className={cx(styles.button, activeOutputType === type && 'active')}
+            variant="contained"
+            onClick={handleControlButtonClick}
+          >
+            {title} ({length || 0})
+          </Button>
+        );
+      })}
     </div>
   );
 };
