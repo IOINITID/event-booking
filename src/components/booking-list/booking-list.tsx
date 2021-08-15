@@ -6,52 +6,38 @@ import { InfoBanner } from '../info-banner';
 import { useHistory } from 'react-router';
 import { Routes } from '../../routes';
 
-// Styles imports
-import { styles } from './styles';
+// Types
+import { BookingListProps, BookingProps } from './types';
 
 // Additional imports
 import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 
-// Interfaces and types
-interface IBooking {
-  _id: string;
-  event: IEvent;
-}
+// Styles imports
+import { styles } from './styles';
 
-interface IEvent {
-  title: string;
-  price: string;
-  date: string;
-  location: string;
-  image: string;
-}
-
-interface IBookingList {
-  bookings: IBooking[];
-  onDelete: (bookingId: string) => void;
-}
-
-const BookingList = (props: IBookingList) => {
-  // Store values
+const BookingList = ({ bookings, onDelete }: BookingListProps) => {
   const history = useHistory();
 
-  if (!props.bookings.length) {
+  if (!bookings.length) {
+    const handleInfoBannerButtonClick = () => history.push(Routes.Events);
     return (
       <InfoBanner
         description="Забронируй любое мероприятие, и оно появится в этом списке!"
         buttonTitle="Забронировать мероприятие"
-        onClick={() => history.push(Routes.Events)}
+        onClick={handleInfoBannerButtonClick}
       />
     );
   }
 
   return (
     <ul className={styles.list}>
-      {props.bookings.map((booking: IBooking, index: number) => {
-        const { title, image, date, price, location } = booking.event;
+      {bookings.map(({ _id, event }: BookingProps, index: number) => {
+        const { title, image, date, price, location } = event;
+        const handleBookingListButtonClick = () => onDelete(_id);
 
         return (
-          <li className={styles.listItem} key={booking._id}>
+          <li className={styles.listItem} key={_id}>
             <span className={styles.number}>{index + 1}</span>
             <img className={styles.image} src={image} alt="Изображение мероприятия." />
             <div className={styles.title}>{title}</div>
@@ -62,7 +48,7 @@ const BookingList = (props: IBookingList) => {
             <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button variant="outlined" className={styles.button} onClick={() => props.onDelete(booking._id)}>
+              <Button variant="outlined" className={styles.button} onClick={handleBookingListButtonClick}>
                 Отменить
               </Button>
             </div>

@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 // Additional
 import dayjs from 'dayjs';
-import ru from 'dayjs/locale/ru';
+import 'dayjs/locale/ru';
 import { cx } from '@emotion/css';
 
 // Interfaces and types
@@ -55,7 +55,7 @@ const ModalPreview = (props: IModalPreview) => {
         <h3 className={styles.title}>{props.event?.title}</h3>
         <p className={styles.description}>{props.event?.description}</p>
         <div className={styles.infoContainer}>
-          <time className={styles.time}>{dayjs(props.event?.date).locale(ru).format('DD MMMM — HH:mm')}</time>
+          <time className={styles.time}>{dayjs(props.event?.date).locale('ru').format('DD MMMM — HH:mm')}</time>
           <p className={styles.location}>{props.event?.location}</p>
         </div>
       </div>
