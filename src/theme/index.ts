@@ -1,10 +1,10 @@
 export const DeviceWidth = {
-  desktop: 1440,
-  tablet: 768,
-  mobile: 320,
+  Desktop: 1440,
+  Tablet: 768,
+  Mobile: 320,
 };
 
 export enum Retina {
-  dppx = 1.5,
-  dpi = 144,
+  Dppx = 1.5,
+  Dpi = 144,
 }

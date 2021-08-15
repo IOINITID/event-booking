@@ -18,7 +18,7 @@ export const styles = {
     border-radius: 24px;
     row-gap: 16px;
 
-    @media (min-resolution: ${Retina.dppx}dppx), (min-resolution: ${Retina.dpi}dpi) {
+    @media (min-resolution: ${Retina.Dppx}dppx), (min-resolution: ${Retina.Dpi}dpi) {
       background-image: url(${ticketsImageDarkRetina});
     }
   `,
@@ -27,7 +27,7 @@ export const styles = {
     row-gap: 32px;
     background-image: url(${ticketsImageLight});
 
-    @media (min-resolution: ${Retina.dppx}dppx), (min-resolution: ${Retina.dpi}dpi) {
+    @media (min-resolution: ${Retina.Dppx}dppx), (min-resolution: ${Retina.Dpi}dpi) {
       background-image: url(${ticketsImageLightRetina});
     }
   `,

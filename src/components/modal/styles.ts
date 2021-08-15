@@ -32,7 +32,7 @@ export const styles = {
     background-position: 50% 100%;
     background-size: contain;
 
-    @media (min-resolution: ${Retina.dppx}dppx), (min-resolution: ${Retina.dpi}dpi) {
+    @media (min-resolution: ${Retina.Dppx}dppx), (min-resolution: ${Retina.Dpi}dpi) {
       background: url(${ticketsImageDarkRetina}), linear-gradient(99.19deg, #9ae048 15.01%, #79ff76 95.29%);
       background-repeat: no-repeat;
       background-position: 50% 100%;
@@ -43,7 +43,7 @@ export const styles = {
     background: linear-gradient(100.38deg, #ffffff -15.69%, rgba(255, 255, 255, 0) 17.45%),
       radial-gradient(132.55% 273% at 103.38% -8.2%, #ef4723 0%, rgba(252, 207, 149, 0.51) 74.11%);
 
-    @media (min-resolution: ${Retina.dppx}dppx), (min-resolution: ${Retina.dpi}dpi) {
+    @media (min-resolution: ${Retina.Dppx}dppx), (min-resolution: ${Retina.Dpi}dpi) {
       background: linear-gradient(100.38deg, #ffffff -15.69%, rgba(255, 255, 255, 0) 17.45%),
         radial-gradient(132.55% 273% at 103.38% -8.2%, #ef4723 0%, rgba(252, 207, 149, 0.51) 74.11%);
     }

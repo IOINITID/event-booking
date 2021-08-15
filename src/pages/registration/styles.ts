@@ -22,7 +22,7 @@ export const styles = {
     border-radius: 32px 0 0 32px;
     row-gap: 40px;
 
-    @media (min-resolution: ${Retina.dppx}dppx), (min-resolution: ${Retina.dpi}dpi) {
+    @media (min-resolution: ${Retina.Dppx}dppx), (min-resolution: ${Retina.Dpi}dpi) {
       background-image: url(${ticketsImageRetina});
     }
   `,
