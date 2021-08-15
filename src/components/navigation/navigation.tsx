@@ -16,6 +16,7 @@ import { nanoid } from 'nanoid';
 
 // Styles
 import { styles } from './styles';
+import { useRenderCount } from '../../hooks';
 
 const Navigation = () => {
   const { pathname, isAuthorized, onLogoutClick } = useNavigation();

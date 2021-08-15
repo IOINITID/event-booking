@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-// Components imports
+// Components
 import { Loader } from '../../components/loader';
 import { EventsBanner } from '../../components/events-banner';
 import { EventList } from '../../components/event-list';
@@ -8,25 +8,25 @@ import { ModalPreview } from '../../components/modal/modal-preview';
 import { ModalCreateEvent } from '../../components/modal/modal-create-event';
 import { ModalSuccess } from '../../components/modal/modal-success';
 
-// GraphQL imports
+// Services
 import { useMutation, useQuery } from '@apollo/client';
 import { EVENTS } from '../../services/graphql/queries';
 import { CREATE_EVENT, BOOK_EVENT } from '../../services/graphql/mutations';
 
-// Store imports
+// Store
+import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../store/userSlice';
 import { userTokenSelector } from '../../store/userSlice/selectors';
 
-// Router imports
+// Router
 import { useHistory } from 'react-router';
 import { Routes } from '../../routes';
 
-// Additional imports
+// Additional
 import { toast } from 'react-toastify';
-import { useDispatch, useSelector } from 'react-redux';
 
 // Interfaces and types
-interface IEvent {
+type EventType = {
   _id: string;
   title: string;
   description: string;
@@ -38,16 +38,16 @@ interface IEvent {
     _id: string;
     email: string;
   };
-}
+};
 
-interface IEventData {
+type EventDataType = {
   title: string;
   description: string;
   date: string;
   price: string;
   location: string;
   image: string;
-}
+};
 
 const Events = () => {
   const dispatch = useDispatch();
@@ -57,8 +57,8 @@ const Events = () => {
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
-  const [previewEvent, setPreviewEvent] = useState<IEvent | null>(null);
-  const [events, setEvents] = useState<IEvent[] | []>([]);
+  const [previewEvent, setPreviewEvent] = useState<EventType | null>(null);
+  const [events, setEvents] = useState<EventType[] | []>([]);
 
   const { loading: eventsLoading } = useQuery(EVENTS, {
     onCompleted: (data) => {
@@ -114,14 +114,14 @@ const Events = () => {
     fetchPolicy: 'no-cache',
   });
 
-  const modalConfirmHandler = (eventData: IEventData) => {
+  const modalConfirmHandler = ({ title, description, price, date, location, image }: EventDataType) => {
     if (
-      eventData.title.trim().length === 0 ||
-      eventData.description.trim().length === 0 ||
-      eventData.price.trim().length === 0 ||
-      eventData.date.trim().length === 0 ||
-      eventData.location.trim().length === 0 ||
-      !eventData.image
+      title.trim().length === 0 ||
+      description.trim().length === 0 ||
+      price.trim().length === 0 ||
+      date.trim().length === 0 ||
+      location.trim().length === 0 ||
+      !image
     ) {
       toast('Все поля должны быть заполнены.');
       return;
@@ -129,12 +129,12 @@ const Events = () => {
 
     createEvent({
       variables: {
-        title: eventData.title,
-        description: eventData.description,
-        price: Number(eventData.price),
-        date: eventData.date,
-        location: eventData.location,
-        image: eventData.image,
+        title,
+        description,
+        price: Number(price),
+        date,
+        location,
+        image,
       },
     });
 
@@ -154,7 +154,7 @@ const Events = () => {
 
   const handleDetailClick = (eventId: string) => {
     setIsPreviewOpen(true);
-    setPreviewEvent(events.find((event: IEvent) => event._id === eventId));
+    setPreviewEvent(events.find(({ _id }: EventType) => _id === eventId));
   };
 
   const bookEventHandler = () => {
