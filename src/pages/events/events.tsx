@@ -14,7 +14,7 @@ import { EVENTS } from '../../graphql/queries';
 import { CREATE_EVENT, BOOK_EVENT } from '../../graphql/mutations';
 
 // Store imports
-import { logout } from '../../store/userSlice';
+import { setLogout } from '../../store/userSlice';
 import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Router imports
@@ -106,7 +106,7 @@ const Events = () => {
       if (error.message === 'Необходима авторизация.') {
         setIsPreviewOpen(false);
         setPreviewEvent(null);
-        dispatch(logout());
+        dispatch(setLogout());
         history.push(Routes.Authorization);
       }
       toast(error.message);

@@ -1,34 +1,35 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface UserState {
-  token: string;
-  userId: string;
-}
+// Constants
+import { MODULE_NAME, LocalStorage } from './constants';
+
+// Types
+import { LoginType, LogoutType, UserState } from './types';
 
 const initialState: UserState = {
-  token: localStorage.getItem('userToken'),
-  userId: localStorage.getItem('userId'),
+  token: localStorage.getItem(LocalStorage.TOKEN) || '',
+  id: localStorage.getItem(LocalStorage.ID) || '',
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: MODULE_NAME,
   initialState,
   reducers: {
-    getLogin: (state: UserState, action: PayloadAction<UserState>) => {
-      state.token = action.payload.token;
-      state.userId = action.payload.userId;
-      localStorage.setItem('userToken', action.payload.token);
-      localStorage.setItem('userId', action.payload.userId);
+    setLogin: (state: UserState, { payload }: PayloadAction<LoginType>) => {
+      state.token = payload.token;
+      state.id = payload.id;
+      localStorage.setItem(LocalStorage.TOKEN, payload.token);
+      localStorage.setItem(LocalStorage.ID, payload.id);
     },
-    logout: (state: UserState) => {
-      state.token = null;
-      state.userId = null;
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('userId');
+    setLogout: (state: LogoutType) => {
+      state.token = '';
+      state.id = '';
+      localStorage.removeItem(LocalStorage.TOKEN);
+      localStorage.removeItem(LocalStorage.ID);
     },
   },
 });
 
-export const { getLogin, logout } = userSlice.actions;
+export const { setLogin, setLogout } = userSlice.actions;
 
 export default userSlice.reducer;

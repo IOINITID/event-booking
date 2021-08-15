@@ -6,7 +6,7 @@ import logoIcon from '../../assets/images/logo-icon.svg';
 
 // Store
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store/userSlice';
+import { setLogout } from '../../store/userSlice';
 import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Types
@@ -63,7 +63,7 @@ const Navigation = () => {
       path: Routes.Authorization,
       onClick: (event: MouseEvent<HTMLAnchorElement>) => {
         event.currentTarget.blur();
-        dispatch(logout());
+        dispatch(setLogout());
       },
     },
   ];

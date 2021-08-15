@@ -1,7 +1,7 @@
 import { MouseEvent, useState } from 'react';
 
 // Store imports
-import { getLogin } from '../../store/userSlice';
+import { setLogin } from '../../store/userSlice';
 
 // Components imports
 import { Loader } from '../../components/loader';
@@ -31,9 +31,9 @@ const Authorization = () => {
   const [login, { loading: loginLoading }] = useLazyQuery(LOGIN, {
     onCompleted: (data) => {
       dispatch(
-        getLogin({
+        setLogin({
           token: data.login.token,
-          userId: data.login.userId,
+          id: data.login.userId,
         })
       );
       toast(data.login.message);
