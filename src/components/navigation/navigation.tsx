@@ -9,12 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../store/userSlice';
 import { userTokenSelector } from '../../store/userSlice/selectors';
 
-// Types
-import { LinkDataType } from './types';
-
 // Router
 import { useLocation } from 'react-router-dom';
 import { Routes } from '../../routes';
+
+// Types
+import { LinkDataType } from './types';
 
 // Additional
 import { nanoid } from 'nanoid';
@@ -27,7 +27,7 @@ const Navigation = () => {
   const token = useSelector(userTokenSelector);
   const { pathname } = useLocation();
 
-  const links: LinkDataType[] = [
+  const LinksData: LinkDataType[] = [
     {
       id: nanoid(),
       enable: true,
@@ -75,16 +75,12 @@ const Navigation = () => {
       </Link>
       <nav>
         <ul className={styles.navigationList}>
-          {links.map((link: LinkDataType) => {
+          {LinksData.map(({ id, enable, title, path, onClick }: LinkDataType) => {
             return (
-              link.enable && (
-                <li key={link.id} className={styles.navigationItem}>
-                  <Link
-                    variant={pathname === link.path ? 'contained' : 'outlined'}
-                    to={link.path}
-                    onClick={link.onClick}
-                  >
-                    {link.title}
+              enable && (
+                <li key={id} className={styles.navigationItem}>
+                  <Link variant={pathname === path ? 'contained' : 'outlined'} to={path} onClick={onClick}>
+                    {title}
                   </Link>
                 </li>
               )
