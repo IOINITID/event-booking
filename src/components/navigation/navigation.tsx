@@ -23,7 +23,7 @@ const Navigation = () => {
   const LinksData: LinkDataType[] = [
     {
       id: nanoid(),
-      enable: isAuthorized,
+      enable: true,
       title: 'Мероприятия',
       path: Routes.Events,
       onClick: null,
