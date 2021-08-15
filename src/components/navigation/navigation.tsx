@@ -1,20 +1,15 @@
-import { MouseEvent } from 'react';
-
 // Components
 import { Link } from '../link';
 import logoIcon from '../../assets/images/logo-icon.svg';
 
-// Store
-import { useDispatch, useSelector } from 'react-redux';
-import { setLogout } from '../../store/userSlice';
-import { userTokenSelector } from '../../store/userSlice/selectors';
-
 // Router
-import { useLocation } from 'react-router-dom';
 import { Routes } from '../../routes';
 
 // Types
 import { LinkDataType } from './types';
+
+// Hooks
+import { useNavigation } from './hooks';
 
 // Additional
 import { nanoid } from 'nanoid';
@@ -23,48 +18,43 @@ import { nanoid } from 'nanoid';
 import { styles } from './styles';
 
 const Navigation = () => {
-  const dispatch = useDispatch();
-  const token = useSelector(userTokenSelector);
-  const { pathname } = useLocation();
+  const { pathname, isAuthorized, onLogoutClick } = useNavigation();
 
   const LinksData: LinkDataType[] = [
     {
       id: nanoid(),
-      enable: true,
+      enable: isAuthorized,
       title: 'Мероприятия',
       path: Routes.Events,
       onClick: null,
     },
     {
       id: nanoid(),
-      enable: Boolean(!token),
+      enable: !isAuthorized,
       title: 'Регистрация',
       path: Routes.Registration,
       onClick: null,
     },
     {
       id: nanoid(),
-      enable: Boolean(!token),
+      enable: !isAuthorized,
       title: 'Войти',
       path: Routes.Authorization,
       onClick: null,
     },
     {
       id: nanoid(),
-      enable: Boolean(token),
+      enable: isAuthorized,
       title: 'Забронированные',
       path: Routes.Bookings,
       onClick: null,
     },
     {
       id: nanoid(),
-      enable: Boolean(token),
+      enable: isAuthorized,
       title: 'Выйти',
       path: Routes.Authorization,
-      onClick: (event: MouseEvent<HTMLAnchorElement>) => {
-        event.currentTarget.blur();
-        dispatch(setLogout());
-      },
+      onClick: onLogoutClick,
     },
   ];
 
