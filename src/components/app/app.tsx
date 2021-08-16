@@ -5,7 +5,6 @@ import { Authorization } from '../../pages/authorization';
 import { Registration } from '../../pages/registration';
 import { Events } from '../../pages/events';
 import { Bookings } from '../../pages/bookings';
-import { Navigation } from '../navigation';
 
 // GraphQL
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
@@ -27,6 +26,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 // Styles
 import { styles } from './styles';
+import { Header } from '../header';
 
 const App = () => {
   const token = useSelector(userTokenSelector);
@@ -44,7 +44,7 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <HashRouter>
-        <Navigation />
+        <Header />
         <main className={styles.container}>
           <Switch>
             {token && <Redirect from={Routes.Main} to={Routes.Events} exact />}

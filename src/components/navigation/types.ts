@@ -8,3 +8,8 @@ export type LinkDataType = {
   path: Routes;
   onClick: (event: MouseEvent<HTMLAnchorElement>) => void | null;
 };
+
+export type NavigationProps = {
+  pathname: string;
+  linksData: LinkDataType[];
+};
