@@ -1,13 +1,12 @@
-// Components imports
+// Components
 import { Button } from '../button';
 import { InfoBanner } from '../info-banner';
 
-// Router imports
-import { useHistory } from 'react-router';
-import { Routes } from '../../routes';
-
 // Types
 import { BookingListProps, BookingProps } from './types';
+
+// Hooks
+import { useInfoBanner } from '../info-banner/hooks';
 
 // Additional imports
 import dayjs from 'dayjs';
@@ -17,15 +16,16 @@ import 'dayjs/locale/ru';
 import { styles } from './styles';
 
 const BookingList = ({ bookings, onDelete }: BookingListProps) => {
-  const history = useHistory();
+  const { title, description, buttonTitle, handleInfoBannerClick } = useInfoBanner('bookings');
 
-  if (!bookings.length) {
-    const handleInfoBannerButtonClick = () => history.push(Routes.Events);
+  if (bookings.length === 0) {
     return (
       <InfoBanner
-        description="Забронируй любое мероприятие, и оно появится в этом списке!"
-        buttonTitle="Забронировать мероприятие"
-        onClick={handleInfoBannerButtonClick}
+        type="bookings"
+        title={title}
+        description={description}
+        buttonTitle={buttonTitle}
+        onClick={handleInfoBannerClick}
       />
     );
   }

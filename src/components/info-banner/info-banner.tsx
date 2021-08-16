@@ -1,26 +1,32 @@
-// Components imports
+// Components
 import { Button } from '../button';
 
-// Styles imports
+// Types
+import { InfoBannerProps } from './types';
+
+// Additional
+import { css, cx } from '@emotion/css';
+
+// Styles
 import { styles } from './styles';
 
-// Interfaces and types
-interface IEventsBanner {
-  description: string;
-  buttonTitle: string;
-  onClick: () => void;
-}
-
-const InfoBanner = (props: IEventsBanner) => {
+const InfoBanner = ({ type, title, description, buttonTitle, onClick }: InfoBannerProps) => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>
-        Здесь пока пусто.
+      <h2
+        className={cx(
+          styles.heading,
+          css`
+            max-width: ${type === 'events' ? '663px' : '752px'};
+          `
+        )}
+      >
+        {title}
         <br />
-        {props.description}
+        {description}
       </h2>
-      <Button variant="contained" onClick={props.onClick}>
-        {props.buttonTitle} ⟶
+      <Button variant="contained" onClick={onClick}>
+        {buttonTitle}
       </Button>
     </div>
   );
