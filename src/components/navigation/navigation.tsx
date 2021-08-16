@@ -2,68 +2,24 @@
 import { Link } from '../link';
 import { Logo } from '../logo';
 
-// Router
-import { Routes } from '../../routes';
-
 // Types
 import { LinkDataType } from './types';
 
 // Hooks
 import { useNavigation } from './hooks';
 
-// Additional
-import { nanoid } from 'nanoid';
-
 // Styles
 import { styles } from './styles';
 
 const Navigation = () => {
-  const { pathname, isAuthorized, onLogoutClick } = useNavigation();
-
-  const LinksData: LinkDataType[] = [
-    {
-      id: nanoid(),
-      enable: true,
-      title: 'Мероприятия',
-      path: Routes.Events,
-      onClick: null,
-    },
-    {
-      id: nanoid(),
-      enable: !isAuthorized,
-      title: 'Регистрация',
-      path: Routes.Registration,
-      onClick: null,
-    },
-    {
-      id: nanoid(),
-      enable: !isAuthorized,
-      title: 'Войти',
-      path: Routes.Authorization,
-      onClick: null,
-    },
-    {
-      id: nanoid(),
-      enable: isAuthorized,
-      title: 'Забронированные',
-      path: Routes.Bookings,
-      onClick: null,
-    },
-    {
-      id: nanoid(),
-      enable: isAuthorized,
-      title: 'Выйти',
-      path: Routes.Authorization,
-      onClick: onLogoutClick,
-    },
-  ];
+  const { pathname, linksData } = useNavigation();
 
   return (
     <header className={styles.header}>
       <Logo width={210} />
       <nav>
         <ul className={styles.navigationList}>
-          {LinksData.map(({ id, enable, title, path, onClick }: LinkDataType) => {
+          {linksData.map(({ id, enable, title, path, onClick }: LinkDataType) => {
             return (
               enable && (
                 <li key={id} className={styles.navigationItem}>
