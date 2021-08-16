@@ -1,6 +1,6 @@
 // Components
 import { Link } from '../link';
-import logoIcon from '../../assets/images/logo-icon.svg';
+import { Logo } from '../logo';
 
 // Router
 import { Routes } from '../../routes';
@@ -16,7 +16,6 @@ import { nanoid } from 'nanoid';
 
 // Styles
 import { styles } from './styles';
-import { useRenderCount } from '../../hooks';
 
 const Navigation = () => {
   const { pathname, isAuthorized, onLogoutClick } = useNavigation();
@@ -61,9 +60,7 @@ const Navigation = () => {
 
   return (
     <header className={styles.header}>
-      <Link to={Routes.Main}>
-        <img src={logoIcon} width="210" alt="Логотип Event booking." />
-      </Link>
+      <Logo width={210} />
       <nav>
         <ul className={styles.navigationList}>
           {LinksData.map(({ id, enable, title, path, onClick }: LinkDataType) => {
