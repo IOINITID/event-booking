@@ -52,9 +52,9 @@ export const DELETE_EVENT = gql`
   }
 `;
 
-export const CREATE_USER = gql`
-  mutation CreateUser($email: String!, $password: String!) {
-    createUser(email: $email, password: $password) {
+export const REGISTRATION = gql`
+  mutation Registration($email: String!, $password: String!) {
+    registration(email: $email, password: $password) {
       id
       token
     }

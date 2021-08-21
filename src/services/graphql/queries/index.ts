@@ -18,9 +18,9 @@ export const EVENTS = gql`
   }
 `;
 
-export const LOGIN = gql`
-  query Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+export const AUTHORIZATION = gql`
+  query Authorization($email: String!, $password: String!) {
+    authorization(email: $email, password: $password) {
       id
       token
     }

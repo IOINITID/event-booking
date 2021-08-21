@@ -14,7 +14,7 @@ import { Routes } from '../../routes';
 
 // Services
 import { useLazyQuery } from '@apollo/client';
-import { LOGIN } from '../../services/graphql/queries';
+import { AUTHORIZATION } from '../../services/graphql/queries';
 
 // Additional
 import { toast } from 'react-toastify';
@@ -36,8 +36,8 @@ const Authorization = () => {
 
   const handleLoginError = (message: string) => toast.error(message);
 
-  const [login, { loading }] = useLazyQuery(LOGIN, {
-    onCompleted: ({ login: { id, token } }) => handleLoginCompeted(id, token),
+  const [authorization, { loading }] = useLazyQuery(AUTHORIZATION, {
+    onCompleted: ({ authorization: { id, token } }) => handleLoginCompeted(id, token),
     onError: ({ message }) => handleLoginError(message),
     fetchPolicy: 'no-cache',
   });
@@ -49,7 +49,7 @@ const Authorization = () => {
       return;
     }
 
-    login({ variables: { email, password } });
+    authorization({ variables: { email, password } });
   };
 
   if (loading) {

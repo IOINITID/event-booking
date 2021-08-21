@@ -14,7 +14,7 @@ import { Routes } from '../../routes';
 
 // Services
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../../services/graphql/mutations';
+import { REGISTRATION } from '../../services/graphql/mutations';
 
 // Additional imports
 import { toast } from 'react-toastify';
@@ -34,8 +34,8 @@ const Registration = () => {
     history.push(Routes.Main);
   };
 
-  const [createUser, { loading }] = useMutation(CREATE_USER, {
-    onCompleted: ({ createUser: { id, token } }) => handleCreateUserCompleted(id, token),
+  const [registration, { loading }] = useMutation(REGISTRATION, {
+    onCompleted: ({ registration: { id, token } }) => handleCreateUserCompleted(id, token),
   });
 
   const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {
@@ -45,7 +45,7 @@ const Registration = () => {
       return;
     }
 
-    createUser({ variables: { email: email, password: password } });
+    registration({ variables: { email: email, password: password } });
   };
 
   if (loading) {
