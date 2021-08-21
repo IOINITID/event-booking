@@ -38,6 +38,7 @@
     "husky": "^4.3.7",
     "lint-staged": "^11.0.1",
     "prettier": "^2.3.2",
+    "storybook-dark-mode": "^1.0.8",
     "style-loader": "^3.1.0",
     "stylelint": "^13.13.1",
     "stylelint-config-htmlacademy": "^0.1.10",

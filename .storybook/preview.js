@@ -1,3 +1,16 @@
+import { themes } from '@storybook/theming';
+
+// Router
+import { HashRouter } from 'react-router-dom';
+
+export const decorators = [
+  (Story) => (
+    <HashRouter>
+      <Story />
+    </HashRouter>
+  ),
+];
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -22,5 +35,9 @@ export const parameters = {
         value: '#3b5998',
       },
     ],
+  },
+  darkMode: {
+    dark: { ...themes.dark },
+    light: { ...themes.normal },
   },
 };

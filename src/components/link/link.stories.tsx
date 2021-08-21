@@ -3,9 +3,6 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 // Components
 import { Link } from './index';
 
-// Router
-import { BrowserRouter } from 'react-router-dom';
-
 // Types
 import { LinkProps } from './types';
 import { action } from '@storybook/addon-actions';
@@ -16,11 +13,7 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof Link>;
 
-const Template: ComponentStory<typeof Link> = (args) => (
-  <BrowserRouter>
-    <Link {...args} />
-  </BrowserRouter>
-);
+const Template: ComponentStory<typeof Link> = (args) => <Link {...args} />;
 
 export const Default = Template.bind({});
 const DefaultLinkArgs: LinkProps = {
