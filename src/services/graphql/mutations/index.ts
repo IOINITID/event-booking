@@ -54,9 +54,9 @@ export const DELETE_EVENT = gql`
 
 export const CREATE_USER = gql`
   mutation CreateUser($email: String!, $password: String!) {
-    createUser(userInput: { email: $email, password: $password }) {
-      _id
-      email
+    createUser(email: $email, password: $password) {
+      id
+      token
     }
   }
 `;

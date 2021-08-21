@@ -1,40 +1,43 @@
 import { MouseEvent, useState } from 'react';
 
-// Components imports
+// Components
 import { Loader } from '../../components/loader';
 import { Button } from '../../components/button';
 
-// GraphQL imports
-import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../../services/graphql/mutations';
+// Store
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../../store/userSlice';
 
-// Router imports
+// Router
 import { NavLink, useHistory } from 'react-router-dom';
 import { Routes } from '../../routes';
 
-// Styles imports
-import { styles } from './styles';
+// Services
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from '../../services/graphql/mutations';
 
 // Additional imports
 import { toast } from 'react-toastify';
 
+// Styles
+import { styles } from './styles';
+
 const Registration = () => {
-  // State values
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  // Router values
+  const dispatch = useDispatch();
   const history = useHistory();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
-  // GraphQL mutation hooks
-  const [createUser, { loading: createUserLoading }] = useMutation(CREATE_USER, {
-    onCompleted: () => {
-      toast('Регистрация выполнена успешно.');
-      history.push(Routes.Authorization);
-    },
+  const handleCreateUserCompleted = (id: string, token: string) => {
+    dispatch(setLogin({ id, token }));
+    toast.success('Регистрация выполнена успешно.');
+    history.push(Routes.Main);
+  };
+
+  const [createUser, { loading }] = useMutation(CREATE_USER, {
+    onCompleted: ({ createUser: { id, token } }) => handleCreateUserCompleted(id, token),
   });
 
-  // Components handlers
   const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -42,16 +45,10 @@ const Registration = () => {
       return;
     }
 
-    createUser({
-      variables: {
-        email: email,
-        password: password,
-      },
-    });
+    createUser({ variables: { email: email, password: password } });
   };
 
-  // Loader conditions
-  if (createUserLoading) {
+  if (loading) {
     return <Loader />;
   }
 

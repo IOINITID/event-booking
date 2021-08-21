@@ -28,7 +28,7 @@ const Authorization = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLoginCompete = (id: string, token: string) => {
+  const handleLoginCompeted = (id: string, token: string) => {
     dispatch(setLogin({ id, token }));
     toast.success('Вы успешно авторизовались.');
     history.push(Routes.Main);
@@ -37,7 +37,7 @@ const Authorization = () => {
   const handleLoginError = (message: string) => toast.error(message);
 
   const [login, { loading }] = useLazyQuery(LOGIN, {
-    onCompleted: ({ login: { id, token } }) => handleLoginCompete(id, token),
+    onCompleted: ({ login: { id, token } }) => handleLoginCompeted(id, token),
     onError: ({ message }) => handleLoginError(message),
     fetchPolicy: 'no-cache',
   });
