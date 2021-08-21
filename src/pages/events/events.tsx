@@ -10,8 +10,8 @@ import { ModalSuccess } from '../../components/modal/modal-success';
 
 // Services
 import { useMutation, useQuery } from '@apollo/client';
-import { EVENTS } from '../../services/graphql/queries';
-import { CREATE_EVENT, BOOK_EVENT } from '../../services/graphql/mutations';
+import { EVENTS, CREATE_EVENT } from '../../services/events';
+import { BOOK_EVENT } from '../../services/bookings';
 
 // Store
 import { useDispatch, useSelector } from 'react-redux';

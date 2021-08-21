@@ -14,7 +14,7 @@ import { Routes } from '../../routes';
 
 // Services
 import { useLazyQuery } from '@apollo/client';
-import { AUTHORIZATION } from '../../services/graphql/queries';
+import { AUTHORIZATION } from '../../services/user';
 
 // Additional
 import { toast } from 'react-toastify';

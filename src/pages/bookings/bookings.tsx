@@ -9,9 +9,8 @@ import { ItemsList } from '../../components/items-list';
 
 // GraphQL imports
 import { useMutation, useQuery } from '@apollo/client';
-import { EVENTS, GET_BOOKINGS } from '../../services/graphql/queries';
-import { DELETE_EVENT } from '../../services/graphql/mutations';
-import { CANCEL_BOOKING } from '../../services/graphql/mutations';
+import { EVENTS, DELETE_EVENT } from '../../services/events';
+import { GET_BOOKINGS, CANCEL_BOOKING } from '../../services/bookings';
 
 // Styles imports
 import { styles } from './styles';

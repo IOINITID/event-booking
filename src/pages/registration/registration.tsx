@@ -14,7 +14,7 @@ import { Routes } from '../../routes';
 
 // Services
 import { useMutation } from '@apollo/client';
-import { REGISTRATION } from '../../services/graphql/mutations';
+import { REGISTRATION } from '../../services/user';
 
 // Additional imports
 import { toast } from 'react-toastify';
