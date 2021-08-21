@@ -1,50 +1,47 @@
 import { MouseEvent, useState } from 'react';
 
-// Store imports
-import { setLogin } from '../../store/userSlice';
-
-// Components imports
+// Components
 import { Loader } from '../../components/loader';
 import { Button } from '../../components/button';
 
-// GraphQL imports
+// Store
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../../store/userSlice';
+
+// Router
+import { NavLink, useHistory } from 'react-router-dom';
+import { Routes } from '../../routes';
+
+// Services
 import { useLazyQuery } from '@apollo/client';
 import { LOGIN } from '../../services/graphql/queries';
 
-// Router imports
-import { NavLink } from 'react-router-dom';
-import { Routes } from '../../routes';
-
-// Styles imports
-import { styles } from './styles';
-
-// Additional imports
+// Additional
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+
+// Styles
+import { styles } from './styles';
 
 const Authorization = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // GraphQL query hooks
-  const [login, { loading: loginLoading }] = useLazyQuery(LOGIN, {
-    onCompleted: (data) => {
-      dispatch(
-        setLogin({
-          token: data.login.token,
-          id: data.login.userId,
-        })
-      );
-      toast(data.login.message);
-    },
-    onError: (error) => {
-      toast(error.message);
-    },
+  const handleLoginCompete = (id: string, token: string) => {
+    dispatch(setLogin({ id, token }));
+    toast.success('Вы успешно авторизовались.');
+    history.push(Routes.Main);
+  };
+
+  const handleLoginError = (message: string) => toast.error(message);
+
+  const [login, { loading }] = useLazyQuery(LOGIN, {
+    onCompleted: ({ login: { id, token } }) => handleLoginCompete(id, token),
+    onError: ({ message }) => handleLoginError(message),
     fetchPolicy: 'no-cache',
   });
 
-  // Components handlers
   const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -52,16 +49,10 @@ const Authorization = () => {
       return;
     }
 
-    login({
-      variables: {
-        email,
-        password,
-      },
-    });
+    login({ variables: { email, password } });
   };
 
-  // Loader conditions
-  if (loginLoading) {
+  if (loading) {
     return <Loader />;
   }
 
