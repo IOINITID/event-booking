@@ -48,7 +48,7 @@ const ItemsList = ({ events, onDelete }: ItemsListProps) => {
             <div className={styles.location}>{location}</div>
             <div>
               <Button className={styles.button} variant="outlined" onClick={() => onDelete(id)}>
-                Отменить
+                Удалить
               </Button>
             </div>
           </li>

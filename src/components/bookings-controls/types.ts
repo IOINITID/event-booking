@@ -1,4 +1,4 @@
-type ControlActiveType = 'booking' | 'my' | 'data';
+export type ControlActiveType = 'booking' | 'my' | 'data';
 
 export type BookingsControlProps = {
   bookings: any;

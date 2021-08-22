@@ -8,3 +8,18 @@ export const AUTHORIZATION = gql`
     }
   }
 `;
+
+export const USER_EVENTS = gql`
+  query UserEvents {
+    userEvents {
+      id
+      title
+      description
+      price
+      date
+      location
+      image
+      creator
+    }
+  }
+`;

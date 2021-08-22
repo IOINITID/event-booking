@@ -1,57 +1,55 @@
 import { useState } from 'react';
 
-// Components imports
+// Components
 import { BookingList } from '../../components/booking-list';
 import { Loader } from '../../components/loader';
 import { BookingsChart } from '../../components/bookings-chart';
 import { BookingsControl } from '../../components/bookings-controls';
 import { ItemsList } from '../../components/items-list';
 
-// GraphQL imports
+// Services
 import { useMutation, useQuery } from '@apollo/client';
 import { EVENTS, DELETE_EVENT } from '../../services/events';
+import { USER_EVENTS } from '../../services/user';
 import { GET_BOOKINGS, CANCEL_BOOKING } from '../../services/bookings';
 
-// Styles imports
-import { styles } from './styles';
+// Types
+import { ControlActiveType } from '../../components/bookings-controls/types';
 
-// Additional imports
+// Additional
 import { toast } from 'react-toastify';
 
+// Styles
+import { styles } from './styles';
+
 const Bookings = () => {
-  // State values
   const [bookings, setBookings] = useState([]);
-  const [events, setEvents] = useState([]);
-  const [type, setType] = useState<'booking' | 'my' | 'data'>('booking');
+  const [userEvents, setUserEvents] = useState([]);
+  const [type, setType] = useState<ControlActiveType>('booking');
 
-  // GraphQL query hooks
-  const { loading: eventsLoading } = useQuery(EVENTS, {
-    onCompleted: (data) => {
-      setEvents(data.events);
-    },
-    onError: (error) => {
-      toast(error.message);
+  const { loading: userEventsLoadeing } = useQuery(USER_EVENTS, {
+    onCompleted: ({ userEvents }) => {
+      setUserEvents(userEvents);
     },
     fetchPolicy: 'no-cache',
   });
 
-  const { loading: bookingsLoading } = useQuery(GET_BOOKINGS, {
-    onCompleted: (data) => {
-      setBookings(data.bookings);
-    },
-    fetchPolicy: 'no-cache',
-  });
-
-  // GraphQL mutation hooks
   const [deleteEvent, { loading: deleteEventLoading }] = useMutation(DELETE_EVENT, {
-    onCompleted: (data) => {
-      setEvents(events.filter((event) => event.id !== data.deleteEvent.id));
+    onCompleted: ({ deleteEvent }) => {
+      setUserEvents(userEvents.filter((event) => event.id !== deleteEvent.id));
     },
     onError: (error) => {
       toast(error.message);
     },
     fetchPolicy: 'no-cache',
   });
+
+  // const { loading: bookingsLoading } = useQuery(GET_BOOKINGS, {
+  //   onCompleted: (data) => {
+  //     setBookings(data.bookings);
+  //   },
+  //   fetchPolicy: 'no-cache',
+  // });
 
   const [cancelBooking, { loading: cancelBookingLoading }] = useMutation(CANCEL_BOOKING, {
     onCompleted: (data) => {
@@ -78,17 +76,21 @@ const Bookings = () => {
     setType(type);
   };
 
-  // Loader conditions
-  if (eventsLoading || deleteEventLoading || cancelBookingLoading || bookingsLoading) {
+  if (deleteEventLoading || cancelBookingLoading || userEventsLoadeing) {
     return <Loader />;
   }
 
   return (
     <div className={styles.container}>
-      <BookingsControl bookings={bookings} events={events} onTypeChange={typeChangeHandler} activeOutputType={type} />
+      <BookingsControl
+        bookings={bookings}
+        events={userEvents}
+        onTypeChange={typeChangeHandler}
+        activeOutputType={type}
+      />
       <div>
         {type !== 'my' && type !== 'data' && <BookingList bookings={bookings} onDelete={deleteBookingHandler} />}
-        {type === 'my' && <ItemsList events={events} onDelete={deleteEventHandler} />}
+        {type === 'my' && <ItemsList events={userEvents} onDelete={deleteEventHandler} />}
         {type === 'data' && <BookingsChart bookings={bookings} />}
       </div>
     </div>

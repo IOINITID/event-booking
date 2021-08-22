@@ -1,2 +1,2 @@
-export { AUTHORIZATION } from './queries';
+export { AUTHORIZATION, USER_EVENTS } from './queries';
 export { REGISTRATION } from './mutations';
