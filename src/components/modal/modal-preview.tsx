@@ -11,17 +11,14 @@ import { cx } from '@emotion/css';
 
 // Interfaces and types
 interface IEvent {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   date: string;
   price: string;
   location: string;
   image: string;
-  creator: {
-    _id: string;
-    email: string;
-  };
+  creator: string;
 }
 
 interface IModalPreview {

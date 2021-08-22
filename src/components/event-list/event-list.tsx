@@ -31,10 +31,10 @@ const EventList = ({ events, isLoading, onDetailClick }: EventListProps) => {
       <ul className={styles.list}>
         {events.map((event: EventType, index: number) => {
           if (index < eventsCount) {
-            const handleDetailClick = () => onDetailClick(event._id);
+            const handleDetailClick = () => onDetailClick(event.id);
 
             return (
-              <li key={event._id}>
+              <li key={event.id}>
                 <Event
                   title={event.title}
                   date={event.date}

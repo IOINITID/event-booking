@@ -27,17 +27,14 @@ import { toast } from 'react-toastify';
 
 // Interfaces and types
 type EventType = {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   date: string;
   price: string;
   location: string;
   image: string;
-  creator: {
-    _id: string;
-    email: string;
-  };
+  creator: string;
 };
 
 type EventDataType = {
@@ -74,17 +71,14 @@ const Events = () => {
     onCompleted: (data) => {
       setEvents([
         {
-          _id: data.createEvent._id,
+          id: data.createEvent.id,
           title: data.createEvent.title,
           description: data.createEvent.description,
           price: data.createEvent.price,
           date: data.createEvent.date,
           location: data.createEvent.location,
           image: data.createEvent.image,
-          creator: {
-            _id: data.createEvent.creator._id,
-            email: data.createEvent.creator.email,
-          },
+          creator: data.createEvent.creator,
         },
         ...events,
       ]);
@@ -154,7 +148,7 @@ const Events = () => {
 
   const handleDetailClick = (eventId: string) => {
     setIsPreviewOpen(true);
-    setPreviewEvent(events.find(({ _id }: EventType) => _id === eventId));
+    setPreviewEvent(events.find(({ id }: EventType) => id === eventId));
   };
 
   const bookEventHandler = () => {
@@ -167,9 +161,7 @@ const Events = () => {
     }
 
     bookEvent({
-      variables: {
-        id: previewEvent._id,
-      },
+      variables: { id: previewEvent.id },
     });
   };
 

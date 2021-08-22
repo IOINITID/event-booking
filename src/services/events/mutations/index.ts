@@ -10,26 +10,21 @@ export const CREATE_EVENT = gql`
     $image: String!
   ) {
     createEvent(
-      eventInput: {
-        title: $title
-        description: $description
-        price: $price
-        date: $date
-        location: $location
-        image: $image
-      }
+      title: $title
+      description: $description
+      price: $price
+      date: $date
+      location: $location
+      image: $image
     ) {
-      _id
+      id
       title
       description
       price
       date
       location
       image
-      creator {
-        _id
-        email
-      }
+      creator
     }
   }
 `;
