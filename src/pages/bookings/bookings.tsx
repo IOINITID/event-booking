@@ -45,7 +45,7 @@ const Bookings = () => {
   // GraphQL mutation hooks
   const [deleteEvent, { loading: deleteEventLoading }] = useMutation(DELETE_EVENT, {
     onCompleted: (data) => {
-      setEvents(events.filter((event) => event._id !== data.deleteEvent._id));
+      setEvents(events.filter((event) => event.id !== data.deleteEvent.id));
     },
     onError: (error) => {
       toast(error.message);
@@ -55,7 +55,7 @@ const Bookings = () => {
 
   const [cancelBooking, { loading: cancelBookingLoading }] = useMutation(CANCEL_BOOKING, {
     onCompleted: (data) => {
-      const updatedBookings = bookings.filter((booking) => booking.event._id !== data.cancelBooking._id);
+      const updatedBookings = bookings.filter((booking) => booking.event.id !== data.cancelBooking.id);
       setBookings(updatedBookings);
     },
     fetchPolicy: 'no-cache',
@@ -71,11 +71,7 @@ const Bookings = () => {
   };
 
   const deleteEventHandler = (eventId: string) => {
-    deleteEvent({
-      variables: {
-        id: eventId,
-      },
-    });
+    deleteEvent({ variables: { id: eventId } });
   };
 
   const typeChangeHandler = (type: 'booking' | 'my' | 'data') => {

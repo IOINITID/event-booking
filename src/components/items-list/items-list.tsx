@@ -33,10 +33,10 @@ const ItemsList = ({ events, onDelete }: ItemsListProps) => {
   return (
     <ul className={styles.list}>
       {events.map((event: EventProps, index: number) => {
-        const { _id, title, image, date, price, location } = event;
+        const { id, title, image, date, price, location } = event;
 
         return (
-          <li className={styles.listItem} key={_id}>
+          <li className={styles.listItem} key={id}>
             <span className={styles.number}>{index + 1}</span>
             <img className={styles.image} src={image} alt="Изображение мероприятия." />
             <div className={styles.title}>{title}</div>
@@ -47,7 +47,7 @@ const ItemsList = ({ events, onDelete }: ItemsListProps) => {
             <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button className={styles.button} variant="outlined" onClick={() => onDelete(_id)}>
+              <Button className={styles.button} variant="outlined" onClick={() => onDelete(id)}>
                 Отменить
               </Button>
             </div>
