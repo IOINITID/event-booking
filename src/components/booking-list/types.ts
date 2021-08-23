@@ -1,14 +1,17 @@
 type EventProps = {
+  id: string;
   title: string;
   price: string;
   date: string;
   location: string;
   image: string;
+  creator: string;
 };
 
 export type BookingProps = {
-  _id: string;
+  id: string;
   event: EventProps;
+  user: string;
 };
 
 export type BookingListProps = {

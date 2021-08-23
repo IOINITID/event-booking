@@ -58,34 +58,34 @@ const Events = () => {
   const [events, setEvents] = useState<EventType[] | []>([]);
 
   const { loading: eventsLoading } = useQuery(EVENTS, {
-    onCompleted: (data) => {
-      setEvents(data.events);
+    onCompleted: ({ events }) => {
+      setEvents(events);
     },
     onError: (error) => {
-      toast(error.message);
+      toast.error(error.message);
     },
     fetchPolicy: 'no-cache',
   });
 
   const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
-    onCompleted: (data) => {
+    onCompleted: ({ createEvent }) => {
       setEvents([
         {
-          id: data.createEvent.id,
-          title: data.createEvent.title,
-          description: data.createEvent.description,
-          price: data.createEvent.price,
-          date: data.createEvent.date,
-          location: data.createEvent.location,
-          image: data.createEvent.image,
-          creator: data.createEvent.creator,
+          id: createEvent.id,
+          title: createEvent.title,
+          description: createEvent.description,
+          price: createEvent.price,
+          date: createEvent.date,
+          location: createEvent.location,
+          image: createEvent.image,
+          creator: createEvent.creator,
         },
         ...events,
       ]);
       toast('Мероприятие успешно создано.');
     },
     onError: (error) => {
-      toast(error.message);
+      toast.error(error.message);
     },
     fetchPolicy: 'no-cache',
   });
@@ -103,7 +103,7 @@ const Events = () => {
         dispatch(setLogout());
         history.push(Routes.Authorization);
       }
-      toast(error.message);
+      toast.error(error.message);
     },
     fetchPolicy: 'no-cache',
   });

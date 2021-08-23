@@ -9,9 +9,9 @@ import { ItemsList } from '../../components/items-list';
 
 // Services
 import { useMutation, useQuery } from '@apollo/client';
-import { EVENTS, DELETE_EVENT } from '../../services/events';
-import { USER_EVENTS } from '../../services/user';
-import { GET_BOOKINGS, CANCEL_BOOKING } from '../../services/bookings';
+import { DELETE_EVENT } from '../../services/events';
+import { USER_EVENTS, USER_BOOKINGS } from '../../services/user';
+import { CANCEL_BOOKING } from '../../services/bookings';
 
 // Types
 import { ControlActiveType } from '../../components/bookings-controls/types';
@@ -23,13 +23,21 @@ import { toast } from 'react-toastify';
 import { styles } from './styles';
 
 const Bookings = () => {
-  const [bookings, setBookings] = useState([]);
   const [userEvents, setUserEvents] = useState([]);
+  const [userBookings, setUserBookings] = useState([]);
   const [type, setType] = useState<ControlActiveType>('booking');
 
   const { loading: userEventsLoadeing } = useQuery(USER_EVENTS, {
     onCompleted: ({ userEvents }) => {
       setUserEvents(userEvents);
+    },
+    fetchPolicy: 'no-cache',
+  });
+
+  const { loading: userBookingsLoading } = useQuery(USER_BOOKINGS, {
+    onCompleted: ({ userBookings }) => {
+      console.log('userBookings', userBookings);
+      setUserBookings(userBookings);
     },
     fetchPolicy: 'no-cache',
   });
@@ -44,17 +52,10 @@ const Bookings = () => {
     fetchPolicy: 'no-cache',
   });
 
-  // const { loading: bookingsLoading } = useQuery(GET_BOOKINGS, {
-  //   onCompleted: (data) => {
-  //     setBookings(data.bookings);
-  //   },
-  //   fetchPolicy: 'no-cache',
-  // });
-
   const [cancelBooking, { loading: cancelBookingLoading }] = useMutation(CANCEL_BOOKING, {
-    onCompleted: (data) => {
-      const updatedBookings = bookings.filter((booking) => booking.event.id !== data.cancelBooking.id);
-      setBookings(updatedBookings);
+    onCompleted: ({ cancelBooking }) => {
+      const updatedBookings = userBookings.filter((booking) => booking.id !== cancelBooking.id);
+      setUserBookings(updatedBookings);
     },
     fetchPolicy: 'no-cache',
   });
@@ -76,22 +77,22 @@ const Bookings = () => {
     setType(type);
   };
 
-  if (deleteEventLoading || cancelBookingLoading || userEventsLoadeing) {
+  if (cancelBookingLoading || deleteEventLoading || userBookingsLoading || userEventsLoadeing) {
     return <Loader />;
   }
 
   return (
     <div className={styles.container}>
       <BookingsControl
-        bookings={bookings}
+        bookings={userBookings}
         events={userEvents}
         onTypeChange={typeChangeHandler}
         activeOutputType={type}
       />
       <div>
-        {type !== 'my' && type !== 'data' && <BookingList bookings={bookings} onDelete={deleteBookingHandler} />}
+        {type !== 'my' && type !== 'data' && <BookingList bookings={userBookings} onDelete={deleteBookingHandler} />}
         {type === 'my' && <ItemsList events={userEvents} onDelete={deleteEventHandler} />}
-        {type === 'data' && <BookingsChart bookings={bookings} />}
+        {type === 'data' && <BookingsChart bookings={userBookings} />}
       </div>
     </div>
   );

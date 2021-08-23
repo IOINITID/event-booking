@@ -8,11 +8,11 @@ import { BookingListProps, BookingProps } from './types';
 // Hooks
 import { useInfoBanner } from '../info-banner/hooks';
 
-// Additional imports
+// Additional
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 
-// Styles imports
+// Styles
 import { styles } from './styles';
 
 const BookingList = ({ bookings, onDelete }: BookingListProps) => {
@@ -32,12 +32,12 @@ const BookingList = ({ bookings, onDelete }: BookingListProps) => {
 
   return (
     <ul className={styles.list}>
-      {bookings.map(({ _id, event }: BookingProps, index: number) => {
+      {bookings.map(({ id, event }: BookingProps, index: number) => {
         const { title, image, date, price, location } = event;
-        const handleBookingListButtonClick = () => onDelete(_id);
+        const handleBookingListButtonClick = () => onDelete(id);
 
         return (
-          <li className={styles.listItem} key={_id}>
+          <li className={styles.listItem} key={id}>
             <span className={styles.number}>{index + 1}</span>
             <img className={styles.image} src={image} alt="Изображение мероприятия." />
             <div className={styles.title}>{title}</div>

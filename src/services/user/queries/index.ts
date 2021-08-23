@@ -23,3 +23,22 @@ export const USER_EVENTS = gql`
     }
   }
 `;
+
+export const USER_BOOKINGS = gql`
+  query UserBookings {
+    userBookings {
+      id
+      event {
+        id
+        title
+        description
+        price
+        date
+        location
+        image
+        creator
+      }
+      user
+    }
+  }
+`;
