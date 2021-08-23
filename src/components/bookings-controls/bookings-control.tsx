@@ -40,7 +40,7 @@ const BookingsControl = ({ bookings, events, activeOutputType, onTypeChange }: B
             variant="contained"
             onClick={handleControlButtonClick}
           >
-            {title} ({length || 0})
+            {title} {type !== 'data' ? `(${length || 0})` : ''}
           </Button>
         );
       })}

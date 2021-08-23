@@ -36,7 +36,6 @@ const Bookings = () => {
 
   const { loading: userBookingsLoading } = useQuery(USER_BOOKINGS, {
     onCompleted: ({ userBookings }) => {
-      console.log('userBookings', userBookings);
       setUserBookings(userBookings);
     },
     fetchPolicy: 'no-cache',

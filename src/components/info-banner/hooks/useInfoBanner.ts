@@ -13,7 +13,7 @@ export const useInfoBanner = (info: InfoBannerType) => {
     info === 'events'
       ? 'Создай любое мероприятие, и оно появится в этом списке!'
       : 'Забронируй любое мероприятие, и оно появится в этом списке!';
-  const buttonTitle = info === 'events' ? 'Создать мероприятие ⟶' : 'Создать мероприятие ⟶';
+  const buttonTitle = info === 'events' ? 'Создать мероприятие ⟶' : 'Забронировать мероприятие ⟶';
   const handleInfoBannerClick = () => history.push(Routes.Events);
 
   return { title, description, buttonTitle, handleInfoBannerClick };
