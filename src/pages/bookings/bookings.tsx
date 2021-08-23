@@ -45,8 +45,8 @@ const Bookings = () => {
     onCompleted: ({ deleteEvent }) => {
       setUserEvents(userEvents.filter((event) => event.id !== deleteEvent.id));
     },
-    onError: (error) => {
-      toast(error.message);
+    onError: ({ message }) => {
+      toast.dark(message);
     },
     fetchPolicy: 'no-cache',
   });

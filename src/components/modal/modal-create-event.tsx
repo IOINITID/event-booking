@@ -179,7 +179,7 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
                     const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
                     if (image.size > MAX_IMAGE_SIZE) {
-                      toast('Изображение должно быть меньше 5MB.');
+                      toast.error('Изображение должно быть меньше 5MB.');
                       return;
                     } else {
                       setImage(String(fileReader.result));

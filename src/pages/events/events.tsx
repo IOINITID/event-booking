@@ -82,7 +82,7 @@ const Events = () => {
         },
         ...events,
       ]);
-      toast('Мероприятие успешно создано.');
+      toast.success('Мероприятие успешно создано.');
     },
     onError: (error) => {
       toast.error(error.message);
@@ -117,7 +117,7 @@ const Events = () => {
       location.trim().length === 0 ||
       !image
     ) {
-      toast('Все поля должны быть заполнены.');
+      toast.error('Все поля должны быть заполнены.');
       return;
     }
 
