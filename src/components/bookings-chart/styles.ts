@@ -4,7 +4,7 @@ export const styles = {
   container: css`
     display: grid;
     grid-template-columns: 469px 1fr;
-    padding: 32px 56px;
+    padding: 56px;
     column-gap: 183px;
     background-color: #ffffff;
     border-radius: 16px;
