@@ -20,7 +20,7 @@ const Event = ({ title, date, price, image, onDetailClick }: EventProps) => {
       </div>
       <div className={styles.info}>
         <h3 className={styles.title}>{title}</h3>
-        <p className={styles.date}>{dayjs(date).locale(dayjs.locale('ru')).format('DD MMMM — HH:mm')}</p>
+        <p className={styles.date}>{dayjs(date).locale('ru').format('DD MMMM — HH:mm')}</p>
         <Button className={styles.button} variant="leaf" onClick={onDetailClick}>
           Подробнее
         </Button>
