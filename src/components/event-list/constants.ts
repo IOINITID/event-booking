@@ -1,1 +1,1 @@
-export const SHOW_MORE_EVENTS_COUNT = 6;
+export const EVENTS_COUNT = 6;

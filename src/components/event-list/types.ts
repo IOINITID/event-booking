@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 export type EventType = {
   id: string;
   title: string;
@@ -12,5 +14,7 @@ export type EventType = {
 export type EventListProps = {
   events: EventType[];
   isLoading: boolean;
+  eventsCount: number;
+  onShowMoreClick: (event: MouseEvent<HTMLButtonElement>) => void;
   onDetailClick: (eventId: string) => void;
 };

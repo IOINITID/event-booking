@@ -1,6 +1,9 @@
-// Additional imports
-import { css } from '@emotion/css';
+// Constants
+import { EVENTS_COUNT } from '../event-list/constants';
+
+// Additional
 import ContentLoader, { IContentLoaderProps } from 'react-content-loader';
+import { css } from '@emotion/css';
 
 const EventItemLoader = (props: IContentLoaderProps) => (
   <ContentLoader
@@ -28,12 +31,7 @@ const EventListButtonLoader = (props: IContentLoaderProps) => (
   </ContentLoader>
 );
 
-// Interfaces and types
-interface IEventListLoader {
-  itemsCount: number;
-}
-
-const EventListLoader = (props: IEventListLoader) => {
+const EventListLoader = () => {
   return (
     <div
       className={css`
@@ -43,7 +41,7 @@ const EventListLoader = (props: IEventListLoader) => {
         row-gap: 40px;
       `}
     >
-      {Array.from(Array(props.itemsCount).keys()).map((item) => {
+      {Array.from(Array(EVENTS_COUNT).keys()).map((item) => {
         return <EventItemLoader key={item} />;
       })}
       <EventListButtonLoader

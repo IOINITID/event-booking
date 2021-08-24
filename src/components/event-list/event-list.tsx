@@ -1,29 +1,17 @@
-import { MouseEvent, useState } from 'react';
-
-// Components imports
+// Components
 import { Button } from '../button';
 import { Event } from '../event';
 import { EventListLoader } from '../event-list-loader';
 
-// Constants
-import { SHOW_MORE_EVENTS_COUNT } from './constants';
-
 // Types
 import { EventListProps, EventType } from './types';
 
-// Styles imports
+// Styles
 import { styles } from './styles';
 
-const EventList = ({ events, isLoading, onDetailClick }: EventListProps) => {
-  const [eventsCount, setEventsCount] = useState<number>(SHOW_MORE_EVENTS_COUNT);
-
-  const handleShowMoreEventsClick = (event: MouseEvent<HTMLButtonElement>) => {
-    event.currentTarget.blur();
-    setEventsCount(eventsCount + SHOW_MORE_EVENTS_COUNT);
-  };
-
+const EventList = ({ events, isLoading, eventsCount, onShowMoreClick, onDetailClick }: EventListProps) => {
   if (isLoading) {
-    return <EventListLoader itemsCount={SHOW_MORE_EVENTS_COUNT} />;
+    return <EventListLoader />;
   }
 
   return (
@@ -48,7 +36,7 @@ const EventList = ({ events, isLoading, onDetailClick }: EventListProps) => {
         })}
       </ul>
       {events.length > eventsCount && (
-        <Button className={styles.button} variant="outlined" onClick={handleShowMoreEventsClick}>
+        <Button className={styles.button} variant="outlined" onClick={onShowMoreClick}>
           Показать ещё
         </Button>
       )}

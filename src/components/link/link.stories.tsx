@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 // Components
 import { Link } from './index';
 
 // Types
 import { LinkProps } from './types';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/Link',

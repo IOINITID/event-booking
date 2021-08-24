@@ -11,11 +11,7 @@ export default {
   title: 'Components/Event',
   component: Event,
   argTypes: {
-    title: {},
     date: { control: { type: 'date' } },
-    price: {},
-    image: {},
-    onDetailClick: {},
   },
 } as ComponentMeta<typeof Event>;
 

@@ -1,8 +1,10 @@
+// Routes
+import { Link as ReactRouterLink } from 'react-router-dom';
+
 // Types
 import { LinkProps } from './types';
 
 // Additional
-import { Link as ReactRouterLink } from 'react-router-dom';
 import { cx } from '@emotion/css';
 
 // Styles

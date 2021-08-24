@@ -3,14 +3,16 @@ import { useState } from 'react';
 // Components
 import { Loader } from '../../components/loader';
 import { EventsBanner } from '../../components/events-banner';
-import { EventList } from '../../components/event-list';
 import { ModalPreview } from '../../components/modal/modal-preview';
 import { ModalCreateEvent } from '../../components/modal/modal-create-event';
 import { ModalSuccess } from '../../components/modal/modal-success';
 
+// Containers
+import { EventListContainer } from '../../containers/event-list-container';
+
 // Services
-import { useMutation, useQuery } from '@apollo/client';
-import { EVENTS, CREATE_EVENT } from '../../services/events';
+import { useMutation } from '@apollo/client';
+import { CREATE_EVENT } from '../../services/events';
 import { BOOK_EVENT } from '../../services/bookings';
 
 // Store
@@ -56,16 +58,6 @@ const Events = () => {
   const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
   const [previewEvent, setPreviewEvent] = useState<EventType | null>(null);
   const [events, setEvents] = useState<EventType[] | []>([]);
-
-  const { loading: eventsLoading } = useQuery(EVENTS, {
-    onCompleted: ({ events }) => {
-      setEvents(events);
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-    fetchPolicy: 'no-cache',
-  });
 
   const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
     onCompleted: ({ createEvent }) => {
@@ -177,7 +169,7 @@ const Events = () => {
   return (
     <>
       <EventsBanner onCreateEvent={createEventHandler} />
-      <EventList events={events} isLoading={eventsLoading} onDetailClick={handleDetailClick} />
+      <EventListContainer onDetailClick={handleDetailClick} />
       <ModalCreateEvent isOpen={isCreateOpen} onCancel={modalCancelHandler} onConfirm={modalConfirmHandler} />
       <ModalPreview
         isOpen={isPreviewOpen}
