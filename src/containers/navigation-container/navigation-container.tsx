@@ -1,29 +1,27 @@
-import { MouseEvent } from 'react';
+// Components
+import { Navigation } from '../../components/navigation';
 
 // Store
 import { useDispatch, useSelector } from 'react-redux';
-import { setLogout } from '../../../store/userSlice';
-import { userTokenSelector } from '../../../store/userSlice/selectors';
+import { setLogout } from '../../store/userSlice';
+import { userTokenSelector } from '../../store/userSlice/selectors';
 
 // Router
 import { useLocation } from 'react-router-dom';
-import { Routes } from '../../../routes';
+import { Routes } from '../../routes';
 
 // Types
-import { LinkDataType } from '../types';
+import { LinkDataType } from '../../components/navigation/types';
 
 // Additional
 import { nanoid } from 'nanoid';
 
-export const useNavigation = () => {
+const NavigationContainer = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const token = useSelector(userTokenSelector);
 
-  const handleNavigationLogoutClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.currentTarget.blur();
-    dispatch(setLogout());
-  };
+  const handleNavigationLogoutClick = () => dispatch(setLogout());
 
   const linksData: LinkDataType[] = [
     {
@@ -63,8 +61,7 @@ export const useNavigation = () => {
     },
   ];
 
-  return {
-    pathname,
-    linksData,
-  };
+  return <Navigation pathname={pathname} linksData={linksData} />;
 };
+
+export { NavigationContainer };
