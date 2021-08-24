@@ -6,16 +6,11 @@ import { Loader } from './index';
 export default {
   title: 'Components/Loader',
   component: Loader,
-  argTypes: {
-    color: { control: { type: 'color' } },
-  },
+  argTypes: {},
 } as ComponentMeta<typeof Loader>;
 
 const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;
 
 export const Default = Template.bind({});
-const DefaultButtonArgs = {
-  color: '#ef4723',
-  duration: 1.2,
-};
-Default.args = DefaultButtonArgs;
+const DefaultLoaderArgs = {};
+Default.args = DefaultLoaderArgs;

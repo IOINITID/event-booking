@@ -1,19 +1,16 @@
-// Routes
-import { Routes } from '../../routes';
-
 // Components
 import { Link } from '../link';
 
-// Types
-import { LogoProps } from './types';
+// Routes
+import { Routes } from '../../routes';
 
 // Assets
 import logoIcon from '../../assets/images/logo-icon.svg';
 
-const Logo = ({ width }: LogoProps) => {
+const Logo = () => {
   return (
     <Link to={Routes.Main}>
-      <img src={logoIcon} width={width} alt="Логотип Event booking." />
+      <img src={logoIcon} width={210} alt="Логотип Event booking." />
     </Link>
   );
 };

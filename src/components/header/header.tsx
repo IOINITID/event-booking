@@ -9,8 +9,8 @@ import { styles } from './styles';
 
 const Header = () => {
   return (
-    <header className={styles.header}>
-      <Logo width={210} />
+    <header className={styles.container}>
+      <Logo />
       <NavigationContainer />
     </header>
   );

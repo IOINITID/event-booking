@@ -1,9 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
 
 // Components
 import { Logo } from './index';
-import { LogoProps } from './types';
 
 export default {
   title: 'Components/Logo',
@@ -11,14 +9,8 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof Logo>;
 
-const Template: ComponentStory<typeof Logo> = (args) => (
-  <BrowserRouter>
-    <Logo {...args} />
-  </BrowserRouter>
-);
+const Template: ComponentStory<typeof Logo> = (args) => <Logo {...args} />;
 
 export const Default = Template.bind({});
-const DefaultLogoArgs: LogoProps = {
-  width: 210,
-};
+const DefaultLogoArgs = {};
 Default.args = DefaultLogoArgs;

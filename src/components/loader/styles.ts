@@ -1,16 +1,7 @@
-// Additional imports
 import { css } from '@emotion/css';
 
 export const styles = {
   container: css`
-    display: grid;
-    justify-content: center;
-    align-items: center;
-  `,
-  loader: css`
-    --loader-color: #ef4723;
-    --loader-animation-duration: 1.2s;
-
     position: fixed;
     top: 50%;
     left: 50%;
@@ -20,15 +11,15 @@ export const styles = {
     transform: translate(-50%, -50%);
 
     &::after {
-      content: ' ';
+      content: '';
       display: block;
       width: 64px;
       height: 64px;
       margin: 8px;
-      border: 6px solid var(--loader-color);
-      border-color: var(--loader-color) transparent var(--loader-color) transparent;
+      border: 6px solid #ef4723;
+      border-color: #ef4723 transparent #ef4723 transparent;
       border-radius: 50%;
-      animation: rotate var(--loader-animation-duration) linear infinite;
+      animation: rotate 1.2s linear infinite;
     }
 
     @keyframes rotate {
