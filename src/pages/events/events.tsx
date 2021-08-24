@@ -63,22 +63,7 @@ const Events = () => {
 
   const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
     onCompleted: ({ createEvent }) => {
-      dispatch(
-        setEvents([
-          {
-            id: createEvent.id,
-            title: createEvent.title,
-            description: createEvent.description,
-            price: createEvent.price,
-            date: createEvent.date,
-            location: createEvent.location,
-            image: createEvent.image,
-            creator: createEvent.creator,
-          },
-          ...events,
-        ])
-      );
-
+      dispatch(setEvents([createEvent, ...events]));
       toast.success('Мероприятие успешно создано.');
     },
     onError: (error) => {
