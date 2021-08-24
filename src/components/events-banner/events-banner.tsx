@@ -1,32 +1,23 @@
-// Components imports
+// Components
 import { Button } from '../button';
 
-// Store imports
-import { useSelector } from 'react-redux';
-import { userTokenSelector } from '../../store/userSlice/selectors';
-
-// Router imports
-import { NavLink, useHistory } from 'react-router-dom';
+// Router
+import { NavLink } from 'react-router-dom';
 import { Routes } from '../../routes';
 
-// Styles imports
-import { styles } from './styles';
+// Types
+import { EventsBannerProps } from './types';
 
-// Additional imports
+// Additional
 import { cx } from '@emotion/css';
 
-// Interfaces and types
-interface IInfoBanner {
-  onCreateEvent: () => void;
-}
+// Styles
+import { styles } from './styles';
 
-const EventsBanner = (props: IInfoBanner) => {
-  const history = useHistory();
-  const token = useSelector(userTokenSelector);
-
+const EventsBanner = ({ isAuthorizated, onCreateAccountClick, onCreateEventClick }: EventsBannerProps) => {
   return (
     <>
-      {!token ? (
+      {!isAuthorizated ? (
         <div className={styles.infoBanner}>
           <h2 className={styles.infoBannerHeading}>
             Регистрируй учётную запись, чтобы бронировать мероприятия и создавать свои
@@ -37,7 +28,7 @@ const EventsBanner = (props: IInfoBanner) => {
               Войдите в свой профиль
             </NavLink>
           </p>
-          <Button variant="contained" onClick={() => history.push(Routes.Registration)}>
+          <Button variant="contained" onClick={onCreateAccountClick}>
             Создать аккаунт ⟶
           </Button>
         </div>
@@ -46,7 +37,7 @@ const EventsBanner = (props: IInfoBanner) => {
           <h2 className={cx(styles.infoBannerHeading, styles.infoBannerHeadingAuthenticated)}>
             Создайте своё мероприятие, и другие пользователи получат возможность забронировать его
           </h2>
-          <Button variant="contained" onClick={props.onCreateEvent}>
+          <Button variant="contained" onClick={onCreateEventClick}>
             Создать мероприятие ⟶
           </Button>
         </div>

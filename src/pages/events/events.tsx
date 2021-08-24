@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 // Components
 import { Loader } from '../../components/loader';
-import { EventsBanner } from '../../components/events-banner';
 import { ModalPreview } from '../../components/modal/modal-preview';
 import { ModalCreateEvent } from '../../components/modal/modal-create-event';
 import { ModalSuccess } from '../../components/modal/modal-success';
 
 // Containers
 import { EventListContainer } from '../../containers/event-list-container';
+import { EventsBannerContainer } from '../../containers/events-banner-container';
 
 // Services
 import { useMutation } from '@apollo/client';
@@ -168,7 +168,7 @@ const Events = () => {
 
   return (
     <>
-      <EventsBanner onCreateEvent={createEventHandler} />
+      <EventsBannerContainer onCreateEventClick={createEventHandler} />
       <EventListContainer onDetailClick={handleDetailClick} />
       <ModalCreateEvent isOpen={isCreateOpen} onCancel={modalCancelHandler} onConfirm={modalConfirmHandler} />
       <ModalPreview
