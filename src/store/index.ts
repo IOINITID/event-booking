@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
+import eventsReucer from './eventsSlice';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
+    events: eventsReucer,
   },
 });
 

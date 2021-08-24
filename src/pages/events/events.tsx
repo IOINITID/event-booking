@@ -26,6 +26,8 @@ import { Routes } from '../../routes';
 
 // Additional
 import { toast } from 'react-toastify';
+import { eventsSelector, previewEventSelector } from '../../store/eventsSlice/selectors';
+import { setEvents, setPreviewEvent } from '../../store/eventsSlice';
 
 // Interfaces and types
 type EventType = {
@@ -52,28 +54,31 @@ const Events = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const token = useSelector(userTokenSelector);
+  const events = useSelector(eventsSelector);
+  const previewEvent = useSelector(previewEventSelector);
 
   const [isCreateOpen, setIsCreateOpen] = useState<boolean>(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState<boolean>(false);
-  const [previewEvent, setPreviewEvent] = useState<EventType | null>(null);
-  const [events, setEvents] = useState<EventType[] | []>([]);
 
   const [createEvent, { loading: createEventLoading }] = useMutation(CREATE_EVENT, {
     onCompleted: ({ createEvent }) => {
-      setEvents([
-        {
-          id: createEvent.id,
-          title: createEvent.title,
-          description: createEvent.description,
-          price: createEvent.price,
-          date: createEvent.date,
-          location: createEvent.location,
-          image: createEvent.image,
-          creator: createEvent.creator,
-        },
-        ...events,
-      ]);
+      dispatch(
+        setEvents([
+          {
+            id: createEvent.id,
+            title: createEvent.title,
+            description: createEvent.description,
+            price: createEvent.price,
+            date: createEvent.date,
+            location: createEvent.location,
+            image: createEvent.image,
+            creator: createEvent.creator,
+          },
+          ...events,
+        ])
+      );
+
       toast.success('Мероприятие успешно создано.');
     },
     onError: (error) => {
@@ -85,13 +90,13 @@ const Events = () => {
   const [bookEvent, { loading: bookEventLoading }] = useMutation(BOOK_EVENT, {
     onCompleted: () => {
       setIsPreviewOpen(false);
-      setPreviewEvent(null);
+      dispatch(setPreviewEvent(null));
       setIsSuccessOpen(true);
     },
     onError: (error) => {
       if (error.message === 'Необходима авторизация.') {
         setIsPreviewOpen(false);
-        setPreviewEvent(null);
+        dispatch(setPreviewEvent(null));
         dispatch(setLogout());
         history.push(Routes.Authorization);
       }
@@ -131,7 +136,7 @@ const Events = () => {
     setIsCreateOpen(false);
     setIsPreviewOpen(false);
     setIsSuccessOpen(false);
-    setPreviewEvent(null);
+    dispatch(setPreviewEvent(null));
   };
 
   const createEventHandler = () => {
@@ -140,13 +145,13 @@ const Events = () => {
 
   const handleDetailClick = (eventId: string) => {
     setIsPreviewOpen(true);
-    setPreviewEvent(events.find(({ id }: EventType) => id === eventId));
+    dispatch(setPreviewEvent(events.find(({ id }: EventType) => id === eventId)));
   };
 
   const bookEventHandler = () => {
     if (!token) {
       setIsPreviewOpen(false);
-      setPreviewEvent(null);
+      dispatch(setPreviewEvent(null));
       setIsCreateOpen(false);
       history.push(Routes.Authorization);
       return;
