@@ -312,8 +312,7 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
               type="datetime-local"
               id="date"
               name="date"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
+              onChange={(event) => setDate(new Date(event.target.value).toISOString())}
             />
           </div>
 
