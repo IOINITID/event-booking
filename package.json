@@ -5,7 +5,7 @@
   "description": "Event Booking application.",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production && npm run build-storybook && npx gh-pages -d dist",
+    "build": "webpack --mode production && npm run build-storybook && yarn gh-pages -d dist",
     "start": "webpack serve --mode development",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o ./dist/storybook"
