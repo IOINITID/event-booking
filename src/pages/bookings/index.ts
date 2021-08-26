@@ -1,1 +1,0 @@
-export { Bookings } from './bookings';
