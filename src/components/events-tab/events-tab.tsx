@@ -3,7 +3,7 @@ import { Button } from '../button';
 import { InfoBanner } from '../info-banner';
 
 // Types
-import { BookingListProps, BookingProps } from './types';
+import { EventsTabProps } from './types';
 
 // Hooks
 import { useInfoBanner } from '../info-banner/hooks';
@@ -14,14 +14,15 @@ import 'dayjs/locale/ru';
 
 // Styles
 import { styles } from './styles';
+import { EventType } from '../../store/eventsSlice/types';
 
-const BookingList = ({ bookings, onDelete }: BookingListProps) => {
-  const { title, description, buttonTitle, handleInfoBannerClick } = useInfoBanner('bookings');
+const EventsTab = ({ events, onEventDeleteClick }: EventsTabProps) => {
+  const { title, description, buttonTitle, handleInfoBannerClick } = useInfoBanner('events');
 
-  if (bookings.length === 0) {
+  if (events.length === 0) {
     return (
       <InfoBanner
-        type="bookings"
+        type="events"
         title={title}
         description={description}
         buttonTitle={buttonTitle}
@@ -32,9 +33,8 @@ const BookingList = ({ bookings, onDelete }: BookingListProps) => {
 
   return (
     <ul className={styles.list}>
-      {bookings.map(({ id, event }: BookingProps, index: number) => {
-        const { title, image, date, price, location } = event;
-        const handleBookingListButtonClick = () => onDelete(id);
+      {events.map(({ id, title, price, date, location, image }: EventType, index: number) => {
+        const handleEventDeleteClick = () => onEventDeleteClick(id);
 
         return (
           <li className={styles.listItem} key={id}>
@@ -48,8 +48,8 @@ const BookingList = ({ bookings, onDelete }: BookingListProps) => {
             <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button variant="outlined" className={styles.button} onClick={handleBookingListButtonClick}>
-                Отменить
+              <Button className={styles.button} variant="outlined" onClick={handleEventDeleteClick}>
+                Удалить
               </Button>
             </div>
           </li>
@@ -59,4 +59,4 @@ const BookingList = ({ bookings, onDelete }: BookingListProps) => {
   );
 };
 
-export { BookingList };
+export { EventsTab };

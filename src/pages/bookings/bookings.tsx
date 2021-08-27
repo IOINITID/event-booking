@@ -1,17 +1,15 @@
-import { useState } from 'react';
-
 // Components
-import { BookingList } from '../../components/booking-list';
 import { Loader } from '../../components/loader';
-import { BookingsChart } from '../../components/bookings-chart';
-import { ItemsList } from '../../components/items-list';
+import { BookingsTab } from '../../components/bookings-tab';
+import { EventsTab } from '../../components/events-tab';
+import { StatisticsTab } from '../../components/statistics-tab';
 
 // Containers
 import { ControlsContainer } from '../../containers/controls-container';
 
 // Store
-import { useSelector } from 'react-redux';
-import { controlTypeSelector } from '../../store/bookingsSlice/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { controlTypeSelector, userBookingsSelector } from '../../store/bookingsSlice/selectors';
 
 // Services
 import { useMutation, useQuery } from '@apollo/client';
@@ -24,29 +22,33 @@ import { toast } from 'react-toastify';
 
 // Styles
 import { styles } from './styles';
+import { setUserEvents } from '../../store/eventsSlice';
+import { setUserBookings } from '../../store/bookingsSlice';
+import { userEventsSelector } from '../../store/eventsSlice/selectors';
 
 const Bookings = () => {
+  const dispatch = useDispatch();
   const controlType = useSelector(controlTypeSelector);
-  const [userEvents, setUserEvents] = useState([]);
-  const [userBookings, setUserBookings] = useState([]);
+  const userEvents = useSelector(userEventsSelector);
+  const userBookings = useSelector(userBookingsSelector);
 
   const { loading: userEventsLoadeing } = useQuery(USER_EVENTS, {
     onCompleted: ({ userEvents }) => {
-      setUserEvents(userEvents);
+      dispatch(setUserEvents(userEvents));
     },
     fetchPolicy: 'no-cache',
   });
 
   const { loading: userBookingsLoading } = useQuery(USER_BOOKINGS, {
     onCompleted: ({ userBookings }) => {
-      setUserBookings(userBookings);
+      dispatch(setUserBookings(userBookings));
     },
     fetchPolicy: 'no-cache',
   });
 
   const [deleteEvent, { loading: deleteEventLoading }] = useMutation(DELETE_EVENT, {
     onCompleted: ({ deleteEvent }) => {
-      setUserEvents(userEvents.filter((event) => event.id !== deleteEvent.id));
+      dispatch(setUserEvents(userEvents.filter((event) => event.id !== deleteEvent.id)));
     },
     onError: ({ message }) => {
       toast.dark(message);
@@ -56,19 +58,13 @@ const Bookings = () => {
 
   const [cancelBooking, { loading: cancelBookingLoading }] = useMutation(CANCEL_BOOKING, {
     onCompleted: ({ cancelBooking }) => {
-      const updatedBookings = userBookings.filter((booking) => booking.id !== cancelBooking.id);
-      setUserBookings(updatedBookings);
+      dispatch(setUserBookings(userBookings.filter((booking) => booking.id !== cancelBooking.id)));
     },
     fetchPolicy: 'no-cache',
   });
 
-  // Components handlers
   const deleteBookingHandler = (bookingId: string) => {
-    cancelBooking({
-      variables: {
-        id: bookingId,
-      },
-    });
+    cancelBooking({ variables: { id: bookingId } });
   };
 
   const deleteEventHandler = (eventId: string) => {
@@ -83,9 +79,11 @@ const Bookings = () => {
     <div className={styles.container}>
       <ControlsContainer />
       <div>
-        {controlType === 'bookings' && <BookingList bookings={userBookings} onDelete={deleteBookingHandler} />}
-        {controlType === 'events' && <ItemsList events={userEvents} onDelete={deleteEventHandler} />}
-        {controlType === 'statistics' && <BookingsChart bookings={userBookings} />}
+        {controlType === 'bookings' && (
+          <BookingsTab bookings={userBookings} onBookingDeleteClick={deleteBookingHandler} />
+        )}
+        {controlType === 'events' && <EventsTab events={userEvents} onEventDeleteClick={deleteEventHandler} />}
+        {controlType === 'statistics' && <StatisticsTab bookings={userBookings} />}
       </div>
     </div>
   );

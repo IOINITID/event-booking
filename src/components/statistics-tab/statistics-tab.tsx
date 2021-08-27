@@ -1,21 +1,19 @@
-import React from 'react';
-
-// Styles imports
-import { styles } from './styles';
-
-// Additional imports
-import { PieChart, Pie, Cell } from 'recharts';
+// Additional
+import { PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
 import { css, cx } from '@emotion/css';
 
-const BookingsChart = (props: any) => {
-  // const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+// Styles
+import { styles } from './styles';
+import { StatisticsTabProps } from './types';
+import { BookingType } from '../../store/bookingsSlice/types';
 
+const StatisticsTab = ({ bookings }: StatisticsTabProps) => {
   const RADIAN = Math.PI / 180;
 
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: any) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: PieLabelRenderProps) => {
+    const radius = Number(innerRadius) + (Number(outerRadius) - Number(innerRadius)) * 0.5;
+    const x = Number(cx) + radius * Math.cos(-midAngle * RADIAN);
+    const y = Number(cy) + radius * Math.sin(-midAngle * RADIAN);
 
     return (
       <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
@@ -24,46 +22,46 @@ const BookingsChart = (props: any) => {
     );
   };
 
-  const one = props.bookings.reduce((previousValue: number, currentValue: any) => {
-    if (currentValue.event.price >= 0 && currentValue.event.price <= 3000) {
-      return previousValue + currentValue.event.price;
+  const lowPriceSum = bookings.reduce((previousValue: number, currentValue: BookingType) => {
+    if (Number(currentValue.event.price) >= 0 && Number(currentValue.event.price) <= 3000) {
+      return previousValue + Number(currentValue.event.price);
     } else {
       return previousValue;
     }
   }, 0);
 
-  const two = props.bookings.reduce((previousValue: number, currentValue: any) => {
-    if (currentValue.event.price >= 3000 && currentValue.event.price <= 8000) {
-      return previousValue + currentValue.event.price;
+  const mediumPriceSus = bookings.reduce((previousValue: number, currentValue: BookingType) => {
+    if (Number(currentValue.event.price) >= 3000 && Number(currentValue.event.price) <= 8000) {
+      return previousValue + Number(currentValue.event.price);
     } else {
       return previousValue;
     }
   }, 0);
 
-  const three = props.bookings.reduce((previousValue: number, currentValue: any) => {
-    if (currentValue.event.price >= 8000 && currentValue.event.price <= 10000) {
-      return previousValue + currentValue.event.price;
+  const highPriceSum = bookings.reduce((previousValue: number, currentValue: BookingType) => {
+    if (Number(currentValue.event.price) >= 8000 && Number(currentValue.event.price) <= 10000) {
+      return previousValue + Number(currentValue.event.price);
     } else {
       return previousValue;
     }
   }, 0);
 
-  const four = props.bookings.reduce((previousValue: number, currentValue: any) => {
-    if (currentValue.event.price >= 10000) {
-      return previousValue + currentValue.event.price;
+  const veryHighPriceSum = bookings.reduce((previousValue: number, currentValue: BookingType) => {
+    if (Number(currentValue.event.price) >= 10000) {
+      return previousValue + Number(currentValue.event.price);
     } else {
       return previousValue;
     }
   }, 0);
 
   const dataValues = [
-    { name: 'one', value: one, color: '#557AFF' },
-    { name: 'two', value: two, color: '#33EF23' },
-    { name: 'three', value: three, color: '#6423EF' },
-    { name: 'four', value: four, color: '#EF4723' },
+    { value: lowPriceSum, color: '#557AFF' },
+    { value: mediumPriceSus, color: '#33EF23' },
+    { value: highPriceSum, color: '#6423EF' },
+    { value: veryHighPriceSum, color: '#EF4723' },
   ];
 
-  const data = dataValues.filter((item: any) => item.value);
+  const data = dataValues.filter((value) => value.value);
 
   return (
     <div className={styles.container}>
@@ -128,8 +126,8 @@ const BookingsChart = (props: any) => {
           fill="#8884d8"
           dataKey="value"
         >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
+          {data.map(({ color }, index) => (
+            <Cell key={`cell-${index}`} fill={color} />
           ))}
         </Pie>
       </PieChart>
@@ -137,4 +135,4 @@ const BookingsChart = (props: any) => {
   );
 };
 
-export { BookingsChart };
+export { StatisticsTab };

@@ -3,7 +3,8 @@ import { Button } from '../button';
 import { InfoBanner } from '../info-banner';
 
 // Types
-import { EventProps, ItemsListProps } from './types';
+import { BookingsTabProps } from './types';
+import { BookingType } from '../../store/bookingsSlice/types';
 
 // Hooks
 import { useInfoBanner } from '../info-banner/hooks';
@@ -15,13 +16,13 @@ import 'dayjs/locale/ru';
 // Styles
 import { styles } from './styles';
 
-const ItemsList = ({ events, onDelete }: ItemsListProps) => {
-  const { title, description, buttonTitle, handleInfoBannerClick } = useInfoBanner('events');
+const BookingsTab = ({ bookings, onBookingDeleteClick }: BookingsTabProps) => {
+  const { title, description, buttonTitle, handleInfoBannerClick } = useInfoBanner('bookings');
 
-  if (events.length === 0) {
+  if (bookings.length === 0) {
     return (
       <InfoBanner
-        type="events"
+        type="bookings"
         title={title}
         description={description}
         buttonTitle={buttonTitle}
@@ -32,8 +33,8 @@ const ItemsList = ({ events, onDelete }: ItemsListProps) => {
 
   return (
     <ul className={styles.list}>
-      {events.map((event: EventProps, index: number) => {
-        const { id, title, image, date, price, location } = event;
+      {bookings.map(({ id, event: { title, price, date, location, image } }: BookingType, index: number) => {
+        const handleBookingDeleteClick = () => onBookingDeleteClick(id);
 
         return (
           <li className={styles.listItem} key={id}>
@@ -47,8 +48,8 @@ const ItemsList = ({ events, onDelete }: ItemsListProps) => {
             <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
             <div className={styles.location}>{location}</div>
             <div>
-              <Button className={styles.button} variant="outlined" onClick={() => onDelete(id)}>
-                Удалить
+              <Button variant="outlined" className={styles.button} onClick={handleBookingDeleteClick}>
+                Отменить
               </Button>
             </div>
           </li>
@@ -58,4 +59,4 @@ const ItemsList = ({ events, onDelete }: ItemsListProps) => {
   );
 };
 
-export { ItemsList };
+export { BookingsTab };
