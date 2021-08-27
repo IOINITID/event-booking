@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { BookingList } from '../../components/booking-list';
 import { Loader } from '../../components/loader';
 import { BookingsChart } from '../../components/bookings-chart';
-import { BookingsControl } from '../../components/bookings-controls';
+import { Controls } from '../../components/controls';
 import { ItemsList } from '../../components/items-list';
 
 // Services
@@ -13,19 +13,18 @@ import { DELETE_EVENT } from '../../services/events';
 import { USER_EVENTS, USER_BOOKINGS } from '../../services/user';
 import { CANCEL_BOOKING } from '../../services/bookings';
 
-// Types
-import { ControlActiveType } from '../../components/bookings-controls/types';
-
 // Additional
 import { toast } from 'react-toastify';
 
 // Styles
 import { styles } from './styles';
+import { useSelector } from 'react-redux';
+import { controlTypeSelector } from '../../store/bookingsSlice/selectors';
 
 const Bookings = () => {
+  const controlType = useSelector(controlTypeSelector);
   const [userEvents, setUserEvents] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
-  const [type, setType] = useState<ControlActiveType>('booking');
 
   const { loading: userEventsLoadeing } = useQuery(USER_EVENTS, {
     onCompleted: ({ userEvents }) => {
@@ -72,26 +71,17 @@ const Bookings = () => {
     deleteEvent({ variables: { id: eventId } });
   };
 
-  const typeChangeHandler = (type: 'booking' | 'my' | 'data') => {
-    setType(type);
-  };
-
   if (cancelBookingLoading || deleteEventLoading || userBookingsLoading || userEventsLoadeing) {
     return <Loader />;
   }
 
   return (
     <div className={styles.container}>
-      <BookingsControl
-        bookings={userBookings}
-        events={userEvents}
-        onTypeChange={typeChangeHandler}
-        activeOutputType={type}
-      />
+      <Controls bookings={userBookings} events={userEvents} />
       <div>
-        {type !== 'my' && type !== 'data' && <BookingList bookings={userBookings} onDelete={deleteBookingHandler} />}
-        {type === 'my' && <ItemsList events={userEvents} onDelete={deleteEventHandler} />}
-        {type === 'data' && <BookingsChart bookings={userBookings} />}
+        {controlType === 'bookings' && <BookingList bookings={userBookings} onDelete={deleteBookingHandler} />}
+        {controlType === 'events' && <ItemsList events={userEvents} onDelete={deleteEventHandler} />}
+        {controlType === 'statistics' && <BookingsChart bookings={userBookings} />}
       </div>
     </div>
   );

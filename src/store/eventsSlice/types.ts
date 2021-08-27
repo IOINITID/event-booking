@@ -1,4 +1,13 @@
-import { EventType } from '../../components/event-list/types';
+export type EventType = {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  date: string;
+  location: string;
+  image: string;
+  creator: string;
+};
 
 export type PreviewEventType = EventType | null;
 
