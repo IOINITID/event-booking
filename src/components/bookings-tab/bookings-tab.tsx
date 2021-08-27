@@ -1,5 +1,5 @@
 // Components
-import { Button } from '../button';
+import { EventCardTab } from '../event-card-tab';
 import { InfoBanner } from '../info-banner';
 
 // Types
@@ -8,10 +8,6 @@ import { BookingType } from '../../store/bookingsSlice/types';
 
 // Hooks
 import { useInfoBanner } from '../info-banner/hooks';
-
-// Additional
-import dayjs from 'dayjs';
-import 'dayjs/locale/ru';
 
 // Styles
 import { styles } from './styles';
@@ -37,21 +33,17 @@ const BookingsTab = ({ bookings, onBookingDeleteClick }: BookingsTabProps) => {
         const handleBookingDeleteClick = () => onBookingDeleteClick(id);
 
         return (
-          <li className={styles.listItem} key={id}>
-            <span className={styles.number}>{index + 1}</span>
-            <img className={styles.image} src={image} alt="Изображение мероприятия." />
-            <div className={styles.title}>{title}</div>
-            <div className={styles.date}>
-              <div>{dayjs(date).locale('ru').format('DD MMMM')}</div>
-              <div>{dayjs(date).locale('ru').format('HH:MM')}</div>
-            </div>
-            <div className={styles.price}>{price ? `${Number(price).toLocaleString()} ₽` : 'Бесплатно'}</div>
-            <div className={styles.location}>{location}</div>
-            <div>
-              <Button variant="outlined" className={styles.button} onClick={handleBookingDeleteClick}>
-                Отменить
-              </Button>
-            </div>
+          <li key={id}>
+            <EventCardTab
+              type="bookings"
+              index={index}
+              title={title}
+              price={price}
+              date={date}
+              location={location}
+              image={image}
+              onDeleteClick={handleBookingDeleteClick}
+            />
           </li>
         );
       })}
