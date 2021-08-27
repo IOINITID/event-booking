@@ -1,9 +1,6 @@
 // Components
 import { Button } from '../button';
 
-// Store
-import { setControlType } from '../../store/bookingsSlice';
-
 // Types
 import { ControlsDataType, ControlsProps } from './types';
 
@@ -13,17 +10,17 @@ import { cx } from '@emotion/css';
 // Styles
 import { styles } from './styles';
 
-const Controls = ({ controlType, bookings, events, onControlClick }: ControlsProps) => {
+const Controls = ({ controlType, bookingsCount, eventsCount, onControlClick }: ControlsProps) => {
   const controlsData: ControlsDataType[] = [
     {
       title: 'Забронированные',
       type: 'bookings',
-      length: bookings.length,
+      length: bookingsCount,
     },
     {
       title: 'Созданные мной',
       type: 'events',
-      length: events.length,
+      length: eventsCount,
     },
     {
       title: 'Статистика',

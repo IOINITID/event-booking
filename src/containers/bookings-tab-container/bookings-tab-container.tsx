@@ -18,7 +18,7 @@ const BookingsTabContainer = () => {
   const dispatch = useDispatch();
   const userBookings = useSelector(userBookingsSelector);
 
-  useQuery(USER_BOOKINGS, {
+  const { loading } = useQuery(USER_BOOKINGS, {
     onCompleted: ({ userBookings }) => {
       dispatch(setUserBookings(userBookings));
     },
@@ -42,7 +42,7 @@ const BookingsTabContainer = () => {
     cancelBooking({ variables: { id: bookingId } });
   };
 
-  return <BookingsTab bookings={userBookings} onBookingDeleteClick={handleBookingDeleteClick} />;
+  return <BookingsTab isLoading={loading} bookings={userBookings} onBookingDeleteClick={handleBookingDeleteClick} />;
 };
 
 export { BookingsTabContainer };

@@ -18,7 +18,7 @@ const EventsTabContainer = () => {
   const dispatch = useDispatch();
   const userEvents = useSelector(userEventsSelector);
 
-  useQuery(USER_EVENTS, {
+  const { loading } = useQuery(USER_EVENTS, {
     onCompleted: ({ userEvents }) => {
       dispatch(setUserEvents(userEvents));
     },
@@ -42,7 +42,7 @@ const EventsTabContainer = () => {
     deleteEvent({ variables: { id: eventId } });
   };
 
-  return <EventsTab events={userEvents} onEventDeleteClick={handleEventDeleteClick} />;
+  return <EventsTab isLoading={loading} events={userEvents} onEventDeleteClick={handleEventDeleteClick} />;
 };
 
 export { EventsTabContainer };

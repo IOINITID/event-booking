@@ -1,6 +1,7 @@
 // Components
-import { EventCardTab } from '../event-card-tab';
+import { Loader } from '../loader';
 import { InfoBanner } from '../info-banner';
+import { EventCardTab } from '../event-card-tab';
 
 // Types
 import { EventsTabProps } from './types';
@@ -12,8 +13,12 @@ import { useInfoBanner } from '../info-banner/hooks';
 // Styles
 import { styles } from './styles';
 
-const EventsTab = ({ events, onEventDeleteClick }: EventsTabProps) => {
+const EventsTab = ({ isLoading, events, onEventDeleteClick }: EventsTabProps) => {
   const { title, description, buttonTitle, handleInfoBannerClick } = useInfoBanner('events');
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   if (events.length === 0) {
     return (

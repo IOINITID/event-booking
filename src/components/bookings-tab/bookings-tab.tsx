@@ -1,6 +1,7 @@
 // Components
-import { EventCardTab } from '../event-card-tab';
+import { Loader } from '../loader';
 import { InfoBanner } from '../info-banner';
+import { EventCardTab } from '../event-card-tab';
 
 // Types
 import { BookingsTabProps } from './types';
@@ -12,8 +13,12 @@ import { useInfoBanner } from '../info-banner/hooks';
 // Styles
 import { styles } from './styles';
 
-const BookingsTab = ({ bookings, onBookingDeleteClick }: BookingsTabProps) => {
+const BookingsTab = ({ isLoading, bookings, onBookingDeleteClick }: BookingsTabProps) => {
   const { title, description, buttonTitle, handleInfoBannerClick } = useInfoBanner('bookings');
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   if (bookings.length === 0) {
     return (
