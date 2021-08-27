@@ -11,7 +11,10 @@ export type EventType = {
 
 export type PreviewEventType = EventType | null;
 
+export type UserEventType = EventType;
+
 export type EventsState = {
   events: EventType[];
   previewEvent: PreviewEventType;
+  userEvents: UserEventType[];
 };

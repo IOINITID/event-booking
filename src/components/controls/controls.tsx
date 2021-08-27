@@ -2,9 +2,7 @@
 import { Button } from '../button';
 
 // Store
-import { useDispatch, useSelector } from 'react-redux';
 import { setControlType } from '../../store/bookingsSlice';
-import { controlTypeSelector } from '../../store/bookingsSlice/selectors';
 
 // Types
 import { ControlsDataType, ControlsProps } from './types';
@@ -15,10 +13,7 @@ import { cx } from '@emotion/css';
 // Styles
 import { styles } from './styles';
 
-const Controls = ({ bookings, events }: ControlsProps) => {
-  const dispatch = useDispatch();
-  const controlType = useSelector(controlTypeSelector);
-
+const Controls = ({ controlType, bookings, events, onControlClick }: ControlsProps) => {
   const controlsData: ControlsDataType[] = [
     {
       title: 'Забронированные',
@@ -39,16 +34,14 @@ const Controls = ({ bookings, events }: ControlsProps) => {
   return (
     <div className={styles.control}>
       {controlsData.map(({ title, type, length }, index) => {
-        const handleControlButtonClick = () => {
-          dispatch(setControlType(type));
-        };
+        const handleControlClick = () => onControlClick(type);
 
         return (
           <Button
             key={`${type}-${index}`}
             className={cx(styles.button, controlType === type && 'active')}
             variant="contained"
-            onClick={handleControlButtonClick}
+            onClick={handleControlClick}
           >
             {title} {type !== 'statistics' ? `(${length || 0})` : ''}
           </Button>

@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { EventType } from '../../components/event-list/types';
 
 // Constants
 import { MODULE_NAME } from './constants';
 
 // Types
-import { EventsState, PreviewEventType } from './types';
+import { EventsState, EventType, PreviewEventType, UserEventType } from './types';
 
 const initialState: EventsState = {
   events: [],
   previewEvent: null,
+  userEvents: [],
 };
 
 export const eventsSlice = createSlice({
@@ -22,9 +22,12 @@ export const eventsSlice = createSlice({
     setPreviewEvent: (state: EventsState, { payload }: PayloadAction<PreviewEventType>) => {
       state.previewEvent = payload;
     },
+    setUserEvents: (state: EventsState, { payload }: PayloadAction<UserEventType[]>) => {
+      state.userEvents = payload;
+    },
   },
 });
 
-export const { setEvents, setPreviewEvent } = eventsSlice.actions;
+export const { setEvents, setPreviewEvent, setUserEvents } = eventsSlice.actions;
 
 export default eventsSlice.reducer;

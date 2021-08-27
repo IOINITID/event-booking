@@ -4,10 +4,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MODULE_NAME } from './constants';
 
 // Types
-import { BookingsState, ControlType } from './types';
+import { BookingsState, ControlType, UserBookingType } from './types';
 
 const initialState: BookingsState = {
   controlType: 'bookings',
+  userBookings: [],
 };
 
 export const bookingsSlice = createSlice({
@@ -17,9 +18,12 @@ export const bookingsSlice = createSlice({
     setControlType: (state: BookingsState, { payload }: PayloadAction<ControlType>) => {
       state.controlType = payload;
     },
+    setUserBookings: (state: BookingsState, { payload }: PayloadAction<UserBookingType[]>) => {
+      state.userBookings = payload;
+    },
   },
 });
 
-export const { setControlType } = bookingsSlice.actions;
+export const { setControlType, setUserBookings } = bookingsSlice.actions;
 
 export default bookingsSlice.reducer;

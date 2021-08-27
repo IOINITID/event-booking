@@ -4,8 +4,14 @@ import { useState } from 'react';
 import { BookingList } from '../../components/booking-list';
 import { Loader } from '../../components/loader';
 import { BookingsChart } from '../../components/bookings-chart';
-import { Controls } from '../../components/controls';
 import { ItemsList } from '../../components/items-list';
+
+// Containers
+import { ControlsContainer } from '../../containers/controls-container';
+
+// Store
+import { useSelector } from 'react-redux';
+import { controlTypeSelector } from '../../store/bookingsSlice/selectors';
 
 // Services
 import { useMutation, useQuery } from '@apollo/client';
@@ -18,8 +24,6 @@ import { toast } from 'react-toastify';
 
 // Styles
 import { styles } from './styles';
-import { useSelector } from 'react-redux';
-import { controlTypeSelector } from '../../store/bookingsSlice/selectors';
 
 const Bookings = () => {
   const controlType = useSelector(controlTypeSelector);
@@ -77,7 +81,7 @@ const Bookings = () => {
 
   return (
     <div className={styles.container}>
-      <Controls bookings={userBookings} events={userEvents} />
+      <ControlsContainer />
       <div>
         {controlType === 'bookings' && <BookingList bookings={userBookings} onDelete={deleteBookingHandler} />}
         {controlType === 'events' && <ItemsList events={userEvents} onDelete={deleteEventHandler} />}
