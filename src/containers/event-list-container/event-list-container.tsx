@@ -24,23 +24,22 @@ import { toast } from 'react-toastify';
 const EventListContainer = ({ onDetailClick }: EventListContainerProps) => {
   const dispatch = useDispatch();
   const events = useSelector(eventsSelector);
-
   const [eventsCount, setEventsCount] = useState<number>(EVENTS_COUNT);
-
-  const handleShowMoreEventsClick = (event: MouseEvent<HTMLButtonElement>) => {
-    event.currentTarget.blur();
-    setEventsCount(eventsCount + EVENTS_COUNT);
-  };
-
-  const handleEventsError = (message: string) => toast.error(message);
 
   const { loading } = useQuery(EVENTS, {
     onCompleted: ({ events }) => {
       dispatch(setEvents(events));
     },
-    onError: ({ message }) => handleEventsError(message),
+    onError: ({ message }) => {
+      toast.error(message);
+    },
     fetchPolicy: 'no-cache',
   });
+
+  const handleShowMoreEventsClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.currentTarget.blur();
+    setEventsCount(eventsCount + EVENTS_COUNT);
+  };
 
   return (
     <EventList
