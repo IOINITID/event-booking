@@ -14,6 +14,8 @@ Storybook: https://ioinitid.github.io/event-booking/storybook/index.html
 
 **Превью:**
 
+![Preview](preview.jpg 'Preview')
+
 ---
 
 Сделано с ❤️
