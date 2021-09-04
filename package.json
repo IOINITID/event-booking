@@ -8,7 +8,8 @@
     "build": "webpack --mode production && npm run build-storybook",
     "start": "webpack serve --mode development",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o ./dist/storybook"
+    "build-storybook": "build-storybook -o ./dist/storybook",
+    "deploy": "yarn build && yarn gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
