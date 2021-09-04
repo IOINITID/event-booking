@@ -15,16 +15,16 @@ export type BookingsStatisticsType = {
   mediumPriceSum: number;
   highPriceSum: number;
   veryHighPriceSum: number;
-};
+} | null;
 
 export type BookingsControlsCountsType = {
   eventsCount: number;
   bookingsCount: number;
-};
+} | null;
 
 export type BookingsState = {
   controlType: ControlType;
   userBookings: UserBookingType[];
-  bookingsStatistics: BookingsStatisticsType | null;
-  bookingsControlsCounts: BookingsControlsCountsType | null;
+  bookingsStatistics: BookingsStatisticsType;
+  bookingsControlsCounts: BookingsControlsCountsType;
 };

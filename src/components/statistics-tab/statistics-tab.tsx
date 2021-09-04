@@ -17,8 +17,8 @@ const StatisticsTab = ({ bookingsStatistics }: StatisticsTabProps) => {
     const y = Number(cy) + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        {`${(percent * 100).toFixed(0)}%`}
+      <text x={x} y={y} fill="white" textAnchor={x > Number(cx) ? 'start' : 'end'} dominantBaseline="central">
+        {`${(Number(percent) * 100).toFixed(0)}%`}
       </text>
     );
   };

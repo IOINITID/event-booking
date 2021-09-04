@@ -10,8 +10,8 @@ import { css, cx } from '@emotion/css';
 // Interfaces and types
 interface IModalSuccess {
   isOpen: boolean;
-  onCancel?: () => void;
-  onConfirm?: () => void;
+  onCancel: () => void;
+  onConfirm: () => void;
 }
 
 const ModalSuccess = (props: IModalSuccess) => {

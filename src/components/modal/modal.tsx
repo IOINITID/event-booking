@@ -23,29 +23,31 @@ const Modal = ({ width, isOpen, children, cancelButton, confirmButton }: ModalPr
     };
   }, [isOpen]);
 
+  if (!isOpen) {
+    return null;
+  }
+
   return (
-    isOpen && (
-      <div className={styles.backdrop}>
-        <div
-          className={cx(
-            styles.container,
-            css`
-              width: ${width}px;
-            `
-          )}
-        >
-          <div>{children}</div>
-          <div className={styles.actions}>
-            <Button variant="outlined" onClick={cancelButton.onClick}>
-              {cancelButton.title}
-            </Button>
-            <Button variant="contained" onClick={confirmButton.onClick}>
-              {confirmButton.title}
-            </Button>
-          </div>
+    <div className={styles.backdrop}>
+      <div
+        className={cx(
+          styles.container,
+          css`
+            width: ${width}px;
+          `
+        )}
+      >
+        <div>{children}</div>
+        <div className={styles.actions}>
+          <Button variant="outlined" onClick={cancelButton.onClick}>
+            {cancelButton.title}
+          </Button>
+          <Button variant="contained" onClick={confirmButton.onClick}>
+            {confirmButton.title}
+          </Button>
         </div>
       </div>
-    )
+    </div>
   );
 };
 

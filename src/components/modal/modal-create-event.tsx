@@ -171,20 +171,22 @@ const ModalCreateEvent = (props: IModalCreateEvent) => {
                 id="image"
                 name="image"
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                  const image = event.target.files[0];
+                  const image = event.target.files ? event.target.files[0] : null;
                   const fileReader = new FileReader();
 
-                  fileReader.readAsDataURL(image);
-                  fileReader.onload = () => {
-                    const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+                  if (image) {
+                    fileReader.readAsDataURL(image);
+                    fileReader.onload = () => {
+                      const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
-                    if (image.size > MAX_IMAGE_SIZE) {
-                      toast.error('Изображение должно быть меньше 5MB.');
-                      return;
-                    } else {
-                      setImage(String(fileReader.result));
-                    }
-                  };
+                      if (image.size > MAX_IMAGE_SIZE) {
+                        toast.error('Изображение должно быть меньше 5MB.');
+                        return;
+                      } else {
+                        setImage(String(fileReader.result));
+                      }
+                    };
+                  }
                 }}
               />
               <span

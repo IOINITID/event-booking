@@ -6,7 +6,7 @@ export type LinkDataType = {
   enable: boolean;
   title: string;
   path: Routes;
-  onClick: (event: MouseEvent<HTMLAnchorElement>) => void | null;
+  onClick: ((event: MouseEvent<HTMLAnchorElement>) => void) | undefined;
 };
 
 export type NavigationProps = {

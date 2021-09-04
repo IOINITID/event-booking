@@ -28,18 +28,7 @@ import { Routes } from '../../routes';
 import { toast } from 'react-toastify';
 import { eventsSelector, previewEventSelector } from '../../store/eventsSlice/selectors';
 import { setEvents, setPreviewEvent } from '../../store/eventsSlice';
-
-// Interfaces and types
-type EventType = {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  price: string;
-  location: string;
-  image: string;
-  creator: string;
-};
+import { EventType, PreviewEventType } from '../../store/eventsSlice/types';
 
 type EventDataType = {
   title: string;
@@ -130,7 +119,7 @@ const Events = () => {
 
   const handleDetailClick = (eventId: string) => {
     setIsPreviewOpen(true);
-    dispatch(setPreviewEvent(events.find(({ id }: EventType) => id === eventId)));
+    dispatch(setPreviewEvent(events.find(({ id }: EventType) => id === eventId) as PreviewEventType));
   };
 
   const bookEventHandler = () => {
@@ -143,7 +132,7 @@ const Events = () => {
     }
 
     bookEvent({
-      variables: { id: previewEvent.id },
+      variables: { id: previewEvent?.id },
     });
   };
 

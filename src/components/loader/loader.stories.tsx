@@ -9,7 +9,7 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof Loader>;
 
-const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;
+const Template: ComponentStory<typeof Loader> = () => <Loader />;
 
 export const Default = Template.bind({});
 const DefaultLoaderArgs = {};
