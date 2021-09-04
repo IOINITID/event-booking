@@ -17,7 +17,6 @@ import { BOOK_EVENT } from '../../services/bookings';
 
 // Store
 import { useDispatch, useSelector } from 'react-redux';
-import { setLogout } from '../../store/userSlice';
 import { tokenSelector } from '../../store/userSlice/selectors';
 
 // Router
@@ -55,10 +54,9 @@ const Events = () => {
       dispatch(setEvents([createEvent, ...events]));
       toast.success('Мероприятие успешно создано.');
     },
-    onError: (error) => {
-      toast.error(error.message);
+    onError: ({ message }) => {
+      toast.error(message);
     },
-    fetchPolicy: 'no-cache',
   });
 
   const [bookEvent, { loading: bookEventLoading }] = useMutation(BOOK_EVENT, {
@@ -67,16 +65,9 @@ const Events = () => {
       dispatch(setPreviewEvent(null));
       setIsSuccessOpen(true);
     },
-    onError: (error) => {
-      if (error.message === 'Необходима авторизация.') {
-        setIsPreviewOpen(false);
-        dispatch(setPreviewEvent(null));
-        dispatch(setLogout());
-        history.push(Routes.Authorization);
-      }
-      toast.error(error.message);
+    onError: ({ message }) => {
+      toast.error(message);
     },
-    fetchPolicy: 'no-cache',
   });
 
   const modalConfirmHandler = ({ title, description, price, date, location, image }: EventDataType) => {

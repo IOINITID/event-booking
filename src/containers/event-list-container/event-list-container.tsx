@@ -33,7 +33,6 @@ const EventListContainer = ({ onDetailClick }: EventListContainerProps) => {
     onError: ({ message }) => {
       toast.error(message);
     },
-    fetchPolicy: 'no-cache',
   });
 
   const handleShowMoreEventsClick = (event: MouseEvent<HTMLButtonElement>) => {

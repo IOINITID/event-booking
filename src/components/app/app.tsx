@@ -19,7 +19,7 @@ import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Routes } from '../../routes';
 
 // Constants
-import { REQUEST_URL } from '../../utils/constants';
+import { defaultOptions, REQUEST_URL } from '../../utils/constants';
 
 // Additional
 import { ToastContainer } from 'react-toastify';
@@ -41,6 +41,7 @@ const App = () => {
       },
     }),
     cache: new InMemoryCache(),
+    defaultOptions,
   });
 
   return (

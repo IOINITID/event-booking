@@ -26,7 +26,6 @@ const StatisticsTabContainer = () => {
     onError: ({ message }) => {
       toast.error(message);
     },
-    fetchPolicy: 'network-only',
   });
 
   useEffect(() => {

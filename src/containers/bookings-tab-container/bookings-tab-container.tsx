@@ -25,7 +25,6 @@ const BookingsTabContainer = () => {
     onError: ({ message }) => {
       toast.error(message);
     },
-    fetchPolicy: 'no-cache',
   });
 
   const [cancelBooking] = useMutation(CANCEL_BOOKING, {
@@ -35,7 +34,6 @@ const BookingsTabContainer = () => {
     onError: ({ message }) => {
       toast.error(message);
     },
-    fetchPolicy: 'no-cache',
   });
 
   const handleBookingDeleteClick = (bookingId: string) => {

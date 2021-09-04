@@ -25,7 +25,6 @@ const EventsTabContainer = () => {
     onError: ({ message }) => {
       toast.error(message);
     },
-    fetchPolicy: 'no-cache',
   });
 
   const [deleteEvent] = useMutation(DELETE_EVENT, {
@@ -35,7 +34,6 @@ const EventsTabContainer = () => {
     onError: ({ message }) => {
       toast.error(message);
     },
-    fetchPolicy: 'no-cache',
   });
 
   const handleEventDeleteClick = (eventId: string) => {

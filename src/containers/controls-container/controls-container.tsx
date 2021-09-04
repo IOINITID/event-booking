@@ -28,7 +28,6 @@ const ControlsContainer = () => {
     onError: ({ message }) => {
       toast.error(message);
     },
-    fetchPolicy: 'network-only',
   });
 
   const handleControlClick = (type: ControlType) => {

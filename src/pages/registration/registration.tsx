@@ -28,14 +28,15 @@ const Registration = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleCreateUserCompleted = (id: string, token: string) => {
-    dispatch(setLogin({ id, token }));
-    toast.success('Регистрация выполнена успешно.');
-    history.push(Routes.Main);
-  };
-
   const [registration, { loading }] = useMutation(REGISTRATION, {
-    onCompleted: ({ registration: { id, token } }) => handleCreateUserCompleted(id, token),
+    onCompleted: ({ registration: { id, token } }) => {
+      dispatch(setLogin({ id, token }));
+      toast.success('Регистрация выполнена успешно.');
+      history.push(Routes.Main);
+    },
+    onError: ({ message }) => {
+      toast.error(message);
+    },
   });
 
   const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {

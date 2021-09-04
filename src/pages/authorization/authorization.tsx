@@ -28,18 +28,15 @@ const Authorization = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLoginCompeted = (id: string, token: string) => {
-    dispatch(setLogin({ id, token }));
-    toast.success('Вы успешно авторизовались.');
-    history.push(Routes.Main);
-  };
-
-  const handleLoginError = (message: string) => toast.error(message);
-
   const [authorization, { loading }] = useLazyQuery(AUTHORIZATION, {
-    onCompleted: ({ authorization: { id, token } }) => handleLoginCompeted(id, token),
-    onError: ({ message }) => handleLoginError(message),
-    fetchPolicy: 'no-cache',
+    onCompleted: ({ authorization: { id, token } }) => {
+      dispatch(setLogin({ id, token }));
+      toast.success('Вы успешно авторизовались.');
+      history.push(Routes.Main);
+    },
+    onError: ({ message }) => {
+      toast.error(message);
+    },
   });
 
   const submitHandler = (event: MouseEvent<HTMLButtonElement>) => {
