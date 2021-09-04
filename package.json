@@ -9,7 +9,7 @@
     "start": "webpack serve --mode development",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o ./dist/storybook",
-    "deploy": "yarn build && yarn gh-pages -d dist"
+    "deploy": "yarn build && npx gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
