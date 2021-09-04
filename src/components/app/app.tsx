@@ -57,7 +57,7 @@ const App = () => {
           </Switch>
         </main>
       </HashRouter>
-      <ToastContainer />
+      <ToastContainer theme="dark" />
     </ApolloProvider>
   );
 };
