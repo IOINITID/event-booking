@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 // Components
 import { StatisticsTab } from '../../components/statistics-tab';
 
@@ -26,6 +28,12 @@ const StatisticsTabContainer = () => {
     },
     fetchPolicy: 'network-only',
   });
+
+  useEffect(() => {
+    return () => {
+      dispatch(setBookingsStatistics(null));
+    };
+  }, []);
 
   return <StatisticsTab bookingsStatistics={bookingsStatistics} />;
 };

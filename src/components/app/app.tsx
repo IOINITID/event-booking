@@ -5,13 +5,14 @@ import { Authorization } from '../../pages/authorization';
 import { Registration } from '../../pages/registration';
 import { Events } from '../../pages/events';
 import { Bookings } from '../../pages/bookings';
+import { Header } from '../header';
 
-// GraphQL
+// Services
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 
 // Store
 import { useSelector } from 'react-redux';
-import { userTokenSelector } from '../../store/userSlice/selectors';
+import { tokenSelector } from '../../store/userSlice/selectors';
 
 // Router
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
@@ -22,14 +23,15 @@ import { REQUEST_URL } from '../../utils/constants';
 
 // Additional
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 // Styles
 import { styles } from './styles';
-import { Header } from '../header';
+
+injectStyle();
 
 const App = () => {
-  const token = useSelector(userTokenSelector);
+  const token = useSelector(tokenSelector);
 
   const client = new ApolloClient({
     link: createHttpLink({

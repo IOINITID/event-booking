@@ -3,7 +3,7 @@ import { EventsBanner } from '../../components/events-banner';
 
 // Store
 import { useSelector } from 'react-redux';
-import { userTokenSelector } from '../../store/userSlice/selectors';
+import { tokenSelector } from '../../store/userSlice/selectors';
 
 // Routes
 import { useHistory } from 'react-router-dom';
@@ -14,7 +14,7 @@ import { EventsBannerContainerProps } from './types';
 
 const EventsBannerContainer = ({ onCreateEventClick }: EventsBannerContainerProps) => {
   const history = useHistory();
-  const token = useSelector(userTokenSelector);
+  const token = useSelector(tokenSelector);
 
   const handleCreateAccountClick = () => history.push(Routes.Registration);
 

@@ -4,7 +4,7 @@ import { Navigation } from '../../components/navigation';
 // Store
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../store/userSlice';
-import { userTokenSelector } from '../../store/userSlice/selectors';
+import { tokenSelector } from '../../store/userSlice/selectors';
 
 // Router
 import { useLocation } from 'react-router-dom';
@@ -19,7 +19,7 @@ import { nanoid } from 'nanoid';
 const NavigationContainer = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const token = useSelector(userTokenSelector);
+  const token = useSelector(tokenSelector);
 
   const handleNavigationLogoutClick = () => dispatch(setLogout());
 

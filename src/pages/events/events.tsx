@@ -18,7 +18,7 @@ import { BOOK_EVENT } from '../../services/bookings';
 // Store
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogout } from '../../store/userSlice';
-import { userTokenSelector } from '../../store/userSlice/selectors';
+import { tokenSelector } from '../../store/userSlice/selectors';
 
 // Router
 import { useHistory } from 'react-router';
@@ -53,7 +53,7 @@ type EventDataType = {
 const Events = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const token = useSelector(userTokenSelector);
+  const token = useSelector(tokenSelector);
   const events = useSelector(eventsSelector);
   const previewEvent = useSelector(previewEventSelector);
 
