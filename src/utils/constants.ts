@@ -13,14 +13,11 @@ export const REQUEST_URL = MODE === 'production' ? PRODUCTION_URL : DEVELOPMENT_
 export const defaultOptions: DefaultOptions = {
   watchQuery: {
     fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
   },
   query: {
     fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
   },
   mutate: {
     fetchPolicy: 'no-cache',
-    errorPolicy: 'all',
   },
 };
