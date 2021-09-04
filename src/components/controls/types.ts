@@ -1,9 +1,8 @@
-import { ControlType } from '../../store/bookingsSlice/types';
+import { BookingsControlsCountsType, ControlType } from '../../store/bookingsSlice/types';
 
 export type ControlsProps = {
   controlType: ControlType;
-  bookingsCount: number;
-  eventsCount: number;
+  controlsCounts: BookingsControlsCountsType;
   onControlClick: (type: ControlType) => void;
 };
 

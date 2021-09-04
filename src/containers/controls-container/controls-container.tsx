@@ -3,15 +3,15 @@ import { Controls } from '../../components/controls';
 
 // Store
 import { useDispatch, useSelector } from 'react-redux';
-import { setControlType, setUserBookings } from '../../store/bookingsSlice';
-import { setUserEvents } from '../../store/eventsSlice';
-import { controlTypeSelector, userBookingsSelector } from '../../store/bookingsSlice/selectors';
-import { userEventsSelector } from '../../store/eventsSlice/selectors';
-import { ControlType } from '../../store/bookingsSlice/types';
+import { setBookingsControlsCounts, setControlType } from '../../store/bookingsSlice';
+import { bookingsControlsCountsSelector, controlTypeSelector } from '../../store/bookingsSlice/selectors';
 
 // Services
 import { useQuery } from '@apollo/client';
-import { USER_BOOKINGS, USER_EVENTS } from '../../services/user';
+import { BOOKINGS_CONTROLS_COUNTS } from '../../services/bookings/queries';
+
+// Types
+import { ControlType } from '../../store/bookingsSlice/types';
 
 // Additional
 import { toast } from 'react-toastify';
@@ -19,41 +19,23 @@ import { toast } from 'react-toastify';
 const ControlsContainer = () => {
   const dispatch = useDispatch();
   const controlType = useSelector(controlTypeSelector);
-  const userBookings = useSelector(userBookingsSelector);
-  const userEvents = useSelector(userEventsSelector);
+  const controlsCounts = useSelector(bookingsControlsCountsSelector);
 
-  useQuery(USER_EVENTS, {
-    onCompleted: ({ userEvents }) => {
-      dispatch(setUserEvents(userEvents));
+  useQuery(BOOKINGS_CONTROLS_COUNTS, {
+    onCompleted: ({ bookingsControlsCounts: { eventsCount, bookingsCount } }) => {
+      dispatch(setBookingsControlsCounts({ eventsCount, bookingsCount }));
     },
     onError: ({ message }) => {
       toast.error(message);
     },
-    fetchPolicy: 'no-cache',
-  });
-
-  useQuery(USER_BOOKINGS, {
-    onCompleted: ({ userBookings }) => {
-      dispatch(setUserBookings(userBookings));
-    },
-    onError: ({ message }) => {
-      toast.error(message);
-    },
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'network-only',
   });
 
   const handleControlClick = (type: ControlType) => {
     dispatch(setControlType(type));
   };
 
-  return (
-    <Controls
-      controlType={controlType}
-      eventsCount={userEvents.length}
-      bookingsCount={userBookings.length}
-      onControlClick={handleControlClick}
-    />
-  );
+  return <Controls controlType={controlType} controlsCounts={controlsCounts} onControlClick={handleControlClick} />;
 };
 
 export { ControlsContainer };

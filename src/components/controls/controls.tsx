@@ -10,17 +10,17 @@ import { cx } from '@emotion/css';
 // Styles
 import { styles } from './styles';
 
-const Controls = ({ controlType, bookingsCount, eventsCount, onControlClick }: ControlsProps) => {
+const Controls = ({ controlType, controlsCounts, onControlClick }: ControlsProps) => {
   const controlsData: ControlsDataType[] = [
     {
       title: 'Забронированные',
       type: 'bookings',
-      length: bookingsCount,
+      length: controlsCounts?.bookingsCount,
     },
     {
       title: 'Созданные мной',
       type: 'events',
-      length: eventsCount,
+      length: controlsCounts?.eventsCount,
     },
     {
       title: 'Статистика',

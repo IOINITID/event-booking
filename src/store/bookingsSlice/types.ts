@@ -17,8 +17,14 @@ export type BookingsStatisticsType = {
   veryHighPriceSum: number;
 };
 
+export type BookingsControlsCountsType = {
+  eventsCount: number;
+  bookingsCount: number;
+};
+
 export type BookingsState = {
   controlType: ControlType;
   userBookings: UserBookingType[];
   bookingsStatistics: BookingsStatisticsType | null;
+  bookingsControlsCounts: BookingsControlsCountsType | null;
 };

@@ -18,8 +18,8 @@ const StatisticsTabContainer = () => {
   const bookingsStatistics = useSelector(bookingsStatisticsSelector);
 
   useQuery(BOOKINGS_STATISTICS, {
-    onCompleted: ({ bookingsStatistics }) => {
-      dispatch(setBookingsStatistics(bookingsStatistics));
+    onCompleted: ({ bookingsStatistics: { lowPriceSum, mediumPriceSum, highPriceSum, veryHighPriceSum } }) => {
+      dispatch(setBookingsStatistics({ lowPriceSum, mediumPriceSum, highPriceSum, veryHighPriceSum }));
     },
     onError: ({ message }) => {
       toast.error(message);

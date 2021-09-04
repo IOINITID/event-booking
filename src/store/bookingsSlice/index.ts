@@ -4,12 +4,19 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MODULE_NAME } from './constants';
 
 // Types
-import { BookingsState, BookingsStatisticsType, ControlType, UserBookingType } from './types';
+import {
+  BookingsControlsCountsType,
+  BookingsState,
+  BookingsStatisticsType,
+  ControlType,
+  UserBookingType,
+} from './types';
 
 const initialState: BookingsState = {
   controlType: 'bookings',
   userBookings: [],
   bookingsStatistics: null,
+  bookingsControlsCounts: null,
 };
 
 export const bookingsSlice = createSlice({
@@ -25,9 +32,13 @@ export const bookingsSlice = createSlice({
     setBookingsStatistics: (state: BookingsState, { payload }: PayloadAction<BookingsStatisticsType>) => {
       state.bookingsStatistics = payload;
     },
+    setBookingsControlsCounts: (state: BookingsState, { payload }: PayloadAction<BookingsControlsCountsType>) => {
+      state.bookingsControlsCounts = payload;
+    },
   },
 });
 
-export const { setControlType, setUserBookings, setBookingsStatistics } = bookingsSlice.actions;
+export const { setControlType, setUserBookings, setBookingsStatistics, setBookingsControlsCounts } =
+  bookingsSlice.actions;
 
 export default bookingsSlice.reducer;
