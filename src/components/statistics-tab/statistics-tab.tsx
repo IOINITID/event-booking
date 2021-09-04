@@ -2,12 +2,13 @@
 import { PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
 import { css, cx } from '@emotion/css';
 
+// Types
+import { StatisticsTabProps } from './types';
+
 // Styles
 import { styles } from './styles';
-import { StatisticsTabProps } from './types';
-import { BookingType } from '../../store/bookingsSlice/types';
 
-const StatisticsTab = ({ bookings }: StatisticsTabProps) => {
+const StatisticsTab = ({ bookingsStatistics }: StatisticsTabProps) => {
   const RADIAN = Math.PI / 180;
 
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: PieLabelRenderProps) => {
@@ -22,43 +23,11 @@ const StatisticsTab = ({ bookings }: StatisticsTabProps) => {
     );
   };
 
-  const lowPriceSum = bookings.reduce((previousValue: number, currentValue: BookingType) => {
-    if (Number(currentValue.event.price) >= 0 && Number(currentValue.event.price) <= 3000) {
-      return previousValue + Number(currentValue.event.price);
-    } else {
-      return previousValue;
-    }
-  }, 0);
-
-  const mediumPriceSus = bookings.reduce((previousValue: number, currentValue: BookingType) => {
-    if (Number(currentValue.event.price) >= 3000 && Number(currentValue.event.price) <= 8000) {
-      return previousValue + Number(currentValue.event.price);
-    } else {
-      return previousValue;
-    }
-  }, 0);
-
-  const highPriceSum = bookings.reduce((previousValue: number, currentValue: BookingType) => {
-    if (Number(currentValue.event.price) >= 8000 && Number(currentValue.event.price) <= 10000) {
-      return previousValue + Number(currentValue.event.price);
-    } else {
-      return previousValue;
-    }
-  }, 0);
-
-  const veryHighPriceSum = bookings.reduce((previousValue: number, currentValue: BookingType) => {
-    if (Number(currentValue.event.price) >= 10000) {
-      return previousValue + Number(currentValue.event.price);
-    } else {
-      return previousValue;
-    }
-  }, 0);
-
   const dataValues = [
-    { value: lowPriceSum, color: '#557AFF' },
-    { value: mediumPriceSus, color: '#33EF23' },
-    { value: highPriceSum, color: '#6423EF' },
-    { value: veryHighPriceSum, color: '#EF4723' },
+    { value: bookingsStatistics?.lowPriceSum, color: '#557AFF' },
+    { value: bookingsStatistics?.mediumPriceSum, color: '#33EF23' },
+    { value: bookingsStatistics?.highPriceSum, color: '#6423EF' },
+    { value: bookingsStatistics?.veryHighPriceSum, color: '#EF4723' },
   ];
 
   const data = dataValues.filter((value) => value.value);

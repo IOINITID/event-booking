@@ -1,5 +1,5 @@
-import { BookingType } from '../../store/bookingsSlice/types';
+import { BookingsStatisticsType } from '../../store/bookingsSlice/types';
 
 export type StatisticsTabProps = {
-  bookings: BookingType[];
+  bookingsStatistics: BookingsStatisticsType;
 };

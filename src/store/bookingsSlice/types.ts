@@ -10,7 +10,15 @@ export type ControlType = 'bookings' | 'events' | 'statistics';
 
 export type UserBookingType = BookingType;
 
+export type BookingsStatisticsType = {
+  lowPriceSum: number;
+  mediumPriceSum: number;
+  highPriceSum: number;
+  veryHighPriceSum: number;
+};
+
 export type BookingsState = {
   controlType: ControlType;
   userBookings: UserBookingType[];
+  bookingsStatistics: BookingsStatisticsType | null;
 };
