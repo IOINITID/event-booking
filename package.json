@@ -5,11 +5,11 @@
   "description": "Event Booking application.",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production && npm run build-storybook",
+    "build": "webpack --mode production && yarn run build-storybook",
     "start": "webpack serve --mode development",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o ./dist/storybook",
-    "deploy": "yarn build && npx gh-pages -d dist"
+    "deploy": "yarn run build && npx gh-pages -d dist"
   },
   "repository": {
     "type": "git",
