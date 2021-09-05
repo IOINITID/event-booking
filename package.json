@@ -22,6 +22,7 @@
     "GraphQL",
     "Apollo-Client",
     "Storybook",
+    "Emotion",
     "Events",
     "Bookings"
   ],
