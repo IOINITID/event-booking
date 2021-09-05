@@ -23,6 +23,7 @@
     "Apollo-Client",
     "Storybook",
     "Emotion",
+    "Webpack",
     "Events",
     "Bookings"
   ],

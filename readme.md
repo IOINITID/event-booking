@@ -7,11 +7,11 @@ Project name: **Event Booking**
 
 ---
 
-Main page: 🖥️ https://ioinitid.github.io/event-booking
+Main page: 🖥️ https://ioinitid.github.io/event-booking/
 
 ---
 
-Storybook: 📖 https://ioinitid.github.io/event-booking/storybook
+Storybook: 📖 https://ioinitid.github.io/event-booking/storybook/
 
 ---
 
