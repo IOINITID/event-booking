@@ -20,6 +20,8 @@ Storybook: https://ioinitid.github.io/event-booking/storybook/index.html
 
 Сделано с ❤️
 
+> Дизайн: _[Волковая Виктория](https://www.behance.net/awwwewolf): "Event Booking"_
+
 ---
 
 **Папка с исходными файлами — `src/`.**
