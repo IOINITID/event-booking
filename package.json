@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "description": "Event Booking application.",
-  "license": "MIT",
   "scripts": {
     "build": "webpack --mode production && yarn run build-storybook",
     "start": "webpack serve --mode development",
@@ -27,6 +26,7 @@
     "Bookings"
   ],
   "author": "Igor Orishchenko <ioinitid@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/IOINITID/event-booking/issues"
   },
