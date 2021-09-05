@@ -1,4 +1,4 @@
-# Project build guide:
+**Project build guide:**
 
 - Clone the project repository to your computer.
 

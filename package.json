@@ -11,6 +11,25 @@
     "build-storybook": "build-storybook -o ./dist/storybook",
     "deploy": "yarn build && npx gh-pages -d dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IOINITID/event-booking.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Redux-Toolkit",
+    "GraphQL",
+    "Apollo-Client",
+    "Storybook",
+    "Events",
+    "Bookings"
+  ],
+  "author": "Igor Orishchenko <ioinitid@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/IOINITID/event-booking/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",

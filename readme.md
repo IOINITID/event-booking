@@ -1,31 +1,34 @@
-Название: **Event Booking**
+Project name: **Event Booking**
 
 [![Build Status](https://travis-ci.com/IOINITID/event-booking.svg?branch=master)](https://travis-ci.com/IOINITID/event-booking)
+![License](https://badgen.net/github/license/IOINITID/event-booking)
+
+![Badge storybook](https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg)
 
 ---
 
-Главная страница сайта: 🖥️ https://ioinitid.github.io/event-booking/index.html
+Main page: 🖥️ https://ioinitid.github.io/event-booking/
 
 ---
 
-Storybook: https://ioinitid.github.io/event-booking/storybook/index.html
+Storybook: 📖 https://ioinitid.github.io/event-booking/storybook/
 
 ---
 
-**Превью:**
+**Preview:**
 
 ![Preview](preview.jpg 'Preview')
 
 ---
 
-Сделано с ❤️
+Made with ❤️
 
-> Дизайн: _[Волковая Виктория](https://www.behance.net/awwwewolf): "Event Booking"_
+> Designed by: _[Волковая Виктория](https://www.behance.net/awwwewolf): "Event Booking"_
 
 ---
 
-**Папка с исходными файлами — `src/`.**
+**Source files folder — `src/`.**
 
-- [contributing.md](contributing.md) — руководство по сборке проекта.
+- [contributing.md](contributing.md) — project build guide.
 
 ---
