@@ -2,7 +2,7 @@
   "name": "event-booking",
   "version": "1.0.0",
   "private": true,
-  "description": "Event Booking application.",
+  "description": "Event Booking - event booking application.",
   "scripts": {
     "build": "webpack --mode production && yarn run build-storybook",
     "start": "webpack serve --mode development",
