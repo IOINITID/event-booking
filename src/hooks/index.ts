@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
-/** Hook than counts component renders */
+/** Hook that counts component renders */
 export const useRenderCount = (componentName?: string | undefined): { renderCount: string | number } => {
   const renderCount = useRef<number>(0);
 
@@ -11,4 +11,23 @@ export const useRenderCount = (componentName?: string | undefined): { renderCoun
   }
 
   return { renderCount: renderCount.current };
+};
+
+/** Hook that helps to manage the states of a modal */
+export const useModalState = ({ initialIsOpen = false } = {}) => {
+  const [isOpen, setIsOpen] = useState(initialIsOpen);
+
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
+  const onToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return { isOpen, onOpen, onClose, onToggle };
 };
